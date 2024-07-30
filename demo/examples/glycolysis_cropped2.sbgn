@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<sbgn xmlns="http://sbgn.org/libsbgn/0.2">
+  <map language="process description">
+    <glyph id="nwtN_57535509-5a21-4dd0-93c6-cc5545c79465" class="process">
+      <bbox x="245.7429111687172" y="342.48204719620617" w="14.285714285714286" h="14.285714285714286"/>
+      <port id="nwtN_57535509-5a21-4dd0-93c6-cc5545c79465.1" x="242.88576831157434" y="349.62490433906333"/>
+      <port id="nwtN_57535509-5a21-4dd0-93c6-cc5545c79465.2" x="262.88576831157434" y="349.62490433906333"/>
+    </glyph>
+    <glyph id="glyph37" class="macromolecule">
+      <label text="enolase"/>
+      <bbox x="228.61965503032434" y="411.445133940345" w="48.5322265625" h="25"/>
+    </glyph>
+    <glyph id="glyph38" class="macromolecule">
+      <label text="pyruvatekinase"/>
+      <bbox x="25.127969060383755" y="405.945133940345" w="52.18994140625" h="36"/>
+    </glyph>
+    <glyph id="glyph28" class="simple chemical">
+      <label text="2 PG"/>
+      <bbox x="318.23070910465503" y="337.1249043390634" w="35.06689453125" h="25"/>
+    </glyph>
+    <glyph id="nwtN_a7dce40d-5759-4cd1-b831-3383eada22c2" class="process">
+      <bbox x="397.01577908501713" y="342.48204719620617" w="14.285714285714286" h="14.285714285714286"/>
+      <port id="nwtN_a7dce40d-5759-4cd1-b831-3383eada22c2.1" x="394.1586362278743" y="349.62490433906333"/>
+      <port id="nwtN_a7dce40d-5759-4cd1-b831-3383eada22c2.2" x="414.1586362278743" y="349.62490433906333"/>
+    </glyph>
+    <glyph id="glyph30" class="simple chemical">
+      <label text="pyruvate"/>
+      <bbox x="-66.04242780106077" y="337.1249043390634" w="52.18994140625" h="25"/>
+    </glyph>
+    <glyph id="nwtN_658c23cb-1ae8-4551-96bb-3cb97666c5c3" class="process">
+      <bbox x="44.09175271592928" y="342.4820471962062" w="14.285714285714286" h="14.285714285714286"/>
+      <port id="nwtN_658c23cb-1ae8-4551-96bb-3cb97666c5c3.1" x="61.23460985878643" y="349.6249043390634"/>
+      <port id="nwtN_658c23cb-1ae8-4551-96bb-3cb97666c5c3.2" x="41.23460985878643" y="349.6249043390634"/>
+    </glyph>
+    <glyph id="glyph40" class="simple chemical">
+      <label text="ATP"/>
+      <clone/>
+      <bbox x="-24.581923360913365" y="281.5413095934183" w="25" h="25"/>
+    </glyph>
+    <glyph id="glyph39" class="simple chemical">
+      <label text="ADP"/>
+      <clone/>
+      <bbox x="91.04901679447991" y="281.5413095934183" w="25" h="25"/>
+    </glyph>
+    <glyph id="glyph29" class="simple chemical">
+      <label text="PEP"/>
+      <bbox x="117.39739232007432" y="337.1249043390634" w="32.0107421875" h="25"/>
+    </glyph>
+    <glyph id="glyph27" class="simple chemical">
+      <label text="3 PG"/>
+      <bbox x="454.9454185635309" y="337.1249043390634" w="35.06689453125" h="25"/>
+    </glyph>
+    <glyph id="glyph43" class="simple chemical">
+      <label text="H2O"/>
+      <bbox x="154.4579391587245" y="281.5413095934183" w="32.61767578125" h="25"/>
+    </glyph>
+    <glyph id="glyph36" class="macromolecule">
+      <label text="PG mutase"/>
+      <bbox x="371.64789404037424" y="411.445133940345" w="65.021484375" h="25"/>
+    </glyph>
+    <arc id="nwtE_7c2b989d-19de-4d58-b18b-8015bf5fda8d" class="catalysis" source="glyph38" target="nwtN_658c23cb-1ae8-4551-96bb-3cb97666c5c3">
+      <start x="51.225864344416436" y="405.320133940345"/>
+      <end x="51.23292745366821" y="360.33919001482303"/>
+    </arc>
+    <arc id="nwtE_d5725e19-4725-4f22-ac12-fedb4c0617ce" class="production" source="nwtN_57535509-5a21-4dd0-93c6-cc5545c79465.1" target="glyph43">
+      <start x="242.26076831157434" y="349.62490433906333"/>
+      <end x="186.10949380903645" y="304.42628068913547"/>
+    </arc>
+    <arc id="nwtE_93129ad3-bff2-47b6-8364-ad69971f6f80" class="consumption" source="glyph27" target="nwtN_a7dce40d-5759-4cd1-b831-3383eada22c2.2">
+      <start x="454.3204185635309" y="349.6249043390634"/>
+      <end x="414.7836362278743" y="349.62490433906333"/>
+    </arc>
+    <arc id="nwtE_322c721b-1233-4684-b436-650c81d5db9a" class="production" source="nwtN_57535509-5a21-4dd0-93c6-cc5545c79465.1" target="glyph29">
+      <start x="242.26076831157434" y="349.62490433906333"/>
+      <end x="153.15813450757432" y="349.6249043390634"/>
+    </arc>
+    <arc id="nwtE_f0a4a22f-3f83-4c66-9761-32c201f9e5a4" class="consumption" source="glyph28" target="nwtN_57535509-5a21-4dd0-93c6-cc5545c79465.2">
+      <start x="317.60570910465503" y="349.6249043390634"/>
+      <end x="263.51076831157434" y="349.62490433906333"/>
+    </arc>
+    <arc id="nwtE_80cba596-750d-485a-be37-d36239cfbbae" class="catalysis" source="glyph36" target="nwtN_a7dce40d-5759-4cd1-b831-3383eada22c2">
+      <start x="404.15863622787424" y="410.820133940345"/>
+      <end x="404.1586362278743" y="360.33919005334906"/>
+    </arc>
+    <arc id="nwtE_24c51c6e-6bac-4c6e-861a-bd408b9b2899" class="production" source="nwtN_658c23cb-1ae8-4551-96bb-3cb97666c5c3.2" target="glyph40">
+      <start x="40.60960985878643" y="349.6249043390634"/>
+      <end x="0.1300713312519619" y="304.76183596288945"/>
+    </arc>
+    <arc id="nwtE_46ec4d6f-5c48-4c9d-82f3-c360d4629689" class="catalysis" source="glyph37" target="nwtN_57535509-5a21-4dd0-93c6-cc5545c79465">
+      <start x="252.88576831157434" y="410.820133940345"/>
+      <end x="252.88576831157434" y="360.33919005334906"/>
+    </arc>
+    <arc id="nwtE_c3843f81-5bd6-4417-8645-2df6821e9889" class="production" source="nwtN_658c23cb-1ae8-4551-96bb-3cb97666c5c3.2" target="glyph30">
+      <start x="40.60960985878643" y="349.6249043390634"/>
+      <end x="-10.102486394810768" y="349.6249043390634"/>
+    </arc>
+    <arc id="nwtE_24058ce2-7bbe-4738-b329-f34ef58ac095" class="production" source="nwtN_a7dce40d-5759-4cd1-b831-3383eada22c2.1" target="glyph28">
+      <start x="393.5336362278743" y="349.62490433906333"/>
+      <end x="357.04760363590503" y="349.6249043390634"/>
+    </arc>
+    <arc id="nwtE_bcc1ee58-5c52-4950-b459-ee1ecee3e8a0" class="consumption" source="glyph39" target="nwtN_658c23cb-1ae8-4551-96bb-3cb97666c5c3.1">
+      <start x="94.5535654190871" y="303.5988971317537"/>
+      <end x="61.85960985878643" y="349.6249043390634"/>
+    </arc>
+    <arc id="nwtE_58fd4bec-8d1f-4867-8874-91365b189283" class="consumption" source="glyph29" target="nwtN_658c23cb-1ae8-4551-96bb-3cb97666c5c3.1">
+      <start x="116.77239232007432" y="349.6249043390634"/>
+      <end x="61.85960985878643" y="349.6249043390634"/>
+    </arc>
+  </map>
+</sbgn>

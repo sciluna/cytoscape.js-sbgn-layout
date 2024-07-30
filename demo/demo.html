@@ -1,0 +1,41 @@
+<!DOCTYPE>
+
+<html>
+
+<head>
+	<title>cytoscape sbgn-layout demo</title>
+
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+	<link href="demo.css" rel="stylesheet">
+	
+	<!-- Demo files -->
+	<!--<script src="demoControl.js"></script>-->
+</head>
+
+<body>
+	<h1>cytoscape sbgn-layout demo</h1>
+
+	<div id="menuSection">
+		<label for="samples">Sample SBGN file:</label>
+
+		<select name="samples" id="samples">
+			<option value="" disabled selected>Select</option>
+		  <option value="sample1">Sample 1</option>
+		  <option value="sample2">Sample 2</option>
+		  <option value="sample3">Sample 3</option>
+			<option value="sample4">Sample 4</option>
+			<option value="sample5">Sample 5</option>
+			<option value="sample6">Sample 6</option>
+			<option value="sample7">Sample 7</option>
+			<option value="sample8">Sample 8</option>
+		</select>
+
+		<button id="layoutButton">Apply Layout</button>
+	</div>
+	<div id="cy"></div>
+
+	<!-- iVis-at-Bilkent libraries -->
+	<script src="bundle.js"></script>
+</body>
+
+</html>

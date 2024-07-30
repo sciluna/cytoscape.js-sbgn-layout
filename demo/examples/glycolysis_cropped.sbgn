@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<sbgn xmlns="http://sbgn.org/libsbgn/0.2">
+  <map language="process description">
+    <glyph id="glyph9" class="macromolecule">
+      <label text="hexokinase"/>
+      <bbox x="55.499746545201916" y="40.98323077999954" w="65.64990234375" h="25"/>
+    </glyph>
+    <glyph id="glyph0" class="simple chemical">
+      <label text="glucose"/>
+      <bbox x="-18.593117394741014" y="115.78371741386201" w="47.91455078125" h="25"/>
+    </glyph>
+    <glyph id="glyph6" class="simple chemical">
+      <label text="ATP"/>
+      <clone/>
+      <bbox x="-7.135842004116014" y="171.26409787306358" w="25" h="25"/>
+    </glyph>
+    <glyph id="glyph7" class="simple chemical">
+      <label text="ADP"/>
+      <clone/>
+      <bbox x="158.2667770493495" y="171.26409787306358" w="25" h="25"/>
+    </glyph>
+    <glyph id="glyph12" class="simple chemical">
+      <label text="ADP"/>
+      <clone/>
+      <bbox x="493.7858513347395" y="171.26409787306358" w="25" h="25"/>
+    </glyph>
+    <glyph id="glyph13" class="simple chemical">
+      <label text="ATP"/>
+      <clone/>
+      <bbox x="323.26415637028" y="171.26409787306358" w="25" h="25"/>
+    </glyph>
+    <glyph id="glyph1" class="simple chemical">
+      <label text="glucose&#xA;6P"/>
+      <bbox x="147.32796204764483" y="110.28371741386201" w="47.91455078125" h="36"/>
+    </glyph>
+    <glyph id="glyph2" class="simple chemical">
+      <label text="fructose&#xA;6P"/>
+      <bbox x="312.64210789628066" y="110.28371741386201" w="49.12841796875" h="36"/>
+    </glyph>
+    <glyph id="glyph3" class="simple chemical">
+      <label text="fructose&#xA;1,6P"/>
+      <bbox x="481.7216423503645" y="110.28371741386201" w="49.12841796875" h="36"/>
+    </glyph>
+    <glyph id="glyph17" class="macromolecule">
+      <label text="glucose-6P&#xA;isomerase"/>
+      <bbox x="220.8611567578866" y="35.48323077999954" w="65.0322265625" h="36"/>
+    </glyph>
+    <glyph id="glyph19" class="macromolecule">
+      <label text="phospho&#xA;fructokinase"/>
+      <bbox x="387.38520254683243" y="36.26082446783136" w="69.3076171875" h="36"/>
+    </glyph>
+    <glyph id="nwtN_869f3b7c-8740-4a33-adfa-060d21134b4b" class="process">
+      <bbox x="413.89227365674986" y="121.14086027100487" w="14.285714285714286" h="14.285714285714286"/>
+      <port id="nwtN_869f3b7c-8740-4a33-adfa-060d21134b4b.1" x="411.03513079960703" y="128.283717413862"/>
+      <port id="nwtN_869f3b7c-8740-4a33-adfa-060d21134b4b.2" x="431.03513079960703" y="128.283717413862"/>
+    </glyph>
+    <glyph id="nwtN_e0d4b93b-757a-476c-aa6d-b75c8af79040" class="process">
+      <bbox x="245.7429111687172" y="121.14086027100487" w="14.285714285714286" h="14.285714285714286"/>
+      <port id="nwtN_e0d4b93b-757a-476c-aa6d-b75c8af79040.1" x="242.88576831157434" y="128.283717413862"/>
+      <port id="nwtN_e0d4b93b-757a-476c-aa6d-b75c8af79040.2" x="262.88576831157434" y="128.283717413862"/>
+    </glyph>
+    <glyph id="nwtN_f72662af-67d4-4ca2-8504-4ca032ddd111" class="process">
+      <bbox x="81.18184057421978" y="121.14086027100487" w="14.285714285714286" h="14.285714285714286"/>
+      <port id="nwtN_f72662af-67d4-4ca2-8504-4ca032ddd111.1" x="78.32469771707692" y="128.283717413862"/>
+      <port id="nwtN_f72662af-67d4-4ca2-8504-4ca032ddd111.2" x="98.32469771707692" y="128.283717413862"/>
+    </glyph>
+    <arc id="nwtE_17a4c19e-711d-43f7-b79a-9fd8b0885cb3" class="production" source="nwtN_e0d4b93b-757a-476c-aa6d-b75c8af79040.2" target="glyph2">
+      <start x="263.51076831157434" y="128.283717413862"/>
+      <end x="308.89210789628066" y="128.283717413862"/>
+    </arc>
+    <arc id="nwtE_526babb9-453d-43a9-94b7-3dc0baed829d" class="consumption" source="glyph2" target="nwtN_869f3b7c-8740-4a33-adfa-060d21134b4b.1">
+      <start x="362.39552586503066" y="128.283717413862"/>
+      <end x="410.41013079960703" y="128.283717413862"/>
+    </arc>
+    <arc id="nwtE_34a64b3c-4eb6-4e8a-bc0e-274a40afe630" class="production" source="nwtN_869f3b7c-8740-4a33-adfa-060d21134b4b.2" target="glyph3">
+      <start x="431.66013079960703" y="128.283717413862"/>
+      <end x="477.9716423503645" y="128.283717413862"/>
+    </arc>
+    <arc id="nwtE_148f1df6-50d5-4fd5-9b7e-f12c734951d3" class="catalysis" source="glyph9" target="nwtN_f72662af-67d4-4ca2-8504-4ca032ddd111">
+      <start x="88.32469771707692" y="66.60823077999953"/>
+      <end x="88.32469771707692" y="117.56943169957628"/>
+    </arc>
+    <arc id="nwtE_5054b0da-c5f1-4ba8-b03b-8f03813e1018" class="consumption" source="glyph1" target="nwtN_e0d4b93b-757a-476c-aa6d-b75c8af79040.1">
+      <start x="195.86751282889483" y="128.283717413862"/>
+      <end x="242.26076831157434" y="128.283717413862"/>
+    </arc>
+    <arc id="nwtE_73b945a7-5608-45fd-84c1-8e486c02cfc4" class="production" source="nwtN_f72662af-67d4-4ca2-8504-4ca032ddd111.2" target="glyph7">
+      <start x="98.94969771707692" y="128.283717413862"/>
+      <end x="157.2852580406484" y="174.6915488807445"/>
+    </arc>
+    <arc id="nwtE_f20091b6-3823-4388-94f0-da0310f7809d" class="catalysis" source="glyph19" target="nwtN_869f3b7c-8740-4a33-adfa-060d21134b4b">
+      <start x="421.78642345309095" y="72.88582446783136"/>
+      <end x="421.1804314210216" y="117.56971903681568"/>
+    </arc>
+    <arc id="nwtE_8c7ee891-6257-462b-83d7-9fe84273f2f2" class="catalysis" source="glyph17" target="nwtN_e0d4b93b-757a-476c-aa6d-b75c8af79040">
+      <start x="253.254888219341" y="72.10823077999953"/>
+      <end x="252.95616968218533" y="117.5694991597125"/>
+    </arc>
+    <arc id="nwtE_f1dcc491-cc7a-457c-a09f-6d3528e76d15" class="consumption" source="glyph13" target="nwtN_869f3b7c-8740-4a33-adfa-060d21134b4b.1">
+      <start x="346.76552970000887" y="176.6062064335452"/>
+      <end x="410.41013079960703" y="128.283717413862"/>
+    </arc>
+    <arc id="nwtE_30045159-f2bd-4bea-b6fa-30e246185213" class="production" source="nwtN_869f3b7c-8740-4a33-adfa-060d21134b4b.2" target="glyph12">
+      <start x="431.66013079960703" y="128.283717413862"/>
+      <end x="492.6660658757439" y="174.90046746273322"/>
+    </arc>
+    <arc id="nwtE_9db732fa-0625-4c29-a4f7-6146c558c2dc" class="consumption" source="glyph6" target="nwtN_f72662af-67d4-4ca2-8504-4ca032ddd111.1">
+      <start x="16.274284664169798" y="176.4678823415734"/>
+      <end x="77.69969771707692" y="128.283717413862"/>
+    </arc>
+    <arc id="nwtE_de477fbf-8efb-4b8e-aefd-4ec752405004" class="consumption" source="glyph0" target="nwtN_f72662af-67d4-4ca2-8504-4ca032ddd111.1">
+      <start x="29.94643338650898" y="128.283717413862"/>
+      <end x="77.69969771707692" y="128.283717413862"/>
+    </arc>
+    <arc id="nwtE_334605a2-73bd-4e52-b0eb-de41efbeda4b" class="production" source="nwtN_f72662af-67d4-4ca2-8504-4ca032ddd111.2" target="glyph1">
+      <start x="98.94969771707692" y="128.283717413862"/>
+      <end x="143.57796204764483" y="128.283717413862"/>
+    </arc>
+  </map>
+</sbgn>

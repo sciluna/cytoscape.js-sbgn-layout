@@ -1,0 +1,450 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<sbgn xmlns="http://sbgn.org/libsbgn/0.2">
+  <map language="process description">
+    <glyph id="b80" class="simple chemical">
+      <label text="pyrophosphate"/>
+      <bbox x="948.622" y="172.50687" w="122.333336" h="19"/>
+    </glyph>
+    <glyph id="ed5ae" class="simple chemical">
+      <label text="UDP-D-glucose"/>
+      <bbox x="613.0066" y="239.17354" w="123.333336" h="19"/>
+    </glyph>
+    <glyph id="f85" class="simple chemical">
+      <label text="ATP"/>
+      <bbox x="656.0066" y="112.506874" w="37.333332" h="19"/>
+    </glyph>
+    <glyph id="c014a" class="simple chemical">
+      <label text="UDP-D-glucose"/>
+      <bbox x="848.6822" y="212.50687" w="123.333336" h="19"/>
+    </glyph>
+    <glyph id="c19e1" class="simple chemical">
+      <label text="GDP-4-dehydro-6-L-deoxygalactose"/>
+      <bbox x="57.08838700000001" y="575.8069" w="278.33334" h="19"/>
+    </glyph>
+    <glyph id="a4579" class="simple chemical">
+      <label text="UTP"/>
+      <bbox x="891.1822" y="82.506874" w="38.333332" h="19"/>
+    </glyph>
+    <glyph id="dee" class="nucleic acid feature">
+      <label text="GAL7"/>
+      <bbox x="470.69852" y="263.16086" w="40" h="20"/>
+      <glyph id="deeuoi" class="unit of information">
+        <label text="ct:gene"/>
+        <bbox x="480.69852" y="257.16086" w="20" h="12"/>
+      </glyph>
+    </glyph>
+    <glyph id="e53" class="nucleic acid feature">
+      <label text="GAL1"/>
+      <bbox x="470.69852" y="136.46846" w="40" h="20"/>
+      <glyph id="e53uoi" class="unit of information">
+        <label text="ct:gene"/>
+        <bbox x="480.69852" y="130.46846" w="20" h="12"/>
+      </glyph>
+    </glyph>
+    <glyph id="b7d" class="nucleic acid feature">
+      <label text="PMI40"/>
+      <bbox x="118.61338" y="129.76846" w="46.666668" h="20"/>
+      <glyph id="b7duoi" class="unit of information">
+        <label text="ct:gene"/>
+        <bbox x="128.61337000000003" y="123.76846" w="26.666666" h="12"/>
+      </glyph>
+    </glyph>
+    <glyph id="b87f3" class="nucleic acid feature">
+      <label text="PSA1"/>
+      <bbox x="118.61338" y="338.1764" w="46.666668" h="20"/>
+      <glyph id="b87f3uoi" class="unit of information">
+        <label text="ct:gene"/>
+        <bbox x="128.61337000000003" y="332.1764" w="26.666666" h="12"/>
+      </glyph>
+    </glyph>
+    <glyph id="c9e" class="simple chemical">
+      <label text="mannose-1-phosphate"/>
+      <bbox x="108.38221000000001" y="295.8069" w="177.33333" h="19"/>
+    </glyph>
+    <glyph id="b15" class="simple chemical">
+      <label text="mannose-6-phosphate"/>
+      <bbox x="108.38221000000001" y="195.80687" w="177.33333" h="19"/>
+    </glyph>
+    <glyph id="f68e5" class="complex">
+      <label text="f68e5"/>
+      <bbox x="796.34296" y="108.04259000000003" w="89.91666400000008" h="69.87499999999997"/>
+      <glyph id="caf" class="nucleic acid feature">
+        <extension>
+          <annotation>
+            <rdf:RDF 
+              xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+              xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+              <rdf:Description rdf:about="#caf">
+                <bqbiol:isDescribedBy>
+                  <rdf:Bag>
+                    <rdf:li rdf:resource="https://identifiers.org/sgd:S000001518"/>
+                  </rdf:Bag>
+                </bqbiol:isDescribedBy>
+              </rdf:Description>
+            </rdf:RDF>
+          </annotation>
+        </extension>
+        <label text="UGP1"/>
+        <bbox x="807.96796" y="126.29259000000002" w="66.666664" h="20"/>
+        <glyph id="cafuoi" class="unit of information">
+          <label text="ct:gene"/>
+          <bbox x="817.96796" y="120.29259000000002" w="46.666668" h="12"/>
+        </glyph>
+      </glyph>
+      <glyph id="cf6" class="nucleic acid feature">
+        <extension>
+          <annotation>
+            <rdf:RDF 
+              xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+              xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+              <rdf:Description rdf:about="#cf6">
+                <bqbiol:isDescribedBy>
+                  <rdf:Bag>
+                    <rdf:li rdf:resource="https://identifiers.org/sgd:S000001004"/>
+                  </rdf:Bag>
+                </bqbiol:isDescribedBy>
+              </rdf:Description>
+            </rdf:RDF>
+          </annotation>
+        </extension>
+        <label text="YHL012W"/>
+        <bbox x="807.96796" y="146.29259" w="66.666664" h="20"/>
+        <glyph id="cf6uoi" class="unit of information">
+          <label text="ct:gene"/>
+          <bbox x="817.96796" y="140.29259" w="46.666668" h="12"/>
+        </glyph>
+      </glyph>
+    </glyph>
+    <glyph id="fea9a" class="simple chemical">
+      <label text="H2O"/>
+      <bbox x="249.83003" y="442.47354" w="38.333332" h="19"/>
+    </glyph>
+    <glyph id="a90" class="simple chemical">
+      <label text="guanosine diphosphate fucose"/>
+      <bbox x="75.08839" y="702.4735" w="242.33333" h="19"/>
+    </glyph>
+    <glyph id="c86f8" class="simple chemical">
+      <label text="GDP-4-dehydro-6-deoxy-D-mannose"/>
+      <bbox x="55.08838700000001" y="492.47354" w="282.33334" h="19"/>
+    </glyph>
+    <glyph id="ce8" class="nucleic acid feature">
+      <label text="SEC53"/>
+      <bbox x="118.61338" y="237.76846" w="46.666668" h="20"/>
+      <glyph id="ce8uoi" class="unit of information">
+        <label text="ct:gene"/>
+        <bbox x="128.61337000000003" y="231.76846" w="26.666666" h="12"/>
+      </glyph>
+    </glyph>
+    <glyph id="a82" class="simple chemical">
+      <label text="phosphate"/>
+      <bbox x="225.33002999999997" y="362.47354" w="87.333336" h="19"/>
+    </glyph>
+    <glyph id="e944e" class="simple chemical">
+      <label text="Alpha-D-Galactose-1-Phosphate"/>
+      <bbox x="431.58220000000006" y="212.50687" w="244.33333" h="19"/>
+    </glyph>
+    <glyph id="e478c" class="simple chemical">
+      <label text="H+"/>
+      <bbox x="255.83003" y="601.4225" w="26.333334" h="19"/>
+    </glyph>
+    <glyph id="badbd" class="simple chemical">
+      <label text="GDP-mannose"/>
+      <bbox x="138.08839999999998" y="398.03766" w="116.333336" h="19"/>
+    </glyph>
+    <glyph id="bde41" class="simple chemical">
+      <label text="NADP"/>
+      <bbox x="243.33003" y="665.8069" w="51.333332" h="19"/>
+    </glyph>
+    <glyph id="c39" class="simple chemical">
+      <label text="glucose-1-phosphate"/>
+      <bbox x="591.0066" y="299.17355" w="167.33333" h="19"/>
+    </glyph>
+    <glyph id="ca56b" class="simple chemical">
+      <label text="UDP-galactose"/>
+      <bbox x="494.0822" y="335.8402" w="119.333336" h="19"/>
+    </glyph>
+    <glyph id="ce33a" class="simple chemical">
+      <label text="UDP-D-glucuronate"/>
+      <bbox x="833.1822" y="357.74496" w="154.33333" h="19"/>
+    </glyph>
+    <glyph id="d21f5" class="simple chemical">
+      <label text="alpha-D-Galactose"/>
+      <bbox x="482.08220000000006" y="82.506874" w="143.33333" h="19"/>
+    </glyph>
+    <glyph id="fa0" class="simple chemical">
+      <label text="fructose-6-phosphate"/>
+      <bbox x="112.38221000000001" y="82.47354" w="169.33333" h="19"/>
+    </glyph>
+    <glyph id="afa" class="simple chemical">
+      <label text="NADPH"/>
+      <bbox x="237.33003" y="624.70435" w="63.333332" h="19"/>
+    </glyph>
+    <glyph id="c800b" class="simple chemical">
+      <label text="H2O"/>
+      <bbox x="990.622" y="271.0783" w="38.333332" h="19"/>
+    </glyph>
+    <glyph id="a8352" class="simple chemical">
+      <label text="NAD"/>
+      <bbox x="983.122" y="244.88782" w="53.333332" h="19"/>
+    </glyph>
+    <glyph id="dcf" class="simple chemical">
+      <label text="GDP"/>
+      <bbox x="248.83003" y="322.47354" w="40.333332" h="19"/>
+    </glyph>
+    <glyph id="b3e" class="simple chemical">
+      <label text="glucose-1-phosphate"/>
+      <bbox x="926.122" y="112.98306" w="167.33333" h="19"/>
+    </glyph>
+    <glyph id="fa7" class="simple chemical">
+      <label text="ADP"/>
+      <bbox x="655.0066" y="165.84021" w="39.333332" h="19"/>
+    </glyph>
+    <glyph id="a057d" class="simple chemical">
+      <label text="UDP-D-glucose"/>
+      <bbox x="492.0822" y="435.8402" w="123.333336" h="19"/>
+    </glyph>
+    <glyph id="aa2" class="nucleic acid feature">
+      <label text="GAL10"/>
+      <bbox x="465.69852" y="377.59674" w="50" h="20"/>
+      <glyph id="aa2uoi" class="unit of information">
+        <label text="ct:gene"/>
+        <bbox x="475.69852" y="371.59674" w="30" h="12"/>
+      </glyph>
+    </glyph>
+    <glyph id="c88" class="simple chemical">
+      <label text="NADH"/>
+      <bbox x="977.122" y="314.2857" w="65.333336" h="18.649729"/>
+    </glyph>
+    <glyph id="ide03c9b6f" class="process">
+      <bbox x="905.3489" y="277.0021" w="10" h="10"/>
+      <port id="ide03c9b6f.1" x="910.3489" y="272.0021"/>
+      <port id="ide03c9b6f.2" x="910.3489" y="292.0021"/>
+    </glyph>
+    <glyph id="id92bcd39b" class="process">
+      <bbox x="192.04887" y="134.20688" w="10" h="10"/>
+      <port id="id92bcd39b.1" x="197.04887" y="129.20688"/>
+      <port id="id92bcd39b.2" x="197.04887" y="149.20688"/>
+    </glyph>
+    <glyph id="id9214769" class="process">
+      <bbox x="191.25505" y="632.87354" w="10" h="10"/>
+      <port id="id9214769.1" x="196.25505" y="627.87354"/>
+      <port id="id9214769.2" x="196.25505" y="647.87354"/>
+    </glyph>
+    <glyph id="idad2389ae" class="process">
+      <bbox x="192.04887" y="242.20688" w="10" h="10"/>
+      <port id="idad2389ae.1" x="197.04887" y="237.20688"/>
+      <port id="idad2389ae.2" x="197.04887" y="257.20688"/>
+    </glyph>
+    <glyph id="id72036ab1" class="process">
+      <bbox x="191.25505" y="538.6402" w="10" h="10"/>
+      <port id="id72036ab1.1" x="196.25505" y="533.6402"/>
+      <port id="id72036ab1.2" x="196.25505" y="553.6402"/>
+    </glyph>
+    <glyph id="id20b9a3f7" class="process">
+      <bbox x="191.25505" y="417.38055" w="10" h="10"/>
+      <port id="id20b9a3f7.1" x="196.25505" y="412.38055"/>
+      <port id="id20b9a3f7.2" x="196.25505" y="432.38055"/>
+    </glyph>
+    <glyph id="f71f2" class="process">
+      <bbox x="548.7489" y="268.2402" w="10" h="10"/>
+      <port id="f71f2.1" x="553.7489" y="263.2402"/>
+      <port id="f71f2.2" x="553.7489" y="283.2402"/>
+    </glyph>
+    <glyph id="id675c929c" class="process">
+      <bbox x="548.7489" y="140.90688" w="10" h="10"/>
+      <port id="id675c929c.1" x="553.7489" y="135.90688"/>
+      <port id="id675c929c.2" x="553.7489" y="155.90688"/>
+    </glyph>
+    <glyph id="cc857" class="process">
+      <bbox x="548.7489" y="382.2402" w="10" h="10"/>
+      <port id="cc857.1" x="553.7489" y="377.2402"/>
+      <port id="cc857.2" x="553.7489" y="397.2402"/>
+    </glyph>
+    <glyph id="ideb4f8ec0" class="process">
+      <bbox x="191.73135" y="343.09918" w="10" h="10"/>
+      <port id="ideb4f8ec0.1" x="196.73135" y="338.09918"/>
+      <port id="ideb4f8ec0.2" x="196.73135" y="358.09918"/>
+    </glyph>
+    <glyph id="idb3554bbc" class="process">
+      <bbox x="905.3489" y="140.90688" w="10" h="10"/>
+      <port id="idb3554bbc.1" x="910.3489" y="135.90688"/>
+      <port id="idb3554bbc.2" x="910.3489" y="155.90688"/>
+    </glyph>
+    <arc id="arc0" class="consumption" source="c014a" target="ide03c9b6f.1">
+      <start x="910.3488734004293" y="232.13186999999996"/>
+      <end x="910.3489" y="271.3771"/>
+    </arc>
+    <arc id="arc1" class="production" source="ide03c9b6f.2" target="ce33a">
+      <start x="910.3489" y="292.6271"/>
+      <end x="910.3488704403383" y="353.9949600000003"/>
+    </arc>
+    <arc id="arc2" class="consumption" source="c800b" target="ide03c9b6f.1">
+      <start x="990.0047472885274" y="280.8615704117726"/>
+      <end x="910.3489" y="271.3771"/>
+    </arc>
+    <arc id="arc3" class="consumption" source="a8352" target="ide03c9b6f.1">
+      <start x="987.9399162045618" y="260.45518639445805"/>
+      <end x="910.3489" y="271.3771"/>
+    </arc>
+    <arc id="arc4" class="production" source="ide03c9b6f.2" target="c88">
+      <start x="910.3489" y="292.6271"/>
+      <end x="987.555822674368" y="314.30770132894406"/>
+    </arc>
+    <arc id="arc5" class="consumption" source="fa0" target="id92bcd39b.1">
+      <start x="197.04887392819353" y="102.09854"/>
+      <end x="197.04887" y="128.58188"/>
+    </arc>
+    <arc id="arc6" class="production" source="id92bcd39b.2" target="b15">
+      <start x="197.04887" y="149.83188"/>
+      <end x="197.04887399773057" y="192.05687"/>
+    </arc>
+    <arc id="arc7" class="catalysis" source="b7d" target="id92bcd39b">
+      <start x="165.90504800000002" y="139.52428586627428"/>
+      <end x="188.6115322827193" y="139.29287010382228"/>
+    </arc>
+    <arc id="arc8" class="consumption" source="c19e1" target="id9214769.1">
+      <start x="196.25505565171144" y="595.4319"/>
+      <end x="196.25505" y="627.24854"/>
+    </arc>
+    <arc id="arc9" class="production" source="id9214769.2" target="a90">
+      <start x="196.25505" y="648.49854"/>
+      <end x="196.25505410593743" y="698.7235"/>
+    </arc>
+    <arc id="arc10" class="consumption" source="afa" target="id9214769.1">
+      <start x="237.11494532418982" y="635.8125099358114"/>
+      <end x="196.25505" y="627.24854"/>
+    </arc>
+    <arc id="arc11" class="consumption" source="e478c" target="id9214769.1">
+      <start x="256.6841788632387" y="615.4843319420866"/>
+      <end x="196.25505" y="627.24854"/>
+    </arc>
+    <arc id="arc12" class="production" source="id9214769.2" target="bde41">
+      <start x="196.25505" y="648.49854"/>
+      <end x="250.46535474508187" y="665.7705421276719"/>
+    </arc>
+    <arc id="arc13" class="consumption" source="b15" target="idad2389ae.1">
+      <start x="197.0488737917664" y="215.43187"/>
+      <end x="197.04887" y="236.58188"/>
+    </arc>
+    <arc id="arc14" class="production" source="idad2389ae.2" target="c9e">
+      <start x="197.04887" y="257.83188"/>
+      <end x="197.048873859725" y="292.0569"/>
+    </arc>
+    <arc id="arc15" class="catalysis" source="ce8" target="idad2389ae">
+      <start x="165.90504800000002" y="247.52428586627428"/>
+      <end x="188.6115322827193" y="247.29287010382228"/>
+    </arc>
+    <arc id="arc16" class="consumption" source="c86f8" target="id72036ab1.1">
+      <start x="196.25505529899974" y="512.09854"/>
+      <end x="196.25505" y="533.0152"/>
+    </arc>
+    <arc id="arc17" class="production" source="id72036ab1.2" target="c19e1">
+      <start x="196.25505" y="554.2652"/>
+      <end x="196.2550547740018" y="572.0569"/>
+    </arc>
+    <arc id="arc18" class="consumption" source="badbd" target="id20b9a3f7.1">
+      <start x="196.2550557213939" y="417.6626599999998"/>
+      <end x="196.25505" y="411.75555"/>
+    </arc>
+    <arc id="arc19" class="production" source="id20b9a3f7.2" target="c86f8">
+      <start x="196.25505" y="433.00555"/>
+      <end x="196.25505583469638" y="488.72354"/>
+    </arc>
+    <arc id="arc20" class="production" source="id20b9a3f7.2" target="fea9a">
+      <start x="196.25505" y="433.00555"/>
+      <end x="250.61139772717374" y="444.49397392124007"/>
+    </arc>
+    <arc id="arc21" class="consumption" source="e944e" target="f71f2.1">
+      <start x="553.748871916884" y="232.13187"/>
+      <end x="553.7489" y="262.6152"/>
+    </arc>
+    <arc id="arc22" class="production" source="f71f2.2" target="ca56b">
+      <start x="553.7489" y="283.8652"/>
+      <end x="553.7488738807212" y="332.09020000000027"/>
+    </arc>
+    <arc id="arc23" class="consumption" source="ed5ae" target="f71f2.1">
+      <start x="635.7576333826562" y="256.57953264764"/>
+      <end x="553.7489" y="262.6152"/>
+    </arc>
+    <arc id="arc24" class="production" source="f71f2.2" target="c39">
+      <start x="553.7489" y="283.8652"/>
+      <end x="639.7025682309903" y="298.42640966264787"/>
+    </arc>
+    <arc id="arc25" class="catalysis" source="dee" target="f71f2">
+      <start x="511.32352" y="273.1868136500811"/>
+      <end x="545.3114024741641" y="273.22958260080753"/>
+    </arc>
+    <arc id="arc26" class="consumption" source="d21f5" target="id675c929c.1">
+      <start x="553.7488715746746" y="102.13187399999995"/>
+      <end x="553.7489" y="135.28188"/>
+    </arc>
+    <arc id="arc27" class="production" source="id675c929c.2" target="e944e">
+      <start x="553.7489" y="156.53188"/>
+      <end x="553.7488710939562" y="208.75687000000033"/>
+    </arc>
+    <arc id="arc28" class="consumption" source="f85" target="id675c929c.1">
+      <start x="656.619320194668" y="125.57513263425332"/>
+      <end x="553.7489" y="135.28188"/>
+    </arc>
+    <arc id="arc29" class="production" source="id675c929c.2" target="fa7">
+      <start x="553.7489" y="156.53188"/>
+      <end x="653.3994240013158" y="170.16209716279786"/>
+    </arc>
+    <arc id="arc30" class="catalysis" source="e53" target="id675c929c">
+      <start x="511.32352" y="146.28475630939576"/>
+      <end x="545.3115239487169" y="145.98203040580057"/>
+    </arc>
+    <arc id="arc31" class="consumption" source="ca56b" target="cc857.1">
+      <start x="553.7488757326969" y="355.46519999999987"/>
+      <end x="553.7489" y="376.6152"/>
+    </arc>
+    <arc id="arc32" class="production" source="cc857.2" target="a057d">
+      <start x="553.7489" y="397.8652"/>
+      <end x="553.7488752977625" y="432.0902000000005"/>
+    </arc>
+    <arc id="arc33" class="catalysis" source="aa2" target="cc857">
+      <start x="516.3235199999999" y="387.45183464812106"/>
+      <end x="545.311449963254" y="387.28791245527947"/>
+    </arc>
+    <arc id="arc34" class="consumption" source="c9e" target="ideb4f8ec0.1">
+      <start x="196.97374604012649" y="315.43189641608234"/>
+      <end x="196.73135" y="337.47418"/>
+    </arc>
+    <arc id="arc35" class="production" source="ideb4f8ec0.2" target="badbd">
+      <start x="196.73135" y="358.72418"/>
+      <end x="196.36123969428158" y="394.28776996190993"/>
+    </arc>
+    <arc id="arc36" class="consumption" source="dcf" target="ideb4f8ec0.1">
+      <start x="250.09496607364645" y="336.19136374320334"/>
+      <end x="196.73135" y="337.47418"/>
+    </arc>
+    <arc id="arc37" class="production" source="ideb4f8ec0.2" target="a82">
+      <start x="196.73135" y="358.72418"/>
+      <end x="240.82711607185053" y="362.66713300667686"/>
+    </arc>
+    <arc id="arc38" class="catalysis" source="b87f3" target="ideb4f8ec0">
+      <start x="165.90504800000002" y="348.14263026661195"/>
+      <end x="188.29385310428376" y="348.1110728144432"/>
+    </arc>
+    <arc id="arc39" class="consumption" source="a4579" target="idb3554bbc.1">
+      <start x="910.3488723868267" y="102.13187399999947"/>
+      <end x="910.3489" y="135.28188"/>
+    </arc>
+    <arc id="arc40" class="production" source="idb3554bbc.2" target="c014a">
+      <start x="910.3489" y="156.53188"/>
+      <end x="910.3488735716169" y="208.7568700000003"/>
+    </arc>
+    <arc id="arc41" class="consumption" source="b3e" target="idb3554bbc.1">
+      <start x="971.4967803391644" y="131.50301508292054"/>
+      <end x="910.3489" y="135.28188"/>
+    </arc>
+    <arc id="arc42" class="production" source="idb3554bbc.2" target="b80">
+      <start x="910.3489" y="156.53188"/>
+      <end x="981.4306865635186" y="171.71196619172522"/>
+    </arc>
+    <arc id="arc43" class="catalysis" source="f68e5" target="idb3554bbc">
+      <start x="886.884624" y="144.91227627159802"/>
+      <end x="901.9142036327204" y="145.54935009134928"/>
+    </arc>
+  </map>
+</sbgn>

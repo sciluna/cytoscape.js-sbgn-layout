@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<sbgn xmlns="http://sbgn.org/libsbgn/0.2">
+  <map language="process description">
+    <glyph id="glyph4" class="simple chemical">
+      <label text="ATP"/>
+      <clone/>
+      <bbox x="282.5" y="179.5" w="35" h="35"/>
+    </glyph>
+    <glyph id="glyph5" class="simple chemical">
+      <label text="ADP"/>
+      <clone/>
+      <bbox x="442.5" y="179.5" w="35" h="35"/>
+    </glyph>
+    <glyph id="glyph2" class="macromolecule">
+      <label text="RAF"/>
+      <bbox x="481.40980944651267" y="137" w="60" h="30"/>
+      <glyph id="glyph2_0" class="state variable">
+        <state value="P"/>
+        <bbox x="486.40980944651267" y="131" w="12" h="12"/>
+      </glyph>
+    </glyph>
+    <glyph id="glyph3" class="process">
+      <bbox x="375" y="147" w="10" h="10"/>
+      <port id="glyph3.2" x="390" y="152"/>
+      <port id="glyph3.1" x="370" y="152"/>
+    </glyph>
+    <glyph id="glyph1" class="macromolecule">
+      <label text="RAS"/>
+      <bbox x="350" y="45" w="60" h="30"/>
+      <glyph id="glyph1_0" class="state variable">
+        <state value="active"/>
+        <bbox x="355" y="39" w="26.123046875" h="12"/>
+      </glyph>
+    </glyph>
+    <glyph id="glyph0" class="tag">
+      <label text="RAS"/>
+      <bbox x="228" y="45" w="60" h="30"/>
+    </glyph>
+    <glyph id="glyph25" class="macromolecule">
+      <label text="RAF"/>
+      <bbox x="228" y="137" w="60" h="30"/>
+      <glyph id="glyph25_0" class="state variable">
+        <state/>
+        <bbox x="233" y="131" w="12" h="12"/>
+      </glyph>
+    </glyph>
+    <arc id="e5e14893-b88e-4930-9b85-9938c3671ea4" class="consumption" source="glyph25" target="glyph3.1">
+      <start x="288.625" y="152"/>
+      <end x="369.375" y="152"/>
+    </arc>
+    <arc id="47a398c9-b511-467a-9820-8c5844d9a9c8" class="equivalence arc" source="glyph1" target="glyph0">
+      <start x="349.375" y="60"/>
+      <end x="288.625" y="60"/>
+    </arc>
+    <arc id="6f654e59-3ebb-46c3-ad76-13f125b0ffb7" class="catalysis" source="glyph1" target="glyph3">
+      <start x="380" y="75.625"/>
+      <end x="380" y="143.5625"/>
+    </arc>
+    <arc id="a387f0f2-0df9-4373-a35c-35babc7c69ce" class="production" source="glyph3.2" target="glyph5">
+      <start x="390.625" y="152"/>
+      <end x="441.4790198361033" y="186.58194865780814"/>
+    </arc>
+    <arc id="80d68006-906e-4f82-aca0-6dc0dfa5ddf9" class="consumption" source="glyph4" target="glyph3.1">
+      <start x="315.79730661038246" y="188.11401503165987"/>
+      <end x="369.375" y="152"/>
+    </arc>
+    <arc id="71683490-4e4e-4d59-ae45-f02b1207cfe2" class="production" source="glyph3.2" target="glyph2">
+      <start x="390.625" y="152"/>
+      <end x="477.65980944651267" y="152"/>
+    </arc>
+  </map>
+</sbgn>

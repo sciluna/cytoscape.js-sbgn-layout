@@ -1,0 +1,52 @@
+{
+  "name": "cytoscape-sbgn-layout",
+  "version": "1.0.0",
+  "description": "Cytoscape SBGN layout extension",
+  "main": "dist/bundle.cjs.js",
+  "module": "dist/bundle.esm.js",
+  "browser": "dist/bundle.umd.js",
+  "type": "commonjs",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production webpack",
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sciluna/cytoscape.js-sbgn-layout.git"
+  },
+  "keywords": [
+    "sbgn",
+    "layout",
+    "llm"
+  ],
+  "author": "Hasan Balci",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sciluna/cytoscape.js-sbgn-layout/issues"
+  },
+  "homepage": "https://github.com/sciluna/cytoscape.js-sbgn-layout#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "cose-base": "^2.2.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "openai": "^4.52.0"
+  },
+  "peerDependencies": {
+    "cytoscape": "^3.2.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-env": "^1.5.1",
+    "@rollup/plugin-commonjs": "^26.0.1",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-replace": "^5.0.7",
+    "@rollup/plugin-babel": "6.0.4",
+    "rollup": "^4.18.0",
+    "webpack": "^2.6.1",
+    "webpack-dev-server": "^2.4.5"
+  }
+}
