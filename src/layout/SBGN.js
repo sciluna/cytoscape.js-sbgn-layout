@@ -111,6 +111,7 @@ class Layout extends ContinuousLayout {
     if (state.randomize) {
       sbgnLayout.runLayout();
     }
+    sbgnLayout.constructSkeleton();
   }
 
   // Get the top most ones of a list of nodes

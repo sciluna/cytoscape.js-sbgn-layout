@@ -143,6 +143,8 @@ module.exports = SBGNConstants;
 "use strict";
 
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 var CoSELayout = __webpack_require__(0).CoSELayout;
 
 // Constructor
@@ -155,6 +157,269 @@ SBGNLayout.prototype = Object.create(CoSELayout.prototype);
 for (var property in CoSELayout) {
   SBGNLayout[property] = CoSELayout[property];
 }
+
+SBGNLayout.prototype.constructSkeleton = function () {
+  var _this = this;
+
+  var queue = [];
+  var allNodes = this.getAllNodes();
+  var processNodes = allNodes.filter(function (node) {
+    return node.class == "process";
+  });
+
+  // find process nodes that are suitable to be source of DFS
+  processNodes.forEach(function (process) {
+    var neighbors = process.getNeighborsList();
+    var count = 0;
+    neighbors.forEach(function (neighbor) {
+      if (neighbor.getEdges().length > 1) {
+        count++;
+      }
+    });
+    if (count < 2) {
+      var outgoers = process.getOutgoerNodes();
+      for (var i = 0; i < outgoers.length; i++) {
+        if (outgoers[i].getOutgoerNodes().length > 0) {
+          queue.push(process);
+          break;
+        }
+      }
+    }
+  });
+  console.log(queue);
+
+  var components = [];
+  var visited = new Set();
+  var visitedProcessNodeIds = new Set();
+
+  // run DFS on graph and find components (in skeleton format)
+  while (queue.length > 0) {
+    var cmpt = this.DFS(queue[0], visited, visitedProcessNodeIds, queue);
+    components.push(cmpt);
+    queue = queue.filter(function (element) {
+      return !visitedProcessNodeIds.has(element.id);
+    });
+  }
+
+  var unvisitedProcessNodes = processNodes.filter(function (process) {
+    return !visitedProcessNodeIds.has(process.id);
+  });
+
+  unvisitedProcessNodes.forEach(function (node) {
+    var cmpt = _this.DFS(node, visited, visitedProcessNodeIds, queue);
+    components.push(cmpt);
+  });
+
+  // remove components with only one node that has ring class
+  for (var i = components.length - 1; i >= 0; i--) {
+    if (components[i].length == 1 && components[i][0].pseudoClass == "ring") {
+      components.splice(i, 1);
+    }
+  }
+
+  // some postprocessing to shape components better
+  var componentIndexesToBeExpanded = new Set();
+  components.forEach(function (component, i) {
+    if (component.length == 1 && component[0].class == "process") {
+      componentIndexesToBeExpanded.add(i);
+    }
+  });
+
+  componentIndexesToBeExpanded.forEach(function (index) {
+    var component = components[index];
+    var process = component[0];
+    var candidateNode = null;
+    var otherProcess = null;
+    process.getIncomerNodes().forEach(function (node) {
+      if (node.getOutgoerNodes().filter(function (node) {
+        return node.class == "process";
+      }).length > 1) {
+        candidateNode = node;
+      }
+    });
+    if (candidateNode) {
+      components[index].unshift(candidateNode);
+      otherProcess = candidateNode.getOutgoerNodes().filter(function (node) {
+        return node.class == "process";
+      }).filter(function (node) {
+        return node.id != process.id;
+      })[0];
+      components.forEach(function (component, i) {
+        if (component.includes(otherProcess)) {
+          components[i].unshift(candidateNode);
+        }
+      });
+    }
+  });
+
+  var nodesWithRingClass = allNodes.filter(function (node) {
+    return node.pseudoClass == "ring";
+  });
+  // process components to separate ring nodes
+  var componentsInfo = this.processComponents(components, nodesWithRingClass);
+  components = componentsInfo.components;
+  var ringNodes = componentsInfo.ringNodes;
+  var directions = componentsInfo.directions;
+  var verticalAlignments = componentsInfo.verticalAlignments;
+  var horizontalAlignments = componentsInfo.horizontalAlignments;
+  console.log(ringNodes);
+  console.log(components);
+};
+
+// A function used by DFS
+SBGNLayout.prototype.DFSUtil = function (currentNode, component, visited, visitedProcessNodeIds, queue) {
+
+  visited.add(currentNode.id);
+  if (currentNode.class == "process") {
+    visitedProcessNodeIds.add(currentNode.id);
+  }
+
+  // Traverse all outgoer neigbors of this node
+  var neighborNodes = [];
+  currentNode.getOutgoerNodes().forEach(function (node) {
+    if (node.getEdges().length != 1) {
+      neighborNodes.push(node);
+    }
+  });
+
+  if (neighborNodes.length == 1) {
+    var neighbor = neighborNodes[0];
+    //if (!visited.has(neighbor.id())) {
+    component.push(neighbor);
+    this.DFSUtil(neighbor, component, visited, visitedProcessNodeIds, queue);
+    //} 
+  } else if (neighborNodes.length > 1) {
+    currentNode.pseudoClass = "ring";
+    neighborNodes.forEach(function (neighbor) {
+      if (neighbor.pseudoClass == "ringCandidate") {
+        neighbor.pseudoClass = "ring";
+      } else {
+        neighbor.pseudoClass = "ringCandidate";
+      }
+      if (!visited.has(neighbor.id)) {
+        queue.unshift(neighbor);
+      }
+    });
+  }
+};
+
+SBGNLayout.prototype.DFS = function (node, visited, visitedProcessNodeIds, queue) {
+  var cmpt = [];
+  cmpt.push(node);
+  queue.shift(node);
+  this.DFSUtil(node, cmpt, visited, visitedProcessNodeIds, queue);
+  return cmpt;
+};
+
+SBGNLayout.prototype.processComponents = function (components, nodesWithRingClass) {
+  // ring nodes with 'ring' class
+  var ringNodes1 = new Set();
+  var verticalAlignments = [];
+  var horizontalAlignments = [];
+  var directions = [];
+  // first, process components with nodes that have ring class
+  components.forEach(function (component, i) {
+    if (component.length > 1) {
+      var direction = [null, null];
+      if (component[0].pseudoClass == "ring") {
+        ringNodes1.add(component[0].id);
+        if (Math.abs(component[1].getCenterX() - component[0].getCenterX()) > Math.abs(component[1].getCenterY() - component[0].getCenterY())) {
+          direction[0] = "horizontal";
+          horizontalAlignments.push([component[0].id, component[1].id]);
+        } else {
+          direction[0] = "vertical";
+          verticalAlignments.push([component[0].id, component[1].id]);
+        }
+        component = component.filter(function (node) {
+          return node.id != component[0].id;
+        });
+        components[i] = component;
+      }
+      if (component[component.length - 1].pseudoClass == "ring") {
+        ringNodes1.add(component[component.length - 1].id);
+        if (Math.abs(component[component.length - 2].getCenterX() - component[component.length - 1].getCenterX()) > Math.abs(component[component.length - 2].getCenterY() - component[component.length - 1].getCenterY())) {
+          direction[1] = "horizontal";
+          horizontalAlignments.push([component[component.length - 1].id, component[component.length - 2].id]);
+        } else {
+          direction[1] = "vertical";
+          verticalAlignments.push([component[component.length - 1].id, component[component.length - 2].id]);
+        }
+        components[i] = component.filter(function (node) {
+          return node.id != component[component.length - 1].id;
+        });
+      }
+      if (direction[0] != null) {
+        directions[i] = direction[0];
+      } else if (direction[1] != null) {
+        directions[i] = direction[1];
+      }
+    } else {
+      ringNodes1.add(component[0].id);
+      directions[i] = "horizontal";
+    }
+  });
+
+  // ring nodes without 'ring' class
+  var ringNodes2 = new Set();
+  // second, process components with ring nodes that doesn't have ring class
+  for (var i = 0; i < components.length; i++) {
+    var component = components[i];
+    for (var j = i + 1; j < components.length; j++) {
+      var componentToCompare = components[j];
+      if (component[0].id == componentToCompare[0].id || component[0].id == componentToCompare[componentToCompare.length - 1].id) {
+        var commonNode = component[0];
+        ringNodes2.add(commonNode.id);
+      }
+      if (component[component.length - 1].id == componentToCompare[0].id || component[component.length - 1].id == componentToCompare[componentToCompare.length - 1].id) {
+        var _commonNode = component[component.length - 1];
+        ringNodes2.add(_commonNode.id);
+      }
+    }
+  }
+
+  components.forEach(function (component, i) {
+    var direction = [null, null];
+    if (ringNodes2.has(component[0].id)) {
+      if (Math.abs(component[1].getCenterX() - component[0].getCenterX()) > Math.abs(component[1].getCenterY() - component[0].getCenterY())) {
+        direction[0] = "horizontal";
+        horizontalAlignments.push([component[0].id, component[1].id]);
+      } else {
+        direction[0] = "vertical";
+        verticalAlignments.push([component[0].id, component[1].id]);
+      }
+      component = component.filter(function (node) {
+        return node.id != component[0].id;
+      });
+      components[i] = component;
+    }
+    if (ringNodes2.has(component[component.length - 1].id)) {
+      if (Math.abs(component[component.length - 2].getCenterX() - component[component.length - 1].getCenterX()) > Math.abs(component[component.length - 2].getCenterY() - component[component.length - 1].getCenterY())) {
+        direction[1] = "horizontal";
+        horizontalAlignments.push([component[component.length - 1].id, component[component.length - 2].id]);
+      } else {
+        direction[1] = "vertical";
+        verticalAlignments.push([component[component.length - 1].id, component[component.length - 2].id]);
+      }
+      components[i] = component.filter(function (node) {
+        return node.id != component[component.length - 1].id;
+      });
+    }
+    if (!directions[i]) {
+      if (direction[0] != null) {
+        directions[i] = direction[0];
+      } else if (direction[1] != null) {
+        directions[i] = direction[1];
+      } else {
+        if (Math.abs(component[component.length - 1].getCenterX() - component[0].getCenterX()) > Math.abs(component[component.length - 1].getCenterY() - component[0].getCenterY())) {
+          directions[i] = "horizontal";
+        } else {
+          directions[i] = "vertical";
+        }
+      }
+    }
+  });
+  return { components: components, ringNodes: new Set([].concat(_toConsumableArray(ringNodes1), _toConsumableArray(ringNodes2))), directions: directions, horizontalAlignments: horizontalAlignments, verticalAlignments: verticalAlignments };
+};
 
 module.exports = SBGNLayout;
 
@@ -174,12 +439,42 @@ function SBGNNode(gm, loc, size, vNode) {
 
   // SBGN class of node (such as macromolecule, simple chemical etc.)
   this.class = null;
+  // pseudoClass is used to add temporary class (other than SBGN class) for a node
+  this.pseudoClass = null;
 }
 
 SBGNNode.prototype = Object.create(CoSENode.prototype);
 for (var prop in CoSENode) {
   SBGNNode[prop] = CoSENode[prop];
 }
+
+SBGNNode.prototype.getOutgoerNodes = function () {
+  var nodeList = [];
+  var self = this;
+
+  self.edges.forEach(function (edge) {
+
+    if (edge.source == self) {
+      nodeList.push(edge.target);
+    }
+  });
+
+  return nodeList;
+};
+
+SBGNNode.prototype.getIncomerNodes = function () {
+  var nodeList = [];
+  var self = this;
+
+  self.edges.forEach(function (edge) {
+
+    if (edge.target == self) {
+      nodeList.push(edge.source);
+    }
+  });
+
+  return nodeList;
+};
 
 module.exports = SBGNNode;
 
@@ -346,6 +641,7 @@ var Layout = function (_ContinuousLayout) {
       if (state.randomize) {
         sbgnLayout.runLayout();
       }
+      sbgnLayout.constructSkeleton();
     }
 
     // Get the top most ones of a list of nodes
