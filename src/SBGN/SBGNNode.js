@@ -16,8 +16,7 @@ for (let prop in CoSENode) {
   SBGNNode[prop] = CoSENode[prop];
 }
 
-SBGNNode.prototype.getOutgoerNodes = function ()
-{
+SBGNNode.prototype.getOutgoerNodes = function () {
   let nodeList = [];
   let self = this;
 
@@ -32,8 +31,7 @@ SBGNNode.prototype.getOutgoerNodes = function ()
   return nodeList;
 };
 
-SBGNNode.prototype.getIncomerNodes = function ()
-{
+SBGNNode.prototype.getIncomerNodes = function () {
   let nodeList = [];
   let self = this;
 
@@ -47,5 +45,13 @@ SBGNNode.prototype.getIncomerNodes = function ()
 
   return nodeList;
 };
+
+SBGNNode.prototype.isProcess = function() {
+  let self = this;
+  if(self.class == "process" || self.class == "omitted process" || self.class == "uncertain process")
+    return true;
+  else
+    return false;
+}
 
 module.exports = SBGNNode;

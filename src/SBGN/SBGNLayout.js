@@ -11,10 +11,14 @@ for (let property in CoSELayout) {
   SBGNLayout[property] = CoSELayout[property];
 }
 
+SBGNLayout.prototype.getAllProcessNodes = function () {
+  return this.graphManager.getAllProcessNodes();
+};
+
 SBGNLayout.prototype.constructSkeleton = function(){
   let queue = [];
   let allNodes = this.getAllNodes();
-  let processNodes = allNodes.filter((node) => node.class == "process");
+  let processNodes = this.getAllProcessNodes();
 
   // find process nodes that are suitable to be source of DFS
   processNodes.forEach(process => {
@@ -65,7 +69,7 @@ SBGNLayout.prototype.constructSkeleton = function(){
   // some postprocessing to shape components better
   let componentIndexesToBeExpanded = new Set();
   components.forEach((component, i) => {
-    if(component.length == 1 && component[0].class == "process") {
+    if(component.length == 1 && component[0].isProcess()) {
       componentIndexesToBeExpanded.add(i);
     }
   });
@@ -76,13 +80,13 @@ SBGNLayout.prototype.constructSkeleton = function(){
     let candidateNode = null;
     let otherProcess = null;
     process.getIncomerNodes().forEach(node => {
-      if(node.getOutgoerNodes().filter((node) => node.class == "process").length > 1) {
+      if(node.getOutgoerNodes().filter((node) => node.isProcess()).length > 1) {
         candidateNode = node;
       }
     });
     if(candidateNode) {
       components[index].unshift(candidateNode);
-      otherProcess = candidateNode.getOutgoerNodes().filter((node) => node.class == "process").filter((node) => node.id != process.id)[0];
+      otherProcess = candidateNode.getOutgoerNodes().filter((node) => node.isProcess()).filter((node) => node.id != process.id)[0];
       components.forEach((component, i) => {
         if(component.includes(otherProcess)) {
           components[i].unshift(candidateNode);
