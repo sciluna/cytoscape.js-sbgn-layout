@@ -1,6 +1,8 @@
 const HashMap = require('cose-base').layoutBase.HashMap;
 const PointD = require('cose-base').layoutBase.PointD;
 const DimensionD = require('cose-base').layoutBase.DimensionD;
+const RectangleD = require('cose-base').layoutBase.RectangleD;
+const Integer = require('cose-base').layoutBase.Integer;
 let LayoutConstants = require('cose-base').layoutBase.LayoutConstants;
 let SBGNConstants = require('../SBGN/SBGNConstants');
 let CoSEConstants = require('cose-base').CoSEConstants;
@@ -72,12 +74,17 @@ let defaults = {
   initialEnergyOnIncremental: 0.5
 };
 
+let getUserOptions = function (options) {
+  CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = false;
+  CoSEConstants.DEFAULT_EDGE_LENGTH = FDLayoutConstants.DEFAULT_EDGE_LENGTH = 70;
+}
+
 class Layout extends ContinuousLayout {
   constructor( options ){
     options = assign( {}, defaults, options );
     super(options);
 
-    //getUserOptions(options);
+    getUserOptions(options);
   }
 
   prerun(){
@@ -106,12 +113,152 @@ class Layout extends ContinuousLayout {
         e1.id = edge.id();
       }
     }
-    // First phase of the algorithm
+    // First phase of the algorithm - Apply a static layout and construct skeleton
     // If incremental is true, skip over Phase I
     if (state.randomize) {
       sbgnLayout.runLayout();
     }
-    sbgnLayout.constructSkeleton();
+    let graphInfo = sbgnLayout.constructSkeleton();
+
+    // Apply an incremental layout to give a shape to reaction blocks
+    sbgnLayout.constraints["alignmentConstraint"] = graphInfo.constraints.alignmentConstraint;
+    sbgnLayout.constraints["relativePlacementConstraint"] = graphInfo.constraints.relativePlacementConstraint;
+    let directions = graphInfo.directions;
+    graphManager.allNodesToApplyGravitation = undefined;
+    sbgnLayout.initParameters();
+    sbgnLayout.initSpringEmbedder();
+    CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = true;
+    CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
+    CoSEConstants.TILE = false;
+    sbgnLayout.runLayout();
+
+    //console.log("Actual Nodes");
+    //console.log(this.root.getNodes());
+
+    //Initialize skeleton layout
+    let sbgnLayoutSkeleton = this.sbgnLayoutSkeleton = new SBGNLayout();
+    let graphManagerSkeleton = this.graphManagerSkeleton = sbgnLayoutSkeleton.newGraphManager();
+    this.rootSkeleton = graphManagerSkeleton.addRoot();
+    let oldPositions = [];
+    let newPositions = [];
+    let sbgnNodeToSkeleton = this.sbgnNodeToSkeleton = new Map();
+    let skeletonToSbgnNode = this.skeletonToSbgnNode = new Map();
+
+    let ringNodes = graphInfo.ringNodes;
+    let components = graphInfo.components;
+    let componentExtended = graphInfo.componentsExtended;
+
+    // process skeleton nodes
+    [...ringNodes].forEach((ringNode, i) => {
+      let theNode = this.rootSkeleton.add(new SBGNNode(sbgnLayoutSkeleton.graphManager,
+        ringNode.getLocation(),
+        new DimensionD(ringNode.getWidth(), ringNode.getHeight())));
+      theNode.id = "ringNode_" + i;
+      this.sbgnNodeToSkeleton.set(ringNode, theNode);
+      this.skeletonToSbgnNode.set(theNode, ringNode);
+      oldPositions.push({x: ringNode.getCenterX(), y: ringNode.getCenterY()});
+    });
+    componentExtended.forEach((component, i) => {
+      let componentRect = this.calculateBounds(component);
+      let theNode = this.rootSkeleton.add(new SBGNNode(sbgnLayoutSkeleton.graphManager,
+        new PointD(componentRect.getX(), componentRect.getY()),
+        new DimensionD(componentRect.getWidth(), componentRect.getHeight())));
+      theNode.id = "component_" + i;
+      this.sbgnNodeToSkeleton.set(components[i], theNode);
+      this.skeletonToSbgnNode.set(theNode, components[i]);
+      oldPositions.push({x: componentRect.getX() + componentRect.getWidth()/2, y: componentRect.getY() + componentRect.getHeight()/2});
+    });
+    //console.log("Skeleton Nodes");
+    //console.log(this.rootSkeleton.getNodes());
+
+    // process skeleton edges
+    components.forEach((component, i) => {
+      let ringNodeToComponentNode = [];
+      component.forEach(node => {
+        node.getNeighborsList().intersection(ringNodes).forEach(neigbor => {
+          ringNodeToComponentNode.push({source: neigbor, target: node});
+        });
+      });
+      ringNodeToComponentNode.forEach(edge => {
+        let sourceNode = this.sbgnNodeToSkeleton.get(edge.source);
+        let targetNode = this.sbgnNodeToSkeleton.get(component);
+        let e1 = graphManagerSkeleton.add(sbgnLayoutSkeleton.newEdge(), sourceNode, targetNode);
+        e1.id = sourceNode.id + "_" + targetNode.id;
+        e1.originalTarget = edge.target;
+      });
+    });
+
+    //console.log("Skeleton Edges");
+    //console.log(this.rootSkeleton.getEdges());
+
+    // apply incremental layout on skeleton graph
+    graphManagerSkeleton.allNodesToApplyGravitation = undefined;
+    sbgnLayoutSkeleton.initParameters();
+    sbgnLayoutSkeleton.initSpringEmbedder();
+    CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = true;
+    CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
+    CoSEConstants.TILE = false;
+    sbgnLayoutSkeleton.runLayout();
+
+    //console.log("Skeleton Nodes");
+    //console.log(this.rootSkeleton.getNodes());
+
+    graphManagerSkeleton.getAllNodes().forEach((node, i) => {
+      newPositions.push({x: node.getCenterX(), y: node.getCenterY()});
+    });
+
+    graphManagerSkeleton.getAllNodes().forEach((node, i) => {
+      let sbgnElement = this.skeletonToSbgnNode.get(node);
+      if(Array.isArray(sbgnElement)) {
+        sbgnElement.forEach(sbgnNode => {
+          sbgnNode.moveBy(newPositions[i].x - oldPositions[i].x, newPositions[i].y - oldPositions[i].y);
+        });
+      }
+      else {
+        sbgnElement.moveBy(newPositions[i].x - oldPositions[i].x, newPositions[i].y - oldPositions[i].y);
+      }
+    });
+
+    let ringToReactionBlockEdges = [];
+    components.forEach((component, i) => {
+      component.forEach(node => {
+        node.getNeighborsList().intersection(ringNodes).forEach(neigbor => {
+          ringToReactionBlockEdges.push(node.getEdgesBetween(neigbor)[0]);
+        });
+      });
+    });
+
+    let updatedConstraintInfo = sbgnLayout.addPerComponentConstraints(components, directions);
+    let verticalAlignments = updatedConstraintInfo.verticalAlignments;
+    let horizontalAlignments = updatedConstraintInfo.horizontalAlignments;
+    this.graphManagerSkeleton.getAllEdges().forEach((edge, i) => {
+      let source = edge.getSource();
+      let target = edge.getTarget();
+      if(Math.abs((target.getCenterY() - source.getCenterY()) > (target.getCenterX() - source.getCenterX()))){
+        verticalAlignments.push([this.skeletonToSbgnNode.get(source).id, edge.originalTarget.id]); // source nodes are ring nodes
+      }
+      else {
+        horizontalAlignments.push([this.skeletonToSbgnNode.get(source).id, edge.originalTarget.id]);
+      }
+    });
+
+    verticalAlignments = sbgnLayout.mergeArrays(verticalAlignments);
+    horizontalAlignments = sbgnLayout.mergeArrays(horizontalAlignments);
+    let alignmentConstraint = {vertical: verticalAlignments, horizontal: horizontalAlignments};
+
+    console.log(verticalAlignments);
+    console.log(horizontalAlignments);
+
+    // Apply an incremental layout to give a final shape to reaction blocks
+    sbgnLayout.constraints["alignmentConstraint"] = alignmentConstraint;
+    graphManager.allNodesToApplyGravitation = undefined;
+    sbgnLayout.initParameters();
+    sbgnLayout.initSpringEmbedder();
+    CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = true;
+    CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
+    CoSEConstants.TILE = false;
+    sbgnLayout.runLayout();
+      
   }
 
   // Get the top most ones of a list of nodes
@@ -184,6 +331,51 @@ class Layout extends ContinuousLayout {
         this.processChildrenList(theNewGraph, children_of_children, layout);
       }
     }
+  }
+
+  calculateBounds ( nodes ) {
+    let left = Integer.MAX_VALUE;
+    let right = -Integer.MAX_VALUE;
+    let top = Integer.MAX_VALUE;
+    let bottom = -Integer.MAX_VALUE;
+    let nodeLeft;
+    let nodeRight;
+    let nodeTop;
+    let nodeBottom;
+
+    let s = nodes.length;
+
+    for (var i = 0; i < s; i++)
+      {
+        var lNode = nodes[i];
+        nodeLeft = lNode.getLeft();
+        nodeRight = lNode.getRight();
+        nodeTop = lNode.getTop();
+        nodeBottom = lNode.getBottom();
+    
+        if (left > nodeLeft)
+        {
+          left = nodeLeft;
+        }
+    
+        if (right < nodeRight)
+        {
+          right = nodeRight;
+        }
+    
+        if (top > nodeTop)
+        {
+          top = nodeTop;
+        }
+    
+        if (bottom < nodeBottom)
+        {
+          bottom = nodeBottom;
+        }
+      }
+      var boundingRect = new RectangleD(left, top, right - left, bottom - top);
+
+      return boundingRect;
   }
 
   // run this each iteraction

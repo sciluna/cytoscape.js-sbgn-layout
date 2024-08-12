@@ -16,6 +16,10 @@
 	<h1>cytoscape sbgn-layout demo</h1>
 
 	<div id="menuSection">
+
+		<button id="randomizeButton">Randomize</button>
+		<button id="layoutButton">SBGN Layout</button>
+
 		<label for="samples">Sample SBGN file:</label>
 
 		<select name="samples" id="samples">
@@ -28,9 +32,14 @@
 			<option value="sample6">Sample 6</option>
 			<option value="sample7">Sample 7</option>
 			<option value="sample8">Sample 8</option>
+<!-- 			<option value="sample8">Sample 8</option>
+			<option value="sample9">Sample 9</option>
+			<option value="sample10">Sample 10</option>
+			<option value="sample11">Sample 11</option> -->
 		</select>
 
-		<button id="layoutButton">Apply Layout</button>
+		<span id="fileName" class="text-secondary mt-2 mr-5"></span>
+		
 	</div>
 	<div id="cy"></div>
 

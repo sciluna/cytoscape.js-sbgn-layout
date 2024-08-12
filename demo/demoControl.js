@@ -30,7 +30,7 @@ document.getElementById("samples").addEventListener("change", function (event) {
 		filename = "glycolysis_cropped.sbgn";
 	}
 	else if(sample == "sample2") {
-		filename = "glycolysis_cropped2.sbgn";
+		filename = "glycolysis.sbgn";
 	}
 	else if(sample == "sample3") {
 		filename = "vitamins_b6_activation_to_pyridoxal_phosphate.sbgn";
@@ -42,15 +42,32 @@ document.getElementById("samples").addEventListener("change", function (event) {
 		filename = "WP121.sbgn";
 	}
 	else if(sample == "sample6") {
-		filename = "mapk_cascade.sbgn";
+		filename = "Hsp90β_interacts_with_MDM2.xml";
 	}
+/* 	else if(sample == "sample7") {
+		filename = "glycolysis_cropped2.sbgn";
+	} */
+/* 	else if(sample == "sample8") {
+		filename = "Repressilator_PD_v7.sbgn";
+	} */
+/* 	else if(sample == "sample9") {
+		filename = "mapk_cascade.sbgn";
+	} */
 	else if(sample == "sample7") {
-		filename = "glycolysis.sbgn";
+		filename = "Ascorbate_and_aldarate_metabolism.xml";
 	}
 	else if(sample == "sample8") {
-		filename = "Repressilator_PD_v7.sbgn";
+		filename = "Selenocompound_metab.xml";
 	}
+/* 	else if(sample == "sample11") {
+		filename = "D-Arginine_and_D-Orn.xml";
+	} */
 	loadSample('examples/' + filename);
+	document.getElementById("fileName").innerHTML = filename;
+});
+
+document.getElementById("randomizeButton").addEventListener("click", function () {
+	cy.layout({name: "random"}).run();
 });
 
 document.getElementById("layoutButton").addEventListener("click", function () {

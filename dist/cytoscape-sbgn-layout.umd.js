@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 9);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -112,14 +112,74 @@ module.exports = Object.assign != null ? Object.assign.bind(Object) : function (
 "use strict";
 
 
+var CoSENode = __webpack_require__(0).CoSENode;
+var IMath = __webpack_require__(15).IMath;
+
+function SBGNNode(gm, loc, size, vNode) {
+  // the constructor of LNode handles alternative constructors
+  CoSENode.call(this, gm, loc, size, vNode);
+
+  // SBGN class of node (such as macromolecule, simple chemical etc.)
+  this.class = null;
+  // pseudoClass is used to add temporary class (other than SBGN class) for a node
+  this.pseudoClass = null;
+}
+
+SBGNNode.prototype = Object.create(CoSENode.prototype);
+for (var prop in CoSENode) {
+  SBGNNode[prop] = CoSENode[prop];
+}
+
+SBGNNode.prototype.getOutgoerNodes = function () {
+  var nodeList = [];
+  var self = this;
+
+  self.edges.forEach(function (edge) {
+
+    if (edge.source == self) {
+      nodeList.push(edge.target);
+    }
+  });
+
+  return nodeList;
+};
+
+SBGNNode.prototype.getIncomerNodes = function () {
+  var nodeList = [];
+  var self = this;
+
+  self.edges.forEach(function (edge) {
+
+    if (edge.target == self) {
+      nodeList.push(edge.source);
+    }
+  });
+
+  return nodeList;
+};
+
+SBGNNode.prototype.isProcess = function () {
+  var self = this;
+  if (self.class == "process" || self.class == "omitted process" || self.class == "uncertain process") return true;else return false;
+};
+
+module.exports = SBGNNode;
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 /**
  * Redirection to SBGN Layout Algorithm
  */
 
-module.exports = __webpack_require__(7);
+module.exports = __webpack_require__(10);
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -137,7 +197,87 @@ for (var prop in CoSEConstants) {
 module.exports = SBGNConstants;
 
 /***/ }),
-/* 4 */
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var CoSEEdge = __webpack_require__(0).CoSEEdge;
+
+function SBGNEdge(source, target, vEdge) {
+  CoSEEdge.call(this, source, target, vEdge);
+
+  // SBGN class of edge (such as consumption, production etc.)
+  this.class = null;
+}
+
+SBGNEdge.prototype = Object.create(CoSEEdge.prototype);
+for (var prop in CoSEEdge) {
+  SBGNEdge[prop] = CoSEEdge[prop];
+}
+
+module.exports = SBGNEdge;
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var CoSEGraph = __webpack_require__(0).CoSEGraph;
+
+function SBGNGraph(parent, graphMgr, vGraph) {
+  CoSEGraph.call(this, parent, graphMgr, vGraph);
+}
+
+SBGNGraph.prototype = Object.create(CoSEGraph.prototype);
+
+for (var prop in CoSEGraph) {
+  SBGNGraph[prop] = CoSEGraph[prop];
+}
+
+module.exports = SBGNGraph;
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var CoSEGraphManager = __webpack_require__(0).CoSEGraphManager;
+
+function SBGNGraphManager(layout) {
+  CoSEGraphManager.call(this, layout);
+}
+
+SBGNGraphManager.prototype = Object.create(CoSEGraphManager.prototype);
+
+for (var prop in CoSEGraphManager) {
+  SBGNGraphManager[prop] = CoSEGraphManager[prop];
+}
+
+SBGNGraphManager.prototype.getAllProcessNodes = function () {
+  var nodeList = [];
+  var graphs = this.getGraphs();
+  var s = graphs.length;
+  for (var i = 0; i < s; i++) {
+    nodeList = nodeList.concat(graphs[i].getNodes());
+  }
+  var processNodeList = nodeList.filter(function (node) {
+    if (node.class == "process" || node.class == "omitted process" || node.class == "uncertain process") return true;else return false;
+  });
+  this.processNodes = processNodeList;
+
+  return this.processNodes;
+};
+
+module.exports = SBGNGraphManager;
+
+/***/ }),
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -146,6 +286,10 @@ module.exports = SBGNConstants;
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var CoSELayout = __webpack_require__(0).CoSELayout;
+var SBGNGraphManager = __webpack_require__(7);
+var SBGNGraph = __webpack_require__(6);
+var SBGNNode = __webpack_require__(2);
+var SBGNEdge = __webpack_require__(5);
 
 // Constructor
 function SBGNLayout() {
@@ -158,14 +302,38 @@ for (var property in CoSELayout) {
   SBGNLayout[property] = CoSELayout[property];
 }
 
+// -----------------------------------------------------------------------------
+// Section: Class methods related to Graph Manager
+// -----------------------------------------------------------------------------
+SBGNLayout.prototype.newGraphManager = function () {
+  this.graphManager = new SBGNGraphManager(this);
+  return this.graphManager;
+};
+
+SBGNLayout.prototype.newGraph = function (vGraph) {
+  return new SBGNGraph(null, this.graphManager, vGraph);
+};
+
+SBGNLayout.prototype.newNode = function (vNode) {
+  return new SBGNNode(this.graphManager, vNode);
+};
+
+SBGNLayout.prototype.newEdge = function (vEdge) {
+  return new SBGNEdge(null, null, vEdge);
+};
+
+SBGNLayout.prototype.getAllProcessNodes = function () {
+  return this.graphManager.getAllProcessNodes();
+};
+
+///////////////////////////////////////////////////////
+
 SBGNLayout.prototype.constructSkeleton = function () {
   var _this = this;
 
   var queue = [];
   var allNodes = this.getAllNodes();
-  var processNodes = allNodes.filter(function (node) {
-    return node.class == "process";
-  });
+  var processNodes = this.getAllProcessNodes();
 
   // find process nodes that are suitable to be source of DFS
   processNodes.forEach(function (process) {
@@ -220,7 +388,7 @@ SBGNLayout.prototype.constructSkeleton = function () {
   // some postprocessing to shape components better
   var componentIndexesToBeExpanded = new Set();
   components.forEach(function (component, i) {
-    if (component.length == 1 && component[0].class == "process") {
+    if (component.length == 1 && component[0].isProcess()) {
       componentIndexesToBeExpanded.add(i);
     }
   });
@@ -232,7 +400,7 @@ SBGNLayout.prototype.constructSkeleton = function () {
     var otherProcess = null;
     process.getIncomerNodes().forEach(function (node) {
       if (node.getOutgoerNodes().filter(function (node) {
-        return node.class == "process";
+        return node.isProcess();
       }).length > 1) {
         candidateNode = node;
       }
@@ -240,7 +408,7 @@ SBGNLayout.prototype.constructSkeleton = function () {
     if (candidateNode) {
       components[index].unshift(candidateNode);
       otherProcess = candidateNode.getOutgoerNodes().filter(function (node) {
-        return node.class == "process";
+        return node.isProcess();
       }).filter(function (node) {
         return node.id != process.id;
       })[0];
@@ -252,9 +420,9 @@ SBGNLayout.prototype.constructSkeleton = function () {
     }
   });
 
-  var nodesWithRingClass = allNodes.filter(function (node) {
+  var nodesWithRingClass = new Set(allNodes.filter(function (node) {
     return node.pseudoClass == "ring";
-  });
+  }));
   // process components to separate ring nodes
   var componentsInfo = this.processComponents(components, nodesWithRingClass);
   components = componentsInfo.components;
@@ -262,8 +430,27 @@ SBGNLayout.prototype.constructSkeleton = function () {
   var directions = componentsInfo.directions;
   var verticalAlignments = componentsInfo.verticalAlignments;
   var horizontalAlignments = componentsInfo.horizontalAlignments;
+  var relativePlacementConstraints = componentsInfo.relativePlacementConstraints;
   console.log(ringNodes);
   console.log(components);
+
+  var componentsExtended = this.extendComponents(components);
+
+  console.log(componentsExtended);
+  console.log(directions);
+
+  var constraintInfo = this.addPerComponentConstraints(components, directions);
+  verticalAlignments = verticalAlignments.concat(constraintInfo.verticalAlignments);
+  horizontalAlignments = horizontalAlignments.concat(constraintInfo.horizontalAlignments);
+  verticalAlignments = this.mergeArrays(verticalAlignments);
+  horizontalAlignments = this.mergeArrays(horizontalAlignments);
+  /*   let verticalAlignments = constraintInfo.verticalAlignments.length > 0 ? constraintInfo.verticalAlignments: undefined;
+    let horizontalAlignments = constraintInfo.horizontalAlignments.length > 0 ? constraintInfo.horizontalAlignments : undefined; */
+  relativePlacementConstraints = relativePlacementConstraints.concat(constraintInfo.relativePlacementConstraints);
+
+  var constraints = { alignmentConstraint: { vertical: verticalAlignments, horizontal: horizontalAlignments }, relativePlacementConstraint: relativePlacementConstraints };
+  console.log(constraints);
+  return { components: components, componentsExtended: componentsExtended, ringNodes: ringNodes, constraints: constraints, directions: directions };
 };
 
 // A function used by DFS
@@ -316,19 +503,28 @@ SBGNLayout.prototype.processComponents = function (components, nodesWithRingClas
   var ringNodes1 = new Set();
   var verticalAlignments = [];
   var horizontalAlignments = [];
+  var relativePlacementConstraints = [];
   var directions = [];
   // first, process components with nodes that have ring class
   components.forEach(function (component, i) {
     if (component.length > 1) {
       var direction = [null, null];
       if (component[0].pseudoClass == "ring") {
-        ringNodes1.add(component[0].id);
+        ringNodes1.add(component[0]);
         if (Math.abs(component[1].getCenterX() - component[0].getCenterX()) > Math.abs(component[1].getCenterY() - component[0].getCenterY())) {
           direction[0] = "horizontal";
           horizontalAlignments.push([component[0].id, component[1].id]);
+          /*           if(component[1].getCenterX() > component[0].getCenterX())
+                      relativePlacementConstraints.push({left: component[0].id, right: component[1].id});
+                    else
+                      relativePlacementConstraints.push({left: component[1].id, right: component[0].id}); */
         } else {
           direction[0] = "vertical";
           verticalAlignments.push([component[0].id, component[1].id]);
+          /*           if(component[1].getCenterY() > component[0].getCenterY())
+                      relativePlacementConstraints.push({top: component[0].id, bottom: component[1].id});
+                    else
+                      relativePlacementConstraints.push({top: component[1].id, bottom: component[0].id}); */
         }
         component = component.filter(function (node) {
           return node.id != component[0].id;
@@ -336,13 +532,21 @@ SBGNLayout.prototype.processComponents = function (components, nodesWithRingClas
         components[i] = component;
       }
       if (component[component.length - 1].pseudoClass == "ring") {
-        ringNodes1.add(component[component.length - 1].id);
+        ringNodes1.add(component[component.length - 1]);
         if (Math.abs(component[component.length - 2].getCenterX() - component[component.length - 1].getCenterX()) > Math.abs(component[component.length - 2].getCenterY() - component[component.length - 1].getCenterY())) {
           direction[1] = "horizontal";
           horizontalAlignments.push([component[component.length - 1].id, component[component.length - 2].id]);
+          /*           if(component[component.length - 2].getCenterX() > component[component.length - 1].getCenterX())
+                      relativePlacementConstraints.push({left: component[component.length - 1].id, right: component[component.length - 2].id});
+                    else
+                      relativePlacementConstraints.push({left: component[component.length - 2].id, right: component[component.length - 1].id}); */
         } else {
           direction[1] = "vertical";
           verticalAlignments.push([component[component.length - 1].id, component[component.length - 2].id]);
+          /*           if(component[component.length - 2].getCenterY() > component[component.length - 1].getCenterY())
+                      relativePlacementConstraints.push({top: component[component.length - 1].id, bottom: component[component.length - 2].id});
+                    else
+                      relativePlacementConstraints.push({top: component[component.length - 2].id, bottom: component[component.length - 1].id}); */
         }
         components[i] = component.filter(function (node) {
           return node.id != component[component.length - 1].id;
@@ -354,7 +558,7 @@ SBGNLayout.prototype.processComponents = function (components, nodesWithRingClas
         directions[i] = direction[1];
       }
     } else {
-      ringNodes1.add(component[0].id);
+      ringNodes1.add(component[0]);
       directions[i] = "horizontal";
     }
   });
@@ -368,37 +572,53 @@ SBGNLayout.prototype.processComponents = function (components, nodesWithRingClas
       var componentToCompare = components[j];
       if (component[0].id == componentToCompare[0].id || component[0].id == componentToCompare[componentToCompare.length - 1].id) {
         var commonNode = component[0];
-        ringNodes2.add(commonNode.id);
+        ringNodes2.add(commonNode);
       }
       if (component[component.length - 1].id == componentToCompare[0].id || component[component.length - 1].id == componentToCompare[componentToCompare.length - 1].id) {
         var _commonNode = component[component.length - 1];
-        ringNodes2.add(_commonNode.id);
+        ringNodes2.add(_commonNode);
       }
     }
   }
 
   components.forEach(function (component, i) {
     var direction = [null, null];
-    if (ringNodes2.has(component[0].id)) {
+    if (ringNodes2.has(component[0])) {
       if (Math.abs(component[1].getCenterX() - component[0].getCenterX()) > Math.abs(component[1].getCenterY() - component[0].getCenterY())) {
         direction[0] = "horizontal";
         horizontalAlignments.push([component[0].id, component[1].id]);
+        /*         if(component[1].getCenterX() > component[0].getCenterX())
+                  relativePlacementConstraints.push({left: component[0].id, right: component[1].id});
+                else
+                  relativePlacementConstraints.push({left: component[1].id, right: component[0].id}); */
       } else {
         direction[0] = "vertical";
         verticalAlignments.push([component[0].id, component[1].id]);
+        /*         if(component[1].getCenterY() > component[0].getCenterY())
+                  relativePlacementConstraints.push({top: component[0].id, bottom: component[1].id});
+                else
+                  relativePlacementConstraints.push({top: component[1].id, bottom: component[0].id}); */
       }
       component = component.filter(function (node) {
         return node.id != component[0].id;
       });
       components[i] = component;
     }
-    if (ringNodes2.has(component[component.length - 1].id)) {
+    if (ringNodes2.has(component[component.length - 1])) {
       if (Math.abs(component[component.length - 2].getCenterX() - component[component.length - 1].getCenterX()) > Math.abs(component[component.length - 2].getCenterY() - component[component.length - 1].getCenterY())) {
         direction[1] = "horizontal";
         horizontalAlignments.push([component[component.length - 1].id, component[component.length - 2].id]);
+        /*         if(component[component.length - 2].getCenterX() > component[component.length - 1].getCenterX())
+                  relativePlacementConstraints.push({left: component[component.length - 1].id, right: component[component.length - 2].id});
+                else
+                  relativePlacementConstraints.push({left: component[component.length - 2].id, right: component[component.length - 1].id}); */
       } else {
         direction[1] = "vertical";
         verticalAlignments.push([component[component.length - 1].id, component[component.length - 2].id]);
+        /*         if(component[component.length - 2].getCenterY() > component[component.length - 1].getCenterY())
+                  relativePlacementConstraints.push({top: component[component.length - 1].id, bottom: component[component.length - 2].id});
+                else
+                  relativePlacementConstraints.push({top: component[component.length - 2].id, bottom: component[component.length - 1].id}); */
       }
       components[i] = component.filter(function (node) {
         return node.id != component[component.length - 1].id;
@@ -418,74 +638,133 @@ SBGNLayout.prototype.processComponents = function (components, nodesWithRingClas
       }
     }
   });
-  return { components: components, ringNodes: new Set([].concat(_toConsumableArray(ringNodes1), _toConsumableArray(ringNodes2))), directions: directions, horizontalAlignments: horizontalAlignments, verticalAlignments: verticalAlignments };
+  return { components: components, ringNodes: new Set([].concat(_toConsumableArray(nodesWithRingClass), _toConsumableArray(ringNodes1), _toConsumableArray(ringNodes2))), directions: directions, horizontalAlignments: horizontalAlignments, verticalAlignments: verticalAlignments, relativePlacementConstraints: relativePlacementConstraints };
+};
+
+// Extend components (reaction chains) with one degree neighbors
+SBGNLayout.prototype.extendComponents = function (components) {
+  var componentsExtended = [];
+  components.forEach(function (component, i) {
+    var componentExtended = [];
+    component.forEach(function (node) {
+      componentExtended.push(node);
+      var neighbors = node.getNeighborsList();
+      neighbors.forEach(function (neighbor) {
+        if (neighbor.getEdges().length == 1) {
+          componentExtended.push(neighbor);
+        }
+      });
+    });
+    //componentExtended.move({parent: componentParent.id()});
+    //componentExtended.css('background-color', getRandomColor());
+    componentsExtended.push(componentExtended);
+  });
+  return componentsExtended;
+};
+
+SBGNLayout.prototype.addPerComponentConstraints = function (components, directions) {
+  var horizontalAlignments = [];
+  var verticalAlignments = [];
+  var relativePlacementConstraints = [];
+
+  directions.forEach(function (direction, i) {
+    if (direction == "horizontal" && components[i].length > 1) {
+      horizontalAlignments.push(components[i].map(function (node) {
+        return node.id;
+      }));
+
+      var isLeftToRight = true;
+      if (components[i][0].getCenterX() > components[i][1].getCenterX()) isLeftToRight = false;
+
+      if (isLeftToRight) {
+        components[i].forEach(function (node, j) {
+          if (j != components[i].length - 1) {
+            relativePlacementConstraints.push({ left: node.id, right: components[i][j + 1].id });
+          }
+        });
+      } else {
+        components[i].forEach(function (node, j) {
+          if (j != components[i].length - 1) {
+            relativePlacementConstraints.push({ left: components[i][j + 1].id, right: node.id });
+          }
+        });
+      }
+    } else if (direction == "vertical" && components[i].length > 1) {
+      verticalAlignments.push(components[i].map(function (node) {
+        return node.id;
+      }));
+
+      var isTopToBottom = true;
+      if (components[i][0].getCenterY() > components[i][1].getCenterY()) isTopToBottom = false;
+
+      if (isTopToBottom) {
+        components[i].forEach(function (node, j) {
+          if (j != components[i].length - 1) {
+            relativePlacementConstraints.push({ top: node.id, bottom: components[i][j + 1].id });
+          }
+        });
+      } else {
+        components[i].forEach(function (node, j) {
+          if (j != components[i].length - 1) {
+            relativePlacementConstraints.push({ top: components[i][j + 1].id, bottom: node.id });
+          }
+        });
+      }
+    }
+  });
+
+  return { horizontalAlignments: horizontalAlignments, verticalAlignments: verticalAlignments, relativePlacementConstraints: relativePlacementConstraints };
+};
+
+// auxuliary function to merge arrays with duplicates
+SBGNLayout.prototype.mergeArrays = function (arrays) {
+  // Function to check if two arrays have common items
+  function haveCommonItems(arr1, arr2) {
+    return arr1.some(function (item) {
+      return arr2.includes(item);
+    });
+  }
+
+  // Function to merge two arrays and remove duplicates
+  function mergeAndRemoveDuplicates(arr1, arr2) {
+    return Array.from(new Set([].concat(_toConsumableArray(arr1), _toConsumableArray(arr2))));
+  }
+
+  // Loop until no more merges are possible
+  var merged = false;
+  do {
+    merged = false;
+    for (var i = 0; i < arrays.length; i++) {
+      for (var j = i + 1; j < arrays.length; j++) {
+        if (haveCommonItems(arrays[i], arrays[j])) {
+          // Merge the arrays
+          arrays[i] = mergeAndRemoveDuplicates(arrays[i], arrays[j]);
+          // Remove the merged array
+          arrays.splice(j, 1);
+          // Set merged to true to indicate a merge has occurred
+          merged = true;
+          break;
+        }
+      }
+      if (merged) {
+        break;
+      }
+    }
+  } while (merged);
+
+  return arrays;
 };
 
 module.exports = SBGNLayout;
 
 /***/ }),
-/* 5 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var CoSENode = __webpack_require__(0).CoSENode;
-var IMath = __webpack_require__(12).IMath;
-
-function SBGNNode(gm, loc, size, vNode) {
-  // the constructor of LNode handles alternative constructors
-  CoSENode.call(this, gm, loc, size, vNode);
-
-  // SBGN class of node (such as macromolecule, simple chemical etc.)
-  this.class = null;
-  // pseudoClass is used to add temporary class (other than SBGN class) for a node
-  this.pseudoClass = null;
-}
-
-SBGNNode.prototype = Object.create(CoSENode.prototype);
-for (var prop in CoSENode) {
-  SBGNNode[prop] = CoSENode[prop];
-}
-
-SBGNNode.prototype.getOutgoerNodes = function () {
-  var nodeList = [];
-  var self = this;
-
-  self.edges.forEach(function (edge) {
-
-    if (edge.source == self) {
-      nodeList.push(edge.target);
-    }
-  });
-
-  return nodeList;
-};
-
-SBGNNode.prototype.getIncomerNodes = function () {
-  var nodeList = [];
-  var self = this;
-
-  self.edges.forEach(function (edge) {
-
-    if (edge.target == self) {
-      nodeList.push(edge.source);
-    }
-  });
-
-  return nodeList;
-};
-
-module.exports = SBGNNode;
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var impl = __webpack_require__(2);
+var impl = __webpack_require__(3);
 
 // registers the extension on a cytoscape lib ref
 var register = function register(cytoscape) {
@@ -504,7 +783,7 @@ if (typeof cytoscape !== 'undefined') {
 module.exports = register;
 
 /***/ }),
-/* 7 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -513,6 +792,8 @@ module.exports = register;
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -523,14 +804,16 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var HashMap = __webpack_require__(0).layoutBase.HashMap;
 var PointD = __webpack_require__(0).layoutBase.PointD;
 var DimensionD = __webpack_require__(0).layoutBase.DimensionD;
+var RectangleD = __webpack_require__(0).layoutBase.RectangleD;
+var Integer = __webpack_require__(0).layoutBase.Integer;
 var LayoutConstants = __webpack_require__(0).layoutBase.LayoutConstants;
-var SBGNConstants = __webpack_require__(3);
+var SBGNConstants = __webpack_require__(4);
 var CoSEConstants = __webpack_require__(0).CoSEConstants;
 var FDLayoutConstants = __webpack_require__(0).layoutBase.FDLayoutConstants;
-var SBGNLayout = __webpack_require__(4);
-var SBGNNode = __webpack_require__(5);
+var SBGNLayout = __webpack_require__(8);
+var SBGNNode = __webpack_require__(2);
 
-var ContinuousLayout = __webpack_require__(8);
+var ContinuousLayout = __webpack_require__(11);
 var assign = __webpack_require__(1);
 var isFn = function isFn(fn) {
   return typeof fn === 'function';
@@ -596,6 +879,11 @@ var defaults = {
   initialEnergyOnIncremental: 0.5
 };
 
+var getUserOptions = function getUserOptions(options) {
+  CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = false;
+  CoSEConstants.DEFAULT_EDGE_LENGTH = FDLayoutConstants.DEFAULT_EDGE_LENGTH = 70;
+};
+
 var Layout = function (_ContinuousLayout) {
   _inherits(Layout, _ContinuousLayout);
 
@@ -603,14 +891,18 @@ var Layout = function (_ContinuousLayout) {
     _classCallCheck(this, Layout);
 
     options = assign({}, defaults, options);
-    return _possibleConstructorReturn(this, (Layout.__proto__ || Object.getPrototypeOf(Layout)).call(this, options));
 
-    //getUserOptions(options);
+    var _this = _possibleConstructorReturn(this, (Layout.__proto__ || Object.getPrototypeOf(Layout)).call(this, options));
+
+    getUserOptions(options);
+    return _this;
   }
 
   _createClass(Layout, [{
     key: 'prerun',
     value: function prerun() {
+      var _this2 = this;
+
       var self = this;
       var state = this.state; // options object combined with current state
 
@@ -636,12 +928,145 @@ var Layout = function (_ContinuousLayout) {
           e1.id = edge.id();
         }
       }
-      // First phase of the algorithm
+      // First phase of the algorithm - Apply a static layout and construct skeleton
       // If incremental is true, skip over Phase I
       if (state.randomize) {
         sbgnLayout.runLayout();
       }
-      sbgnLayout.constructSkeleton();
+      var graphInfo = sbgnLayout.constructSkeleton();
+
+      // Apply an incremental layout to give a shape to reaction blocks
+      sbgnLayout.constraints["alignmentConstraint"] = graphInfo.constraints.alignmentConstraint;
+      sbgnLayout.constraints["relativePlacementConstraint"] = graphInfo.constraints.relativePlacementConstraint;
+      var directions = graphInfo.directions;
+      graphManager.allNodesToApplyGravitation = undefined;
+      sbgnLayout.initParameters();
+      sbgnLayout.initSpringEmbedder();
+      CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = true;
+      CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
+      CoSEConstants.TILE = false;
+      sbgnLayout.runLayout();
+
+      //console.log("Actual Nodes");
+      //console.log(this.root.getNodes());
+
+      //Initialize skeleton layout
+      var sbgnLayoutSkeleton = this.sbgnLayoutSkeleton = new SBGNLayout();
+      var graphManagerSkeleton = this.graphManagerSkeleton = sbgnLayoutSkeleton.newGraphManager();
+      this.rootSkeleton = graphManagerSkeleton.addRoot();
+      var oldPositions = [];
+      var newPositions = [];
+      var sbgnNodeToSkeleton = this.sbgnNodeToSkeleton = new Map();
+      var skeletonToSbgnNode = this.skeletonToSbgnNode = new Map();
+
+      var ringNodes = graphInfo.ringNodes;
+      var components = graphInfo.components;
+      var componentExtended = graphInfo.componentsExtended;
+
+      // process skeleton nodes
+      [].concat(_toConsumableArray(ringNodes)).forEach(function (ringNode, i) {
+        var theNode = _this2.rootSkeleton.add(new SBGNNode(sbgnLayoutSkeleton.graphManager, ringNode.getLocation(), new DimensionD(ringNode.getWidth(), ringNode.getHeight())));
+        theNode.id = "ringNode_" + i;
+        _this2.sbgnNodeToSkeleton.set(ringNode, theNode);
+        _this2.skeletonToSbgnNode.set(theNode, ringNode);
+        oldPositions.push({ x: ringNode.getCenterX(), y: ringNode.getCenterY() });
+      });
+      componentExtended.forEach(function (component, i) {
+        var componentRect = _this2.calculateBounds(component);
+        var theNode = _this2.rootSkeleton.add(new SBGNNode(sbgnLayoutSkeleton.graphManager, new PointD(componentRect.getX(), componentRect.getY()), new DimensionD(componentRect.getWidth(), componentRect.getHeight())));
+        theNode.id = "component_" + i;
+        _this2.sbgnNodeToSkeleton.set(components[i], theNode);
+        _this2.skeletonToSbgnNode.set(theNode, components[i]);
+        oldPositions.push({ x: componentRect.getX() + componentRect.getWidth() / 2, y: componentRect.getY() + componentRect.getHeight() / 2 });
+      });
+      //console.log("Skeleton Nodes");
+      //console.log(this.rootSkeleton.getNodes());
+
+      // process skeleton edges
+      components.forEach(function (component, i) {
+        var ringNodeToComponentNode = [];
+        component.forEach(function (node) {
+          node.getNeighborsList().intersection(ringNodes).forEach(function (neigbor) {
+            ringNodeToComponentNode.push({ source: neigbor, target: node });
+          });
+        });
+        ringNodeToComponentNode.forEach(function (edge) {
+          var sourceNode = _this2.sbgnNodeToSkeleton.get(edge.source);
+          var targetNode = _this2.sbgnNodeToSkeleton.get(component);
+          var e1 = graphManagerSkeleton.add(sbgnLayoutSkeleton.newEdge(), sourceNode, targetNode);
+          e1.id = sourceNode.id + "_" + targetNode.id;
+          e1.originalTarget = edge.target;
+        });
+      });
+
+      //console.log("Skeleton Edges");
+      //console.log(this.rootSkeleton.getEdges());
+
+      // apply incremental layout on skeleton graph
+      graphManagerSkeleton.allNodesToApplyGravitation = undefined;
+      sbgnLayoutSkeleton.initParameters();
+      sbgnLayoutSkeleton.initSpringEmbedder();
+      CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = true;
+      CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
+      CoSEConstants.TILE = false;
+      sbgnLayoutSkeleton.runLayout();
+
+      //console.log("Skeleton Nodes");
+      //console.log(this.rootSkeleton.getNodes());
+
+      graphManagerSkeleton.getAllNodes().forEach(function (node, i) {
+        newPositions.push({ x: node.getCenterX(), y: node.getCenterY() });
+      });
+
+      graphManagerSkeleton.getAllNodes().forEach(function (node, i) {
+        var sbgnElement = _this2.skeletonToSbgnNode.get(node);
+        if (Array.isArray(sbgnElement)) {
+          sbgnElement.forEach(function (sbgnNode) {
+            sbgnNode.moveBy(newPositions[i].x - oldPositions[i].x, newPositions[i].y - oldPositions[i].y);
+          });
+        } else {
+          sbgnElement.moveBy(newPositions[i].x - oldPositions[i].x, newPositions[i].y - oldPositions[i].y);
+        }
+      });
+
+      var ringToReactionBlockEdges = [];
+      components.forEach(function (component, i) {
+        component.forEach(function (node) {
+          node.getNeighborsList().intersection(ringNodes).forEach(function (neigbor) {
+            ringToReactionBlockEdges.push(node.getEdgesBetween(neigbor)[0]);
+          });
+        });
+      });
+
+      var updatedConstraintInfo = sbgnLayout.addPerComponentConstraints(components, directions);
+      var verticalAlignments = updatedConstraintInfo.verticalAlignments;
+      var horizontalAlignments = updatedConstraintInfo.horizontalAlignments;
+      this.graphManagerSkeleton.getAllEdges().forEach(function (edge, i) {
+        var source = edge.getSource();
+        var target = edge.getTarget();
+        if (Math.abs(target.getCenterY() - source.getCenterY() > target.getCenterX() - source.getCenterX())) {
+          verticalAlignments.push([_this2.skeletonToSbgnNode.get(source).id, edge.originalTarget.id]); // source nodes are ring nodes
+        } else {
+          horizontalAlignments.push([_this2.skeletonToSbgnNode.get(source).id, edge.originalTarget.id]);
+        }
+      });
+
+      verticalAlignments = sbgnLayout.mergeArrays(verticalAlignments);
+      horizontalAlignments = sbgnLayout.mergeArrays(horizontalAlignments);
+      var alignmentConstraint = { vertical: verticalAlignments, horizontal: horizontalAlignments };
+
+      console.log(verticalAlignments);
+      console.log(horizontalAlignments);
+
+      // Apply an incremental layout to give a final shape to reaction blocks
+      sbgnLayout.constraints["alignmentConstraint"] = alignmentConstraint;
+      graphManager.allNodesToApplyGravitation = undefined;
+      sbgnLayout.initParameters();
+      sbgnLayout.initSpringEmbedder();
+      CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = true;
+      CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
+      CoSEConstants.TILE = false;
+      sbgnLayout.runLayout();
     }
 
     // Get the top most ones of a list of nodes
@@ -717,13 +1142,54 @@ var Layout = function (_ContinuousLayout) {
         }
       }
     }
+  }, {
+    key: 'calculateBounds',
+    value: function calculateBounds(nodes) {
+      var left = Integer.MAX_VALUE;
+      var right = -Integer.MAX_VALUE;
+      var top = Integer.MAX_VALUE;
+      var bottom = -Integer.MAX_VALUE;
+      var nodeLeft = void 0;
+      var nodeRight = void 0;
+      var nodeTop = void 0;
+      var nodeBottom = void 0;
+
+      var s = nodes.length;
+
+      for (var i = 0; i < s; i++) {
+        var lNode = nodes[i];
+        nodeLeft = lNode.getLeft();
+        nodeRight = lNode.getRight();
+        nodeTop = lNode.getTop();
+        nodeBottom = lNode.getBottom();
+
+        if (left > nodeLeft) {
+          left = nodeLeft;
+        }
+
+        if (right < nodeRight) {
+          right = nodeRight;
+        }
+
+        if (top > nodeTop) {
+          top = nodeTop;
+        }
+
+        if (bottom < nodeBottom) {
+          bottom = nodeBottom;
+        }
+      }
+      var boundingRect = new RectangleD(left, top, right - left, bottom - top);
+
+      return boundingRect;
+    }
 
     // run this each iteraction
 
   }, {
     key: 'tick',
     value: function tick() {
-      var _this2 = this;
+      var _this3 = this;
 
       var state = this.state;
       var self = this;
@@ -731,8 +1197,8 @@ var Layout = function (_ContinuousLayout) {
 
       // TODO update state for this iteration
       this.state.nodes.forEach(function (n) {
-        var s = _this2.getScratch(n);
-        var location = _this2.idToLNode[n.data('id')];
+        var s = _this3.getScratch(n);
+        var location = _this3.idToLNode[n.data('id')];
         s.x = location.getCenterX();
         s.y = location.getCenterY();
       });
@@ -767,7 +1233,7 @@ var Layout = function (_ContinuousLayout) {
 module.exports = Layout;
 
 /***/ }),
-/* 8 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -782,14 +1248,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  */
 
 var assign = __webpack_require__(1);
-var makeBoundingBox = __webpack_require__(9);
+var makeBoundingBox = __webpack_require__(12);
 
-var _require = __webpack_require__(10),
+var _require = __webpack_require__(13),
     setInitialPositionState = _require.setInitialPositionState,
     refreshPositions = _require.refreshPositions,
     getNodePositionData = _require.getNodePositionData;
 
-var _require2 = __webpack_require__(11),
+var _require2 = __webpack_require__(14),
     multitick = _require2.multitick;
 
 var Layout = function () {
@@ -999,7 +1465,7 @@ var Layout = function () {
 module.exports = Layout;
 
 /***/ }),
-/* 9 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1030,7 +1496,7 @@ module.exports = function (bb, cy) {
 };
 
 /***/ }),
-/* 10 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1072,7 +1538,7 @@ var refreshPositions = function refreshPositions(nodes, state) {
 module.exports = { setInitialPositionState: setInitialPositionState, getNodePositionData: getNodePositionData, refreshPositions: refreshPositions };
 
 /***/ }),
-/* 11 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1124,7 +1590,7 @@ var multitick = function multitick(state) {
 module.exports = { tick: tick, multitick: multitick };
 
 /***/ }),
-/* 12 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {

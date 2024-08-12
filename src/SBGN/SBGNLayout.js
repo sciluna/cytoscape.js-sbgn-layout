@@ -1,4 +1,8 @@
 const CoSELayout = require('cose-base').CoSELayout;
+const SBGNGraphManager = require('./SBGNGraphManager');
+const SBGNGraph = require('./SBGNGraph');
+const SBGNNode = require('./SBGNNode');
+const SBGNEdge = require('./SBGNEdge');
 
 // Constructor
 function SBGNLayout() {
@@ -11,9 +15,31 @@ for (let property in CoSELayout) {
   SBGNLayout[property] = CoSELayout[property];
 }
 
+// -----------------------------------------------------------------------------
+// Section: Class methods related to Graph Manager
+// -----------------------------------------------------------------------------
+SBGNLayout.prototype.newGraphManager = function(){
+  this.graphManager = new SBGNGraphManager(this);
+  return this.graphManager;
+};
+
+SBGNLayout.prototype.newGraph = function (vGraph) {
+  return new SBGNGraph(null, this.graphManager, vGraph);
+};
+
+SBGNLayout.prototype.newNode = function (vNode) {
+  return new SBGNNode(this.graphManager, vNode);
+};
+
+SBGNLayout.prototype.newEdge = function (vEdge) {
+  return new SBGNEdge(null, null, vEdge);
+};
+
 SBGNLayout.prototype.getAllProcessNodes = function () {
   return this.graphManager.getAllProcessNodes();
 };
+
+///////////////////////////////////////////////////////
 
 SBGNLayout.prototype.constructSkeleton = function(){
   let queue = [];
@@ -95,7 +121,7 @@ SBGNLayout.prototype.constructSkeleton = function(){
     }
   });
 
-  let nodesWithRingClass = allNodes.filter((node) => node.pseudoClass == "ring");
+  let nodesWithRingClass = new Set(allNodes.filter((node) => node.pseudoClass == "ring"));
   // process components to separate ring nodes
   let componentsInfo = this.processComponents(components, nodesWithRingClass);
   components = componentsInfo.components;
@@ -103,8 +129,28 @@ SBGNLayout.prototype.constructSkeleton = function(){
   let directions = componentsInfo.directions
   let verticalAlignments = componentsInfo.verticalAlignments;
 	let horizontalAlignments = componentsInfo.horizontalAlignments;
+  let relativePlacementConstraints = componentsInfo.relativePlacementConstraints;
   console.log(ringNodes);
   console.log(components);
+
+  let componentsExtended = this.extendComponents(components);
+
+  console.log(componentsExtended);
+  console.log(directions);
+  
+
+  let constraintInfo = this.addPerComponentConstraints(components, directions);
+  verticalAlignments = verticalAlignments.concat(constraintInfo.verticalAlignments);
+  horizontalAlignments = horizontalAlignments.concat(constraintInfo.horizontalAlignments);
+  verticalAlignments = this.mergeArrays(verticalAlignments);
+	horizontalAlignments = this.mergeArrays(horizontalAlignments);
+/*   let verticalAlignments = constraintInfo.verticalAlignments.length > 0 ? constraintInfo.verticalAlignments: undefined;
+  let horizontalAlignments = constraintInfo.horizontalAlignments.length > 0 ? constraintInfo.horizontalAlignments : undefined; */
+  relativePlacementConstraints = relativePlacementConstraints.concat(constraintInfo.relativePlacementConstraints);
+
+  let constraints = {alignmentConstraint: {vertical: verticalAlignments, horizontal: horizontalAlignments},relativePlacementConstraint: relativePlacementConstraints};
+  console.log(constraints);
+  return {components: components, componentsExtended: componentsExtended, ringNodes: ringNodes, constraints: constraints, directions: directions};
 }
 
 // A function used by DFS
@@ -159,33 +205,50 @@ SBGNLayout.prototype.processComponents = function (components, nodesWithRingClas
   let ringNodes1 = new Set();
   let verticalAlignments = [];
 	let horizontalAlignments = [];
+  let relativePlacementConstraints = [];
   let directions = [];
   // first, process components with nodes that have ring class
   components.forEach((component, i) => {
     if(component.length > 1) {
       let direction = [null, null];
       if(component[0].pseudoClass == "ring") {
-        ringNodes1.add(component[0].id);
+        ringNodes1.add(component[0]);
         if(Math.abs(component[1].getCenterX() - component[0].getCenterX()) > Math.abs(component[1].getCenterY() - component[0].getCenterY())){
           direction[0] = "horizontal";
           horizontalAlignments.push([component[0].id, component[1].id]);
+/*           if(component[1].getCenterX() > component[0].getCenterX())
+            relativePlacementConstraints.push({left: component[0].id, right: component[1].id});
+          else
+            relativePlacementConstraints.push({left: component[1].id, right: component[0].id}); */
         }
         else {
           direction[0] = "vertical";
           verticalAlignments.push([component[0].id, component[1].id]);
+/*           if(component[1].getCenterY() > component[0].getCenterY())
+            relativePlacementConstraints.push({top: component[0].id, bottom: component[1].id});
+          else
+            relativePlacementConstraints.push({top: component[1].id, bottom: component[0].id}); */
         }
         component = component.filter((node) => node.id != component[0].id);
         components[i] = component;
       }
       if(component[component.length - 1].pseudoClass == "ring") {
-        ringNodes1.add(component[component.length - 1].id);
+        ringNodes1.add(component[component.length - 1]);
         if(Math.abs(component[component.length - 2].getCenterX() - component[component.length - 1].getCenterX()) > Math.abs(component[component.length - 2].getCenterY() - component[component.length - 1].getCenterY())){
           direction[1] = "horizontal";
           horizontalAlignments.push([component[component.length - 1].id, component[component.length - 2].id]);
+/*           if(component[component.length - 2].getCenterX() > component[component.length - 1].getCenterX())
+            relativePlacementConstraints.push({left: component[component.length - 1].id, right: component[component.length - 2].id});
+          else
+            relativePlacementConstraints.push({left: component[component.length - 2].id, right: component[component.length - 1].id}); */
         }
         else {
           direction[1] = "vertical";
           verticalAlignments.push([component[component.length - 1].id, component[component.length - 2].id]);
+/*           if(component[component.length - 2].getCenterY() > component[component.length - 1].getCenterY())
+            relativePlacementConstraints.push({top: component[component.length - 1].id, bottom: component[component.length - 2].id});
+          else
+            relativePlacementConstraints.push({top: component[component.length - 2].id, bottom: component[component.length - 1].id}); */
         }
         components[i] = component.filter((node) => node.id != component[component.length - 1].id);
       }
@@ -197,7 +260,7 @@ SBGNLayout.prototype.processComponents = function (components, nodesWithRingClas
       }
     }
     else {
-      ringNodes1.add(component[0].id);
+      ringNodes1.add(component[0]);
       directions[i] = "horizontal";
     }
   });
@@ -211,37 +274,53 @@ SBGNLayout.prototype.processComponents = function (components, nodesWithRingClas
       let componentToCompare = components[j];
       if(component[0].id == componentToCompare[0].id || component[0].id == componentToCompare[componentToCompare.length - 1].id ){
         let commonNode = component[0]
-        ringNodes2.add(commonNode.id);
+        ringNodes2.add(commonNode);
       }
       if(component[component.length - 1].id == componentToCompare[0].id || component[component.length - 1].id == componentToCompare[componentToCompare.length - 1].id ){
         let commonNode = component[component.length - 1];
-        ringNodes2.add(commonNode.id);
+        ringNodes2.add(commonNode);
       }     
     }
   }
 
   components.forEach((component, i) => {
     let direction = [null, null];
-    if(ringNodes2.has(component[0].id)){
+    if(ringNodes2.has(component[0])){
       if(Math.abs(component[1].getCenterX() - component[0].getCenterX()) > Math.abs(component[1].getCenterY() - component[0].getCenterY())){
         direction[0] = "horizontal";
         horizontalAlignments.push([component[0].id, component[1].id]);
+/*         if(component[1].getCenterX() > component[0].getCenterX())
+          relativePlacementConstraints.push({left: component[0].id, right: component[1].id});
+        else
+          relativePlacementConstraints.push({left: component[1].id, right: component[0].id}); */
       }
       else {
         direction[0] = "vertical";
         verticalAlignments.push([component[0].id, component[1].id]);
+/*         if(component[1].getCenterY() > component[0].getCenterY())
+          relativePlacementConstraints.push({top: component[0].id, bottom: component[1].id});
+        else
+          relativePlacementConstraints.push({top: component[1].id, bottom: component[0].id}); */
       }
       component = component.filter((node) => node.id != component[0].id);
       components[i] = component;
     }
-    if (ringNodes2.has(component[component.length - 1].id)){
+    if (ringNodes2.has(component[component.length - 1])){
       if(Math.abs(component[component.length - 2].getCenterX() - component[component.length - 1].getCenterX()) > Math.abs(component[component.length - 2].getCenterY() - component[component.length - 1].getCenterY())){
         direction[1] = "horizontal";
         horizontalAlignments.push([component[component.length - 1].id, component[component.length - 2].id]);
+/*         if(component[component.length - 2].getCenterX() > component[component.length - 1].getCenterX())
+          relativePlacementConstraints.push({left: component[component.length - 1].id, right: component[component.length - 2].id});
+        else
+          relativePlacementConstraints.push({left: component[component.length - 2].id, right: component[component.length - 1].id}); */
       }
       else {
         direction[1] = "vertical";
         verticalAlignments.push([component[component.length - 1].id, component[component.length - 2].id]);
+/*         if(component[component.length - 2].getCenterY() > component[component.length - 1].getCenterY())
+          relativePlacementConstraints.push({top: component[component.length - 1].id, bottom: component[component.length - 2].id});
+        else
+          relativePlacementConstraints.push({top: component[component.length - 2].id, bottom: component[component.length - 1].id}); */
       }
       components[i] = component.filter((node) => node.id != component[component.length - 1].id);
     }
@@ -262,7 +341,120 @@ SBGNLayout.prototype.processComponents = function (components, nodesWithRingClas
       }
     }
   });
-  return {components: components, ringNodes: new Set([...ringNodes1, ...ringNodes2]), directions: directions, horizontalAlignments: horizontalAlignments, verticalAlignments: verticalAlignments};
+  return {components: components, ringNodes: new Set([...nodesWithRingClass, ...ringNodes1, ...ringNodes2]), directions: directions, horizontalAlignments: horizontalAlignments, verticalAlignments: verticalAlignments, relativePlacementConstraints: relativePlacementConstraints};
 };
+
+// Extend components (reaction chains) with one degree neighbors
+SBGNLayout.prototype.extendComponents = function (components){
+  let componentsExtended = [];
+  components.forEach((component, i) => {
+    let componentExtended = [];
+    component.forEach(node => {
+      componentExtended.push(node);
+      let neighbors = node.getNeighborsList();
+      neighbors.forEach((neighbor) => {
+        if (neighbor.getEdges().length == 1) {
+          componentExtended.push(neighbor);
+        }
+      });
+    });
+    //componentExtended.move({parent: componentParent.id()});
+    //componentExtended.css('background-color', getRandomColor());
+    componentsExtended.push(componentExtended);
+  });
+  return componentsExtended;
+};
+
+SBGNLayout.prototype.addPerComponentConstraints = function (components, directions){
+  let horizontalAlignments = [];
+  let verticalAlignments = [];
+  let relativePlacementConstraints = [];
+
+  directions.forEach((direction, i) => {
+    if(direction == "horizontal" && components[i].length > 1) {
+      horizontalAlignments.push(components[i].map(node => node.id));
+
+      let isLeftToRight = true;
+      if(components[i][0].getCenterX() > components[i][1].getCenterX())
+        isLeftToRight = false;
+
+      if(isLeftToRight){
+        components[i].forEach((node, j) => {
+          if(j != components[i].length - 1){
+            relativePlacementConstraints.push({left: node.id, right: components[i][j+1].id});
+          }
+        });
+      }
+      else {
+        components[i].forEach((node, j) => {
+          if(j != components[i].length - 1){
+            relativePlacementConstraints.push({left: components[i][j+1].id, right: node.id});
+          }
+        });
+      }
+    }
+    else if(direction == "vertical" && components[i].length > 1){
+      verticalAlignments.push(components[i].map(node => node.id));
+
+      let isTopToBottom = true;
+      if(components[i][0].getCenterY() > components[i][1].getCenterY())
+        isTopToBottom = false;
+
+      if(isTopToBottom){
+        components[i].forEach((node, j) => {
+          if(j != components[i].length - 1){
+            relativePlacementConstraints.push({top: node.id, bottom: components[i][j+1].id});
+          }
+        });
+      }
+      else {
+        components[i].forEach((node, j) => {
+          if(j != components[i].length - 1){
+            relativePlacementConstraints.push({top: components[i][j+1].id, bottom: node.id});
+          }
+        });
+      }
+    }
+  });
+
+  return {horizontalAlignments: horizontalAlignments, verticalAlignments: verticalAlignments, relativePlacementConstraints: relativePlacementConstraints};
+};
+
+// auxuliary function to merge arrays with duplicates
+SBGNLayout.prototype.mergeArrays = function (arrays) {
+	// Function to check if two arrays have common items
+	function haveCommonItems(arr1, arr2) {
+			return arr1.some(item => arr2.includes(item));
+	}
+
+	// Function to merge two arrays and remove duplicates
+	function mergeAndRemoveDuplicates(arr1, arr2) {
+			return Array.from(new Set([...arr1, ...arr2]));
+	}
+
+	// Loop until no more merges are possible
+	let merged = false;
+	do {
+			merged = false;
+			for (let i = 0; i < arrays.length; i++) {
+					for (let j = i + 1; j < arrays.length; j++) {
+							if (haveCommonItems(arrays[i], arrays[j])) {
+									// Merge the arrays
+									arrays[i] = mergeAndRemoveDuplicates(arrays[i], arrays[j]);
+									// Remove the merged array
+									arrays.splice(j, 1);
+									// Set merged to true to indicate a merge has occurred
+									merged = true;
+									break;
+							}
+					}
+					if (merged) {
+							break;
+					}
+			}
+	} while (merged);
+
+	return arrays;
+}
 
 module.exports = SBGNLayout;

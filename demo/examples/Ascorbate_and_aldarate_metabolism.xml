@@ -1,0 +1,317 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<sbgn xmlns="http://sbgn.org/libsbgn/0.2">
+    <map language="process description">
+        <glyph class="simple chemical" id="kegg:cpdC00800">
+            <label text="Gulonate"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="kegg:rnR08615_1_LEFTTORIGHT">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_kegg:rnR08615_1_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_kegg:rnR08615_1_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="macromolecule" id="kegg:EC321">
+            <label text="EC:3.2.1.-"/>
+            <bbox w="48.0" h="25.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="and" id="d174d2c10fcc135b724379cd70c27ba5">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="kegg:cpdC01040">
+            <label text="L-Gulonolactone"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="kegg:cpdC02670">
+            <label text="Glucurone"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="kegg:rnR00286_1_LEFTTORIGHT">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_kegg:rnR00286_1_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_kegg:rnR00286_1_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="macromolecule" id="kegg:hsa217_hsa219_hsa223_hsa224_hsa501">
+            <label text="ALDH3A2"/>
+            <bbox w="48.0" h="25.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="macromolecule" id="kegg:hsa55586">
+            <label text="MIOX"/>
+            <bbox w="48.0" h="25.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="kegg:cpdC00029">
+            <label text="UDPglucose"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="macromolecule" id="kegg:hsa7358">
+            <label text="UGDH"/>
+            <bbox w="48.0" h="25.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="macromolecule" id="kegg:hsa9104">
+            <label text="RGN"/>
+            <bbox w="48.0" h="25.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="kegg:cpdC00167">
+            <label text="UDPglucuronate"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="kegg:rnR01184_1_LEFTTORIGHT">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_kegg:rnR01184_1_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_kegg:rnR01184_1_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="kegg:rnR02933_1_LEFTTORIGHT">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_kegg:rnR02933_1_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_kegg:rnR02933_1_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="macromolecule" id="kegg:hsa10720_hsa10941_hsa54490_hsa54575_hsa5">
+            <label text="UGT1A7"/>
+            <bbox w="48.0" h="25.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="kegg:rnR02957_1_LEFTTORIGHT">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_kegg:rnR02957_1_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_kegg:rnR02957_1_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="and" id="e5018fe5e6b1b7fb70c96652194e04f1">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="kegg:cpdC00015">
+            <label text="UDP"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="kegg:cpdC00818">
+            <label text="Glucarate"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="macromolecule" id="kegg:EC31125">
+            <label text="1,4-lactonase"/>
+            <bbox w="48.0" h="25.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="kegg:cpdC00191">
+            <label text="Glucuronate"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="kegg:cpdC00137">
+            <label text="Bios I"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="kegg:cpdC00007_cea6d2ee5425050f75a31b89f8187724">
+            <label text="O2"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="kegg:cpdC00080_94d3aeea7bbb96c98c3088a072c5019f">
+            <label text="H+"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="kegg:cpdC00004_94d3aeea7bbb96c98c3088a072c5019f">
+            <label text="NADH"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="kegg:cpdC00003_94d3aeea7bbb96c98c3088a072c5019f">
+            <label text="NAD"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="kegg:cpdC00001_cea6d2ee5425050f75a31b89f8187724">
+            <label text="H2O"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="kegg:cpdC00001_94c62444946d9caf913d0c14598aa2f3">
+            <label text="H2O"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="kegg:cpdC00001_2309ae23e1b8e8a6d9038536869b9381">
+            <label text="H2O"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="kegg:cpdC00001_beceb32ff8eb0a619ceb6ffcdfe26c1a">
+            <label text="H2O"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="kegg:cpdC00001_2309ae23e1b8e8a6d9038536869b9381">
+            <label text="H2O"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="kegg:cpdC00001_94d3aeea7bbb96c98c3088a072c5019f">
+            <label text="H2O"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="kegg:cpdC00080_beceb32ff8eb0a619ceb6ffcdfe26c1a">
+            <label text="H+"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="kegg:cpdC00004_beceb32ff8eb0a619ceb6ffcdfe26c1a">
+            <label text="NADH"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="kegg:cpdC00003_beceb32ff8eb0a619ceb6ffcdfe26c1a">
+            <label text="NAD"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <arc class="production" id="OUT_kegg:rnR01184_1_LEFTTORIGHT--TO--kegg:cpdC00001_cea6d2ee5425050f75a31b89f8187724" source="kegg:rnR01184_1_LEFTTORIGHT" target="kegg:cpdC00001_cea6d2ee5425050f75a31b89f8187724">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="catalysis" id="kegg:hsa7358--TO--kegg:rnR00286_1_LEFTTORIGHT" source="kegg:hsa7358" target="kegg:rnR00286_1_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="catalysis" id="kegg:hsa55586--TO--kegg:rnR01184_1_LEFTTORIGHT" source="kegg:hsa55586" target="kegg:rnR01184_1_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_kegg:rnR01184_1_LEFTTORIGHT--TO--kegg:cpdC00191" source="kegg:rnR01184_1_LEFTTORIGHT" target="kegg:cpdC00191">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="kegg:cpdC00029--TO--INP_kegg:rnR00286_1_LEFTTORIGHT" source="kegg:cpdC00029" target="kegg:rnR00286_1_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="kegg:cpdC00001_94d3aeea7bbb96c98c3088a072c5019f--TO--INP_kegg:rnR00286_1_LEFTTORIGHT" source="kegg:cpdC00001_94d3aeea7bbb96c98c3088a072c5019f" target="kegg:rnR00286_1_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="logic arc" id="kegg:EC321--TO--e5018fe5e6b1b7fb70c96652194e04f1" source="kegg:EC321" target="e5018fe5e6b1b7fb70c96652194e04f1">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="logic arc" id="kegg:hsa10720_hsa10941_hsa54490_hsa54575_hsa5--TO--e5018fe5e6b1b7fb70c96652194e04f1" source="kegg:hsa10720_hsa10941_hsa54490_hsa54575_hsa5" target="e5018fe5e6b1b7fb70c96652194e04f1">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_kegg:rnR00286_1_LEFTTORIGHT--TO--kegg:cpdC00167" source="kegg:rnR00286_1_LEFTTORIGHT" target="kegg:cpdC00167">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="kegg:cpdC00001_2309ae23e1b8e8a6d9038536869b9381--TO--INP_kegg:rnR02933_1_LEFTTORIGHT" source="kegg:cpdC00001_2309ae23e1b8e8a6d9038536869b9381" target="kegg:rnR02933_1_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="catalysis" id="kegg:hsa217_hsa219_hsa223_hsa224_hsa501--TO--kegg:rnR02957_1_LEFTTORIGHT" source="kegg:hsa217_hsa219_hsa223_hsa224_hsa501" target="kegg:rnR02957_1_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="kegg:cpdC00001_beceb32ff8eb0a619ceb6ffcdfe26c1a--TO--INP_kegg:rnR02957_1_LEFTTORIGHT" source="kegg:cpdC00001_beceb32ff8eb0a619ceb6ffcdfe26c1a" target="kegg:rnR02957_1_LEFTTORIGHT">
+            <glyph class="cardinality">
+                <label text="2"/>
+            </glyph>
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="kegg:cpdC00003_94d3aeea7bbb96c98c3088a072c5019f--TO--INP_kegg:rnR00286_1_LEFTTORIGHT" source="kegg:cpdC00003_94d3aeea7bbb96c98c3088a072c5019f" target="kegg:rnR00286_1_LEFTTORIGHT">
+            <glyph class="cardinality">
+                <label text="2"/>
+            </glyph>
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="kegg:cpdC02670--TO--INP_kegg:rnR02957_1_LEFTTORIGHT" source="kegg:cpdC02670" target="kegg:rnR02957_1_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="kegg:cpdC00001_94c62444946d9caf913d0c14598aa2f3--TO--INP_kegg:rnR08615_1_LEFTTORIGHT" source="kegg:cpdC00001_94c62444946d9caf913d0c14598aa2f3" target="kegg:rnR08615_1_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_kegg:rnR02933_1_LEFTTORIGHT--TO--kegg:cpdC00001_2309ae23e1b8e8a6d9038536869b9381" source="kegg:rnR02933_1_LEFTTORIGHT" target="kegg:cpdC00001_2309ae23e1b8e8a6d9038536869b9381">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_kegg:rnR02933_1_LEFTTORIGHT--TO--kegg:cpdC01040" source="kegg:rnR02933_1_LEFTTORIGHT" target="kegg:cpdC01040">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="logic arc" id="kegg:EC31125--TO--d174d2c10fcc135b724379cd70c27ba5" source="kegg:EC31125" target="d174d2c10fcc135b724379cd70c27ba5">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="catalysis" id="e5018fe5e6b1b7fb70c96652194e04f1--TO--kegg:rnR08615_1_LEFTTORIGHT" source="e5018fe5e6b1b7fb70c96652194e04f1" target="kegg:rnR08615_1_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_kegg:rnR02957_1_LEFTTORIGHT--TO--kegg:cpdC00004_beceb32ff8eb0a619ceb6ffcdfe26c1a" source="kegg:rnR02957_1_LEFTTORIGHT" target="kegg:cpdC00004_beceb32ff8eb0a619ceb6ffcdfe26c1a">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="catalysis" id="d174d2c10fcc135b724379cd70c27ba5--TO--kegg:rnR02933_1_LEFTTORIGHT" source="d174d2c10fcc135b724379cd70c27ba5" target="kegg:rnR02933_1_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_kegg:rnR08615_1_LEFTTORIGHT--TO--kegg:cpdC00015" source="kegg:rnR08615_1_LEFTTORIGHT" target="kegg:cpdC00015">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_kegg:rnR02957_1_LEFTTORIGHT--TO--kegg:cpdC00818" source="kegg:rnR02957_1_LEFTTORIGHT" target="kegg:cpdC00818">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_kegg:rnR00286_1_LEFTTORIGHT--TO--kegg:cpdC00004_94d3aeea7bbb96c98c3088a072c5019f" source="kegg:rnR00286_1_LEFTTORIGHT" target="kegg:cpdC00004_94d3aeea7bbb96c98c3088a072c5019f">
+            <glyph class="cardinality">
+                <label text="2"/>
+            </glyph>
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="kegg:cpdC00167--TO--INP_kegg:rnR08615_1_LEFTTORIGHT" source="kegg:cpdC00167" target="kegg:rnR08615_1_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="kegg:cpdC00007_cea6d2ee5425050f75a31b89f8187724--TO--INP_kegg:rnR01184_1_LEFTTORIGHT" source="kegg:cpdC00007_cea6d2ee5425050f75a31b89f8187724" target="kegg:rnR01184_1_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_kegg:rnR00286_1_LEFTTORIGHT--TO--kegg:cpdC00080_94d3aeea7bbb96c98c3088a072c5019f" source="kegg:rnR00286_1_LEFTTORIGHT" target="kegg:cpdC00080_94d3aeea7bbb96c98c3088a072c5019f">
+            <glyph class="cardinality">
+                <label text="2"/>
+            </glyph>
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_kegg:rnR08615_1_LEFTTORIGHT--TO--kegg:cpdC00191" source="kegg:rnR08615_1_LEFTTORIGHT" target="kegg:cpdC00191">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="kegg:cpdC00800--TO--INP_kegg:rnR02933_1_LEFTTORIGHT" source="kegg:cpdC00800" target="kegg:rnR02933_1_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_kegg:rnR02933_1_LEFTTORIGHT--TO--kegg:cpdC00800" source="kegg:rnR02933_1_LEFTTORIGHT" target="kegg:cpdC00800">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="logic arc" id="kegg:hsa9104--TO--d174d2c10fcc135b724379cd70c27ba5" source="kegg:hsa9104" target="d174d2c10fcc135b724379cd70c27ba5">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_kegg:rnR02957_1_LEFTTORIGHT--TO--kegg:cpdC00080_beceb32ff8eb0a619ceb6ffcdfe26c1a" source="kegg:rnR02957_1_LEFTTORIGHT" target="kegg:cpdC00080_beceb32ff8eb0a619ceb6ffcdfe26c1a">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="kegg:cpdC00137--TO--INP_kegg:rnR01184_1_LEFTTORIGHT" source="kegg:cpdC00137" target="kegg:rnR01184_1_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="kegg:cpdC01040--TO--INP_kegg:rnR02933_1_LEFTTORIGHT" source="kegg:cpdC01040" target="kegg:rnR02933_1_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="kegg:cpdC00003_beceb32ff8eb0a619ceb6ffcdfe26c1a--TO--INP_kegg:rnR02957_1_LEFTTORIGHT" source="kegg:cpdC00003_beceb32ff8eb0a619ceb6ffcdfe26c1a" target="kegg:rnR02957_1_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+    </map>
+</sbgn>

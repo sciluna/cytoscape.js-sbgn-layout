@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<sbgn xmlns="http://sbgn.org/libsbgn/0.2">
+    <map language="process description">
+        <glyph class="process" id="biofactoid:ba9eda03-6912-49f4-a96e-8e2ab3f5ac7f">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="biofactoid:b841305c-b0f9-40c7-8e4d-3f006db28595">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="biofactoid:a125c339-1a0e-4969-b940-cc39832be9ce_LEFTTORIGHT">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_biofactoid:a125c339-1a0e-4969-b940-cc39832be9ce_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_biofactoid:a125c339-1a0e-4969-b940-cc39832be9ce_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="macromolecule" id="biofactoid:6958c15d-84da-4a65-8bcf-9ec5b89f8012">
+            <label text="MDM2"/>
+            <bbox w="48.0" h="25.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="macromolecule" id="biofactoid:b4148304-739b-4eb7-9f50-2a0a4aba3bd8">
+            <label text="TP53"/>
+            <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+            <glyph class="state variable">
+                <state value="active"/>
+                <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+            </glyph>
+            <glyph class="state variable">
+                <state value="!ubiquitinated"/>
+                <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+            </glyph>
+        </glyph>
+        <glyph class="macromolecule" id="biofactoid:49163fba-f558-4d9c-8bc1-d755fc38703d">
+            <label text="TP53"/>
+            <bbox w="48.0" h="25.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="macromolecule" id="biofactoid:d9f3b2b2-d1d6-4e67-9972-c587e63289ba">
+            <label text="HSP90AB1"/>
+            <bbox w="48.0" h="25.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="macromolecule" id="biofactoid:7b9a9347-6c2b-4a46-916c-ad8d52bc0eb5">
+            <label text="TP53"/>
+            <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+            <glyph class="state variable">
+                <state value="ubiquitinated"/>
+                <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+            </glyph>
+            <glyph class="state variable">
+                <state value="!active"/>
+                <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+            </glyph>
+        </glyph>
+        <arc class="consumption" id="biofactoid:b4148304-739b-4eb7-9f50-2a0a4aba3bd8--TO--INP_biofactoid:a125c339-1a0e-4969-b940-cc39832be9ce_LEFTTORIGHT" source="biofactoid:b4148304-739b-4eb7-9f50-2a0a4aba3bd8" target="biofactoid:a125c339-1a0e-4969-b940-cc39832be9ce_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_biofactoid:a125c339-1a0e-4969-b940-cc39832be9ce_LEFTTORIGHT--TO--biofactoid:7b9a9347-6c2b-4a46-916c-ad8d52bc0eb5" source="biofactoid:a125c339-1a0e-4969-b940-cc39832be9ce_LEFTTORIGHT" target="biofactoid:7b9a9347-6c2b-4a46-916c-ad8d52bc0eb5">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="biofactoid:6958c15d-84da-4a65-8bcf-9ec5b89f8012--TO--biofactoid:ba9eda03-6912-49f4-a96e-8e2ab3f5ac7f" source="biofactoid:6958c15d-84da-4a65-8bcf-9ec5b89f8012" target="biofactoid:ba9eda03-6912-49f4-a96e-8e2ab3f5ac7f">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="biofactoid:d9f3b2b2-d1d6-4e67-9972-c587e63289ba--TO--biofactoid:b841305c-b0f9-40c7-8e4d-3f006db28595" source="biofactoid:d9f3b2b2-d1d6-4e67-9972-c587e63289ba" target="biofactoid:b841305c-b0f9-40c7-8e4d-3f006db28595">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="catalysis" id="biofactoid:6958c15d-84da-4a65-8bcf-9ec5b89f8012--TO--biofactoid:a125c339-1a0e-4969-b940-cc39832be9ce_LEFTTORIGHT" source="biofactoid:6958c15d-84da-4a65-8bcf-9ec5b89f8012" target="biofactoid:a125c339-1a0e-4969-b940-cc39832be9ce_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="biofactoid:d9f3b2b2-d1d6-4e67-9972-c587e63289ba--TO--biofactoid:ba9eda03-6912-49f4-a96e-8e2ab3f5ac7f" source="biofactoid:d9f3b2b2-d1d6-4e67-9972-c587e63289ba" target="biofactoid:ba9eda03-6912-49f4-a96e-8e2ab3f5ac7f">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="biofactoid:49163fba-f558-4d9c-8bc1-d755fc38703d--TO--biofactoid:b841305c-b0f9-40c7-8e4d-3f006db28595" source="biofactoid:49163fba-f558-4d9c-8bc1-d755fc38703d" target="biofactoid:b841305c-b0f9-40c7-8e4d-3f006db28595">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+    </map>
+</sbgn>

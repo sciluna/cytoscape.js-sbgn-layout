@@ -21,3 +21,11 @@ h1 {
     font-size: 1.15em;
     font-weight: bold;
 }
+
+#layoutButton {
+    margin-right: 30px;
+}
+
+#samples {
+    margin-right: 15px;
+}

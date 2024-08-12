@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<sbgn xmlns="http://sbgn.org/libsbgn/0.2">
+    <map language="process description">
+        <glyph class="compartment" id="peroxisome">
+            <label text="peroxisome"/>
+            <bbox w="56.0" h="33.0" x="-4.0" y="-4.0"/>
+        </glyph>
+        <glyph class="complex" id="pathbank:ProteinComplex/213_Peroxisome" compartmentRef="peroxisome">
+            <label text="D-amino-acid oxidase"/>
+            <bbox w="52.0" h="29.0" x="-2.0" y="-2.0"/>
+            <glyph class="macromolecule" id="pathbank:Protein/201_Peroxisome_d0f97bdbdeffef18e9634af5d1503725" compartmentRef="peroxisome">
+                <label text="DAO"/>
+                <bbox w="48.0" h="25.0" x="0.0" y="0.0"/>
+            </glyph>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C002094_Peroxisome" compartmentRef="peroxisome">
+            <label text="2-Oxoarginine"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C001864_Peroxisome" compartmentRef="peroxisome">
+            <label text="D-Ornithine"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C001880_Peroxisome" compartmentRef="peroxisome">
+            <label text="D-Arginine"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C002698_Peroxisome" compartmentRef="peroxisome">
+            <label text="5-Amino-2-oxopentanoic acid"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C000035_Peroxisome" compartmentRef="peroxisome">
+            <label text="Ammonia"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C002984_Peroxisome" compartmentRef="peroxisome">
+            <label text="1-Pyrroline-2-carboxylic acid"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C000200_Peroxisome" compartmentRef="peroxisome">
+            <label text="Urea"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C001783_Peroxisome" compartmentRef="peroxisome">
+            <label text="Hydrogen peroxide"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C001420_Peroxisome_3dbb0f42c32d2437ae06b0d19a329e66" compartmentRef="peroxisome">
+            <label text="Water"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C001065_Peroxisome_a923b69b837566fd04d350bd568ce306" compartmentRef="peroxisome">
+            <label text="Oxygen"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C001420_Peroxisome_e3b50dc5a93584105e89aa6d374a513e" compartmentRef="peroxisome">
+            <label text="Water"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C001420_Peroxisome_a923b69b837566fd04d350bd568ce306" compartmentRef="peroxisome">
+            <label text="Water"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C001420_Peroxisome_f3cc59c8e7b6b6d8cf2f35f5370eec24" compartmentRef="peroxisome">
+            <label text="Water"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C001065_Peroxisome_e3b50dc5a93584105e89aa6d374a513e" compartmentRef="peroxisome">
+            <label text="Oxygen"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="pathbank:Reactions/724_LEFTTORIGHT" compartmentRef="peroxisome">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_pathbank:Reactions/724_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_pathbank:Reactions/724_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="pathbank:Reactions/425_LEFTTORIGHT" compartmentRef="peroxisome">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_pathbank:Reactions/425_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_pathbank:Reactions/425_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="pathbank:Reactions/723_LEFTTORIGHT" compartmentRef="peroxisome">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_pathbank:Reactions/723_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_pathbank:Reactions/723_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="pathbank:Reactions/725_LEFTTORIGHT" compartmentRef="peroxisome">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_pathbank:Reactions/725_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_pathbank:Reactions/725_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <arc class="consumption" id="pathbank:Compound/PW_C001065_Peroxisome_e3b50dc5a93584105e89aa6d374a513e--TO--INP_pathbank:Reactions/723_LEFTTORIGHT" source="pathbank:Compound/PW_C001065_Peroxisome_e3b50dc5a93584105e89aa6d374a513e" target="pathbank:Reactions/723_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_pathbank:Reactions/724_LEFTTORIGHT--TO--pathbank:Compound/PW_C001420_Peroxisome_3dbb0f42c32d2437ae06b0d19a329e66" source="pathbank:Reactions/724_LEFTTORIGHT" target="pathbank:Compound/PW_C001420_Peroxisome_3dbb0f42c32d2437ae06b0d19a329e66">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="catalysis" id="pathbank:ProteinComplex/213_Peroxisome--TO--pathbank:Reactions/425_LEFTTORIGHT" source="pathbank:ProteinComplex/213_Peroxisome" target="pathbank:Reactions/425_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="pathbank:Compound/PW_C001420_Peroxisome_e3b50dc5a93584105e89aa6d374a513e--TO--INP_pathbank:Reactions/723_LEFTTORIGHT" source="pathbank:Compound/PW_C001420_Peroxisome_e3b50dc5a93584105e89aa6d374a513e" target="pathbank:Reactions/723_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_pathbank:Reactions/724_LEFTTORIGHT--TO--pathbank:Compound/PW_C002094_Peroxisome" source="pathbank:Reactions/724_LEFTTORIGHT" target="pathbank:Compound/PW_C002094_Peroxisome">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_pathbank:Reactions/725_LEFTTORIGHT--TO--pathbank:Compound/PW_C001420_Peroxisome_f3cc59c8e7b6b6d8cf2f35f5370eec24" source="pathbank:Reactions/725_LEFTTORIGHT" target="pathbank:Compound/PW_C001420_Peroxisome_f3cc59c8e7b6b6d8cf2f35f5370eec24">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_pathbank:Reactions/723_LEFTTORIGHT--TO--pathbank:Compound/PW_C000035_Peroxisome" source="pathbank:Reactions/723_LEFTTORIGHT" target="pathbank:Compound/PW_C000035_Peroxisome">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_pathbank:Reactions/425_LEFTTORIGHT--TO--pathbank:Compound/PW_C002698_Peroxisome" source="pathbank:Reactions/425_LEFTTORIGHT" target="pathbank:Compound/PW_C002698_Peroxisome">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="pathbank:Compound/PW_C001065_Peroxisome_a923b69b837566fd04d350bd568ce306--TO--INP_pathbank:Reactions/425_LEFTTORIGHT" source="pathbank:Compound/PW_C001065_Peroxisome_a923b69b837566fd04d350bd568ce306" target="pathbank:Reactions/425_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="pathbank:Compound/PW_C000200_Peroxisome--TO--INP_pathbank:Reactions/724_LEFTTORIGHT" source="pathbank:Compound/PW_C000200_Peroxisome" target="pathbank:Reactions/724_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_pathbank:Reactions/725_LEFTTORIGHT--TO--pathbank:Compound/PW_C002984_Peroxisome" source="pathbank:Reactions/725_LEFTTORIGHT" target="pathbank:Compound/PW_C002984_Peroxisome">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_pathbank:Reactions/723_LEFTTORIGHT--TO--pathbank:Compound/PW_C001783_Peroxisome" source="pathbank:Reactions/723_LEFTTORIGHT" target="pathbank:Compound/PW_C001783_Peroxisome">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="pathbank:Compound/PW_C001880_Peroxisome--TO--INP_pathbank:Reactions/723_LEFTTORIGHT" source="pathbank:Compound/PW_C001880_Peroxisome" target="pathbank:Reactions/723_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="pathbank:Compound/PW_C001864_Peroxisome--TO--INP_pathbank:Reactions/425_LEFTTORIGHT" source="pathbank:Compound/PW_C001864_Peroxisome" target="pathbank:Reactions/425_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="pathbank:Compound/PW_C002698_Peroxisome--TO--INP_pathbank:Reactions/724_LEFTTORIGHT" source="pathbank:Compound/PW_C002698_Peroxisome" target="pathbank:Reactions/724_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_pathbank:Reactions/425_LEFTTORIGHT--TO--pathbank:Compound/PW_C000035_Peroxisome" source="pathbank:Reactions/425_LEFTTORIGHT" target="pathbank:Compound/PW_C000035_Peroxisome">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_pathbank:Reactions/723_LEFTTORIGHT--TO--pathbank:Compound/PW_C002094_Peroxisome" source="pathbank:Reactions/723_LEFTTORIGHT" target="pathbank:Compound/PW_C002094_Peroxisome">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="pathbank:Compound/PW_C002698_Peroxisome--TO--INP_pathbank:Reactions/725_LEFTTORIGHT" source="pathbank:Compound/PW_C002698_Peroxisome" target="pathbank:Reactions/725_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="pathbank:Compound/PW_C001420_Peroxisome_a923b69b837566fd04d350bd568ce306--TO--INP_pathbank:Reactions/425_LEFTTORIGHT" source="pathbank:Compound/PW_C001420_Peroxisome_a923b69b837566fd04d350bd568ce306" target="pathbank:Reactions/425_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_pathbank:Reactions/425_LEFTTORIGHT--TO--pathbank:Compound/PW_C001783_Peroxisome" source="pathbank:Reactions/425_LEFTTORIGHT" target="pathbank:Compound/PW_C001783_Peroxisome">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="catalysis" id="pathbank:ProteinComplex/213_Peroxisome--TO--pathbank:Reactions/723_LEFTTORIGHT" source="pathbank:ProteinComplex/213_Peroxisome" target="pathbank:Reactions/723_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+    </map>
+</sbgn>
