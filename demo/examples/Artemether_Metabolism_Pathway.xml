@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<sbgn xmlns="http://sbgn.org/libsbgn/0.2">
+    <map language="process description">
+        <glyph class="compartment" id="endoplasmic_reticulum_membrane">
+            <label text="endoplasmic reticulum membrane"/>
+            <bbox w="52.0" h="29.0" x="-2.0" y="-2.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C000746_Endoplasmic_Reticulum_Membrane" compartmentRef="endoplasmic_reticulum_membrane">
+            <label text="Uridine diphosphate glucuronic acid"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="macromolecule" id="pathbank:Protein/466_Endoplasmic_Reticulum_Membrane" compartmentRef="endoplasmic_reticulum_membrane">
+            <label text="UGT1A9"/>
+            <bbox w="48.0" h="25.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="macromolecule" id="pathbank:Protein/956_Endoplasmic_Reticulum_Membrane" compartmentRef="endoplasmic_reticulum_membrane">
+            <label text="CYP3A4"/>
+            <bbox w="48.0" h="25.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C040654_Endoplasmic_Reticulum_Membrane" compartmentRef="endoplasmic_reticulum_membrane">
+            <label text="Dihydroartemisinin glucuronide"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C040648_Endoplasmic_Reticulum_Membrane" compartmentRef="endoplasmic_reticulum_membrane">
+            <label text="Dihydroartemisinin (DHA)"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="macromolecule" id="pathbank:Protein/1442_Endoplasmic_Reticulum_Membrane" compartmentRef="endoplasmic_reticulum_membrane">
+            <label text="CYP3A5"/>
+            <bbox w="48.0" h="25.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="macromolecule" id="pathbank:Protein/462_Endoplasmic_Reticulum_Membrane" compartmentRef="endoplasmic_reticulum_membrane">
+            <label text="UGT2B7"/>
+            <bbox w="48.0" h="25.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C001102_Endoplasmic_Reticulum_Membrane" compartmentRef="endoplasmic_reticulum_membrane">
+            <label text="Formaldehyde"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C009897_Endoplasmic_Reticulum_Membrane" compartmentRef="endoplasmic_reticulum_membrane">
+            <label text="Artemether"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C000201_Endoplasmic_Reticulum_Membrane" compartmentRef="endoplasmic_reticulum_membrane">
+            <label text="Uridine 5'-diphosphate"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C001065_Endoplasmic_Reticulum_Membrane_0da0393055156e53199870197fb76413" compartmentRef="endoplasmic_reticulum_membrane">
+            <label text="Oxygen"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C001144_Endoplasmic_Reticulum_Membrane_0da0393055156e53199870197fb76413" compartmentRef="endoplasmic_reticulum_membrane">
+            <label text="NADH"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C001420_Endoplasmic_Reticulum_Membrane_0da0393055156e53199870197fb76413" compartmentRef="endoplasmic_reticulum_membrane">
+            <label text="Water"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C000721_Endoplasmic_Reticulum_Membrane_0da0393055156e53199870197fb76413" compartmentRef="endoplasmic_reticulum_membrane">
+            <label text="NAD"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="pathbank:Reactions/2066_LEFTTORIGHT" compartmentRef="endoplasmic_reticulum_membrane">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_pathbank:Reactions/2066_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_pathbank:Reactions/2066_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="pathbank:Reactions/2074_LEFTTORIGHT" compartmentRef="endoplasmic_reticulum_membrane">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_pathbank:Reactions/2074_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_pathbank:Reactions/2074_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <arc class="catalysis" id="pathbank:Protein/466_Endoplasmic_Reticulum_Membrane--TO--pathbank:Reactions/2074_LEFTTORIGHT" source="pathbank:Protein/466_Endoplasmic_Reticulum_Membrane" target="pathbank:Reactions/2074_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_pathbank:Reactions/2066_LEFTTORIGHT--TO--pathbank:Compound/PW_C040648_Endoplasmic_Reticulum_Membrane" source="pathbank:Reactions/2066_LEFTTORIGHT" target="pathbank:Compound/PW_C040648_Endoplasmic_Reticulum_Membrane">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="pathbank:Compound/PW_C009897_Endoplasmic_Reticulum_Membrane--TO--INP_pathbank:Reactions/2066_LEFTTORIGHT" source="pathbank:Compound/PW_C009897_Endoplasmic_Reticulum_Membrane" target="pathbank:Reactions/2066_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_pathbank:Reactions/2066_LEFTTORIGHT--TO--pathbank:Compound/PW_C001420_Endoplasmic_Reticulum_Membrane_0da0393055156e53199870197fb76413" source="pathbank:Reactions/2066_LEFTTORIGHT" target="pathbank:Compound/PW_C001420_Endoplasmic_Reticulum_Membrane_0da0393055156e53199870197fb76413">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="pathbank:Compound/PW_C040648_Endoplasmic_Reticulum_Membrane--TO--INP_pathbank:Reactions/2074_LEFTTORIGHT" source="pathbank:Compound/PW_C040648_Endoplasmic_Reticulum_Membrane" target="pathbank:Reactions/2074_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="pathbank:Compound/PW_C000746_Endoplasmic_Reticulum_Membrane--TO--INP_pathbank:Reactions/2074_LEFTTORIGHT" source="pathbank:Compound/PW_C000746_Endoplasmic_Reticulum_Membrane" target="pathbank:Reactions/2074_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_pathbank:Reactions/2066_LEFTTORIGHT--TO--pathbank:Compound/PW_C000721_Endoplasmic_Reticulum_Membrane_0da0393055156e53199870197fb76413" source="pathbank:Reactions/2066_LEFTTORIGHT" target="pathbank:Compound/PW_C000721_Endoplasmic_Reticulum_Membrane_0da0393055156e53199870197fb76413">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_pathbank:Reactions/2074_LEFTTORIGHT--TO--pathbank:Compound/PW_C000201_Endoplasmic_Reticulum_Membrane" source="pathbank:Reactions/2074_LEFTTORIGHT" target="pathbank:Compound/PW_C000201_Endoplasmic_Reticulum_Membrane">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="catalysis" id="pathbank:Protein/1442_Endoplasmic_Reticulum_Membrane--TO--pathbank:Reactions/2066_LEFTTORIGHT" source="pathbank:Protein/1442_Endoplasmic_Reticulum_Membrane" target="pathbank:Reactions/2066_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_pathbank:Reactions/2066_LEFTTORIGHT--TO--pathbank:Compound/PW_C001102_Endoplasmic_Reticulum_Membrane" source="pathbank:Reactions/2066_LEFTTORIGHT" target="pathbank:Compound/PW_C001102_Endoplasmic_Reticulum_Membrane">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="catalysis" id="pathbank:Protein/956_Endoplasmic_Reticulum_Membrane--TO--pathbank:Reactions/2066_LEFTTORIGHT" source="pathbank:Protein/956_Endoplasmic_Reticulum_Membrane" target="pathbank:Reactions/2066_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="catalysis" id="pathbank:Protein/462_Endoplasmic_Reticulum_Membrane--TO--pathbank:Reactions/2074_LEFTTORIGHT" source="pathbank:Protein/462_Endoplasmic_Reticulum_Membrane" target="pathbank:Reactions/2074_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="pathbank:Compound/PW_C001144_Endoplasmic_Reticulum_Membrane_0da0393055156e53199870197fb76413--TO--INP_pathbank:Reactions/2066_LEFTTORIGHT" source="pathbank:Compound/PW_C001144_Endoplasmic_Reticulum_Membrane_0da0393055156e53199870197fb76413" target="pathbank:Reactions/2066_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="pathbank:Compound/PW_C001065_Endoplasmic_Reticulum_Membrane_0da0393055156e53199870197fb76413--TO--INP_pathbank:Reactions/2066_LEFTTORIGHT" source="pathbank:Compound/PW_C001065_Endoplasmic_Reticulum_Membrane_0da0393055156e53199870197fb76413" target="pathbank:Reactions/2066_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_pathbank:Reactions/2074_LEFTTORIGHT--TO--pathbank:Compound/PW_C040654_Endoplasmic_Reticulum_Membrane" source="pathbank:Reactions/2074_LEFTTORIGHT" target="pathbank:Compound/PW_C040654_Endoplasmic_Reticulum_Membrane">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+    </map>
+</sbgn>

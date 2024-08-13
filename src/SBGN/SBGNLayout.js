@@ -1,5 +1,6 @@
 const CoSELayout = require('cose-base').CoSELayout;
 const SBGNGraphManager = require('./SBGNGraphManager');
+const SBGNConstants = require('./SBGNConstants');
 const SBGNGraph = require('./SBGNGraph');
 const SBGNNode = require('./SBGNNode');
 const SBGNEdge = require('./SBGNEdge');
@@ -414,6 +415,569 @@ SBGNLayout.prototype.addPerComponentConstraints = function (components, directio
           }
         });
       }
+    }
+  });
+
+  return {horizontalAlignments: horizontalAlignments, verticalAlignments: verticalAlignments, relativePlacementConstraints: relativePlacementConstraints};
+};
+
+SBGNLayout.prototype.addPerComponentPolishingConstraints = function (components, directions){
+  let horizontalAlignments = [];
+  let verticalAlignments = [];
+  let relativePlacementConstraints = [];
+
+  let idealEdgeLength = SBGNConstants.DEFAULT_EDGE_LENGTH;
+
+  let calculateDiagonal = function(nodeA, nodeB, idealEdgeLength, direction) {
+    if (direction == "diagonal")
+      return 2 * (nodeA.getWidth() / 2) + (3 / 5) * idealEdgeLength;
+    else if (direction == "horizontal")
+      return nodeA.getWidth() / 2 + nodeB.getWidth() / 2 + idealEdgeLength;
+    else
+      return nodeA.getHeight() / 2 + nodeB.getHeight() / 2 + idealEdgeLength;
+  };
+
+  // first process input nodes (except modulators)
+  components.forEach((component, i) => {
+    if(component.length > 1) {
+      let orientation = "";
+      if (directions[i] == "horizontal") {
+        if(component[0].getCenterX() > component[1].getCenterX())
+          orientation = "right-to-left";
+        else
+          orientation = "left-to-right";
+      }
+      else {
+        if(component[0].getCenterY() > component[1].getCenterY())
+          orientation = "bottom-to-top";
+        else
+          orientation = "top-to-bottom";
+      }
+      component.forEach((node, j) => {
+        let incomers = node.getIncomerNodes();
+        let outgoers = node.getOutgoerNodes();
+        // find input nodes (filter ring nodes, modulator nodes and input with degree higher than 1)
+        let inputs = incomers.filter((input) => {
+          let edgeBetween = node.getEdgesBetween(input)[0];
+          if(input.pseudoClass == "ring" || edgeBetween.class == "modulation" || edgeBetween.class == "stimulation" || edgeBetween.class == "catalysis" || edgeBetween.class == "inhibition" || edgeBetween.class == "necessary stimulation" || input.getNeighborsList().size > 1) {
+            return false;
+          }
+          else {
+            return true;
+          }
+        });
+        // find modulator nodes (filter ring nodes, non-modulator nodes and input with degree higher than 1)
+        let modulators = incomers.filter((input) => {
+          let edgeBetween = node.getEdgesBetween(input)[0];
+          if(input.pseudoClass != "ring" && (edgeBetween.class == "modulation" || edgeBetween.class == "stimulation" || edgeBetween.class == "catalysis" || edgeBetween.class == "inhibition" || edgeBetween.class == "necessary stimulation") && input.getNeighborsList().size == 1) {
+            return true;
+          }
+          else {
+            return false;
+          }
+        });
+        // find output nodes (filter ring nodes, modulator nodes and output with degree higher than 1)
+        let outputs = outgoers.filter((output) => {
+          let edgeBetween = node.getEdgesBetween(output)[0];
+          if(output.pseudoClass == "ring" || edgeBetween.class == "modulation" || edgeBetween.class == "stimulation" || edgeBetween.class == "catalysis" || edgeBetween.class == "inhibition" || edgeBetween.class == "necessary stimulation" || output.getNeighborsList().size > 1) {
+            return false;
+          }
+          else {
+            return true;
+          }
+        });
+        if (j == 0 && !node.isConnectedToRing()) {  // first node and not connected to ring
+          if(orientation == "left-to-right") {
+            // process inputs
+            if (inputs.length == 1){
+              inputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[0], idealEdgeLength, "horizontal"), node.getCenterY());
+              horizontalAlignments.push([node, inputs[0]]);
+            }
+            else if (inputs.length == 2) {
+              inputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"));
+              inputs[1].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[1], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, inputs[1], idealEdgeLength, "diagonal"));
+            }
+            else if (inputs.length == 3) {
+              inputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"));
+              inputs[1].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[1], idealEdgeLength, "horizontal"), node.getCenterY());
+              inputs[2].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[2], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, inputs[2], idealEdgeLength, "diagonal"));
+              horizontalAlignments.push([node, inputs[1]]);
+            }
+            else if (inputs.length > 3){
+              inputs.forEach(input => {
+                relativePlacementConstraints.push({left: input.id, right: node.id});
+              });
+            }
+            // process modulators
+            if (modulators.length == 1){
+              modulators[0].setCenter(node.getCenterX(), node.getCenterY() - calculateDiagonal(node, modulators[0], idealEdgeLength, "vertical"));
+              verticalAlignments.push([node, modulators[0]]);
+            }
+            else if (modulators.length >= 2) {
+              modulators[0].setCenter(node.getCenterX(), node.getCenterY() - calculateDiagonal(node, modulators[0], idealEdgeLength, "vertical"));
+              modulators[1].setCenter(node.getCenterX(), node.getCenterY() + calculateDiagonal(node, modulators[1], idealEdgeLength, "vertical"));
+              if (modulators[2]) {
+                if (inputs.length == 1) {
+                  modulators[2].setCenter(node.getCenterX() - calculateDiagonal(node, modulators[1], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, modulators[1], idealEdgeLength, "diagonal"));
+                }
+                if (inputs.length == 2) {
+                  modulators[2].setCenter(node.getCenterX() - calculateDiagonal(node, modulators[1], idealEdgeLength, "horizontal"), node.getCenterY());
+                }
+              }
+            }
+            // process outputs
+            if (outputs.length == 1){
+/*               let random = Math.random();
+              if (random > 0.5)
+                outputs[0].setCenter(node.getCenterX() + calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"));
+              else */
+              outputs[0].setCenter(node.getCenterX() + calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"));
+            }
+            else if (outputs.length == 2) {
+              outputs[0].setCenter(node.getCenterX() + calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"));
+              outputs[1].setCenter(node.getCenterX() + calculateDiagonal(node, outputs[1], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, outputs[1], idealEdgeLength, "diagonal"));
+            }
+/*             else if (outputs.length == 3) {
+              inputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"));
+              inputs[1].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[1], idealEdgeLength, "horizontal"), node.getCenterY());
+              inputs[2].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[2], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, inputs[2], idealEdgeLength, "diagonal"));
+              horizontalAlignments.push([node, inputs[1]]);
+            } */
+            else if (outputs.length > 3){
+              outputs.forEach(output => {
+                relativePlacementConstraints.push({left: node.id, right: output.id});
+              });
+            }
+          }
+          if(orientation == "right-to-left") {
+            // process inputs
+            if (inputs.length == 1){
+              inputs[0].setCenter(node.getCenterX() + calculateDiagonal(node, inputs[0], idealEdgeLength, "horizontal"), node.getCenterY());
+              horizontalAlignments.push([node, inputs[0]]);
+            }
+            else if (inputs.length == 2) {
+              inputs[0].setCenter(node.getCenterX() + calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"));
+              inputs[1].setCenter(node.getCenterX() + calculateDiagonal(node, inputs[1], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, inputs[1], idealEdgeLength, "diagonal"));
+            }
+            else if (inputs.length == 3) {
+              inputs[0].setCenter(node.getCenterX() + calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"));
+              inputs[1].setCenter(node.getCenterX() + calculateDiagonal(node, inputs[1], idealEdgeLength, "horizontal"), node.getCenterY());
+              inputs[2].setCenter(node.getCenterX() + calculateDiagonal(node, inputs[2], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, inputs[2], idealEdgeLength, "diagonal"));
+              horizontalAlignments.push([node, inputs[1]]);
+            }
+            else if (inputs.length > 3){
+              inputs.forEach(input => {
+                relativePlacementConstraints.push({left: node.id, right: input.id});
+              });
+            }
+            // process modulators
+            if (modulators.length == 1){
+              modulators[0].setCenter(node.getCenterX(), node.getCenterY() - calculateDiagonal(node, modulators[0], idealEdgeLength, "vertical"));
+              verticalAlignments.push([node, modulators[0]]);
+            }
+            else if (modulators.length >= 2) {
+              modulators[0].setCenter(node.getCenterX(), node.getCenterY() - calculateDiagonal(node, modulators[0], idealEdgeLength, "vertical"));
+              modulators[1].setCenter(node.getCenterX(), node.getCenterY() + calculateDiagonal(node, modulators[1], idealEdgeLength, "vertical"));
+              if (modulators[2]) {
+                if (inputs.length == 1) {
+                  modulators[2].setCenter(node.getCenterX() + calculateDiagonal(node, modulators[1], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, modulators[1], idealEdgeLength, "diagonal"));
+                }
+                if (inputs.length == 2) {
+                  modulators[2].setCenter(node.getCenterX() + calculateDiagonal(node, modulators[1], idealEdgeLength, "horizontal"), node.getCenterY());
+                }
+              }
+            }
+            // process outputs
+            if (outputs.length == 1){
+/*               let random = Math.random();
+              if (random > 0.5)
+                outputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"));
+              else */
+              outputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"));
+            }
+            else if (outputs.length == 2) {
+              outputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"));
+              outputs[1].setCenter(node.getCenterX() - calculateDiagonal(node, outputs[1], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, outputs[1], idealEdgeLength, "diagonal"));
+            }
+/*             else if (outputs.length == 3) {
+              inputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"));
+              inputs[1].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[1], idealEdgeLength, "horizontal"), node.getCenterY());
+              inputs[2].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[2], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, inputs[2], idealEdgeLength, "diagonal"));
+              horizontalAlignments.push([node, inputs[1]]);
+            } */
+            else if (outputs.length > 3){
+              outputs.forEach(output => {
+                relativePlacementConstraints.push({left: output.id, right: node.id});
+              });
+            }
+          }
+          if(orientation == "top-to-bottom") {
+            // process inputs
+            if (inputs.length == 1){
+              inputs[0].setCenter(node.getCenterX(), node.getCenterY() - calculateDiagonal(node, inputs[0], idealEdgeLength, "vertical"));
+              verticalAlignments.push([node, inputs[0]]);
+            }
+            else if (inputs.length == 2) {
+              inputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"));
+              inputs[1].setCenter(node.getCenterX() + calculateDiagonal(node, inputs[1], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, inputs[1], idealEdgeLength, "diagonal"));
+            }
+            else if (inputs.length == 3) {
+              inputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"));
+              inputs[1].setCenter(node.getCenterX(), node.getCenterY() - calculateDiagonal(node, inputs[1], idealEdgeLength, "vertical"));
+              inputs[2].setCenter(node.getCenterX() + calculateDiagonal(node, inputs[2], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, inputs[2], idealEdgeLength, "diagonal"));
+              verticalAlignments.push([node, inputs[1]]);
+            }
+            else if (inputs.length > 3){
+              inputs.forEach(input => {
+                relativePlacementConstraints.push({top: input.id, bottom: node.id});
+              });
+            }
+            // process modulators
+            if (modulators.length == 1){
+              modulators[0].setCenter(node.getCenterX() - calculateDiagonal(node, modulators[0], idealEdgeLength, "horizontal"), node.getCenterY());
+              horizontalAlignments.push([node, modulators[0]]);
+            }
+            else if (modulators.length >= 2) {
+              modulators[0].setCenter(node.getCenterX() - calculateDiagonal(node, modulators[0], idealEdgeLength, "horizontal"), node.getCenterY());
+              modulators[1].setCenter(node.getCenterX() + calculateDiagonal(node, modulators[1], idealEdgeLength, "horizontal"), node.getCenterY());
+              if (modulators[2]) {
+                if (inputs.length == 1) {
+                  modulators[2].setCenter(node.getCenterX() + calculateDiagonal(node, modulators[1], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, modulators[1], idealEdgeLength, "diagonal"));
+                }
+                if (inputs.length == 2) {
+                  modulators[2].setCenter(node.getCenterX(), node.getCenterY() - calculateDiagonal(node, modulators[1], idealEdgeLength, "horizontal"));
+                }
+              }
+            }
+            // process outputs
+            if (outputs.length == 1){
+/*               let random = Math.random();
+              if (random > 0.5)
+                outputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"));
+              else */
+              outputs[0].setCenter(node.getCenterX() + calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"));
+            }
+            else if (outputs.length == 2) {
+              outputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"));
+              outputs[1].setCenter(node.getCenterX() + calculateDiagonal(node, outputs[1], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, outputs[1], idealEdgeLength, "diagonal"));
+            }
+/*             else if (outputs.length == 3) {
+              inputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"));
+              inputs[1].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[1], idealEdgeLength, "horizontal"), node.getCenterY());
+              inputs[2].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[2], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, inputs[2], idealEdgeLength, "diagonal"));
+              horizontalAlignments.push([node, inputs[1]]);
+            } */
+            else if (outputs.length > 3){
+              outputs.forEach(output => {
+                relativePlacementConstraints.push({top: node.id, bottom: output.id});
+              });
+            }        
+          }
+          if(orientation == "bottom-to-top") {
+            // process inputs
+            if (inputs.length == 1){
+              inputs[0].setCenter(node.getCenterX(), node.getCenterY() + calculateDiagonal(node, inputs[0], idealEdgeLength, "vertical"));
+              verticalAlignments.push([node, inputs[0]]);
+            }
+            else if (inputs.length == 2) {
+              inputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"));
+              inputs[1].setCenter(node.getCenterX() + calculateDiagonal(node, inputs[1], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, inputs[1], idealEdgeLength, "diagonal"));
+            }
+            else if (inputs.length == 3) {
+              inputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"));
+              inputs[1].setCenter(node.getCenterX(), node.getCenterY() + calculateDiagonal(node, inputs[1], idealEdgeLength, "vertical"));
+              inputs[2].setCenter(node.getCenterX() + calculateDiagonal(node, inputs[2], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, inputs[2], idealEdgeLength, "diagonal"));
+              verticalAlignments.push([node, inputs[1]]);
+            }
+            else if (inputs.length > 3){
+              inputs.forEach(input => {
+                relativePlacementConstraints.push({top: node.id, bottom: input.id});
+              });
+            }
+            // process modulators
+            if (modulators.length == 1){
+              modulators[0].setCenter(node.getCenterX() - calculateDiagonal(node, modulators[0], idealEdgeLength, "horizontal"), node.getCenterY());
+              horizontalAlignments.push([node, modulators[0]]);
+            }
+            else if (modulators.length == 2) {
+              modulators[0].setCenter(node.getCenterX() - calculateDiagonal(node, modulators[0], idealEdgeLength, "horizontal"), node.getCenterY());
+              modulators[1].setCenter(node.getCenterX() + calculateDiagonal(node, modulators[1], idealEdgeLength, "horizontal"), node.getCenterY());
+              if (modulators[2]) {
+                if (inputs.length == 1) {
+                  modulators[2].setCenter(node.getCenterX() + calculateDiagonal(node, modulators[1], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, modulators[1], idealEdgeLength, "diagonal"));
+                }
+                if (inputs.length == 2) {
+                  modulators[2].setCenter(node.getCenterX(), node.getCenterY() + calculateDiagonal(node, modulators[1], idealEdgeLength, "horizontal"));
+                }
+              }
+            }
+            // process outputs
+            if (outputs.length == 1){
+/*               let random = Math.random();
+              if (random > 0.5)
+                outputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"));
+              else */
+              outputs[0].setCenter(node.getCenterX() + calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"));
+            }
+            else if (outputs.length == 2) {
+              outputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"));
+              outputs[1].setCenter(node.getCenterX() + calculateDiagonal(node, outputs[1], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, outputs[1], idealEdgeLength, "diagonal"));
+            }
+/*             else if (outputs.length == 3) {
+              inputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"));
+              inputs[1].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[1], idealEdgeLength, "horizontal"), node.getCenterY());
+              inputs[2].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[2], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, inputs[2], idealEdgeLength, "diagonal"));
+              horizontalAlignments.push([node, inputs[1]]);
+            } */
+            else if (outputs.length > 3){
+              outputs.forEach(output => {
+                relativePlacementConstraints.push({top: output.id, bottom: node.id});
+              });
+            }
+          }
+        }
+        else { // an intermediate node - think about if connected to ring
+          if(orientation == "left-to-right") {
+            // process inputs
+            if (inputs.length == 1){
+/*               let random = Math.random();
+              if (random > 0.5)
+                inputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"));
+              else */
+                inputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"));
+            }
+            else if (inputs.length == 2) {
+              inputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"));
+              inputs[1].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[1], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, inputs[1], idealEdgeLength, "diagonal"));
+            }
+            else if (inputs.length > 2){
+              inputs.forEach(input => {
+                relativePlacementConstraints.push({left: input.id, right: node.id});
+              });
+            }
+            // process modulators
+            if (modulators.length == 1){
+              modulators[0].setCenter(node.getCenterX(), node.getCenterY() - calculateDiagonal(node, modulators[0], idealEdgeLength, "vertical"));
+              verticalAlignments.push([node, modulators[0]]);
+            }
+            else if (modulators.length >= 2) {
+              modulators[0].setCenter(node.getCenterX(), node.getCenterY() - calculateDiagonal(node, modulators[0], idealEdgeLength, "vertical"));
+              modulators[1].setCenter(node.getCenterX(), node.getCenterY() + calculateDiagonal(node, modulators[1], idealEdgeLength, "vertical"));
+              if (modulators[2]) {
+                if (inputs.length == 1) {
+                  modulators[2].setCenter(node.getCenterX() - calculateDiagonal(node, modulators[1], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, modulators[1], idealEdgeLength, "diagonal"));
+                }
+                if (inputs.length == 2) {
+                  modulators[2].setCenter(node.getCenterX() - calculateDiagonal(node, modulators[1], idealEdgeLength, "horizontal"), node.getCenterY());
+                }
+              }
+            }
+            // process outputs
+            if (outputs.length == 1){
+/*               let random = Math.random();
+              if (random > 0.5)
+                outputs[0].setCenter(node.getCenterX() + calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"));
+              else */
+              outputs[0].setCenter(node.getCenterX() + calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"));
+            }
+            else if (outputs.length == 2) {
+              outputs[0].setCenter(node.getCenterX() + calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"));
+              outputs[1].setCenter(node.getCenterX() + calculateDiagonal(node, outputs[1], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, outputs[1], idealEdgeLength, "diagonal"));
+            }
+/*             else if (outputs.length == 3) {
+              inputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"));
+              inputs[1].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[1], idealEdgeLength, "horizontal"), node.getCenterY());
+              inputs[2].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[2], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, inputs[2], idealEdgeLength, "diagonal"));
+              horizontalAlignments.push([node, inputs[1]]);
+            } */
+            else if (outputs.length > 3){
+              outputs.forEach(output => {
+                relativePlacementConstraints.push({left: node.id, right: output.id});
+              });
+            }
+          }
+          if(orientation == "right-to-left") {
+            // process inputs
+            if (inputs.length == 1){
+/*               let random = Math.random();
+              if (random > 0.5)
+                inputs[0].setCenter(node.getCenterX() + calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"));
+              else */
+                inputs[0].setCenter(node.getCenterX() + calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"));
+            }
+            else if (inputs.length == 2) {
+              inputs[0].setCenter(node.getCenterX() + calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"));
+              inputs[1].setCenter(node.getCenterX() + calculateDiagonal(node, inputs[1], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, inputs[1], idealEdgeLength, "diagonal"));
+            }
+            else if (inputs.length > 2){
+              inputs.forEach(input => {
+                relativePlacementConstraints.push({left: node.id, right: input.id});
+              });
+            }
+            // process modulators
+            if (modulators.length == 1){
+              modulators[0].setCenter(node.getCenterX(), node.getCenterY() - calculateDiagonal(node, modulators[0], idealEdgeLength, "vertical"));
+              verticalAlignments.push([node, modulators[0]]);
+            }
+            else if (modulators.length >= 2) {
+              modulators[0].setCenter(node.getCenterX(), node.getCenterY() - calculateDiagonal(node, modulators[0], idealEdgeLength, "vertical"));
+              modulators[1].setCenter(node.getCenterX(), node.getCenterY() + calculateDiagonal(node, modulators[1], idealEdgeLength, "vertical"));
+              if (modulators[2]) {
+                if (inputs.length == 1) {
+                  modulators[2].setCenter(node.getCenterX() + calculateDiagonal(node, modulators[1], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, modulators[1], idealEdgeLength, "diagonal"));
+                }
+                if (inputs.length == 2) {
+                  modulators[2].setCenter(node.getCenterX() + calculateDiagonal(node, modulators[1], idealEdgeLength, "horizontal"), node.getCenterY());
+                }
+              }
+            }
+            // process outputs
+            if (outputs.length == 1){
+              let random = Math.random();
+              if (random > 0.5)
+                outputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"));
+              else
+              outputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"));
+            }
+            else if (outputs.length == 2) {
+              outputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"));
+              outputs[1].setCenter(node.getCenterX() - calculateDiagonal(node, outputs[1], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, outputs[1], idealEdgeLength, "diagonal"));
+            }
+/*             else if (outputs.length == 3) {
+              inputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"));
+              inputs[1].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[1], idealEdgeLength, "horizontal"), node.getCenterY());
+              inputs[2].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[2], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, inputs[2], idealEdgeLength, "diagonal"));
+              horizontalAlignments.push([node, inputs[1]]);
+            } */
+            else if (outputs.length > 3){
+              outputs.forEach(output => {
+                relativePlacementConstraints.push({left: output.id, right: node.id});
+              });
+            }
+          }
+          if(orientation == "top-to-bottom") {
+            // process inputs
+            if (inputs.length == 1){
+/*               let random = Math.random();
+              if (random > 0.5)
+                inputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"));
+              else */
+                inputs[0].setCenter(node.getCenterX() + calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"));
+            }
+            else if (inputs.length == 2) {
+              inputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"));
+              inputs[1].setCenter(node.getCenterX() + calculateDiagonal(node, inputs[1], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, inputs[1], idealEdgeLength, "diagonal"));
+            }
+            else if (inputs.length > 2){
+              inputs.forEach(input => {
+                relativePlacementConstraints.push({top: input.id, bottom: node.id});
+              });
+            }
+            // process modulators
+            if (modulators.length == 1){
+              modulators[0].setCenter(node.getCenterX() - calculateDiagonal(node, modulators[0], idealEdgeLength, "horizontal"), node.getCenterY());
+              horizontalAlignments.push([node, modulators[0]]);
+            }
+            else if (modulators.length >= 2) {
+              modulators[0].setCenter(node.getCenterX() - calculateDiagonal(node, modulators[0], idealEdgeLength, "horizontal"), node.getCenterY());
+              modulators[1].setCenter(node.getCenterX() + calculateDiagonal(node, modulators[1], idealEdgeLength, "horizontal"), node.getCenterY());
+              if (modulators[2]) {
+                if (inputs.length == 1) {
+                  modulators[2].setCenter(node.getCenterX() + calculateDiagonal(node, modulators[1], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, modulators[1], idealEdgeLength, "diagonal"));
+                }
+                if (inputs.length == 2) {
+                  modulators[2].setCenter(node.getCenterX(), node.getCenterY() - calculateDiagonal(node, modulators[1], idealEdgeLength, "horizontal"));
+                }
+              }
+            }
+            // process outputs
+            if (outputs.length == 1){
+              let random = Math.random();
+              if (random > 0.5)
+                outputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"));
+              else
+              outputs[0].setCenter(node.getCenterX() + calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"));
+            }
+            else if (outputs.length == 2) {
+              outputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"));
+              outputs[1].setCenter(node.getCenterX() + calculateDiagonal(node, outputs[1], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, outputs[1], idealEdgeLength, "diagonal"));
+            }
+/*             else if (outputs.length == 3) {
+              inputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"));
+              inputs[1].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[1], idealEdgeLength, "horizontal"), node.getCenterY());
+              inputs[2].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[2], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, inputs[2], idealEdgeLength, "diagonal"));
+              horizontalAlignments.push([node, inputs[1]]);
+            } */
+            else if (outputs.length > 3){
+              outputs.forEach(output => {
+                relativePlacementConstraints.push({top: node.id, bottom: output.id});
+              });
+            } 
+          }
+          if(orientation == "bottom-to-top") {
+            // process inputs
+            if (inputs.length == 1){
+/*               let random = Math.random();
+              if (random > 0.5)
+                inputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"));
+              else */
+                inputs[0].setCenter(node.getCenterX() + calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"));
+            }
+            else if (inputs.length == 2) {
+              inputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"));
+              inputs[1].setCenter(node.getCenterX() + calculateDiagonal(node, inputs[1], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, inputs[1], idealEdgeLength, "diagonal"));
+            }
+            else if (inputs.length > 2){
+              inputs.forEach(input => {
+                relativePlacementConstraints.push({top: node.id, bottom: input.id});
+              });
+            }
+            // process modulators
+            if (modulators.length == 1){
+              modulators[0].setCenter(node.getCenterX() - calculateDiagonal(node, modulators[0], idealEdgeLength, "horizontal"), node.getCenterY());
+              horizontalAlignments.push([node, modulators[0]]);
+            }
+            else if (modulators.length == 2) {
+              modulators[0].setCenter(node.getCenterX() - calculateDiagonal(node, modulators[0], idealEdgeLength, "horizontal"), node.getCenterY());
+              modulators[1].setCenter(node.getCenterX() + calculateDiagonal(node, modulators[1], idealEdgeLength, "horizontal"), node.getCenterY());
+              if (modulators[2]) {
+                if (inputs.length == 1) {
+                  modulators[2].setCenter(node.getCenterX() + calculateDiagonal(node, modulators[1], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, modulators[1], idealEdgeLength, "diagonal"));
+                }
+                if (inputs.length == 2) {
+                  modulators[2].setCenter(node.getCenterX(), node.getCenterY() + calculateDiagonal(node, modulators[1], idealEdgeLength, "horizontal"));
+                }
+              }
+            }
+            // process outputs
+            if (outputs.length == 1){
+/*               let random = Math.random();
+              if (random > 0.5)
+                outputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"));
+              else */
+              outputs[0].setCenter(node.getCenterX() + calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"));
+            }
+            else if (outputs.length == 2) {
+              outputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"));
+              outputs[1].setCenter(node.getCenterX() + calculateDiagonal(node, outputs[1], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, outputs[1], idealEdgeLength, "diagonal"));
+            }
+/*             else if (outputs.length == 3) {
+              inputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, inputs[0], idealEdgeLength, "diagonal"));
+              inputs[1].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[1], idealEdgeLength, "horizontal"), node.getCenterY());
+              inputs[2].setCenter(node.getCenterX() - calculateDiagonal(node, inputs[2], idealEdgeLength, "diagonal"), node.getCenterY() + calculateDiagonal(node, inputs[2], idealEdgeLength, "diagonal"));
+              horizontalAlignments.push([node, inputs[1]]);
+            } */
+            else if (outputs.length > 3){
+              outputs.forEach(output => {
+                relativePlacementConstraints.push({top: output.id, bottom: node.id});
+              });
+            }
+          }
+        }
+      });
+    }
+    else {
+
     }
   });
 

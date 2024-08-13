@@ -76,7 +76,7 @@ let defaults = {
 
 let getUserOptions = function (options) {
   CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = false;
-  CoSEConstants.DEFAULT_EDGE_LENGTH = FDLayoutConstants.DEFAULT_EDGE_LENGTH = 70;
+  SBGNConstants.DEFAULT_EDGE_LENGTH = CoSEConstants.DEFAULT_EDGE_LENGTH = FDLayoutConstants.DEFAULT_EDGE_LENGTH = 80;
 }
 
 class Layout extends ContinuousLayout {
@@ -111,6 +111,7 @@ class Layout extends ContinuousLayout {
       if(sourceNode !== targetNode && sourceNode.getEdgesBetween(targetNode).length == 0){
         var e1 = graphManager.add(sbgnLayout.newEdge(), sourceNode, targetNode);
         e1.id = edge.id();
+        e1.class = edge.data("class");
       }
     }
     // First phase of the algorithm - Apply a static layout and construct skeleton
@@ -258,6 +259,26 @@ class Layout extends ContinuousLayout {
     CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
     CoSEConstants.TILE = false;
     sbgnLayout.runLayout();
+
+    let polishingInfo = sbgnLayout.addPerComponentPolishingConstraints(components, directions);
+/*     verticalAlignments.push(polishingInfo.verticalAlignments);
+    horizontalAlignments.push(polishingInfo.horizontalAlignments);
+    verticalAlignments = sbgnLayout.mergeArrays(verticalAlignments);
+    horizontalAlignments = sbgnLayout.mergeArrays(horizontalAlignments);
+    alignmentConstraint = {vertical: verticalAlignments, horizontal: horizontalAlignments};
+
+    let relativePlacementConstraints = graphInfo.constraints.relativePlacementConstraint.concat(polishingInfo.relativePlacementConstraints);
+
+    // Apply an incremental layout to polish each component
+    sbgnLayout.constraints["alignmentConstraint"] = alignmentConstraint;
+    sbgnLayout.constraints["relativePlacementConstraint"] = relativePlacementConstraints;
+    graphManager.allNodesToApplyGravitation = undefined;
+    sbgnLayout.initParameters();
+    sbgnLayout.initSpringEmbedder();
+    CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = true;
+    CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
+    CoSEConstants.TILE = false;
+    sbgnLayout.runLayout(); */
       
   }
 
@@ -392,7 +413,8 @@ class Layout extends ContinuousLayout {
         s.y = location.getCenterY();
     });
 
-    isDone = this.sbgnLayout.tick();
+    //isDone = this.sbgnLayout.tick();
+    isDone = true;
 
     state.tickIndex = this.sbgnLayout.totalIterations;
 

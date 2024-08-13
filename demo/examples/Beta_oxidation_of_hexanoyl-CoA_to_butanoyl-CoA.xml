@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<sbgn xmlns="http://sbgn.org/libsbgn/0.2">
+    <map language="process description">
+        <glyph class="compartment" id="mitochondrial_matrix">
+            <label text="mitochondrial matrix"/>
+            <bbox w="56.0" h="38.0" x="-4.0" y="-4.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="reactome:SmallMolecule1159" compartmentRef="mitochondrial_matrix">
+            <label text="Ac-CoA"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="reactome:SmallMolecule1381" compartmentRef="mitochondrial_matrix">
+            <label text="CoA"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="reactome:SmallMolecule1608" compartmentRef="mitochondrial_matrix">
+            <label text="trans-Hex-2-enoyl-CoA"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="reactome:SmallMolecule1607" compartmentRef="mitochondrial_matrix">
+            <label text="HX-CoA"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="reactome:SmallMolecule1584" compartmentRef="mitochondrial_matrix">
+            <label text="FAD"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="complex" id="reactome:Complex3435" compartmentRef="mitochondrial_matrix">
+            <label text="ECHS1 hexamer"/>
+            <bbox w="52.0" h="34.0" x="-2.0" y="-2.0"/>
+<!--             <glyph class="macromolecule" id="reactome:Protein7846_37f6e741a9f55b5e0528e314dba90d30" compartmentRef="mitochondrial_matrix">
+                <label text="ECHS1"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="mitochondrial_matrix">
+                    <state value="x[28 - 290]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph> -->
+        </glyph>
+        <glyph class="complex" id="reactome:Complex3439" compartmentRef="mitochondrial_matrix">
+            <label text="ACADS tetramer"/>
+            <bbox w="52.0" h="34.0" x="-2.0" y="-2.0"/>
+<!--             <glyph class="macromolecule" id="reactome:Protein7849_be2a91365fe814231f08fddc8d5201b0" compartmentRef="mitochondrial_matrix">
+                <label text="ACADS"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="mitochondrial_matrix">
+                    <state value="x[25 - 412]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph> -->
+        </glyph>
+        <glyph class="simple chemical" id="reactome:SmallMolecule1609" compartmentRef="mitochondrial_matrix">
+            <label text="(S)-Hydroxyhexanoyl-CoA"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="complex" id="reactome:Complex3436" compartmentRef="mitochondrial_matrix">
+            <label text="HADH dimer"/>
+            <bbox w="52.0" h="34.0" x="-2.0" y="-2.0"/>
+<!--             <glyph class="macromolecule" id="reactome:Protein7847_f6835f873edb95c71ba15d72ef120893" compartmentRef="mitochondrial_matrix">
+                <label text="HADH"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="mitochondrial_matrix">
+                    <state value="x[13 - 314]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph> -->
+        </glyph>
+        <glyph class="simple chemical" id="reactome:SmallMolecule1611" compartmentRef="mitochondrial_matrix">
+            <label text="BT-CoA"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="reactome:SmallMolecule1610" compartmentRef="mitochondrial_matrix">
+            <label text="3-Oxohexanoyl-CoA"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="complex" id="reactome:Complex3433" compartmentRef="mitochondrial_matrix">
+            <label text="Trifunctional Protein"/>
+            <bbox w="52.0" h="34.0" x="-2.0" y="-2.0"/>
+<!--             <glyph class="macromolecule" id="reactome:Protein7844_19815730f8bec3c75118e3dc337f6e56" compartmentRef="mitochondrial_matrix">
+                <label text="HADHA"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="mitochondrial_matrix">
+                    <state value="x[37 - 763]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein7843_19815730f8bec3c75118e3dc337f6e56" compartmentRef="mitochondrial_matrix">
+                <label text="HADHB"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="mitochondrial_matrix">
+                    <state value="x[34 - 474]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph> -->
+        </glyph>
+        <glyph class="simple chemical" id="reactome:SmallMolecule1585_1cef81b673002a764e04bbf83ecf2f76" compartmentRef="mitochondrial_matrix">
+            <label text="FADH2"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="reactome:SmallMolecule1588_d8b5642e3185df8872ec528d4a5a67cf" compartmentRef="mitochondrial_matrix">
+            <label text="NAD"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="reactome:SmallMolecule263_d8b5642e3185df8872ec528d4a5a67cf" compartmentRef="mitochondrial_matrix">
+            <label text="H+"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="reactome:SmallMolecule32_d89b776cd31780ba2b3b8cc8f5c4da03" compartmentRef="mitochondrial_matrix">
+            <label text="H2O"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="reactome:SmallMolecule1590_d8b5642e3185df8872ec528d4a5a67cf" compartmentRef="mitochondrial_matrix">
+            <label text="NADH"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="http://bioregistry.io/reactome:R-HSA-77325_LEFTTORIGHT" compartmentRef="mitochondrial_matrix">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_http://bioregistry.io/reactome:R-HSA-77325_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_http://bioregistry.io/reactome:R-HSA-77325_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="http://bioregistry.io/reactome:R-HSA-77321_LEFTTORIGHT" compartmentRef="mitochondrial_matrix">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_http://bioregistry.io/reactome:R-HSA-77321_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_http://bioregistry.io/reactome:R-HSA-77321_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="http://bioregistry.io/reactome:R-HSA-77327_LEFTTORIGHT" compartmentRef="mitochondrial_matrix">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_http://bioregistry.io/reactome:R-HSA-77327_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_http://bioregistry.io/reactome:R-HSA-77327_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="http://bioregistry.io/reactome:R-HSA-77323_LEFTTORIGHT" compartmentRef="mitochondrial_matrix">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_http://bioregistry.io/reactome:R-HSA-77323_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_http://bioregistry.io/reactome:R-HSA-77323_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <arc class="production" id="OUT_http://bioregistry.io/reactome:R-HSA-77321_LEFTTORIGHT--TO--reactome:SmallMolecule1159" source="http://bioregistry.io/reactome:R-HSA-77321_LEFTTORIGHT" target="reactome:SmallMolecule1159">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_http://bioregistry.io/reactome:R-HSA-77323_LEFTTORIGHT--TO--reactome:SmallMolecule1590_d8b5642e3185df8872ec528d4a5a67cf" source="http://bioregistry.io/reactome:R-HSA-77323_LEFTTORIGHT" target="reactome:SmallMolecule1590_d8b5642e3185df8872ec528d4a5a67cf">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_http://bioregistry.io/reactome:R-HSA-77323_LEFTTORIGHT--TO--reactome:SmallMolecule1610" source="http://bioregistry.io/reactome:R-HSA-77323_LEFTTORIGHT" target="reactome:SmallMolecule1610">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_http://bioregistry.io/reactome:R-HSA-77321_LEFTTORIGHT--TO--reactome:SmallMolecule1611" source="http://bioregistry.io/reactome:R-HSA-77321_LEFTTORIGHT" target="reactome:SmallMolecule1611">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="catalysis" id="reactome:Complex3435--TO--http://bioregistry.io/reactome:R-HSA-77325_LEFTTORIGHT" source="reactome:Complex3435" target="http://bioregistry.io/reactome:R-HSA-77325_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="reactome:SmallMolecule1609--TO--INP_http://bioregistry.io/reactome:R-HSA-77323_LEFTTORIGHT" source="reactome:SmallMolecule1609" target="http://bioregistry.io/reactome:R-HSA-77323_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="reactome:SmallMolecule1610--TO--INP_http://bioregistry.io/reactome:R-HSA-77321_LEFTTORIGHT" source="reactome:SmallMolecule1610" target="http://bioregistry.io/reactome:R-HSA-77321_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="reactome:SmallMolecule1608--TO--INP_http://bioregistry.io/reactome:R-HSA-77325_LEFTTORIGHT" source="reactome:SmallMolecule1608" target="http://bioregistry.io/reactome:R-HSA-77325_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_http://bioregistry.io/reactome:R-HSA-77327_LEFTTORIGHT--TO--reactome:SmallMolecule1585_1cef81b673002a764e04bbf83ecf2f76" source="http://bioregistry.io/reactome:R-HSA-77327_LEFTTORIGHT" target="reactome:SmallMolecule1585_1cef81b673002a764e04bbf83ecf2f76">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_http://bioregistry.io/reactome:R-HSA-77323_LEFTTORIGHT--TO--reactome:SmallMolecule263_d8b5642e3185df8872ec528d4a5a67cf" source="http://bioregistry.io/reactome:R-HSA-77323_LEFTTORIGHT" target="reactome:SmallMolecule263_d8b5642e3185df8872ec528d4a5a67cf">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="catalysis" id="reactome:Complex3439--TO--http://bioregistry.io/reactome:R-HSA-77327_LEFTTORIGHT" source="reactome:Complex3439" target="http://bioregistry.io/reactome:R-HSA-77327_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="catalysis" id="reactome:Complex3433--TO--http://bioregistry.io/reactome:R-HSA-77321_LEFTTORIGHT" source="reactome:Complex3433" target="http://bioregistry.io/reactome:R-HSA-77321_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="reactome:SmallMolecule1607--TO--INP_http://bioregistry.io/reactome:R-HSA-77327_LEFTTORIGHT" source="reactome:SmallMolecule1607" target="http://bioregistry.io/reactome:R-HSA-77327_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="reactome:SmallMolecule1588_d8b5642e3185df8872ec528d4a5a67cf--TO--INP_http://bioregistry.io/reactome:R-HSA-77323_LEFTTORIGHT" source="reactome:SmallMolecule1588_d8b5642e3185df8872ec528d4a5a67cf" target="http://bioregistry.io/reactome:R-HSA-77323_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="catalysis" id="reactome:Complex3436--TO--http://bioregistry.io/reactome:R-HSA-77323_LEFTTORIGHT" source="reactome:Complex3436" target="http://bioregistry.io/reactome:R-HSA-77323_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_http://bioregistry.io/reactome:R-HSA-77325_LEFTTORIGHT--TO--reactome:SmallMolecule1609" source="http://bioregistry.io/reactome:R-HSA-77325_LEFTTORIGHT" target="reactome:SmallMolecule1609">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="reactome:SmallMolecule1381--TO--INP_http://bioregistry.io/reactome:R-HSA-77321_LEFTTORIGHT" source="reactome:SmallMolecule1381" target="http://bioregistry.io/reactome:R-HSA-77321_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_http://bioregistry.io/reactome:R-HSA-77327_LEFTTORIGHT--TO--reactome:SmallMolecule1608" source="http://bioregistry.io/reactome:R-HSA-77327_LEFTTORIGHT" target="reactome:SmallMolecule1608">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="reactome:SmallMolecule1584--TO--INP_http://bioregistry.io/reactome:R-HSA-77327_LEFTTORIGHT" source="reactome:SmallMolecule1584" target="http://bioregistry.io/reactome:R-HSA-77327_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="reactome:SmallMolecule32_d89b776cd31780ba2b3b8cc8f5c4da03--TO--INP_http://bioregistry.io/reactome:R-HSA-77325_LEFTTORIGHT" source="reactome:SmallMolecule32_d89b776cd31780ba2b3b8cc8f5c4da03" target="http://bioregistry.io/reactome:R-HSA-77325_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+    </map>
+</sbgn>

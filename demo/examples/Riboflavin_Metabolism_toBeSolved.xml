@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<sbgn xmlns="http://sbgn.org/libsbgn/0.2">
+    <map language="process description">
+        <glyph class="compartment" id="cytoplasm">
+            <label text="cytoplasm"/>
+            <bbox w="52.0" h="29.0" x="-2.0" y="-2.0"/>
+        </glyph>
+        <glyph class="compartment" id="plasma_membrane">
+            <label text="plasma membrane"/>
+            <bbox w="56.0" h="33.0" x="-4.0" y="-4.0"/>
+        </glyph>
+        <glyph class="compartment" id="melanosome_membrane">
+            <label text="melanosome membrane"/>
+            <bbox w="52.0" h="29.0" x="-2.0" y="-2.0"/>
+        </glyph>
+        <glyph class="macromolecule" id="pathbank:Protein/92_Cytoplasm" compartmentRef="cytoplasm">
+            <label text="ACP1"/>
+            <bbox w="48.0" h="25.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C001170_Cytoplasm" compartmentRef="cytoplasm">
+            <label text="Flavin Mononucleotide"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C002109_Cytoplasm" compartmentRef="cytoplasm">
+            <label text="7-Hydroxy-6-methyl-8-ribityl lumazine"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C001860_Cytoplasm" compartmentRef="cytoplasm">
+            <label text="Quinone"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C000165_Cytoplasm" compartmentRef="cytoplasm">
+            <label text="Riboflavin"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="macromolecule" id="pathbank:Protein/2636_Cytoplasm" compartmentRef="cytoplasm">
+            <label text="FLAD1"/>
+            <bbox w="48.0" h="25.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C000964_Cytoplasm" compartmentRef="cytoplasm">
+            <label text="FAD"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C001632_Cytoplasm" compartmentRef="cytoplasm">
+            <label text="Hydroquinone"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C001973_Cytoplasm" compartmentRef="cytoplasm">
+            <label text="6,7-Dimethyl-8-(1-D-ribityl)lumazine"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C001957_Cytoplasm" compartmentRef="cytoplasm">
+            <label text="Dimethylbenzimidazole"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="macromolecule" id="pathbank:Protein/996_Cytoplasm" compartmentRef="cytoplasm">
+            <label text="RFK"/>
+            <bbox w="48.0" h="25.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C001104_Cytoplasm_70ff247c10ec78ec843c402bdc922668" compartmentRef="cytoplasm">
+            <label text="Phosphate"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C001034_Cytoplasm_5d246e214e617e99c351ff91593e8133" compartmentRef="cytoplasm">
+            <label text="Adenosine diphosphate"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C000414_Cytoplasm_5d246e214e617e99c351ff91593e8133" compartmentRef="cytoplasm">
+            <label text="Adenosine triphosphate"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C001420_Cytoplasm_70ff247c10ec78ec843c402bdc922668" compartmentRef="cytoplasm">
+            <label text="Water"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C000170_Cytoplasm_1d978031346af4e298922516a96435a7" compartmentRef="cytoplasm">
+            <label text="Pyrophosphate"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C000414_Cytoplasm_1d978031346af4e298922516a96435a7" compartmentRef="cytoplasm">
+            <label text="Adenosine triphosphate"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="pathbank:Reactions/845_LEFTTORIGHT" compartmentRef="cytoplasm">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_pathbank:Reactions/845_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_pathbank:Reactions/845_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="pathbank:Reactions/500_LEFTTORIGHT" compartmentRef="cytoplasm">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_pathbank:Reactions/500_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_pathbank:Reactions/500_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="pathbank:Reactions/846_LEFTTORIGHT" compartmentRef="cytoplasm">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_pathbank:Reactions/846_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_pathbank:Reactions/846_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="pathbank:Reactions/479_LEFTTORIGHT" compartmentRef="cytoplasm">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_pathbank:Reactions/479_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_pathbank:Reactions/479_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="pathbank:Reactions/2332_LEFTTORIGHT" compartmentRef="cytoplasm">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_pathbank:Reactions/2332_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_pathbank:Reactions/2332_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="complex" id="pathbank:ProteinComplex/320_Cell_Membrane" compartmentRef="plasma_membrane">
+            <label text="Ectonucleotide pyrophosphatase/phosphodiesterase family member 1"/>
+            <bbox w="52.0" h="29.0" x="-2.0" y="-2.0"/>
+            <glyph class="macromolecule" id="pathbank:Protein/114_Cell_Membrane_81449efd0d0f19daec4a89be1abab65b" compartmentRef="plasma_membrane">
+                <label text="ENPP1"/>
+                <bbox w="48.0" h="25.0" x="0.0" y="0.0"/>
+            </glyph>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C001170_Cell_Membrane" compartmentRef="plasma_membrane">
+            <label text="Flavin Mononucleotide"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C000032_Cell_Membrane" compartmentRef="plasma_membrane">
+            <label text="Adenosine monophosphate"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C000964_Cell_Membrane" compartmentRef="plasma_membrane">
+            <label text="FAD"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C001420_Cell_Membrane_d86f943cff10fb6442301a34c467750f" compartmentRef="plasma_membrane">
+            <label text="Water"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="pathbank:Reactions/246_LEFTTORIGHT" compartmentRef="plasma_membrane">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_pathbank:Reactions/246_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_pathbank:Reactions/246_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C001632_Melanosome_Membrane" compartmentRef="melanosome_membrane">
+            <label text="Hydroquinone"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="macromolecule" id="pathbank:Protein/84_Melanosome_Membrane" compartmentRef="melanosome_membrane">
+            <label text="TYR"/>
+            <bbox w="48.0" h="25.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C001860_Melanosome_Membrane" compartmentRef="melanosome_membrane">
+            <label text="Quinone"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C001420_Melanosome_Membrane_cc6df5a556854d8ec4accf7119aa66b6" compartmentRef="melanosome_membrane">
+            <label text="Water"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C001065_Melanosome_Membrane_cc6df5a556854d8ec4accf7119aa66b6" compartmentRef="melanosome_membrane">
+            <label text="Oxygen"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="pathbank:Reactions/547_LEFTTORIGHT" compartmentRef="melanosome_membrane">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_pathbank:Reactions/547_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_pathbank:Reactions/547_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <arc class="production" id="OUT_pathbank:Reactions/479_LEFTTORIGHT--TO--pathbank:Compound/PW_C000165_Cytoplasm" source="pathbank:Reactions/479_LEFTTORIGHT" target="pathbank:Compound/PW_C000165_Cytoplasm">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_pathbank:Reactions/845_LEFTTORIGHT--TO--pathbank:Compound/PW_C002109_Cytoplasm" source="pathbank:Reactions/845_LEFTTORIGHT" target="pathbank:Compound/PW_C002109_Cytoplasm">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="pathbank:Compound/PW_C001065_Melanosome_Membrane_cc6df5a556854d8ec4accf7119aa66b6--TO--INP_pathbank:Reactions/547_LEFTTORIGHT" source="pathbank:Compound/PW_C001065_Melanosome_Membrane_cc6df5a556854d8ec4accf7119aa66b6" target="pathbank:Reactions/547_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_pathbank:Reactions/547_LEFTTORIGHT--TO--pathbank:Compound/PW_C001420_Melanosome_Membrane_cc6df5a556854d8ec4accf7119aa66b6" source="pathbank:Reactions/547_LEFTTORIGHT" target="pathbank:Compound/PW_C001420_Melanosome_Membrane_cc6df5a556854d8ec4accf7119aa66b6">
+            <glyph class="cardinality">
+                <label text="2"/>
+            </glyph>
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="pathbank:Compound/PW_C001170_Cytoplasm--TO--INP_pathbank:Reactions/846_LEFTTORIGHT" source="pathbank:Compound/PW_C001170_Cytoplasm" target="pathbank:Reactions/846_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="catalysis" id="pathbank:Protein/2636_Cytoplasm--TO--pathbank:Reactions/846_LEFTTORIGHT" source="pathbank:Protein/2636_Cytoplasm" target="pathbank:Reactions/846_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="catalysis" id="pathbank:Protein/996_Cytoplasm--TO--pathbank:Reactions/500_LEFTTORIGHT" source="pathbank:Protein/996_Cytoplasm" target="pathbank:Reactions/500_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="pathbank:Compound/PW_C000414_Cytoplasm_1d978031346af4e298922516a96435a7--TO--INP_pathbank:Reactions/846_LEFTTORIGHT" source="pathbank:Compound/PW_C000414_Cytoplasm_1d978031346af4e298922516a96435a7" target="pathbank:Reactions/846_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="pathbank:Compound/PW_C000414_Cytoplasm_5d246e214e617e99c351ff91593e8133--TO--INP_pathbank:Reactions/500_LEFTTORIGHT" source="pathbank:Compound/PW_C000414_Cytoplasm_5d246e214e617e99c351ff91593e8133" target="pathbank:Reactions/500_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_pathbank:Reactions/846_LEFTTORIGHT--TO--pathbank:Compound/PW_C000170_Cytoplasm_1d978031346af4e298922516a96435a7" source="pathbank:Reactions/846_LEFTTORIGHT" target="pathbank:Compound/PW_C000170_Cytoplasm_1d978031346af4e298922516a96435a7">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_pathbank:Reactions/845_LEFTTORIGHT--TO--pathbank:Compound/PW_C001632_Cytoplasm" source="pathbank:Reactions/845_LEFTTORIGHT" target="pathbank:Compound/PW_C001632_Cytoplasm">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_pathbank:Reactions/246_LEFTTORIGHT--TO--pathbank:Compound/PW_C000032_Cell_Membrane" source="pathbank:Reactions/246_LEFTTORIGHT" target="pathbank:Compound/PW_C000032_Cell_Membrane">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="pathbank:Compound/PW_C001170_Cytoplasm--TO--INP_pathbank:Reactions/479_LEFTTORIGHT" source="pathbank:Compound/PW_C001170_Cytoplasm" target="pathbank:Reactions/479_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="catalysis" id="pathbank:ProteinComplex/320_Cell_Membrane--TO--pathbank:Reactions/246_LEFTTORIGHT" source="pathbank:ProteinComplex/320_Cell_Membrane" target="pathbank:Reactions/246_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_pathbank:Reactions/846_LEFTTORIGHT--TO--pathbank:Compound/PW_C000964_Cytoplasm" source="pathbank:Reactions/846_LEFTTORIGHT" target="pathbank:Compound/PW_C000964_Cytoplasm">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_pathbank:Reactions/500_LEFTTORIGHT--TO--pathbank:Compound/PW_C001034_Cytoplasm_5d246e214e617e99c351ff91593e8133" source="pathbank:Reactions/500_LEFTTORIGHT" target="pathbank:Compound/PW_C001034_Cytoplasm_5d246e214e617e99c351ff91593e8133">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="pathbank:Compound/PW_C000165_Cytoplasm--TO--INP_pathbank:Reactions/2332_LEFTTORIGHT" source="pathbank:Compound/PW_C000165_Cytoplasm" target="pathbank:Reactions/2332_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="pathbank:Compound/PW_C000165_Cytoplasm--TO--INP_pathbank:Reactions/500_LEFTTORIGHT" source="pathbank:Compound/PW_C000165_Cytoplasm" target="pathbank:Reactions/500_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_pathbank:Reactions/547_LEFTTORIGHT--TO--pathbank:Compound/PW_C001860_Melanosome_Membrane" source="pathbank:Reactions/547_LEFTTORIGHT" target="pathbank:Compound/PW_C001860_Melanosome_Membrane">
+            <glyph class="cardinality">
+                <label text="2"/>
+            </glyph>
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="pathbank:Compound/PW_C001632_Melanosome_Membrane--TO--INP_pathbank:Reactions/547_LEFTTORIGHT" source="pathbank:Compound/PW_C001632_Melanosome_Membrane" target="pathbank:Reactions/547_LEFTTORIGHT">
+            <glyph class="cardinality">
+                <label text="2"/>
+            </glyph>
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="pathbank:Compound/PW_C001973_Cytoplasm--TO--INP_pathbank:Reactions/845_LEFTTORIGHT" source="pathbank:Compound/PW_C001973_Cytoplasm" target="pathbank:Reactions/845_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_pathbank:Reactions/2332_LEFTTORIGHT--TO--pathbank:Compound/PW_C001957_Cytoplasm" source="pathbank:Reactions/2332_LEFTTORIGHT" target="pathbank:Compound/PW_C001957_Cytoplasm">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="pathbank:Compound/PW_C001860_Cytoplasm--TO--INP_pathbank:Reactions/845_LEFTTORIGHT" source="pathbank:Compound/PW_C001860_Cytoplasm" target="pathbank:Reactions/845_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="pathbank:Compound/PW_C001420_Cytoplasm_70ff247c10ec78ec843c402bdc922668--TO--INP_pathbank:Reactions/479_LEFTTORIGHT" source="pathbank:Compound/PW_C001420_Cytoplasm_70ff247c10ec78ec843c402bdc922668" target="pathbank:Reactions/479_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="pathbank:Compound/PW_C001420_Cell_Membrane_d86f943cff10fb6442301a34c467750f--TO--INP_pathbank:Reactions/246_LEFTTORIGHT" source="pathbank:Compound/PW_C001420_Cell_Membrane_d86f943cff10fb6442301a34c467750f" target="pathbank:Reactions/246_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_pathbank:Reactions/246_LEFTTORIGHT--TO--pathbank:Compound/PW_C001170_Cell_Membrane" source="pathbank:Reactions/246_LEFTTORIGHT" target="pathbank:Compound/PW_C001170_Cell_Membrane">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_pathbank:Reactions/500_LEFTTORIGHT--TO--pathbank:Compound/PW_C001170_Cytoplasm" source="pathbank:Reactions/500_LEFTTORIGHT" target="pathbank:Compound/PW_C001170_Cytoplasm">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="catalysis" id="pathbank:Protein/92_Cytoplasm--TO--pathbank:Reactions/479_LEFTTORIGHT" source="pathbank:Protein/92_Cytoplasm" target="pathbank:Reactions/479_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="pathbank:Compound/PW_C000964_Cell_Membrane--TO--INP_pathbank:Reactions/246_LEFTTORIGHT" source="pathbank:Compound/PW_C000964_Cell_Membrane" target="pathbank:Reactions/246_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="catalysis" id="pathbank:Protein/84_Melanosome_Membrane--TO--pathbank:Reactions/547_LEFTTORIGHT" source="pathbank:Protein/84_Melanosome_Membrane" target="pathbank:Reactions/547_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_pathbank:Reactions/479_LEFTTORIGHT--TO--pathbank:Compound/PW_C001104_Cytoplasm_70ff247c10ec78ec843c402bdc922668" source="pathbank:Reactions/479_LEFTTORIGHT" target="pathbank:Compound/PW_C001104_Cytoplasm_70ff247c10ec78ec843c402bdc922668">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+    </map>
+</sbgn>

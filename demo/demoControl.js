@@ -19,6 +19,8 @@ let loadSample = function (fname) {
 	}).then(function (data) {
 		cyGraph = convert(data);
 		cy.add(cyGraph);
+		if(cy.nodes("[class='process']")[0].css('content'))
+			cy.nodes("[class='process']").css("content", ".");
 		cy.layout({ name: 'sbgn-layout' }).run();
 	});
 };
@@ -42,7 +44,7 @@ document.getElementById("samples").addEventListener("change", function (event) {
 		filename = "WP121.sbgn";
 	}
 	else if(sample == "sample6") {
-		filename = "Hsp90β_interacts_with_MDM2.xml";
+		filename = "Beta_oxidation_of_hexanoyl-CoA_to_butanoyl-CoA.xml";
 	}
 /* 	else if(sample == "sample7") {
 		filename = "glycolysis_cropped2.sbgn";
@@ -54,7 +56,7 @@ document.getElementById("samples").addEventListener("change", function (event) {
 		filename = "mapk_cascade.sbgn";
 	} */
 	else if(sample == "sample7") {
-		filename = "Ascorbate_and_aldarate_metabolism.xml";
+		filename = "Artemether_Metabolism_Pathway.xml";
 	}
 	else if(sample == "sample8") {
 		filename = "Selenocompound_metab.xml";

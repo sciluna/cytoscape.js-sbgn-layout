@@ -68,7 +68,7 @@
     <glyph id="f68e5" class="complex">
       <label text="f68e5"/>
       <bbox x="796.34296" y="108.04259000000003" w="89.91666400000008" h="69.87499999999997"/>
-      <glyph id="caf" class="nucleic acid feature">
+ <!--      <glyph id="caf" class="nucleic acid feature">
         <extension>
           <annotation>
             <rdf:RDF 
@@ -113,7 +113,7 @@
           <label text="ct:gene"/>
           <bbox x="817.96796" y="140.29259" w="46.666668" h="12"/>
         </glyph>
-      </glyph>
+      </glyph> -->
     </glyph>
     <glyph id="fea9a" class="simple chemical">
       <label text="H2O"/>

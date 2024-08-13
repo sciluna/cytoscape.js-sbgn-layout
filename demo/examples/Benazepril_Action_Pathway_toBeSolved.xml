@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<sbgn xmlns="http://sbgn.org/libsbgn/0.2">
+    <map language="process description">
+        <glyph class="process" id="pathbank:Transports/131_LEFTTORIGHT">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_pathbank:Transports/131_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_pathbank:Transports/131_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="pathbank:Reactions/1606_LEFTTORIGHT">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_pathbank:Reactions/1606_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_pathbank:Reactions/1606_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="pathbank:Transports/135_LEFTTORIGHT">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_pathbank:Transports/135_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_pathbank:Transports/135_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C000816">
+            <label text="Angiotensin II"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C040470">
+            <label text="Angiotensin I"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="pathbank:Reactions/1600_LEFTTORIGHT">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_pathbank:Reactions/1600_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_pathbank:Reactions/1600_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="macromolecule" id="pathbank:Protein/2025">
+            <label text="REN"/>
+            <bbox w="48.0" h="25.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C040467">
+            <label text="Benazeprilat"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="macromolecule" id="pathbank:Protein/10207">
+            <label text="Unknown"/>
+            <bbox w="48.0" h="25.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="pathbank:Transports/136_LEFTTORIGHT">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_pathbank:Transports/136_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_pathbank:Transports/136_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="pathbank:Reactions/179428_LEFTTORIGHT">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_pathbank:Reactions/179428_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_pathbank:Reactions/179428_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="macromolecule" id="pathbank:Protein/1560">
+            <label text="ACE"/>
+            <bbox w="48.0" h="25.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C009037">
+            <label text="Benazepril"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="pathbank:Transports/10328_LEFTTORIGHT">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_pathbank:Transports/10328_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_pathbank:Transports/10328_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="macromolecule" id="pathbank:Protein/2016">
+            <label text="AGT"/>
+            <bbox w="48.0" h="25.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="compartment" id="extracellular_space">
+            <label text="extracellular space"/>
+            <bbox w="52.0" h="24.0" x="-2.0" y="-2.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="pathbank:Compound/PW_C040467_Extracellular_Space" compartmentRef="extracellular_space">
+            <label text="Benazeprilat"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <arc class="consumption" id="pathbank:Protein/2016--TO--INP_pathbank:Reactions/179428_LEFTTORIGHT" source="pathbank:Protein/2016" target="pathbank:Reactions/179428_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_pathbank:Reactions/179428_LEFTTORIGHT--TO--pathbank:Protein/10207" source="pathbank:Reactions/179428_LEFTTORIGHT" target="pathbank:Protein/10207">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_pathbank:Reactions/179428_LEFTTORIGHT--TO--pathbank:Compound/PW_C040470" source="pathbank:Reactions/179428_LEFTTORIGHT" target="pathbank:Compound/PW_C040470">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="catalysis" id="pathbank:Protein/1560--TO--pathbank:Reactions/1606_LEFTTORIGHT" source="pathbank:Protein/1560" target="pathbank:Reactions/1606_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="pathbank:Compound/PW_C040467--TO--INP_pathbank:Transports/131_LEFTTORIGHT" source="pathbank:Compound/PW_C040467" target="pathbank:Transports/131_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="pathbank:Compound/PW_C009037--TO--INP_pathbank:Reactions/1600_LEFTTORIGHT" source="pathbank:Compound/PW_C009037" target="pathbank:Reactions/1600_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="catalysis" id="pathbank:Protein/2025--TO--pathbank:Reactions/179428_LEFTTORIGHT" source="pathbank:Protein/2025" target="pathbank:Reactions/179428_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_pathbank:Transports/135_LEFTTORIGHT--TO--pathbank:Protein/2025" source="pathbank:Transports/135_LEFTTORIGHT" target="pathbank:Protein/2025">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="pathbank:Protein/1560--TO--INP_pathbank:Transports/10328_LEFTTORIGHT" source="pathbank:Protein/1560" target="pathbank:Transports/10328_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_pathbank:Transports/136_LEFTTORIGHT--TO--pathbank:Protein/2016" source="pathbank:Transports/136_LEFTTORIGHT" target="pathbank:Protein/2016">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_pathbank:Reactions/1606_LEFTTORIGHT--TO--pathbank:Compound/PW_C000816" source="pathbank:Reactions/1606_LEFTTORIGHT" target="pathbank:Compound/PW_C000816">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="pathbank:Protein/2016--TO--INP_pathbank:Transports/136_LEFTTORIGHT" source="pathbank:Protein/2016" target="pathbank:Transports/136_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="pathbank:Protein/2025--TO--INP_pathbank:Transports/135_LEFTTORIGHT" source="pathbank:Protein/2025" target="pathbank:Transports/135_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_pathbank:Transports/131_LEFTTORIGHT--TO--pathbank:Compound/PW_C040467_Extracellular_Space" source="pathbank:Transports/131_LEFTTORIGHT" target="pathbank:Compound/PW_C040467_Extracellular_Space">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_pathbank:Transports/10328_LEFTTORIGHT--TO--pathbank:Protein/1560" source="pathbank:Transports/10328_LEFTTORIGHT" target="pathbank:Protein/1560">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="pathbank:Compound/PW_C040470--TO--INP_pathbank:Reactions/1606_LEFTTORIGHT" source="pathbank:Compound/PW_C040470" target="pathbank:Reactions/1606_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_pathbank:Reactions/1600_LEFTTORIGHT--TO--pathbank:Compound/PW_C040467" source="pathbank:Reactions/1600_LEFTTORIGHT" target="pathbank:Compound/PW_C040467">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+    </map>
+</sbgn>

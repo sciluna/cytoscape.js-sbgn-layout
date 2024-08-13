@@ -52,6 +52,23 @@ SBGNNode.prototype.isProcess = function() {
     return true;
   else
     return false;
-}
+};
+
+// for nodes in components
+SBGNNode.prototype.isConnectedToRing = function() {
+  let self = this;
+
+  let neighbors = self.getNeighborsList();
+  let isConnectedToRing = false;
+
+  neighbors.forEach(neighbor => {
+    if (neighbor.pseudoClass == "ring"){
+      isConnectedToRing = true;
+      return true;
+    }
+  });
+
+  return isConnectedToRing;
+};
 
 module.exports = SBGNNode;
