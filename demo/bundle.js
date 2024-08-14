@@ -58105,16 +58105,16 @@
 			filename = "glycolysis.sbgn";
 		}
 		else if(sample == "sample3") {
-			filename = "vitamins_b6_activation_to_pyridoxal_phosphate.sbgn";
+			filename = "WP121.sbgn";
 		}
 		else if(sample == "sample4") {
 			filename = "R-HSA-5652084.sbgn";
 		}
 		else if(sample == "sample5") {
-			filename = "WP121.sbgn";
+			filename = "Beta_oxidation_of_hexanoyl-CoA_to_butanoyl-CoA.xml";
 		}
 		else if(sample == "sample6") {
-			filename = "Beta_oxidation_of_hexanoyl-CoA_to_butanoyl-CoA.xml";
+			filename = "vitamins_b6_activation_to_pyridoxal_phosphate.sbgn";
 		}
 	/* 	else if(sample == "sample7") {
 			filename = "glycolysis_cropped2.sbgn";
@@ -58129,7 +58129,7 @@
 			filename = "Artemether_Metabolism_Pathway.xml";
 		}
 		else if(sample == "sample8") {
-			filename = "Selenocompound_metab.xml";
+			filename = "Aminobutyrate_degradation.xml";
 		}
 	/* 	else if(sample == "sample11") {
 			filename = "D-Arginine_and_D-Orn.xml";

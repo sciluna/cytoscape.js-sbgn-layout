@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<sbgn xmlns="http://sbgn.org/libsbgn/0.2">
+    <map language="process description">
+        <glyph class="simple chemical" id="panther:_glutamate_s3_a3_">
+            <label text="glutamate"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="panther:_succinate_semialdehyde_s4_a4_">
+            <label text="succinate semialdehyde"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="panther:_succinate_s8_a8_">
+            <label text="succinate"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="macromolecule" id="panther:_Succinate_semi_aldeyde_dehydrogenase_s10_a10_">
+            <label text="Succinate semi-aldehyde dehydrogenase"/>
+            <bbox w="48.0" h="25.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="panther:_ketoglutarate_s2_a2_">
+            <label text="ketoglutarate"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="panther:STATE_TRANSITION_LEFT__4_aminobutyrate-_ketoglutarate-RIGHT__glutamate-_succinate_semialdehyde-_r1_LEFTTORIGHT">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_panther:STATE_TRANSITION_LEFT__4_aminobutyrate-_ketoglutarate-RIGHT__glutamate-_succinate_semialdehyde-_r1_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_panther:STATE_TRANSITION_LEFT__4_aminobutyrate-_ketoglutarate-RIGHT__glutamate-_succinate_semialdehyde-_r1_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="panther:STATE_TRANSITION_LEFT__NADP-_succinate_semialdehyde-_H2O-RIGHT__NADPH-_succinate-_r2_LEFTTORIGHT">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_panther:STATE_TRANSITION_LEFT__NADP-_succinate_semialdehyde-_H2O-RIGHT__NADPH-_succinate-_r2_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_panther:STATE_TRANSITION_LEFT__NADP-_succinate_semialdehyde-_H2O-RIGHT__NADPH-_succinate-_r2_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="macromolecule" id="panther:_4_aminobutyrate_aminotransferase_s9_a9_">
+            <label text="ABAT"/>
+            <bbox w="48.0" h="25.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="panther:_4_aminobutyrate_s1_a1_">
+            <label text="4-aminobutyrate"/>
+            <bbox w="48.0" h="20.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="panther:_NADP_s6_a6__894b58a2dedccddd8f9ce0bf746b695b_237e65685416934b8c77baa5b385ff0a">
+            <label text="NADP"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="panther:_H2O_s5_a5__404148f59df9584bc370e34ca5a7be1c_237e65685416934b8c77baa5b385ff0a">
+            <label text="H2O"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="panther:_NADPH_s7_a7__2f673c9a9096140796f114ef186fbd6a_237e65685416934b8c77baa5b385ff0a">
+            <label text="NADPH"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <arc class="production" id="OUT_panther:STATE_TRANSITION_LEFT__NADP-_succinate_semialdehyde-_H2O-RIGHT__NADPH-_succinate-_r2_LEFTTORIGHT--TO--panther:_NADPH_s7_a7__2f673c9a9096140796f114ef186fbd6a_237e65685416934b8c77baa5b385ff0a" source="panther:STATE_TRANSITION_LEFT__NADP-_succinate_semialdehyde-_H2O-RIGHT__NADPH-_succinate-_r2_LEFTTORIGHT" target="panther:_NADPH_s7_a7__2f673c9a9096140796f114ef186fbd6a_237e65685416934b8c77baa5b385ff0a">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_panther:STATE_TRANSITION_LEFT__NADP-_succinate_semialdehyde-_H2O-RIGHT__NADPH-_succinate-_r2_LEFTTORIGHT--TO--panther:_succinate_s8_a8_" source="panther:STATE_TRANSITION_LEFT__NADP-_succinate_semialdehyde-_H2O-RIGHT__NADPH-_succinate-_r2_LEFTTORIGHT" target="panther:_succinate_s8_a8_">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="panther:_ketoglutarate_s2_a2_--TO--INP_panther:STATE_TRANSITION_LEFT__4_aminobutyrate-_ketoglutarate-RIGHT__glutamate-_succinate_semialdehyde-_r1_LEFTTORIGHT" source="panther:_ketoglutarate_s2_a2_" target="panther:STATE_TRANSITION_LEFT__4_aminobutyrate-_ketoglutarate-RIGHT__glutamate-_succinate_semialdehyde-_r1_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_panther:STATE_TRANSITION_LEFT__4_aminobutyrate-_ketoglutarate-RIGHT__glutamate-_succinate_semialdehyde-_r1_LEFTTORIGHT--TO--panther:_succinate_semialdehyde_s4_a4_" source="panther:STATE_TRANSITION_LEFT__4_aminobutyrate-_ketoglutarate-RIGHT__glutamate-_succinate_semialdehyde-_r1_LEFTTORIGHT" target="panther:_succinate_semialdehyde_s4_a4_">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="panther:_4_aminobutyrate_s1_a1_--TO--INP_panther:STATE_TRANSITION_LEFT__4_aminobutyrate-_ketoglutarate-RIGHT__glutamate-_succinate_semialdehyde-_r1_LEFTTORIGHT" source="panther:_4_aminobutyrate_s1_a1_" target="panther:STATE_TRANSITION_LEFT__4_aminobutyrate-_ketoglutarate-RIGHT__glutamate-_succinate_semialdehyde-_r1_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="panther:_NADP_s6_a6__894b58a2dedccddd8f9ce0bf746b695b_237e65685416934b8c77baa5b385ff0a--TO--INP_panther:STATE_TRANSITION_LEFT__NADP-_succinate_semialdehyde-_H2O-RIGHT__NADPH-_succinate-_r2_LEFTTORIGHT" source="panther:_NADP_s6_a6__894b58a2dedccddd8f9ce0bf746b695b_237e65685416934b8c77baa5b385ff0a" target="panther:STATE_TRANSITION_LEFT__NADP-_succinate_semialdehyde-_H2O-RIGHT__NADPH-_succinate-_r2_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="panther:_H2O_s5_a5__404148f59df9584bc370e34ca5a7be1c_237e65685416934b8c77baa5b385ff0a--TO--INP_panther:STATE_TRANSITION_LEFT__NADP-_succinate_semialdehyde-_H2O-RIGHT__NADPH-_succinate-_r2_LEFTTORIGHT" source="panther:_H2O_s5_a5__404148f59df9584bc370e34ca5a7be1c_237e65685416934b8c77baa5b385ff0a" target="panther:STATE_TRANSITION_LEFT__NADP-_succinate_semialdehyde-_H2O-RIGHT__NADPH-_succinate-_r2_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="catalysis" id="panther:_Succinate_semi_aldeyde_dehydrogenase_s10_a10_--TO--panther:STATE_TRANSITION_LEFT__NADP-_succinate_semialdehyde-_H2O-RIGHT__NADPH-_succinate-_r2_LEFTTORIGHT" source="panther:_Succinate_semi_aldeyde_dehydrogenase_s10_a10_" target="panther:STATE_TRANSITION_LEFT__NADP-_succinate_semialdehyde-_H2O-RIGHT__NADPH-_succinate-_r2_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_panther:STATE_TRANSITION_LEFT__4_aminobutyrate-_ketoglutarate-RIGHT__glutamate-_succinate_semialdehyde-_r1_LEFTTORIGHT--TO--panther:_glutamate_s3_a3_" source="panther:STATE_TRANSITION_LEFT__4_aminobutyrate-_ketoglutarate-RIGHT__glutamate-_succinate_semialdehyde-_r1_LEFTTORIGHT" target="panther:_glutamate_s3_a3_">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="catalysis" id="panther:_4_aminobutyrate_aminotransferase_s9_a9_--TO--panther:STATE_TRANSITION_LEFT__4_aminobutyrate-_ketoglutarate-RIGHT__glutamate-_succinate_semialdehyde-_r1_LEFTTORIGHT" source="panther:_4_aminobutyrate_aminotransferase_s9_a9_" target="panther:STATE_TRANSITION_LEFT__4_aminobutyrate-_ketoglutarate-RIGHT__glutamate-_succinate_semialdehyde-_r1_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="panther:_succinate_semialdehyde_s4_a4_--TO--INP_panther:STATE_TRANSITION_LEFT__NADP-_succinate_semialdehyde-_H2O-RIGHT__NADPH-_succinate-_r2_LEFTTORIGHT" source="panther:_succinate_semialdehyde_s4_a4_" target="panther:STATE_TRANSITION_LEFT__NADP-_succinate_semialdehyde-_H2O-RIGHT__NADPH-_succinate-_r2_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+    </map>
+</sbgn>
