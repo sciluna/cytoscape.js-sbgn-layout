@@ -886,7 +886,7 @@ SBGNLayout.prototype.addPerComponentPolishingConstraints = function (components,
           else if (modulators.length == 2) {
             let position = calculatePosition(node, modulators[0], idealEdgeLength, 90);
             modulators[0].setCenter(position.x, position.y);
-            position = calculatePosition(node, modulators[1], idealEdgeLength, 180);
+            position = calculatePosition(node, modulators[1], idealEdgeLength, 270);
             modulators[1].setCenter(position.x, position.y);
           }
           else if (modulators.length > 2) {

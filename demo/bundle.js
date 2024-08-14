@@ -51722,7 +51722,7 @@
 		          } else if (modulators.length == 2) {
 		            var _position40 = calculatePosition(node, modulators[0], idealEdgeLength, 90);
 		            modulators[0].setCenter(_position40.x, _position40.y);
-		            _position40 = calculatePosition(node, modulators[1], idealEdgeLength, 180);
+		            _position40 = calculatePosition(node, modulators[1], idealEdgeLength, 270);
 		            modulators[1].setCenter(_position40.x, _position40.y);
 		          } else if (modulators.length > 2) {
 		            var _position41 = calculatePosition(node, modulators[0], idealEdgeLength, 60);
