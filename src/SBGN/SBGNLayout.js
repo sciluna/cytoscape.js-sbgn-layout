@@ -926,13 +926,13 @@ SBGNLayout.prototype.addPerComponentPolishingConstraints = function (components,
         if (orientation == "right-to-left") {
           // process inputs
           if (inputs.length == 1) {
-            let position = calculatePosition(node, inputs[0], idealEdgeLength, 315);
+            let position = calculatePosition(node, inputs[0], idealEdgeLength, 45);
             inputs[0].setCenter(position.x, position.y);
           }
           else if (inputs.length == 2) {
-            let position = calculatePosition(node, inputs[0], idealEdgeLength, 315);
+            let position = calculatePosition(node, inputs[0], idealEdgeLength, 45);
             inputs[0].setCenter(position.x, position.y);
-            position = calculatePosition(node, inputs[1], idealEdgeLength, 45);
+            position = calculatePosition(node, inputs[1], idealEdgeLength, 315);
             inputs[1].setCenter(position.x, position.y);
           }
           else if (inputs.length > 2) {
@@ -974,13 +974,13 @@ SBGNLayout.prototype.addPerComponentPolishingConstraints = function (components,
           }
           // process outputs
           if (outputs.length == 1) {
-            let position = calculatePosition(node, outputs[0], idealEdgeLength, 225);
+            let position = calculatePosition(node, outputs[0], idealEdgeLength, 135);
             outputs[0].setCenter(position.x, position.y);
           }
           else if (outputs.length == 2) {
-            let position = calculatePosition(node, outputs[0], idealEdgeLength, 225);
+            let position = calculatePosition(node, outputs[0], idealEdgeLength, 135);
             outputs[0].setCenter(position.x, position.y);
-            position = calculatePosition(node, outputs[1], idealEdgeLength, 135);
+            position = calculatePosition(node, outputs[1], idealEdgeLength, 225);
             outputs[1].setCenter(position.x, position.y);
           }
           else if (outputs.length > 2) {
@@ -1001,13 +1001,13 @@ SBGNLayout.prototype.addPerComponentPolishingConstraints = function (components,
         if (orientation == "top-to-bottom") {
           // process inputs
           if (inputs.length == 1) {
-            let position = calculatePosition(node, inputs[0], idealEdgeLength, 45);
+            let position = calculatePosition(node, inputs[0], idealEdgeLength, 135);
             inputs[0].setCenter(position.x, position.y);
           }
           else if (inputs.length == 2) {
-            let position = calculatePosition(node, inputs[0], idealEdgeLength, 45);
+            let position = calculatePosition(node, inputs[0], idealEdgeLength, 135);
             inputs[0].setCenter(position.x, position.y);
-            position = calculatePosition(node, inputs[1], idealEdgeLength, 135);
+            position = calculatePosition(node, inputs[1], idealEdgeLength, 45);
             inputs[1].setCenter(position.x, position.y);
           }
           else if (inputs.length > 2) {
@@ -1049,13 +1049,13 @@ SBGNLayout.prototype.addPerComponentPolishingConstraints = function (components,
           }
           // process outputs
           if (outputs.length == 1) {
-            let position = calculatePosition(node, outputs[0], idealEdgeLength, 315);
+            let position = calculatePosition(node, outputs[0], idealEdgeLength, 225);
             outputs[0].setCenter(position.x, position.y);
           }
           else if (outputs.length == 2) {
-            let position = calculatePosition(node, outputs[0], idealEdgeLength, 315);
+            let position = calculatePosition(node, outputs[0], idealEdgeLength, 225);
             outputs[0].setCenter(position.x, position.y);
-            position = calculatePosition(node, outputs[1], idealEdgeLength, 225);
+            position = calculatePosition(node, outputs[1], idealEdgeLength, 315);
             outputs[1].setCenter(position.x, position.y);
           }
           else if (outputs.length > 2) {
@@ -1124,10 +1124,6 @@ SBGNLayout.prototype.addPerComponentPolishingConstraints = function (components,
           }
           // process outputs
           if (outputs.length == 1) {
-            /*               let random = Math.random();
-                          if (random > 0.5)
-                            outputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"));
-                          else */
             let position = calculatePosition(node, outputs[0], idealEdgeLength, 45);
             outputs[0].setCenter(position.x, position.y);
           }

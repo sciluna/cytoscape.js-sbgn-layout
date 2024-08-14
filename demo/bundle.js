@@ -51759,12 +51759,12 @@
 		        if (orientation == "right-to-left") {
 		          // process inputs
 		          if (inputs.length == 1) {
-		            var _position45 = calculatePosition(node, inputs[0], idealEdgeLength, 315);
+		            var _position45 = calculatePosition(node, inputs[0], idealEdgeLength, 45);
 		            inputs[0].setCenter(_position45.x, _position45.y);
 		          } else if (inputs.length == 2) {
-		            var _position46 = calculatePosition(node, inputs[0], idealEdgeLength, 315);
+		            var _position46 = calculatePosition(node, inputs[0], idealEdgeLength, 45);
 		            inputs[0].setCenter(_position46.x, _position46.y);
-		            _position46 = calculatePosition(node, inputs[1], idealEdgeLength, 45);
+		            _position46 = calculatePosition(node, inputs[1], idealEdgeLength, 315);
 		            inputs[1].setCenter(_position46.x, _position46.y);
 		          } else if (inputs.length > 2) {
 		            var _position47 = calculatePosition(node, inputs[0], idealEdgeLength, 330);
@@ -51803,12 +51803,12 @@
 		          }
 		          // process outputs
 		          if (outputs.length == 1) {
-		            var _position51 = calculatePosition(node, outputs[0], idealEdgeLength, 225);
+		            var _position51 = calculatePosition(node, outputs[0], idealEdgeLength, 135);
 		            outputs[0].setCenter(_position51.x, _position51.y);
 		          } else if (outputs.length == 2) {
-		            var _position52 = calculatePosition(node, outputs[0], idealEdgeLength, 225);
+		            var _position52 = calculatePosition(node, outputs[0], idealEdgeLength, 135);
 		            outputs[0].setCenter(_position52.x, _position52.y);
-		            _position52 = calculatePosition(node, outputs[1], idealEdgeLength, 135);
+		            _position52 = calculatePosition(node, outputs[1], idealEdgeLength, 225);
 		            outputs[1].setCenter(_position52.x, _position52.y);
 		          } else if (outputs.length > 2) {
 		            var _position53 = calculatePosition(node, outputs[0], idealEdgeLength, 210);
@@ -51828,12 +51828,12 @@
 		        if (orientation == "top-to-bottom") {
 		          // process inputs
 		          if (inputs.length == 1) {
-		            var _position54 = calculatePosition(node, inputs[0], idealEdgeLength, 45);
+		            var _position54 = calculatePosition(node, inputs[0], idealEdgeLength, 135);
 		            inputs[0].setCenter(_position54.x, _position54.y);
 		          } else if (inputs.length == 2) {
-		            var _position55 = calculatePosition(node, inputs[0], idealEdgeLength, 45);
+		            var _position55 = calculatePosition(node, inputs[0], idealEdgeLength, 135);
 		            inputs[0].setCenter(_position55.x, _position55.y);
-		            _position55 = calculatePosition(node, inputs[1], idealEdgeLength, 135);
+		            _position55 = calculatePosition(node, inputs[1], idealEdgeLength, 45);
 		            inputs[1].setCenter(_position55.x, _position55.y);
 		          } else if (inputs.length > 2) {
 		            var _position56 = calculatePosition(node, inputs[0], idealEdgeLength, 60);
@@ -51872,12 +51872,12 @@
 		          }
 		          // process outputs
 		          if (outputs.length == 1) {
-		            var _position60 = calculatePosition(node, outputs[0], idealEdgeLength, 315);
+		            var _position60 = calculatePosition(node, outputs[0], idealEdgeLength, 225);
 		            outputs[0].setCenter(_position60.x, _position60.y);
 		          } else if (outputs.length == 2) {
-		            var _position61 = calculatePosition(node, outputs[0], idealEdgeLength, 315);
+		            var _position61 = calculatePosition(node, outputs[0], idealEdgeLength, 225);
 		            outputs[0].setCenter(_position61.x, _position61.y);
-		            _position61 = calculatePosition(node, outputs[1], idealEdgeLength, 225);
+		            _position61 = calculatePosition(node, outputs[1], idealEdgeLength, 315);
 		            outputs[1].setCenter(_position61.x, _position61.y);
 		          } else if (outputs.length > 2) {
 		            var _position62 = calculatePosition(node, outputs[0], idealEdgeLength, 300);
@@ -51941,10 +51941,6 @@
 		          }
 		          // process outputs
 		          if (outputs.length == 1) {
-		            /*               let random = Math.random();
-		                          if (random > 0.5)
-		                            outputs[0].setCenter(node.getCenterX() - calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"), node.getCenterY() - calculateDiagonal(node, outputs[0], idealEdgeLength, "diagonal"));
-		                          else */
 		            var _position69 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
 		            outputs[0].setCenter(_position69.x, _position69.y);
 		          } else if (outputs.length == 2) {
