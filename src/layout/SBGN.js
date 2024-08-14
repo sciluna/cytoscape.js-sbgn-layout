@@ -14,9 +14,9 @@ const ContinuousLayout = require('./continuous-base');
 const assign = require('../assign');
 const isFn = fn => typeof fn === 'function';
 
-const optFn = ( opt, ele ) => {
-  if( isFn( opt ) ){
-    return opt( ele );
+const optFn = (opt, ele) => {
+  if (isFn(opt)) {
+    return opt(ele);
   } else {
     return opt;
   }
@@ -39,8 +39,8 @@ let defaults = {
   infinite: false, // overrides all other options for a forces-all-the-time mode
 
   // layout event callbacks
-  ready: function(){}, // on layoutready
-  stop: function(){}, // on layoutstop
+  ready: function () { }, // on layoutready
+  stop: function () { }, // on layoutstop
 
   // positioning options
   randomize: true, // use random node positions at beginning of layout
@@ -80,14 +80,14 @@ let getUserOptions = function (options) {
 }
 
 class Layout extends ContinuousLayout {
-  constructor( options ){
-    options = assign( {}, defaults, options );
+  constructor(options) {
+    options = assign({}, defaults, options);
     super(options);
 
     getUserOptions(options);
   }
 
-  prerun(){
+  prerun() {
     let self = this;
     let state = this.state; // options object combined with current state
 
@@ -108,7 +108,7 @@ class Layout extends ContinuousLayout {
       var edge = edges[i];
       var sourceNode = this.idToLNode[edge.data("source")];
       var targetNode = this.idToLNode[edge.data("target")];
-      if(sourceNode !== targetNode && sourceNode.getEdgesBetween(targetNode).length == 0){
+      if (sourceNode !== targetNode && sourceNode.getEdgesBetween(targetNode).length == 0) {
         var e1 = graphManager.add(sbgnLayout.newEdge(), sourceNode, targetNode);
         e1.id = edge.id();
         e1.class = edge.data("class");
@@ -157,7 +157,7 @@ class Layout extends ContinuousLayout {
       theNode.id = "ringNode_" + i;
       this.sbgnNodeToSkeleton.set(ringNode, theNode);
       this.skeletonToSbgnNode.set(theNode, ringNode);
-      oldPositions.push({x: ringNode.getCenterX(), y: ringNode.getCenterY()});
+      oldPositions.push({ x: ringNode.getCenterX(), y: ringNode.getCenterY() });
     });
     componentExtended.forEach((component, i) => {
       let componentRect = this.calculateBounds(component);
@@ -167,7 +167,7 @@ class Layout extends ContinuousLayout {
       theNode.id = "component_" + i;
       this.sbgnNodeToSkeleton.set(components[i], theNode);
       this.skeletonToSbgnNode.set(theNode, components[i]);
-      oldPositions.push({x: componentRect.getX() + componentRect.getWidth()/2, y: componentRect.getY() + componentRect.getHeight()/2});
+      oldPositions.push({ x: componentRect.getX() + componentRect.getWidth() / 2, y: componentRect.getY() + componentRect.getHeight() / 2 });
     });
     //console.log("Skeleton Nodes");
     //console.log(this.rootSkeleton.getNodes());
@@ -177,7 +177,7 @@ class Layout extends ContinuousLayout {
       let ringNodeToComponentNode = [];
       component.forEach(node => {
         node.getNeighborsList().intersection(ringNodes).forEach(neigbor => {
-          ringNodeToComponentNode.push({source: neigbor, target: node});
+          ringNodeToComponentNode.push({ source: neigbor, target: node });
         });
       });
       ringNodeToComponentNode.forEach(edge => {
@@ -205,12 +205,12 @@ class Layout extends ContinuousLayout {
     //console.log(this.rootSkeleton.getNodes());
 
     graphManagerSkeleton.getAllNodes().forEach((node, i) => {
-      newPositions.push({x: node.getCenterX(), y: node.getCenterY()});
+      newPositions.push({ x: node.getCenterX(), y: node.getCenterY() });
     });
 
     graphManagerSkeleton.getAllNodes().forEach((node, i) => {
       let sbgnElement = this.skeletonToSbgnNode.get(node);
-      if(Array.isArray(sbgnElement)) {
+      if (Array.isArray(sbgnElement)) {
         sbgnElement.forEach(sbgnNode => {
           sbgnNode.moveBy(newPositions[i].x - oldPositions[i].x, newPositions[i].y - oldPositions[i].y);
         });
@@ -235,7 +235,7 @@ class Layout extends ContinuousLayout {
     this.graphManagerSkeleton.getAllEdges().forEach((edge, i) => {
       let source = edge.getSource();
       let target = edge.getTarget();
-      if(Math.abs((target.getCenterY() - source.getCenterY()) > (target.getCenterX() - source.getCenterX()))){
+      if (Math.abs(target.getCenterY() - source.getCenterY()) > Math.abs(target.getCenterX() - source.getCenterX())) {
         verticalAlignments.push([this.skeletonToSbgnNode.get(source).id, edge.originalTarget.id]); // source nodes are ring nodes
       }
       else {
@@ -245,7 +245,7 @@ class Layout extends ContinuousLayout {
 
     verticalAlignments = sbgnLayout.mergeArrays(verticalAlignments);
     horizontalAlignments = sbgnLayout.mergeArrays(horizontalAlignments);
-    let alignmentConstraint = {vertical: verticalAlignments, horizontal: horizontalAlignments};
+    let alignmentConstraint = { vertical: verticalAlignments, horizontal: horizontalAlignments };
 
     console.log(verticalAlignments);
     console.log(horizontalAlignments);
@@ -261,30 +261,30 @@ class Layout extends ContinuousLayout {
     sbgnLayout.runLayout();
 
     let polishingInfo = sbgnLayout.addPerComponentPolishingConstraints(components, directions);
-/*     verticalAlignments.push(polishingInfo.verticalAlignments);
-    horizontalAlignments.push(polishingInfo.horizontalAlignments);
-    verticalAlignments = sbgnLayout.mergeArrays(verticalAlignments);
-    horizontalAlignments = sbgnLayout.mergeArrays(horizontalAlignments);
-    alignmentConstraint = {vertical: verticalAlignments, horizontal: horizontalAlignments};
+    /*     verticalAlignments.push(polishingInfo.verticalAlignments);
+        horizontalAlignments.push(polishingInfo.horizontalAlignments);
+        verticalAlignments = sbgnLayout.mergeArrays(verticalAlignments);
+        horizontalAlignments = sbgnLayout.mergeArrays(horizontalAlignments);
+        alignmentConstraint = {vertical: verticalAlignments, horizontal: horizontalAlignments};
+    
+        let relativePlacementConstraints = graphInfo.constraints.relativePlacementConstraint.concat(polishingInfo.relativePlacementConstraints);
+    
+        // Apply an incremental layout to polish each component
+        sbgnLayout.constraints["alignmentConstraint"] = alignmentConstraint;
+        sbgnLayout.constraints["relativePlacementConstraint"] = relativePlacementConstraints;
+        graphManager.allNodesToApplyGravitation = undefined;
+        sbgnLayout.initParameters();
+        sbgnLayout.initSpringEmbedder();
+        CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = true;
+        CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
+        CoSEConstants.TILE = false;
+        sbgnLayout.runLayout(); */
 
-    let relativePlacementConstraints = graphInfo.constraints.relativePlacementConstraint.concat(polishingInfo.relativePlacementConstraints);
-
-    // Apply an incremental layout to polish each component
-    sbgnLayout.constraints["alignmentConstraint"] = alignmentConstraint;
-    sbgnLayout.constraints["relativePlacementConstraint"] = relativePlacementConstraints;
-    graphManager.allNodesToApplyGravitation = undefined;
-    sbgnLayout.initParameters();
-    sbgnLayout.initSpringEmbedder();
-    CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = true;
-    CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
-    CoSEConstants.TILE = false;
-    sbgnLayout.runLayout(); */
-      
   }
 
   // Get the top most ones of a list of nodes
   // Note: Taken from CoSE-Bilkent !!
-  getTopMostNodes( nodes ) {
+  getTopMostNodes(nodes) {
     let nodesMap = {};
     for (let i = 0; i < nodes.length; i++) {
       nodesMap[nodes[i].id()] = true;
@@ -305,7 +305,7 @@ class Layout extends ContinuousLayout {
   }
 
   // Note: Taken from CoSE-Bilkent !!
-  processChildrenList ( parent, children, layout ) {
+  processChildrenList(parent, children, layout) {
     let size = children.length;
     for (let i = 0; i < size; i++) {
       let theChild = children[i];
@@ -317,10 +317,10 @@ class Layout extends ContinuousLayout {
       });
 
       if (theChild.outerWidth() != null
-          && theChild.outerHeight() != null) {
+        && theChild.outerHeight() != null) {
         theNode = parent.add(new SBGNNode(layout.graphManager,
-            new PointD(theChild.position('x') - dimensions.w / 2, theChild.position('y') - dimensions.h / 2),
-            new DimensionD(parseFloat(dimensions.w), parseFloat(dimensions.h))));
+          new PointD(theChild.position('x') - dimensions.w / 2, theChild.position('y') - dimensions.h / 2),
+          new DimensionD(parseFloat(dimensions.w), parseFloat(dimensions.h))));
       }
       else {
         theNode = parent.add(new SBGNNode(this.graphManager));
@@ -330,10 +330,10 @@ class Layout extends ContinuousLayout {
       theNode.class = theChild.data("class");
 
       // Attach the paddings of cy node to layout node
-      theNode.paddingLeft = parseInt( theChild.css('padding') );
-      theNode.paddingTop = parseInt( theChild.css('padding') );
-      theNode.paddingRight = parseInt( theChild.css('padding') );
-      theNode.paddingBottom = parseInt( theChild.css('padding') );
+      theNode.paddingLeft = parseInt(theChild.css('padding'));
+      theNode.paddingTop = parseInt(theChild.css('padding'));
+      theNode.paddingRight = parseInt(theChild.css('padding'));
+      theNode.paddingBottom = parseInt(theChild.css('padding'));
 
       // Map the layout node
       this.idToLNode[theChild.data("id")] = theNode;
@@ -354,7 +354,7 @@ class Layout extends ContinuousLayout {
     }
   }
 
-  calculateBounds ( nodes ) {
+  calculateBounds(nodes) {
     let left = Integer.MAX_VALUE;
     let right = -Integer.MAX_VALUE;
     let top = Integer.MAX_VALUE;
@@ -366,51 +366,46 @@ class Layout extends ContinuousLayout {
 
     let s = nodes.length;
 
-    for (var i = 0; i < s; i++)
-      {
-        var lNode = nodes[i];
-        nodeLeft = lNode.getLeft();
-        nodeRight = lNode.getRight();
-        nodeTop = lNode.getTop();
-        nodeBottom = lNode.getBottom();
-    
-        if (left > nodeLeft)
-        {
-          left = nodeLeft;
-        }
-    
-        if (right < nodeRight)
-        {
-          right = nodeRight;
-        }
-    
-        if (top > nodeTop)
-        {
-          top = nodeTop;
-        }
-    
-        if (bottom < nodeBottom)
-        {
-          bottom = nodeBottom;
-        }
-      }
-      var boundingRect = new RectangleD(left, top, right - left, bottom - top);
+    for (var i = 0; i < s; i++) {
+      var lNode = nodes[i];
+      nodeLeft = lNode.getLeft();
+      nodeRight = lNode.getRight();
+      nodeTop = lNode.getTop();
+      nodeBottom = lNode.getBottom();
 
-      return boundingRect;
+      if (left > nodeLeft) {
+        left = nodeLeft;
+      }
+
+      if (right < nodeRight) {
+        right = nodeRight;
+      }
+
+      if (top > nodeTop) {
+        top = nodeTop;
+      }
+
+      if (bottom < nodeBottom) {
+        bottom = nodeBottom;
+      }
+    }
+    var boundingRect = new RectangleD(left, top, right - left, bottom - top);
+
+    return boundingRect;
   }
 
   // run this each iteraction
-  tick(){
+  tick() {
     let state = this.state;
     let self = this;
     let isDone;
 
     // TODO update state for this iteration
-    this.state.nodes.forEach( n => {
+    this.state.nodes.forEach(n => {
       let s = this.getScratch(n);
-        let location = this.idToLNode[n.data('id')];
-        s.x = location.getCenterX();
-        s.y = location.getCenterY();
+      let location = this.idToLNode[n.data('id')];
+      s.x = location.getCenterX();
+      s.y = location.getCenterY();
     });
 
     //isDone = this.sbgnLayout.tick();
