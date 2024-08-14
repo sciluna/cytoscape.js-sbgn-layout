@@ -51928,9 +51928,9 @@
 		            horizontalAlignments.push([node, modulators[0]]);
 		          } else if (modulators.length == 2) {
 		            var _position67 = calculatePosition(node, modulators[0], idealEdgeLength, 180);
-		            outputs[0].setCenter(_position67.x, _position67.y);
+		            modulators[0].setCenter(_position67.x, _position67.y);
 		            _position67 = calculatePosition(node, modulators[1], idealEdgeLength, 0);
-		            outputs[1].setCenter(_position67.x, _position67.y);
+		            modulators[1].setCenter(_position67.x, _position67.y);
 		          } else if (modulators.length > 2) {
 		            var _position68 = calculatePosition(node, modulators[0], idealEdgeLength, 150);
 		            modulators[0].setCenter(_position68.x, _position68.y);
