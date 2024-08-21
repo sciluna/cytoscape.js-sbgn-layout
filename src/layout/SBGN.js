@@ -9,6 +9,7 @@ let CoSEConstants = require('cose-base').CoSEConstants;
 let FDLayoutConstants = require('cose-base').layoutBase.FDLayoutConstants;
 const SBGNLayout = require('../SBGN/SBGNLayout');
 const SBGNNode = require('../SBGN/SBGNNode');
+let SBGNPolishing = require('../SBGN/SBGNPolishing');
 
 const ContinuousLayout = require('./continuous-base');
 const assign = require('../assign');
@@ -51,23 +52,23 @@ let defaults = {
   // Node repulsion (non overlapping) multiplier
   nodeRepulsion: 4500,
   // Ideal edge (non nested) length
-  idealEdgeLength: 50,
+  idealEdgeLength: 70,
   // Divisor to compute edge forces
   edgeElasticity: 0.45,
   // Nesting factor (multiplier) to compute ideal edge length for nested edges
   nestingFactor: 0.1,
-  // Gravity force (constant)
-  gravity: 0.25,
   // For enabling tiling
   tile: true,
   // Represents the amount of the vertical space to put between the zero degree members during the tiling operation(can also be a function)
   tilingPaddingVertical: 10,
   // Represents the amount of the horizontal space to put between the zero degree members during the tiling operation(can also be a function)
   tilingPaddingHorizontal: 10,
+  // Gravity force (constant)
+  gravity: 0.25,
   // Gravity range (constant) for compounds
-  gravityRangeCompound: 0.5,
+  gravityRangeCompound: 1.5,
   // Gravity force (constant) for compounds
-  gravityCompound: 2.0,
+  gravityCompound: 1.0,
   // Gravity range (constant)
   gravityRange: 3.8,
   // Initial cooling factor for incremental layout
@@ -75,6 +76,35 @@ let defaults = {
 };
 
 let getUserOptions = function (options) {
+  if (options.nestingFactor != null)
+    SBGNConstants.PER_LEVEL_IDEAL_EDGE_LENGTH_FACTOR = CoSEConstants.PER_LEVEL_IDEAL_EDGE_LENGTH_FACTOR = FDLayoutConstants.PER_LEVEL_IDEAL_EDGE_LENGTH_FACTOR = options.nestingFactor;
+  if (options.numIter != null)
+    SBGNConstants.MAX_ITERATIONS = FDLayoutConstants.MAX_ITERATIONS = options.numIter;
+  if (options.gravity != null)
+    SBGNConstants.DEFAULT_GRAVITY_STRENGTH = CoSEConstants.DEFAULT_GRAVITY_STRENGTH = FDLayoutConstants.DEFAULT_GRAVITY_STRENGTH = options.gravity;
+  if (options.gravityRange != null)
+    SBGNConstants.DEFAULT_GRAVITY_RANGE_FACTOR = CoSEConstants.DEFAULT_GRAVITY_RANGE_FACTOR = FDLayoutConstants.DEFAULT_GRAVITY_RANGE_FACTOR = options.gravityRange;
+  if (options.gravityCompound != null)
+    SBGNConstants.DEFAULT_COMPOUND_GRAVITY_STRENGTH = CoSEConstants.DEFAULT_COMPOUND_GRAVITY_STRENGTH = FDLayoutConstants.DEFAULT_COMPOUND_GRAVITY_STRENGTH = options.gravityCompound;
+  if (options.gravityRangeCompound != null)
+    SBGNConstants.DEFAULT_COMPOUND_GRAVITY_RANGE_FACTOR = CoSEConstants.DEFAULT_COMPOUND_GRAVITY_RANGE_FACTOR = FDLayoutConstants.DEFAULT_COMPOUND_GRAVITY_RANGE_FACTOR = options.gravityRangeCompound;
+  if (options.initialEnergyOnIncremental != null)
+    SBGNConstants.DEFAULT_COOLING_FACTOR_INCREMENTAL = CoSEConstants.DEFAULT_COOLING_FACTOR_INCREMENTAL = FDLayoutConstants.DEFAULT_COOLING_FACTOR_INCREMENTAL = options.initialEnergyOnIncremental;
+
+  SBGNConstants.TILE = CoSEConstants.TILE = options.tile;
+  if (options.tilingCompareBy != null)
+    SBGNConstants.TILING_COMPARE_BY = CoSEConstants.TILING_COMPARE_BY = options.tilingCompareBy;
+
+  SBGNConstants.TILING_PADDING_VERTICAL = CoSEConstants.TILING_PADDING_VERTICAL =
+    typeof options.tilingPaddingVertical === 'function' ? options.tilingPaddingVertical.call() : options.tilingPaddingVertical;
+  SBGNConstants.TILING_PADDING_HORIZONTAL = CoSEConstants.TILING_PADDING_HORIZONTAL =
+    typeof options.tilingPaddingHorizontal === 'function' ? options.tilingPaddingHorizontal.call() : options.tilingPaddingHorizontal;
+
+  SBGNConstants.NODE_DIMENSIONS_INCLUDE_LABELS = CoSEConstants.NODE_DIMENSIONS_INCLUDE_LABELS = FDLayoutConstants.NODE_DIMENSIONS_INCLUDE_LABELS = LayoutConstants.NODE_DIMENSIONS_INCLUDE_LABELS = options.nodeDimensionsIncludeLabels;
+  SBGNConstants.DEFAULT_INCREMENTAL = CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = !(options.randomize);
+  SBGNConstants.ANIMATE = CoSEConstants.ANIMATE = FDLayoutConstants.ANIMATE = LayoutConstants.ANIMATE = options.animate;
+  SBGNConstants.DEFAULT_EDGE_LENGTH = CoSEConstants.DEFAULT_EDGE_LENGTH = FDLayoutConstants.DEFAULT_EDGE_LENGTH = 80;
+  LayoutConstants.DEFAULT_UNIFORM_LEAF_NODE_SIZES = options.uniformNodeDimensions;
   CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = false;
   SBGNConstants.DEFAULT_EDGE_LENGTH = CoSEConstants.DEFAULT_EDGE_LENGTH = FDLayoutConstants.DEFAULT_EDGE_LENGTH = 80;
 }
@@ -103,17 +133,8 @@ class Layout extends ContinuousLayout {
 
     // Establishing node relations in the GraphManager object
     this.processChildrenList(this.root, this.getTopMostNodes(nodes), sbgnLayout);
+    this.processEdges(this.options, sbgnLayout, graphManager, edges);
 
-    for (var i = 0; i < edges.length; i++) {
-      var edge = edges[i];
-      var sourceNode = this.idToLNode[edge.data("source")];
-      var targetNode = this.idToLNode[edge.data("target")];
-      if (sourceNode !== targetNode && sourceNode.getEdgesBetween(targetNode).length == 0) {
-        var e1 = graphManager.add(sbgnLayout.newEdge(), sourceNode, targetNode);
-        e1.id = edge.id();
-        e1.class = edge.data("class");
-      }
-    }
     // First phase of the algorithm - Apply a static layout and construct skeleton
     // If incremental is true, skip over Phase I
     if (state.randomize) {
@@ -260,7 +281,7 @@ class Layout extends ContinuousLayout {
     CoSEConstants.TILE = false;
     sbgnLayout.runLayout();
 
-    let polishingInfo = sbgnLayout.addPerComponentPolishingConstraints(components, directions);
+    let polishingInfo = SBGNPolishing.addPerComponentPolishment(components, directions);
     /*     verticalAlignments.push(polishingInfo.verticalAlignments);
         horizontalAlignments.push(polishingInfo.horizontalAlignments);
         verticalAlignments = sbgnLayout.mergeArrays(verticalAlignments);
@@ -351,6 +372,38 @@ class Layout extends ContinuousLayout {
         theNewGraph = layout.getGraphManager().add(layout.newGraph(), theNode);
         this.processChildrenList(theNewGraph, children_of_children, layout);
       }
+    }
+  }
+
+  processEdges(options, layout, gm, edges) {
+    let idealLengthTotal = 0;
+    let edgeCount = 0;
+    for (let i = 0; i < edges.length; i++) {
+      let edge = edges[i];
+      let sourceNode = this.idToLNode[edge.data("source")];
+      let targetNode = this.idToLNode[edge.data("target")];
+      if (sourceNode && targetNode && sourceNode !== targetNode && sourceNode.getEdgesBetween(targetNode).length == 0) {
+        let e1 = gm.add(layout.newEdge(), sourceNode, targetNode);
+        e1.id = edge.id();
+        e1.idealLength = optFn(options.idealEdgeLength, edge);
+        e1.edgeElasticity = optFn(options.edgeElasticity, edge);
+        e1.class = edge.data("class");
+        idealLengthTotal += e1.idealLength;
+        edgeCount++;
+      }
+    }
+    // we need to update the ideal edge length constant with the avg. ideal length value after processing edges
+    // in case there is no edge, use other options
+    if (options.idealEdgeLength != null) {
+      if (edgeCount > 0)
+        SBGNConstants.DEFAULT_EDGE_LENGTH = CoSEConstants.DEFAULT_EDGE_LENGTH = FDLayoutConstants.DEFAULT_EDGE_LENGTH = idealLengthTotal / edgeCount;
+      else if (!isFn(options.idealEdgeLength)) // in case there is no edge, but option gives a value to use
+        SBGNConstants.DEFAULT_EDGE_LENGTH = CoSEConstants.DEFAULT_EDGE_LENGTH = FDLayoutConstants.DEFAULT_EDGE_LENGTH = options.idealEdgeLength;
+      else  // in case there is no edge and we cannot get a value from option (because it's a function)
+        SBGNConstants.DEFAULT_EDGE_LENGTH = CoSEConstants.DEFAULT_EDGE_LENGTH = FDLayoutConstants.DEFAULT_EDGE_LENGTH = 50;
+      // we need to update these constant values based on the ideal edge length constant
+      SBGNConstants.MIN_REPULSION_DIST = CoSEConstants.MIN_REPULSION_DIST = FDLayoutConstants.MIN_REPULSION_DIST = FDLayoutConstants.DEFAULT_EDGE_LENGTH / 10.0;
+      SBGNConstants.DEFAULT_RADIAL_SEPARATION = CoSEConstants.DEFAULT_RADIAL_SEPARATION = FDLayoutConstants.DEFAULT_EDGE_LENGTH;
     }
   }
 

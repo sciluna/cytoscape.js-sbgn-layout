@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 9);
+/******/ 	return __webpack_require__(__webpack_require__.s = 10);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -131,7 +131,7 @@ module.exports = SBGNConstants;
 
 
 var CoSENode = __webpack_require__(0).CoSENode;
-var IMath = __webpack_require__(15).IMath;
+var IMath = __webpack_require__(16).IMath;
 
 function SBGNNode(gm, loc, size, vNode) {
   // the constructor of LNode handles alternative constructors
@@ -211,7 +211,7 @@ module.exports = SBGNNode;
  * Redirection to SBGN Layout Algorithm
  */
 
-module.exports = __webpack_require__(10);
+module.exports = __webpack_require__(11);
 
 /***/ }),
 /* 5 */
@@ -304,7 +304,6 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 var CoSELayout = __webpack_require__(0).CoSELayout;
 var SBGNGraphManager = __webpack_require__(7);
-var SBGNConstants = __webpack_require__(2);
 var SBGNGraph = __webpack_require__(6);
 var SBGNNode = __webpack_require__(3);
 var SBGNEdge = __webpack_require__(5);
@@ -737,7 +736,61 @@ SBGNLayout.prototype.addPerComponentConstraints = function (components, directio
   return { horizontalAlignments: horizontalAlignments, verticalAlignments: verticalAlignments, relativePlacementConstraints: relativePlacementConstraints };
 };
 
-SBGNLayout.prototype.addPerComponentPolishingConstraints = function (components, directions) {
+// auxuliary function to merge arrays with duplicates
+SBGNLayout.prototype.mergeArrays = function (arrays) {
+  // Function to check if two arrays have common items
+  function haveCommonItems(arr1, arr2) {
+    return arr1.some(function (item) {
+      return arr2.includes(item);
+    });
+  }
+
+  // Function to merge two arrays and remove duplicates
+  function mergeAndRemoveDuplicates(arr1, arr2) {
+    return Array.from(new Set([].concat(_toConsumableArray(arr1), _toConsumableArray(arr2))));
+  }
+
+  // Loop until no more merges are possible
+  var merged = false;
+  do {
+    merged = false;
+    for (var i = 0; i < arrays.length; i++) {
+      for (var j = i + 1; j < arrays.length; j++) {
+        if (haveCommonItems(arrays[i], arrays[j])) {
+          // Merge the arrays
+          arrays[i] = mergeAndRemoveDuplicates(arrays[i], arrays[j]);
+          // Remove the merged array
+          arrays.splice(j, 1);
+          // Set merged to true to indicate a merge has occurred
+          merged = true;
+          break;
+        }
+      }
+      if (merged) {
+        break;
+      }
+    }
+  } while (merged);
+
+  return arrays;
+};
+
+module.exports = SBGNLayout;
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var SBGNConstants = __webpack_require__(2);
+
+function SBGNPolishing() {}
+
+SBGNPolishing.addPerComponentPolishment = function (components, directions) {
   var horizontalAlignments = [];
   var verticalAlignments = [];
   var relativePlacementConstraints = [];
@@ -1522,49 +1575,10 @@ SBGNLayout.prototype.addPerComponentPolishingConstraints = function (components,
   return { horizontalAlignments: horizontalAlignments, verticalAlignments: verticalAlignments, relativePlacementConstraints: relativePlacementConstraints };
 };
 
-// auxuliary function to merge arrays with duplicates
-SBGNLayout.prototype.mergeArrays = function (arrays) {
-  // Function to check if two arrays have common items
-  function haveCommonItems(arr1, arr2) {
-    return arr1.some(function (item) {
-      return arr2.includes(item);
-    });
-  }
-
-  // Function to merge two arrays and remove duplicates
-  function mergeAndRemoveDuplicates(arr1, arr2) {
-    return Array.from(new Set([].concat(_toConsumableArray(arr1), _toConsumableArray(arr2))));
-  }
-
-  // Loop until no more merges are possible
-  var merged = false;
-  do {
-    merged = false;
-    for (var i = 0; i < arrays.length; i++) {
-      for (var j = i + 1; j < arrays.length; j++) {
-        if (haveCommonItems(arrays[i], arrays[j])) {
-          // Merge the arrays
-          arrays[i] = mergeAndRemoveDuplicates(arrays[i], arrays[j]);
-          // Remove the merged array
-          arrays.splice(j, 1);
-          // Set merged to true to indicate a merge has occurred
-          merged = true;
-          break;
-        }
-      }
-      if (merged) {
-        break;
-      }
-    }
-  } while (merged);
-
-  return arrays;
-};
-
-module.exports = SBGNLayout;
+module.exports = SBGNPolishing;
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1589,7 +1603,7 @@ if (typeof cytoscape !== 'undefined') {
 module.exports = register;
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1618,8 +1632,9 @@ var CoSEConstants = __webpack_require__(0).CoSEConstants;
 var FDLayoutConstants = __webpack_require__(0).layoutBase.FDLayoutConstants;
 var SBGNLayout = __webpack_require__(8);
 var SBGNNode = __webpack_require__(3);
+var SBGNPolishing = __webpack_require__(9);
 
-var ContinuousLayout = __webpack_require__(11);
+var ContinuousLayout = __webpack_require__(12);
 var assign = __webpack_require__(1);
 var isFn = function isFn(fn) {
   return typeof fn === 'function';
@@ -1662,23 +1677,23 @@ var defaults = {
   // Node repulsion (non overlapping) multiplier
   nodeRepulsion: 4500,
   // Ideal edge (non nested) length
-  idealEdgeLength: 50,
+  idealEdgeLength: 70,
   // Divisor to compute edge forces
   edgeElasticity: 0.45,
   // Nesting factor (multiplier) to compute ideal edge length for nested edges
   nestingFactor: 0.1,
-  // Gravity force (constant)
-  gravity: 0.25,
   // For enabling tiling
   tile: true,
   // Represents the amount of the vertical space to put between the zero degree members during the tiling operation(can also be a function)
   tilingPaddingVertical: 10,
   // Represents the amount of the horizontal space to put between the zero degree members during the tiling operation(can also be a function)
   tilingPaddingHorizontal: 10,
+  // Gravity force (constant)
+  gravity: 0.25,
   // Gravity range (constant) for compounds
-  gravityRangeCompound: 0.5,
+  gravityRangeCompound: 1.5,
   // Gravity force (constant) for compounds
-  gravityCompound: 2.0,
+  gravityCompound: 1.0,
   // Gravity range (constant)
   gravityRange: 3.8,
   // Initial cooling factor for incremental layout
@@ -1686,6 +1701,25 @@ var defaults = {
 };
 
 var getUserOptions = function getUserOptions(options) {
+  if (options.nestingFactor != null) SBGNConstants.PER_LEVEL_IDEAL_EDGE_LENGTH_FACTOR = CoSEConstants.PER_LEVEL_IDEAL_EDGE_LENGTH_FACTOR = FDLayoutConstants.PER_LEVEL_IDEAL_EDGE_LENGTH_FACTOR = options.nestingFactor;
+  if (options.numIter != null) SBGNConstants.MAX_ITERATIONS = FDLayoutConstants.MAX_ITERATIONS = options.numIter;
+  if (options.gravity != null) SBGNConstants.DEFAULT_GRAVITY_STRENGTH = CoSEConstants.DEFAULT_GRAVITY_STRENGTH = FDLayoutConstants.DEFAULT_GRAVITY_STRENGTH = options.gravity;
+  if (options.gravityRange != null) SBGNConstants.DEFAULT_GRAVITY_RANGE_FACTOR = CoSEConstants.DEFAULT_GRAVITY_RANGE_FACTOR = FDLayoutConstants.DEFAULT_GRAVITY_RANGE_FACTOR = options.gravityRange;
+  if (options.gravityCompound != null) SBGNConstants.DEFAULT_COMPOUND_GRAVITY_STRENGTH = CoSEConstants.DEFAULT_COMPOUND_GRAVITY_STRENGTH = FDLayoutConstants.DEFAULT_COMPOUND_GRAVITY_STRENGTH = options.gravityCompound;
+  if (options.gravityRangeCompound != null) SBGNConstants.DEFAULT_COMPOUND_GRAVITY_RANGE_FACTOR = CoSEConstants.DEFAULT_COMPOUND_GRAVITY_RANGE_FACTOR = FDLayoutConstants.DEFAULT_COMPOUND_GRAVITY_RANGE_FACTOR = options.gravityRangeCompound;
+  if (options.initialEnergyOnIncremental != null) SBGNConstants.DEFAULT_COOLING_FACTOR_INCREMENTAL = CoSEConstants.DEFAULT_COOLING_FACTOR_INCREMENTAL = FDLayoutConstants.DEFAULT_COOLING_FACTOR_INCREMENTAL = options.initialEnergyOnIncremental;
+
+  SBGNConstants.TILE = CoSEConstants.TILE = options.tile;
+  if (options.tilingCompareBy != null) SBGNConstants.TILING_COMPARE_BY = CoSEConstants.TILING_COMPARE_BY = options.tilingCompareBy;
+
+  SBGNConstants.TILING_PADDING_VERTICAL = CoSEConstants.TILING_PADDING_VERTICAL = typeof options.tilingPaddingVertical === 'function' ? options.tilingPaddingVertical.call() : options.tilingPaddingVertical;
+  SBGNConstants.TILING_PADDING_HORIZONTAL = CoSEConstants.TILING_PADDING_HORIZONTAL = typeof options.tilingPaddingHorizontal === 'function' ? options.tilingPaddingHorizontal.call() : options.tilingPaddingHorizontal;
+
+  SBGNConstants.NODE_DIMENSIONS_INCLUDE_LABELS = CoSEConstants.NODE_DIMENSIONS_INCLUDE_LABELS = FDLayoutConstants.NODE_DIMENSIONS_INCLUDE_LABELS = LayoutConstants.NODE_DIMENSIONS_INCLUDE_LABELS = options.nodeDimensionsIncludeLabels;
+  SBGNConstants.DEFAULT_INCREMENTAL = CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = !options.randomize;
+  SBGNConstants.ANIMATE = CoSEConstants.ANIMATE = FDLayoutConstants.ANIMATE = LayoutConstants.ANIMATE = options.animate;
+  SBGNConstants.DEFAULT_EDGE_LENGTH = CoSEConstants.DEFAULT_EDGE_LENGTH = FDLayoutConstants.DEFAULT_EDGE_LENGTH = 80;
+  LayoutConstants.DEFAULT_UNIFORM_LEAF_NODE_SIZES = options.uniformNodeDimensions;
   CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = false;
   SBGNConstants.DEFAULT_EDGE_LENGTH = CoSEConstants.DEFAULT_EDGE_LENGTH = FDLayoutConstants.DEFAULT_EDGE_LENGTH = 80;
 };
@@ -1724,17 +1758,8 @@ var Layout = function (_ContinuousLayout) {
 
       // Establishing node relations in the GraphManager object
       this.processChildrenList(this.root, this.getTopMostNodes(nodes), sbgnLayout);
+      this.processEdges(this.options, sbgnLayout, graphManager, edges);
 
-      for (var i = 0; i < edges.length; i++) {
-        var edge = edges[i];
-        var sourceNode = this.idToLNode[edge.data("source")];
-        var targetNode = this.idToLNode[edge.data("target")];
-        if (sourceNode !== targetNode && sourceNode.getEdgesBetween(targetNode).length == 0) {
-          var e1 = graphManager.add(sbgnLayout.newEdge(), sourceNode, targetNode);
-          e1.id = edge.id();
-          e1.class = edge.data("class");
-        }
-      }
       // First phase of the algorithm - Apply a static layout and construct skeleton
       // If incremental is true, skip over Phase I
       if (state.randomize) {
@@ -1875,7 +1900,7 @@ var Layout = function (_ContinuousLayout) {
       CoSEConstants.TILE = false;
       sbgnLayout.runLayout();
 
-      var polishingInfo = sbgnLayout.addPerComponentPolishingConstraints(components, directions);
+      var polishingInfo = SBGNPolishing.addPerComponentPolishment(components, directions);
       /*     verticalAlignments.push(polishingInfo.verticalAlignments);
           horizontalAlignments.push(polishingInfo.horizontalAlignments);
           verticalAlignments = sbgnLayout.mergeArrays(verticalAlignments);
@@ -1970,6 +1995,36 @@ var Layout = function (_ContinuousLayout) {
       }
     }
   }, {
+    key: 'processEdges',
+    value: function processEdges(options, layout, gm, edges) {
+      var idealLengthTotal = 0;
+      var edgeCount = 0;
+      for (var i = 0; i < edges.length; i++) {
+        var edge = edges[i];
+        var sourceNode = this.idToLNode[edge.data("source")];
+        var targetNode = this.idToLNode[edge.data("target")];
+        if (sourceNode && targetNode && sourceNode !== targetNode && sourceNode.getEdgesBetween(targetNode).length == 0) {
+          var e1 = gm.add(layout.newEdge(), sourceNode, targetNode);
+          e1.id = edge.id();
+          e1.idealLength = optFn(options.idealEdgeLength, edge);
+          e1.edgeElasticity = optFn(options.edgeElasticity, edge);
+          e1.class = edge.data("class");
+          idealLengthTotal += e1.idealLength;
+          edgeCount++;
+        }
+      }
+      // we need to update the ideal edge length constant with the avg. ideal length value after processing edges
+      // in case there is no edge, use other options
+      if (options.idealEdgeLength != null) {
+        if (edgeCount > 0) SBGNConstants.DEFAULT_EDGE_LENGTH = CoSEConstants.DEFAULT_EDGE_LENGTH = FDLayoutConstants.DEFAULT_EDGE_LENGTH = idealLengthTotal / edgeCount;else if (!isFn(options.idealEdgeLength)) // in case there is no edge, but option gives a value to use
+          SBGNConstants.DEFAULT_EDGE_LENGTH = CoSEConstants.DEFAULT_EDGE_LENGTH = FDLayoutConstants.DEFAULT_EDGE_LENGTH = options.idealEdgeLength;else // in case there is no edge and we cannot get a value from option (because it's a function)
+          SBGNConstants.DEFAULT_EDGE_LENGTH = CoSEConstants.DEFAULT_EDGE_LENGTH = FDLayoutConstants.DEFAULT_EDGE_LENGTH = 50;
+        // we need to update these constant values based on the ideal edge length constant
+        SBGNConstants.MIN_REPULSION_DIST = CoSEConstants.MIN_REPULSION_DIST = FDLayoutConstants.MIN_REPULSION_DIST = FDLayoutConstants.DEFAULT_EDGE_LENGTH / 10.0;
+        SBGNConstants.DEFAULT_RADIAL_SEPARATION = CoSEConstants.DEFAULT_RADIAL_SEPARATION = FDLayoutConstants.DEFAULT_EDGE_LENGTH;
+      }
+    }
+  }, {
     key: 'calculateBounds',
     value: function calculateBounds(nodes) {
       var left = Integer.MAX_VALUE;
@@ -2061,7 +2116,7 @@ var Layout = function (_ContinuousLayout) {
 module.exports = Layout;
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2076,14 +2131,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  */
 
 var assign = __webpack_require__(1);
-var makeBoundingBox = __webpack_require__(12);
+var makeBoundingBox = __webpack_require__(13);
 
-var _require = __webpack_require__(13),
+var _require = __webpack_require__(14),
     setInitialPositionState = _require.setInitialPositionState,
     refreshPositions = _require.refreshPositions,
     getNodePositionData = _require.getNodePositionData;
 
-var _require2 = __webpack_require__(14),
+var _require2 = __webpack_require__(15),
     multitick = _require2.multitick;
 
 var Layout = function () {
@@ -2293,7 +2348,7 @@ var Layout = function () {
 module.exports = Layout;
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2324,7 +2379,7 @@ module.exports = function (bb, cy) {
 };
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2366,7 +2421,7 @@ var refreshPositions = function refreshPositions(nodes, state) {
 module.exports = { setInitialPositionState: setInitialPositionState, getNodePositionData: getNodePositionData, refreshPositions: refreshPositions };
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2418,7 +2473,7 @@ var multitick = function multitick(state) {
 module.exports = { tick: tick, multitick: multitick };
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
