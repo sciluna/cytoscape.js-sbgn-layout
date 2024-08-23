@@ -28,26 +28,26 @@
         <glyph class="complex" id="reactome:Complex3435" compartmentRef="mitochondrial_matrix">
             <label text="ECHS1 hexamer"/>
             <bbox w="52.0" h="34.0" x="-2.0" y="-2.0"/>
-<!--             <glyph class="macromolecule" id="reactome:Protein7846_37f6e741a9f55b5e0528e314dba90d30" compartmentRef="mitochondrial_matrix">
+            <glyph class="macromolecule" id="reactome:Protein7846_37f6e741a9f55b5e0528e314dba90d30" compartmentRef="mitochondrial_matrix">
                 <label text="ECHS1"/>
                 <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
                 <glyph class="state variable" compartmentRef="mitochondrial_matrix">
                     <state value="x[28 - 290]"/>
                     <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
                 </glyph>
-            </glyph> -->
+            </glyph>
         </glyph>
         <glyph class="complex" id="reactome:Complex3439" compartmentRef="mitochondrial_matrix">
             <label text="ACADS tetramer"/>
             <bbox w="52.0" h="34.0" x="-2.0" y="-2.0"/>
-<!--             <glyph class="macromolecule" id="reactome:Protein7849_be2a91365fe814231f08fddc8d5201b0" compartmentRef="mitochondrial_matrix">
+            <glyph class="macromolecule" id="reactome:Protein7849_be2a91365fe814231f08fddc8d5201b0" compartmentRef="mitochondrial_matrix">
                 <label text="ACADS"/>
                 <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
                 <glyph class="state variable" compartmentRef="mitochondrial_matrix">
                     <state value="x[25 - 412]"/>
                     <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
                 </glyph>
-            </glyph> -->
+            </glyph>
         </glyph>
         <glyph class="simple chemical" id="reactome:SmallMolecule1609" compartmentRef="mitochondrial_matrix">
             <label text="(S)-Hydroxyhexanoyl-CoA"/>
@@ -56,14 +56,14 @@
         <glyph class="complex" id="reactome:Complex3436" compartmentRef="mitochondrial_matrix">
             <label text="HADH dimer"/>
             <bbox w="52.0" h="34.0" x="-2.0" y="-2.0"/>
-<!--             <glyph class="macromolecule" id="reactome:Protein7847_f6835f873edb95c71ba15d72ef120893" compartmentRef="mitochondrial_matrix">
+            <glyph class="macromolecule" id="reactome:Protein7847_f6835f873edb95c71ba15d72ef120893" compartmentRef="mitochondrial_matrix">
                 <label text="HADH"/>
                 <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
                 <glyph class="state variable" compartmentRef="mitochondrial_matrix">
                     <state value="x[13 - 314]"/>
                     <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
                 </glyph>
-            </glyph> -->
+            </glyph>
         </glyph>
         <glyph class="simple chemical" id="reactome:SmallMolecule1611" compartmentRef="mitochondrial_matrix">
             <label text="BT-CoA"/>
@@ -76,7 +76,7 @@
         <glyph class="complex" id="reactome:Complex3433" compartmentRef="mitochondrial_matrix">
             <label text="Trifunctional Protein"/>
             <bbox w="52.0" h="34.0" x="-2.0" y="-2.0"/>
-<!--             <glyph class="macromolecule" id="reactome:Protein7844_19815730f8bec3c75118e3dc337f6e56" compartmentRef="mitochondrial_matrix">
+            <glyph class="macromolecule" id="reactome:Protein7844_19815730f8bec3c75118e3dc337f6e56" compartmentRef="mitochondrial_matrix">
                 <label text="HADHA"/>
                 <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
                 <glyph class="state variable" compartmentRef="mitochondrial_matrix">
@@ -91,7 +91,7 @@
                     <state value="x[34 - 474]"/>
                     <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
                 </glyph>
-            </glyph> -->
+            </glyph>
         </glyph>
         <glyph class="simple chemical" id="reactome:SmallMolecule1585_1cef81b673002a764e04bbf83ecf2f76" compartmentRef="mitochondrial_matrix">
             <label text="FADH2"/>

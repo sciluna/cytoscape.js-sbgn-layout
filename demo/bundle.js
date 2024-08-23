@@ -51337,6 +51337,42 @@
 		  return arrays;
 		};
 
+		SBGNLayout.prototype.reduceComplexes = function () {
+		  var complexToChildGraphMap = new Map();
+		  var topComplexNodes = this.getTopMostComplexNodes();
+
+		  topComplexNodes.forEach(function (complex) {
+		    complexToChildGraphMap.set(complex, complex.getChild());
+		  });
+		  console.log(complexToChildGraphMap);
+		};
+
+		SBGNLayout.prototype.getTopMostComplexNodes = function () {
+		  var allNodes = this.getAllNodes();
+		  var complexNodes = allNodes.filter(function (node) {
+		    return node.class == "complex" || node.class == "complex multimer";
+		  });
+		  var complexNodesMap = {};
+		  for (var i = 0; i < complexNodes.length; i++) {
+		    complexNodesMap[complexNodes[i].id] = true;
+		  }
+		  return complexNodes.filter(function (ele, i) {
+		    if (typeof ele === "number") {
+		      ele = i;
+		    }
+		    var parent = ele.getParent();
+		    if (parent != null) {
+		      if (complexNodesMap[parent.id]) {
+		        return false;
+		      } else {
+		        return true;
+		      }
+		    } else {
+		      return true;
+		    }
+		  });
+		};
+
 		module.exports = SBGNLayout;
 
 		/***/ }),
@@ -51368,7 +51404,7 @@
 		      return { x: nodeA.getCenterX(), y: nodeA.getCenterY() + (nodeA.getHeight() / 2 + nodeB.getHeight() / 2 + idealEdgeLength) };
 		    } else {
 		      var radian = degree * Math.PI / 180;
-		      var radius = idealEdgeLength / 2 + 2 * nodeA.getDiagonal();
+		      var radius = idealEdgeLength / 2 + (nodeA.getDiagonal() / 2 + nodeB.getDiagonal() / 2);
 		      return { x: nodeA.getCenterX() + radius * Math.cos(radian), y: nodeA.getCenterY() - radius * Math.sin(radian) };
 		    }
 		  };
@@ -52319,6 +52355,7 @@
 		      if (state.randomize) {
 		        sbgnLayout.runLayout();
 		      }
+
 		      var graphInfo = sbgnLayout.constructSkeleton();
 
 		      // Apply an incremental layout to give a shape to reaction blocks
@@ -52455,6 +52492,7 @@
 		      sbgnLayout.runLayout();
 
 		      SBGNPolishing.addPerComponentPolishment(components, directions);
+		      sbgnLayout.repopulateCompounds();
 		      /*     verticalAlignments.push(polishingInfo.verticalAlignments);
 		          horizontalAlignments.push(polishingInfo.horizontalAlignments);
 		          verticalAlignments = sbgnLayout.mergeArrays(verticalAlignments);
@@ -58191,9 +58229,9 @@
 		else if(sample == "sample8") {
 			filename = "Aminobutyrate_degradation.xml";
 		}
-	/* 	else if(sample == "sample11") {
-			filename = "D-Arginine_and_D-Orn.xml";
-		} */
+		else if(sample == "sample9") {
+			filename = "Formation_of_the_ter.xml";
+		}
 		loadSample('examples/' + filename);
 		document.getElementById("fileName").innerHTML = filename;
 	});

@@ -458,6 +458,6 @@ SBGNLayout.prototype.mergeArrays = function (arrays) {
   } while (merged);
 
   return arrays;
-}
+};
 
 module.exports = SBGNLayout;

@@ -61,9 +61,9 @@ document.getElementById("samples").addEventListener("change", function (event) {
 	else if(sample == "sample8") {
 		filename = "Aminobutyrate_degradation.xml";
 	}
-/* 	else if(sample == "sample11") {
-		filename = "D-Arginine_and_D-Orn.xml";
-	} */
+	else if(sample == "sample9") {
+		filename = "Formation_of_the_Editosome.xml";
+	}
 	loadSample('examples/' + filename);
 	document.getElementById("fileName").innerHTML = filename;
 });

@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<sbgn xmlns="http://sbgn.org/libsbgn/0.2">
+    <map language="process description">
+        <glyph class="compartment" id="nucleoplasm">
+            <label text="nucleoplasm"/>
+            <bbox w="56.0" h="48.0" x="-4.0" y="-4.0"/>
+        </glyph>
+        <glyph class="unspecified entity" id="reactome:PhysicalEntity515" compartmentRef="nucleoplasm">
+            <label text="Stem-looped mRNA"/>
+            <bbox w="40.0" h="40.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="macromolecule" id="reactome:Protein9932" compartmentRef="nucleoplasm">
+            <label text="APOBEC1(APOBEC2,3A,3B,3C,3H,4)"/>
+            <bbox w="48.0" h="25.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="complex" id="reactome:Complex4741" compartmentRef="nucleoplasm">
+            <label text="Editosome for C to U editing"/>
+            <bbox w="52.0" h="44.0" x="-2.0" y="-2.0"/>
+            <glyph class="macromolecule" id="reactome:Protein9931_6350a0199a2525663151372f6b4ebe22" compartmentRef="nucleoplasm">
+                <label text="A1CF"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="nucleoplasm">
+                    <state value="x[1 - 594]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9932_6350a0199a2525663151372f6b4ebe22" compartmentRef="nucleoplasm">
+                <label text="APOBEC1(APOBEC2,3A,3B,3C,3H,4)"/>
+                <bbox w="48.0" h="25.0" x="0.0" y="0.0"/>
+            </glyph>
+            <glyph class="unspecified entity" id="reactome:PhysicalEntity515_6350a0199a2525663151372f6b4ebe22" compartmentRef="nucleoplasm">
+                <label text="Stem-looped mRNA"/>
+                <bbox w="40.0" h="40.0" x="0.0" y="0.0"/>
+            </glyph>
+        </glyph>
+        <glyph class="complex" id="reactome:Complex4740" compartmentRef="nucleoplasm">
+            <label text="Stem-looped mRNA:ACF complex"/>
+            <bbox w="52.0" h="44.0" x="-2.0" y="-2.0"/>
+            <glyph class="macromolecule" id="reactome:Protein9931_7d4a668385643ba661d828fe17537a9b" compartmentRef="nucleoplasm">
+                <label text="A1CF"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="nucleoplasm">
+                    <state value="x[1 - 594]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="unspecified entity" id="reactome:PhysicalEntity515_7d4a668385643ba661d828fe17537a9b" compartmentRef="nucleoplasm">
+                <label text="Stem-looped mRNA"/>
+                <bbox w="40.0" h="40.0" x="0.0" y="0.0"/>
+            </glyph>
+        </glyph>
+        <glyph class="unspecified entity" id="reactome:PhysicalEntity502" compartmentRef="nucleoplasm">
+            <label text="mRNA with spliced exons"/>
+            <bbox w="40.0" h="40.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="macromolecule" id="reactome:Protein9931" compartmentRef="nucleoplasm">
+            <label text="A1CF"/>
+            <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+            <glyph class="state variable">
+                <state value="x[1 - 594]"/>
+                <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+            </glyph>
+        </glyph>
+        <glyph class="process" id="http://bioregistry.io/reactome:R-HSA-77608_LEFTTORIGHT" compartmentRef="nucleoplasm">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_http://bioregistry.io/reactome:R-HSA-77608_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_http://bioregistry.io/reactome:R-HSA-77608_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="http://bioregistry.io/reactome:R-HSA-77609_LEFTTORIGHT" compartmentRef="nucleoplasm">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_http://bioregistry.io/reactome:R-HSA-77609_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_http://bioregistry.io/reactome:R-HSA-77609_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="http://bioregistry.io/reactome:R-HSA-77607_LEFTTORIGHT" compartmentRef="nucleoplasm">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_http://bioregistry.io/reactome:R-HSA-77607_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_http://bioregistry.io/reactome:R-HSA-77607_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <arc class="production" id="OUT_http://bioregistry.io/reactome:R-HSA-77607_LEFTTORIGHT--TO--reactome:PhysicalEntity515" source="http://bioregistry.io/reactome:R-HSA-77607_LEFTTORIGHT" target="reactome:PhysicalEntity515">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_http://bioregistry.io/reactome:R-HSA-77609_LEFTTORIGHT--TO--reactome:Complex4741" source="http://bioregistry.io/reactome:R-HSA-77609_LEFTTORIGHT" target="reactome:Complex4741">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="reactome:PhysicalEntity515--TO--INP_http://bioregistry.io/reactome:R-HSA-77608_LEFTTORIGHT" source="reactome:PhysicalEntity515" target="http://bioregistry.io/reactome:R-HSA-77608_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="reactome:PhysicalEntity502--TO--INP_http://bioregistry.io/reactome:R-HSA-77607_LEFTTORIGHT" source="reactome:PhysicalEntity502" target="http://bioregistry.io/reactome:R-HSA-77607_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="reactome:Complex4740--TO--INP_http://bioregistry.io/reactome:R-HSA-77609_LEFTTORIGHT" source="reactome:Complex4740" target="http://bioregistry.io/reactome:R-HSA-77609_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_http://bioregistry.io/reactome:R-HSA-77608_LEFTTORIGHT--TO--reactome:Complex4740" source="http://bioregistry.io/reactome:R-HSA-77608_LEFTTORIGHT" target="reactome:Complex4740">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="reactome:Protein9932--TO--INP_http://bioregistry.io/reactome:R-HSA-77609_LEFTTORIGHT" source="reactome:Protein9932" target="http://bioregistry.io/reactome:R-HSA-77609_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="reactome:Protein9931--TO--INP_http://bioregistry.io/reactome:R-HSA-77608_LEFTTORIGHT" source="reactome:Protein9931" target="http://bioregistry.io/reactome:R-HSA-77608_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+    </map>
+</sbgn>

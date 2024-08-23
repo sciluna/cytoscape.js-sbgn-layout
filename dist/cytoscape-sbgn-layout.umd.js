@@ -775,6 +775,42 @@ SBGNLayout.prototype.mergeArrays = function (arrays) {
   return arrays;
 };
 
+SBGNLayout.prototype.reduceComplexes = function () {
+  var complexToChildGraphMap = new Map();
+  var topComplexNodes = this.getTopMostComplexNodes();
+
+  topComplexNodes.forEach(function (complex) {
+    complexToChildGraphMap.set(complex, complex.getChild());
+  });
+  console.log(complexToChildGraphMap);
+};
+
+SBGNLayout.prototype.getTopMostComplexNodes = function () {
+  var allNodes = this.getAllNodes();
+  var complexNodes = allNodes.filter(function (node) {
+    return node.class == "complex" || node.class == "complex multimer";
+  });
+  var complexNodesMap = {};
+  for (var i = 0; i < complexNodes.length; i++) {
+    complexNodesMap[complexNodes[i].id] = true;
+  }
+  return complexNodes.filter(function (ele, i) {
+    if (typeof ele === "number") {
+      ele = i;
+    }
+    var parent = ele.getParent();
+    if (parent != null) {
+      if (complexNodesMap[parent.id]) {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      return true;
+    }
+  });
+};
+
 module.exports = SBGNLayout;
 
 /***/ }),
@@ -808,7 +844,7 @@ SBGNPolishing.addPerComponentPolishment = function (components, directions) {
       return { x: nodeA.getCenterX(), y: nodeA.getCenterY() + (nodeA.getHeight() / 2 + nodeB.getHeight() / 2 + idealEdgeLength) };
     } else {
       var radian = degree * Math.PI / 180;
-      var radius = idealEdgeLength / 2 + 2 * nodeA.getDiagonal();
+      var radius = idealEdgeLength / 2 + (nodeA.getDiagonal() / 2 + nodeB.getDiagonal() / 2);
       return { x: nodeA.getCenterX() + radius * Math.cos(radian), y: nodeA.getCenterY() - radius * Math.sin(radian) };
     }
   };
@@ -1765,6 +1801,7 @@ var Layout = function (_ContinuousLayout) {
       if (state.randomize) {
         sbgnLayout.runLayout();
       }
+
       var graphInfo = sbgnLayout.constructSkeleton();
 
       // Apply an incremental layout to give a shape to reaction blocks
@@ -1901,6 +1938,7 @@ var Layout = function (_ContinuousLayout) {
       sbgnLayout.runLayout();
 
       var polishingInfo = SBGNPolishing.addPerComponentPolishment(components, directions);
+      sbgnLayout.repopulateCompounds();
       /*     verticalAlignments.push(polishingInfo.verticalAlignments);
           horizontalAlignments.push(polishingInfo.horizontalAlignments);
           verticalAlignments = sbgnLayout.mergeArrays(verticalAlignments);

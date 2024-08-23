@@ -282,6 +282,7 @@ class Layout extends ContinuousLayout {
     sbgnLayout.runLayout();
 
     let polishingInfo = SBGNPolishing.addPerComponentPolishment(components, directions);
+    sbgnLayout.repopulateCompounds();
     /*     verticalAlignments.push(polishingInfo.verticalAlignments);
         horizontalAlignments.push(polishingInfo.horizontalAlignments);
         verticalAlignments = sbgnLayout.mergeArrays(verticalAlignments);

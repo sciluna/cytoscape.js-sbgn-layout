@@ -25,7 +25,7 @@ SBGNPolishing.addPerComponentPolishment = function (components, directions) {
     }
     else {
       let radian = degree * Math.PI / 180;
-      let radius = idealEdgeLength / 2 + 2 * nodeA.getDiagonal();
+      let radius = idealEdgeLength / 2 + (nodeA.getDiagonal() / 2 + nodeB.getDiagonal() / 2);
       return { x: nodeA.getCenterX() + radius * Math.cos(radian), y: nodeA.getCenterY() - radius * Math.sin(radian) };
     }
   };

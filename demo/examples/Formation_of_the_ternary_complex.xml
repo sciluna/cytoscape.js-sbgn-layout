@@ -1,0 +1,944 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<sbgn xmlns="http://sbgn.org/libsbgn/0.2">
+    <map language="process description">
+        <glyph class="compartment" id="cytosol">
+            <label text="cytosol"/>
+            <bbox w="58.0" h="48.0" x="-4.0" y="-4.0"/>
+        </glyph>
+        <glyph class="complex" id="reactome:Complex4897" compartmentRef="cytosol">
+            <label text="eIF2:GTP"/>
+            <bbox w="52.0" h="34.0" x="-2.0" y="-2.0"/>
+            <glyph class="macromolecule" id="reactome:Protein46_9e1892c291089ca7169056aba91fe2d4" compartmentRef="cytosol">
+                <label text="EIF2S1"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[1 - 315]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="simple chemical" id="reactome:SmallMolecule493_9e1892c291089ca7169056aba91fe2d4" compartmentRef="cytosol">
+                <label text="GTP"/>
+                <clone/>
+                <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein47_9e1892c291089ca7169056aba91fe2d4" compartmentRef="cytosol">
+                <label text="EIF2S3"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 472]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein48_9e1892c291089ca7169056aba91fe2d4" compartmentRef="cytosol">
+                <label text="EIF2S2"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 333]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+        </glyph>
+        <glyph class="complex" id="reactome:Complex4899" compartmentRef="cytosol">
+            <label text="43S complex"/>
+            <bbox w="54.0" h="44.0" x="-2.0" y="-2.0"/>
+            <glyph class="macromolecule" id="reactome:Protein9198_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="RPS24"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[1 - 133]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9199_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="RPS3"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 243]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein10351_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="EIF3E"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 445]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein10350_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="EIF3I"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[1 - 325]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9190_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="RPS2"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[1 - 293]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9191_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="RPS27,RPS27L"/>
+                <bbox w="48.0" h="25.0" x="0.0" y="0.0"/>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9194_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="RPS8"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 208]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9195_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="RPS21"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[1 - 83]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9196_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="RPS5"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[1 - 204]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9197_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="RPS17"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 135]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="simple chemical" id="reactome:SmallMolecule493_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="GTP"/>
+                <clone/>
+                <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein10353_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="EIF3G"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 320]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein10352_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="EIF3H"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[1 - 352]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein10355_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="EIF3A"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 1382]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein10354_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="EIF3F"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 357]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9187_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="RPS7"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[1 - 194]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="nucleic acid feature" id="reactome:Rna15_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="18S rRNA"/>
+                <bbox w="50.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="unit of information" compartmentRef="cytosol">
+                    <label text="mt:RNA"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9188_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="RPS29"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 56]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9189_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="RPS3A"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 264]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein46_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="EIF2S1"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[1 - 315]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9180_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="RPSA"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 295]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9181_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="RPS14"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 151]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9182_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="RPS16"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 146]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9183_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="FAU"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[1 - 59]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9184_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="RPS15A"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 130]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein47_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="EIF2S3"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 472]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9185_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="RPS28"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[1 - 69]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein48_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="EIF2S2"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 333]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9186_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="RPS23"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 143]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="unspecified entity" id="reactome:PhysicalEntity448_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="Met-tRNAi"/>
+                <bbox w="40.0" h="40.0" x="0.0" y="0.0"/>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9176_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="RPS13"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 151]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9177_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="RPS9"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 194]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9178_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="RPS27A"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[77 - 156]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9179_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="RPS11"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 158]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9170_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="RPS6"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[1 - 249]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9171_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="RPS18"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 152]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9172_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="RPS10"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[1 - 165]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9173_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="RPS25"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[1 - 125]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9174_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="RPS12"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 132]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9175_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="RPS20"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 119]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9165_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="RPS4X,RPS4Y1,RPS4Y2"/>
+                <bbox w="48.0" h="25.0" x="0.0" y="0.0"/>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9200_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="RPS19"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 145]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9169_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="RPS15"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 145]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9164_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="RPS26"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 115]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein10349_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="EIF3L"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 564]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein10346_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="EIF3D"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[1 - 548]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein10345_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="EIF3C"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[1 - 913]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein10348_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="EIF3M"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 374]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein10347_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="EIF3K"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 218]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein10342_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="EIF1AX"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[1 - 144]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein10344_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="EIF3J"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 258]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein10343_0c146780614850a9ac21b410ad815a46" compartmentRef="cytosol">
+                <label text="EIF3B"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[1 - 814]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+        </glyph>
+        <glyph class="complex" id="reactome:Complex22" compartmentRef="cytosol">
+            <label text="MP"/>
+            <bbox w="52.0" h="34.0" x="-2.0" y="-2.0"/>
+            <glyph class="macromolecule" id="reactome:Protein46_4182df40fd2b86433604c8d710639503" compartmentRef="cytosol">
+                <label text="EIF2S1"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[1 - 315]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein47_4182df40fd2b86433604c8d710639503" compartmentRef="cytosol">
+                <label text="EIF2S3"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 472]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein48_4182df40fd2b86433604c8d710639503" compartmentRef="cytosol">
+                <label text="EIF2S2"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 333]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+        </glyph>
+        <glyph class="complex" id="reactome:Complex4896" compartmentRef="cytosol">
+            <label text="40S:eIF3:eIF1A"/>
+            <bbox w="54.0" h="34.0" x="-2.0" y="-2.0"/>
+            <glyph class="macromolecule" id="reactome:Protein9198_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="RPS24"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[1 - 133]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9176_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="RPS13"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 151]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9199_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="RPS3"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 243]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9177_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="RPS9"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 194]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9178_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="RPS27A"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[77 - 156]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein10351_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="EIF3E"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 445]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9179_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="RPS11"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 158]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein10350_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="EIF3I"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[1 - 325]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9190_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="RPS2"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[1 - 293]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9191_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="RPS27,RPS27L"/>
+                <bbox w="48.0" h="25.0" x="0.0" y="0.0"/>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9170_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="RPS6"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[1 - 249]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9171_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="RPS18"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 152]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9194_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="RPS8"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 208]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9172_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="RPS10"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[1 - 165]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9195_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="RPS21"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[1 - 83]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9173_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="RPS25"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[1 - 125]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9196_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="RPS5"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[1 - 204]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9174_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="RPS12"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 132]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9197_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="RPS17"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 135]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9175_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="RPS20"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 119]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein10353_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="EIF3G"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 320]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein10352_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="EIF3H"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[1 - 352]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein10355_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="EIF3A"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 1382]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein10354_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="EIF3F"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 357]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9165_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="RPS4X,RPS4Y1,RPS4Y2"/>
+                <bbox w="48.0" h="25.0" x="0.0" y="0.0"/>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9187_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="RPS7"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[1 - 194]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="nucleic acid feature" id="reactome:Rna15_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="18S rRNA"/>
+                <bbox w="50.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="unit of information" compartmentRef="cytosol">
+                    <label text="mt:RNA"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9188_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="RPS29"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 56]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9200_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="RPS19"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 145]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9189_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="RPS3A"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 264]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9169_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="RPS15"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 145]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9180_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="RPSA"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 295]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9181_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="RPS14"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 151]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9182_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="RPS16"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 146]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9183_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="FAU"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[1 - 59]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9184_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="RPS15A"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 130]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9185_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="RPS28"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[1 - 69]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9164_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="RPS26"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 115]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein9186_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="RPS23"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 143]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein10349_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="EIF3L"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 564]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein10346_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="EIF3D"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[1 - 548]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein10345_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="EIF3C"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[1 - 913]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein10348_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="EIF3M"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 374]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein10347_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="EIF3K"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 218]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein10342_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="EIF1AX"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[1 - 144]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein10344_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="EIF3J"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 258]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein10343_cda4140daec57fa45be12d7a92c4cdbe" compartmentRef="cytosol">
+                <label text="EIF3B"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[1 - 814]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+        </glyph>
+        <glyph class="complex" id="reactome:Complex4898" compartmentRef="cytosol">
+            <label text="ternary complex"/>
+            <bbox w="52.0" h="44.0" x="-2.0" y="-2.0"/>
+            <glyph class="macromolecule" id="reactome:Protein46_364a59cb3b577f4ec09f618733ae35cd" compartmentRef="cytosol">
+                <label text="EIF2S1"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[1 - 315]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="simple chemical" id="reactome:SmallMolecule493_364a59cb3b577f4ec09f618733ae35cd" compartmentRef="cytosol">
+                <label text="GTP"/>
+                <clone/>
+                <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein47_364a59cb3b577f4ec09f618733ae35cd" compartmentRef="cytosol">
+                <label text="EIF2S3"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 472]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+            <glyph class="unspecified entity" id="reactome:PhysicalEntity448_364a59cb3b577f4ec09f618733ae35cd" compartmentRef="cytosol">
+                <label text="Met-tRNAi"/>
+                <bbox w="40.0" h="40.0" x="0.0" y="0.0"/>
+            </glyph>
+            <glyph class="macromolecule" id="reactome:Protein48_364a59cb3b577f4ec09f618733ae35cd" compartmentRef="cytosol">
+                <label text="EIF2S2"/>
+                <bbox w="48.0" h="30.0" x="0.0" y="0.0"/>
+                <glyph class="state variable" compartmentRef="cytosol">
+                    <state value="x[2 - 333]"/>
+                    <bbox w="35.0" h="10.0" x="0.0" y="0.0"/>
+                </glyph>
+            </glyph>
+        </glyph>
+        <glyph class="unspecified entity" id="reactome:PhysicalEntity448" compartmentRef="cytosol">
+            <label text="Met-tRNAi"/>
+            <bbox w="40.0" h="40.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="simple chemical" id="reactome:SmallMolecule493_36e7132c99c290c2913632164d3eea69" compartmentRef="cytosol">
+            <label text="GTP"/>
+            <clone/>
+            <bbox w="45.0" h="15.0" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="http://bioregistry.io/reactome:R-HSA-72669_LEFTTORIGHT" compartmentRef="cytosol">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_http://bioregistry.io/reactome:R-HSA-72669_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_http://bioregistry.io/reactome:R-HSA-72669_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="http://bioregistry.io/reactome:R-HSA-72691_LEFTTORIGHT" compartmentRef="cytosol">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_http://bioregistry.io/reactome:R-HSA-72691_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_http://bioregistry.io/reactome:R-HSA-72691_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <glyph class="process" id="http://bioregistry.io/reactome:R-HSA-72663_LEFTTORIGHT" compartmentRef="cytosol">
+            <bbox w="15.0" h="15.0" x="0.0" y="0.0"/>
+            <port id="INP_http://bioregistry.io/reactome:R-HSA-72663_LEFTTORIGHT" x="0.0" y="0.0"/>
+            <port id="OUT_http://bioregistry.io/reactome:R-HSA-72663_LEFTTORIGHT" x="0.0" y="0.0"/>
+        </glyph>
+        <arc class="consumption" id="reactome:Complex4898--TO--INP_http://bioregistry.io/reactome:R-HSA-72691_LEFTTORIGHT" source="reactome:Complex4898" target="http://bioregistry.io/reactome:R-HSA-72691_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="reactome:Complex22--TO--INP_http://bioregistry.io/reactome:R-HSA-72663_LEFTTORIGHT" source="reactome:Complex22" target="http://bioregistry.io/reactome:R-HSA-72663_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="reactome:SmallMolecule493_36e7132c99c290c2913632164d3eea69--TO--INP_http://bioregistry.io/reactome:R-HSA-72663_LEFTTORIGHT" source="reactome:SmallMolecule493_36e7132c99c290c2913632164d3eea69" target="http://bioregistry.io/reactome:R-HSA-72663_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_http://bioregistry.io/reactome:R-HSA-72669_LEFTTORIGHT--TO--reactome:Complex4898" source="http://bioregistry.io/reactome:R-HSA-72669_LEFTTORIGHT" target="reactome:Complex4898">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_http://bioregistry.io/reactome:R-HSA-72663_LEFTTORIGHT--TO--reactome:Complex4897" source="http://bioregistry.io/reactome:R-HSA-72663_LEFTTORIGHT" target="reactome:Complex4897">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="reactome:Complex4897--TO--INP_http://bioregistry.io/reactome:R-HSA-72669_LEFTTORIGHT" source="reactome:Complex4897" target="http://bioregistry.io/reactome:R-HSA-72669_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="reactome:PhysicalEntity448--TO--INP_http://bioregistry.io/reactome:R-HSA-72669_LEFTTORIGHT" source="reactome:PhysicalEntity448" target="http://bioregistry.io/reactome:R-HSA-72669_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="reactome:Complex4896--TO--INP_http://bioregistry.io/reactome:R-HSA-72691_LEFTTORIGHT" source="reactome:Complex4896" target="http://bioregistry.io/reactome:R-HSA-72691_LEFTTORIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="OUT_http://bioregistry.io/reactome:R-HSA-72691_LEFTTORIGHT--TO--reactome:Complex4899" source="http://bioregistry.io/reactome:R-HSA-72691_LEFTTORIGHT" target="reactome:Complex4899">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+    </map>
+</sbgn>
