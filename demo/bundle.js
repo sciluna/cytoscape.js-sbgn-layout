@@ -58230,7 +58230,7 @@
 			filename = "Aminobutyrate_degradation.xml";
 		}
 		else if(sample == "sample9") {
-			filename = "Formation_of_the_ter.xml";
+			filename = "Formation_of_the_Editosome.xml";
 		}
 		loadSample('examples/' + filename);
 		document.getElementById("fileName").innerHTML = filename;
