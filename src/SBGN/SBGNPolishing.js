@@ -44,20 +44,30 @@ SBGNPolishing.addPerComponentPolishment = function (components, directions) {
     }
   };
 
-  let findOrientation = function (edgeBetween, direction) {
-    let source = edgeBetween.getSource();
-    let target = edgeBetween.getTarget();
-    if (direction == "horizontal") {
-      if (source.getCenterX() > target.getCenterX())
-        return "right-to-left";
-      else
-        return "left-to-right";
+  let findOrientation = function (direction, edgeBetween) {
+    if(edgeBetween) {
+      let source = edgeBetween.getSource();
+      let target = edgeBetween.getTarget();
+      if (direction == "horizontal") {
+        if (source.getCenterX() > target.getCenterX())
+          return "right-to-left";
+        else
+          return "left-to-right";
+      }
+      else {
+        if (source.getCenterY() > target.getCenterY())
+          return "bottom-to-top";
+        else
+          return "top-to-bottom";
+      }
     }
     else {
-      if (source.getCenterY() > target.getCenterY())
-        return "bottom-to-top";
-      else
+      if (direction == "horizontal") {
+        return "left-to-right";
+      }
+      else {
         return "top-to-bottom";
+      }
     }
   };
 
@@ -66,14 +76,17 @@ SBGNPolishing.addPerComponentPolishment = function (components, directions) {
     let orientation = "";
     if (component.length > 1) {
       let edgeBetween = component[0].getEdgesBetween(component[1])[0];
-      orientation = findOrientation(edgeBetween, directions[i]);
+      orientation = findOrientation(directions[i], edgeBetween);
     }
     else if (component.length == 1) {
       let ringNeighbors = [...component[0].getNeighborsList()].filter(neighbor => { return neighbor.pseudoClass == "ring" });
-      if (ringNeighbors.length == 1) {
+      if (ringNeighbors.length == 0) {
+        orientation = findOrientation(directions[i]);
+      }
+      else if (ringNeighbors.length == 1) {
         let ringNeighbor = ringNeighbors[0];
         let edgeBetween = component[0].getEdgesBetween(ringNeighbor)[0];
-        orientation = findOrientation(edgeBetween, directions[i]);
+        orientation = findOrientation(directions[i], edgeBetween);
       }
     }
 
@@ -809,7 +822,7 @@ SBGNPolishing.addPerComponentPolishment = function (components, directions) {
           }
         }
       }
-      if (j == component.length - 1 && !node.isConnectedToRing()) {
+      if ((j == component.length - 1 && !node.isConnectedToRing()) || (j == 0 && node.isConnectedToRing())) {
         if (orientation == "left-to-right") {
           // process outputs
           if (outputs.length == 1) {

@@ -267,7 +267,7 @@ SBGNLayout.prototype.processComponents = function (components, nodesWithRingClas
       }
     }
     else {
-      ringNodes1.add(component[0]);
+      //ringNodes1.add(component[0]);
       directions[i] = "horizontal";
     }
   });

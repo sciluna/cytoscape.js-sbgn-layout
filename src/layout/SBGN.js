@@ -52,7 +52,7 @@ let defaults = {
   // Node repulsion (non overlapping) multiplier
   nodeRepulsion: 4500,
   // Ideal edge (non nested) length
-  idealEdgeLength: 70,
+  idealEdgeLength: 100,
   // Divisor to compute edge forces
   edgeElasticity: 0.45,
   // Nesting factor (multiplier) to compute ideal edge length for nested edges
@@ -70,7 +70,7 @@ let defaults = {
   // Gravity force (constant) for compounds
   gravityCompound: 1.0,
   // Gravity range (constant)
-  gravityRange: 3.8,
+  gravityRange: 1.8,
   // Initial cooling factor for incremental layout
   initialEnergyOnIncremental: 0.5
 };

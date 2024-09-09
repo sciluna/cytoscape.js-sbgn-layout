@@ -592,7 +592,7 @@ SBGNLayout.prototype.processComponents = function (components, nodesWithRingClas
         directions[i] = direction[1];
       }
     } else {
-      ringNodes1.add(component[0]);
+      //ringNodes1.add(component[0]);
       directions[i] = "horizontal";
     }
   });
@@ -846,13 +846,21 @@ SBGNPolishing.addPerComponentPolishment = function (components, directions) {
     }
   };
 
-  var findOrientation = function findOrientation(edgeBetween, direction) {
-    var source = edgeBetween.getSource();
-    var target = edgeBetween.getTarget();
-    if (direction == "horizontal") {
-      if (source.getCenterX() > target.getCenterX()) return "right-to-left";else return "left-to-right";
+  var findOrientation = function findOrientation(direction, edgeBetween) {
+    if (edgeBetween) {
+      var source = edgeBetween.getSource();
+      var target = edgeBetween.getTarget();
+      if (direction == "horizontal") {
+        if (source.getCenterX() > target.getCenterX()) return "right-to-left";else return "left-to-right";
+      } else {
+        if (source.getCenterY() > target.getCenterY()) return "bottom-to-top";else return "top-to-bottom";
+      }
     } else {
-      if (source.getCenterY() > target.getCenterY()) return "bottom-to-top";else return "top-to-bottom";
+      if (direction == "horizontal") {
+        return "left-to-right";
+      } else {
+        return "top-to-bottom";
+      }
     }
   };
 
@@ -861,15 +869,17 @@ SBGNPolishing.addPerComponentPolishment = function (components, directions) {
     var orientation = "";
     if (component.length > 1) {
       var edgeBetween = component[0].getEdgesBetween(component[1])[0];
-      orientation = findOrientation(edgeBetween, directions[i]);
+      orientation = findOrientation(directions[i], edgeBetween);
     } else if (component.length == 1) {
       var ringNeighbors = [].concat(_toConsumableArray(component[0].getNeighborsList())).filter(function (neighbor) {
         return neighbor.pseudoClass == "ring";
       });
-      if (ringNeighbors.length == 1) {
+      if (ringNeighbors.length == 0) {
+        orientation = findOrientation(directions[i]);
+      } else if (ringNeighbors.length == 1) {
         var ringNeighbor = ringNeighbors[0];
         var _edgeBetween = component[0].getEdgesBetween(ringNeighbor)[0];
-        orientation = findOrientation(_edgeBetween, directions[i]);
+        orientation = findOrientation(directions[i], _edgeBetween);
       }
     }
 
@@ -1579,7 +1589,7 @@ SBGNPolishing.addPerComponentPolishment = function (components, directions) {
           }
         }
       }
-      if (j == component.length - 1 && !node.isConnectedToRing()) {
+      if (j == component.length - 1 && !node.isConnectedToRing() || j == 0 && node.isConnectedToRing()) {
         if (orientation == "left-to-right") {
           // process outputs
           if (outputs.length == 1) {
@@ -1819,7 +1829,7 @@ var defaults = {
   // Gravity force (constant) for compounds
   gravityCompound: 1.0,
   // Gravity range (constant)
-  gravityRange: 3.8,
+  gravityRange: 1.8,
   // Initial cooling factor for incremental layout
   initialEnergyOnIncremental: 0.5
 };

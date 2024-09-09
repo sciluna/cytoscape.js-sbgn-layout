@@ -56,17 +56,14 @@ document.getElementById("samples").addEventListener("change", function (event) {
 		filename = "Formation_of_the_Editosome.xml";
 	}
 	else if(sample == "sample10") {
-		filename = "Ketone_body_catabolism_toBeSolved.sbgn";
+		filename = "Ketone_body_catabolism.sbgn";
 	}
 	else if(sample == "sample11") {
 		filename = "activated_stat1alpha_induction_of_the_irf1_gene.sbgn";
 	}
-/* 	else if(sample == "sample8") {
-		filename = "Repressilator_PD_v7.sbgn";
-	} */
-/* 	else if(sample == "sample9") {
-		filename = "mapk_cascade.sbgn";
-	} */
+	else if(sample == "sample12") {
+		filename = "Riboflavin_Metabolism_toBeSolved.sbgn";
+	}
 	loadSample('examples/' + filename);
 	document.getElementById("fileName").innerHTML = filename;
 });
