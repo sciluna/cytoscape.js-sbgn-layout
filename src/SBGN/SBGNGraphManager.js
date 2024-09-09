@@ -20,7 +20,7 @@ SBGNGraphManager.prototype.getAllProcessNodes = function ()
     nodeList = nodeList.concat(graphs[i].getNodes());
   }
   let processNodeList = nodeList.filter(node => {
-    if(node.class == "process" || node.class == "omitted process" || node.class == "uncertain process")
+    if(node.isProcess())
       return true;
     else
       return false;

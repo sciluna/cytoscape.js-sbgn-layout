@@ -178,7 +178,12 @@ SBGNNode.prototype.getIncomerNodes = function () {
 
 SBGNNode.prototype.isProcess = function () {
   var self = this;
-  if (self.class == "process" || self.class == "omitted process" || self.class == "uncertain process") return true;else return false;
+  if (self.class == "process" || self.class == "omitted process" || self.class == "uncertain process" || self.class == "association" || self.class == "dissociation") return true;else return false;
+};
+
+SBGNNode.prototype.isLogicalOperator = function () {
+  var self = this;
+  if (self.class == "and" || self.class == "or" || self.class == "not") return true;else return false;
 };
 
 // for nodes in components
@@ -234,6 +239,11 @@ for (var prop in CoSEEdge) {
   SBGNEdge[prop] = CoSEEdge[prop];
 }
 
+SBGNEdge.prototype.isModulation = function () {
+  var self = this;
+  if (self.class == "modulation" || self.class == "stimulation" || self.class == "catalysis" || self.class == "inhibition" || self.class == "necessary stimulation") return true;else return false;
+};
+
 module.exports = SBGNEdge;
 
 /***/ }),
@@ -284,7 +294,7 @@ SBGNGraphManager.prototype.getAllProcessNodes = function () {
     nodeList = nodeList.concat(graphs[i].getNodes());
   }
   var processNodeList = nodeList.filter(function (node) {
-    if (node.class == "process" || node.class == "omitted process" || node.class == "uncertain process") return true;else return false;
+    if (node.isProcess()) return true;else return false;
   });
   this.processNodes = processNodeList;
 
@@ -357,7 +367,7 @@ SBGNLayout.prototype.constructSkeleton = function () {
     var neighbors = process.getNeighborsList();
     var count = 0;
     neighbors.forEach(function (neighbor) {
-      if (neighbor.getEdges().length > 1) {
+      if (neighbor.getEdges().length > 1 && !neighbor.getEdgesBetween(process)[0].isModulation()) {
         count++;
       }
     });
@@ -477,7 +487,7 @@ SBGNLayout.prototype.constructSkeleton = function () {
 SBGNLayout.prototype.DFSUtil = function (currentNode, component, visited, visitedProcessNodeIds, queue) {
 
   visited.add(currentNode.id);
-  if (currentNode.class == "process") {
+  if (currentNode.isProcess()) {
     visitedProcessNodeIds.add(currentNode.id);
   }
 
@@ -491,10 +501,14 @@ SBGNLayout.prototype.DFSUtil = function (currentNode, component, visited, visite
 
   if (neighborNodes.length == 1) {
     var neighbor = neighborNodes[0];
-    //if (!visited.has(neighbor.id())) {
-    component.push(neighbor);
-    this.DFSUtil(neighbor, component, visited, visitedProcessNodeIds, queue);
-    //} 
+    if (neighbor.isLogicalOperator() || currentNode.getEdgesBetween(neighbor)[0].isModulation()) {
+      neighbor.pseudoClass = "ring";
+    } else {
+      //if (!visited.has(neighbor.id())) {
+      component.push(neighbor);
+      this.DFSUtil(neighbor, component, visited, visitedProcessNodeIds, queue);
+      //}
+    }
   } else if (neighborNodes.length > 1) {
     currentNode.pseudoClass = "ring";
     neighborNodes.forEach(function (neighbor) {
@@ -670,8 +684,14 @@ SBGNLayout.prototype.extendComponents = function (components) {
       componentExtended.push(node);
       var neighbors = node.getNeighborsList();
       neighbors.forEach(function (neighbor) {
+        var edgeBetween = node.getEdgesBetween(neighbor)[0];
         if (neighbor.getEdges().length == 1) {
           componentExtended.push(neighbor);
+        } else if (edgeBetween.isModulation() && edgeBetween.getSource().isLogicalOperator() && edgeBetween.getSource().pseudoClass != "ring") {
+          componentExtended.push(neighbor);
+          neighbor.getIncomerNodes().forEach(function (incomer) {
+            componentExtended.push(incomer);
+          });
         }
       });
     });
@@ -775,42 +795,6 @@ SBGNLayout.prototype.mergeArrays = function (arrays) {
   return arrays;
 };
 
-SBGNLayout.prototype.reduceComplexes = function () {
-  var complexToChildGraphMap = new Map();
-  var topComplexNodes = this.getTopMostComplexNodes();
-
-  topComplexNodes.forEach(function (complex) {
-    complexToChildGraphMap.set(complex, complex.getChild());
-  });
-  console.log(complexToChildGraphMap);
-};
-
-SBGNLayout.prototype.getTopMostComplexNodes = function () {
-  var allNodes = this.getAllNodes();
-  var complexNodes = allNodes.filter(function (node) {
-    return node.class == "complex" || node.class == "complex multimer";
-  });
-  var complexNodesMap = {};
-  for (var i = 0; i < complexNodes.length; i++) {
-    complexNodesMap[complexNodes[i].id] = true;
-  }
-  return complexNodes.filter(function (ele, i) {
-    if (typeof ele === "number") {
-      ele = i;
-    }
-    var parent = ele.getParent();
-    if (parent != null) {
-      if (complexNodesMap[parent.id]) {
-        return false;
-      } else {
-        return true;
-      }
-    } else {
-      return true;
-    }
-  });
-};
-
 module.exports = SBGNLayout;
 
 /***/ }),
@@ -849,6 +833,19 @@ SBGNPolishing.addPerComponentPolishment = function (components, directions) {
     }
   };
 
+  var placeLogicalOperators = function placeLogicalOperators(modulator, a1, a2, a3) {
+    var incomers = modulator.getIncomerNodes();
+    if (incomers.length == 1) {
+      var position = calculatePosition(modulator, incomers[0], idealEdgeLength, a1);
+      incomers[0].setCenter(position.x, position.y);
+    } else if (incomers.length == 2) {
+      var _position = calculatePosition(modulator, incomers[0], idealEdgeLength, a2);
+      incomers[0].setCenter(_position.x, _position.y);
+      _position = calculatePosition(modulator, incomers[1], idealEdgeLength, a3);
+      incomers[1].setCenter(_position.x, _position.y);
+    }
+  };
+
   var findOrientation = function findOrientation(edgeBetween, direction) {
     var source = edgeBetween.getSource();
     var target = edgeBetween.getTarget();
@@ -875,7 +872,7 @@ SBGNPolishing.addPerComponentPolishment = function (components, directions) {
         orientation = findOrientation(_edgeBetween, directions[i]);
       }
     }
-    console.log(orientation);
+
     component.forEach(function (node, j) {
       var incomers = node.getIncomerNodes();
       var outgoers = node.getOutgoerNodes();
@@ -891,7 +888,7 @@ SBGNPolishing.addPerComponentPolishment = function (components, directions) {
       // find modulator nodes (filter ring nodes, non-modulator nodes and input with degree higher than 1)
       var modulators = incomers.filter(function (input) {
         var edgeBetween = node.getEdgesBetween(input)[0];
-        if (input.pseudoClass != "ring" && (edgeBetween.class == "modulation" || edgeBetween.class == "stimulation" || edgeBetween.class == "catalysis" || edgeBetween.class == "inhibition" || edgeBetween.class == "necessary stimulation") && input.getNeighborsList().size == 1) {
+        if (input.pseudoClass != "ring" && (edgeBetween.class == "modulation" || edgeBetween.class == "stimulation" || edgeBetween.class == "catalysis" || edgeBetween.class == "inhibition" || edgeBetween.class == "necessary stimulation") && (input.getNeighborsList().size == 1 || input.isLogicalOperator())) {
           return true;
         } else {
           return false;
@@ -915,72 +912,72 @@ SBGNPolishing.addPerComponentPolishment = function (components, directions) {
             inputs[0].setCenter(position.x, position.y);
             horizontalAlignments.push([node, inputs[0]]);
           } else if (inputs.length == 2) {
-            var _position = calculatePosition(node, inputs[0], idealEdgeLength, 135);
-            inputs[0].setCenter(_position.x, _position.y);
-            _position = calculatePosition(node, inputs[1], idealEdgeLength, 225);
-            inputs[1].setCenter(_position.x, _position.y);
-          } else if (inputs.length == 3) {
             var _position2 = calculatePosition(node, inputs[0], idealEdgeLength, 135);
             inputs[0].setCenter(_position2.x, _position2.y);
-            _position2 = calculatePosition(node, inputs[1], idealEdgeLength, 180);
+            _position2 = calculatePosition(node, inputs[1], idealEdgeLength, 225);
             inputs[1].setCenter(_position2.x, _position2.y);
-            _position2 = calculatePosition(node, inputs[2], idealEdgeLength, 225);
-            inputs[2].setCenter(_position2.x, _position2.y);
+          } else if (inputs.length == 3) {
+            var _position3 = calculatePosition(node, inputs[0], idealEdgeLength, 135);
+            inputs[0].setCenter(_position3.x, _position3.y);
+            _position3 = calculatePosition(node, inputs[1], idealEdgeLength, 180);
+            inputs[1].setCenter(_position3.x, _position3.y);
+            _position3 = calculatePosition(node, inputs[2], idealEdgeLength, 225);
+            inputs[2].setCenter(_position3.x, _position3.y);
             horizontalAlignments.push([node, inputs[1]]);
           } else if (inputs.length > 3) {
-            var _position3 = calculatePosition(node, inputs[0], idealEdgeLength, 126);
-            inputs[0].setCenter(_position3.x, _position3.y);
-            _position3 = calculatePosition(node, inputs[1], idealEdgeLength, 162);
-            inputs[1].setCenter(_position3.x, _position3.y);
-            _position3 = calculatePosition(node, inputs[2], idealEdgeLength, 198);
-            inputs[2].setCenter(_position3.x, _position3.y);
-            _position3 = calculatePosition(node, inputs[3], idealEdgeLength, 234);
-            inputs[3].setCenter(_position3.x, _position3.y);
+            var _position4 = calculatePosition(node, inputs[0], idealEdgeLength, 126);
+            inputs[0].setCenter(_position4.x, _position4.y);
+            _position4 = calculatePosition(node, inputs[1], idealEdgeLength, 162);
+            inputs[1].setCenter(_position4.x, _position4.y);
+            _position4 = calculatePosition(node, inputs[2], idealEdgeLength, 198);
+            inputs[2].setCenter(_position4.x, _position4.y);
+            _position4 = calculatePosition(node, inputs[3], idealEdgeLength, 234);
+            inputs[3].setCenter(_position4.x, _position4.y);
             inputs.forEach(function (input) {
               relativePlacementConstraints.push({ left: input.id, right: node.id });
             });
           }
           // process modulators
           if (modulators.length == 1) {
-            var _position4 = calculatePosition(node, modulators[0], idealEdgeLength, 90);
-            modulators[0].setCenter(_position4.x, _position4.y);
-            verticalAlignments.push([node, modulators[0]]);
-          } else if (modulators.length >= 2) {
             var _position5 = calculatePosition(node, modulators[0], idealEdgeLength, 90);
             modulators[0].setCenter(_position5.x, _position5.y);
-            _position5 = calculatePosition(node, modulators[1], idealEdgeLength, 270);
-            modulators[1].setCenter(_position5.x, _position5.y);
+            verticalAlignments.push([node, modulators[0]]);
+          } else if (modulators.length >= 2) {
+            var _position6 = calculatePosition(node, modulators[0], idealEdgeLength, 90);
+            modulators[0].setCenter(_position6.x, _position6.y);
+            _position6 = calculatePosition(node, modulators[1], idealEdgeLength, 270);
+            modulators[1].setCenter(_position6.x, _position6.y);
             if (modulators[2]) {
               if (inputs.length == 1) {
-                _position5 = calculatePosition(node, modulators[2], idealEdgeLength, 135);
-                modulators[2].setCenter(_position5.x, _position5.y);
+                _position6 = calculatePosition(node, modulators[2], idealEdgeLength, 135);
+                modulators[2].setCenter(_position6.x, _position6.y);
               }
               if (inputs.length == 2) {
-                _position5 = calculatePosition(node, modulators[2], idealEdgeLength, 180);
-                modulators[2].setCenter(_position5.x, _position5.y);
+                _position6 = calculatePosition(node, modulators[2], idealEdgeLength, 180);
+                modulators[2].setCenter(_position6.x, _position6.y);
               }
             }
           }
           // process outputs
           if (outputs.length == 1) {
-            var _position6 = calculatePosition(node, outputs[0], idealEdgeLength, 315);
-            outputs[0].setCenter(_position6.x, _position6.y);
-          } else if (outputs.length == 2) {
             var _position7 = calculatePosition(node, outputs[0], idealEdgeLength, 315);
             outputs[0].setCenter(_position7.x, _position7.y);
-            _position7 = calculatePosition(node, outputs[1], idealEdgeLength, 45);
-            outputs[1].setCenter(_position7.x, _position7.y);
-          } else if (outputs.length > 2) {
-            var _position8 = calculatePosition(node, outputs[0], idealEdgeLength, 330);
+          } else if (outputs.length == 2) {
+            var _position8 = calculatePosition(node, outputs[0], idealEdgeLength, 315);
             outputs[0].setCenter(_position8.x, _position8.y);
-            _position8 = calculatePosition(node, outputs[1], idealEdgeLength, 30);
+            _position8 = calculatePosition(node, outputs[1], idealEdgeLength, 45);
             outputs[1].setCenter(_position8.x, _position8.y);
+          } else if (outputs.length > 2) {
+            var _position9 = calculatePosition(node, outputs[0], idealEdgeLength, 330);
+            outputs[0].setCenter(_position9.x, _position9.y);
+            _position9 = calculatePosition(node, outputs[1], idealEdgeLength, 30);
+            outputs[1].setCenter(_position9.x, _position9.y);
             if (outputs[2]) {
-              _position8 = calculatePosition(node, outputs[2], idealEdgeLength, 310);
-              outputs[2].setCenter(_position8.x, _position8.y);
+              _position9 = calculatePosition(node, outputs[2], idealEdgeLength, 310);
+              outputs[2].setCenter(_position9.x, _position9.y);
               if (outputs[3]) {
-                _position8 = calculatePosition(node, outputs[3], idealEdgeLength, 60);
-                outputs[3].setCenter(_position8.x, _position8.y);
+                _position9 = calculatePosition(node, outputs[3], idealEdgeLength, 60);
+                outputs[3].setCenter(_position9.x, _position9.y);
               }
             }
           }
@@ -988,77 +985,77 @@ SBGNPolishing.addPerComponentPolishment = function (components, directions) {
         if (orientation == "right-to-left") {
           // process inputs
           if (inputs.length == 1) {
-            var _position9 = calculatePosition(node, inputs[0], idealEdgeLength, 0);
-            inputs[0].setCenter(_position9.x, _position9.y);
+            var _position10 = calculatePosition(node, inputs[0], idealEdgeLength, 0);
+            inputs[0].setCenter(_position10.x, _position10.y);
             horizontalAlignments.push([node, inputs[0]]);
           } else if (inputs.length == 2) {
-            var _position10 = calculatePosition(node, inputs[0], idealEdgeLength, 45);
-            inputs[0].setCenter(_position10.x, _position10.y);
-            _position10 = calculatePosition(node, inputs[1], idealEdgeLength, 315);
-            inputs[1].setCenter(_position10.x, _position10.y);
-          } else if (inputs.length == 3) {
             var _position11 = calculatePosition(node, inputs[0], idealEdgeLength, 45);
             inputs[0].setCenter(_position11.x, _position11.y);
-            _position11 = calculatePosition(node, inputs[1], idealEdgeLength, 0);
+            _position11 = calculatePosition(node, inputs[1], idealEdgeLength, 315);
             inputs[1].setCenter(_position11.x, _position11.y);
-            _position11 = calculatePosition(node, inputs[2], idealEdgeLength, 315);
-            inputs[2].setCenter(_position11.x, _position11.y);
+          } else if (inputs.length == 3) {
+            var _position12 = calculatePosition(node, inputs[0], idealEdgeLength, 45);
+            inputs[0].setCenter(_position12.x, _position12.y);
+            _position12 = calculatePosition(node, inputs[1], idealEdgeLength, 0);
+            inputs[1].setCenter(_position12.x, _position12.y);
+            _position12 = calculatePosition(node, inputs[2], idealEdgeLength, 315);
+            inputs[2].setCenter(_position12.x, _position12.y);
             horizontalAlignments.push([node, inputs[1]]);
           } else if (inputs.length > 3) {
-            var _position12 = calculatePosition(node, inputs[0], idealEdgeLength, 36);
-            inputs[0].setCenter(_position12.x, _position12.y);
-            _position12 = calculatePosition(node, inputs[1], idealEdgeLength, 324);
-            inputs[1].setCenter(_position12.x, _position12.y);
-            _position12 = calculatePosition(node, inputs[2], idealEdgeLength, 72);
-            inputs[2].setCenter(_position12.x, _position12.y);
-            _position12 = calculatePosition(node, inputs[3], idealEdgeLength, 288);
-            inputs[3].setCenter(_position12.x, _position12.y);
+            var _position13 = calculatePosition(node, inputs[0], idealEdgeLength, 36);
+            inputs[0].setCenter(_position13.x, _position13.y);
+            _position13 = calculatePosition(node, inputs[1], idealEdgeLength, 324);
+            inputs[1].setCenter(_position13.x, _position13.y);
+            _position13 = calculatePosition(node, inputs[2], idealEdgeLength, 72);
+            inputs[2].setCenter(_position13.x, _position13.y);
+            _position13 = calculatePosition(node, inputs[3], idealEdgeLength, 288);
+            inputs[3].setCenter(_position13.x, _position13.y);
             inputs.forEach(function (input) {
               relativePlacementConstraints.push({ left: input.id, right: node.id });
             });
           }
           // process modulators
           if (modulators.length == 1) {
-            var _position13 = calculatePosition(node, modulators[0], idealEdgeLength, 270);
-            modulators[0].setCenter(_position13.x, _position13.y);
+            var _position14 = calculatePosition(node, modulators[0], idealEdgeLength, 270);
+            modulators[0].setCenter(_position14.x, _position14.y);
             verticalAlignments.push([node, modulators[0]]);
           } else if (modulators.length >= 2) {
-            var _position14 = calculatePosition(node, modulators[0], idealEdgeLength, 90);
-            modulators[0].setCenter(_position14.x, _position14.y);
-            _position14 = calculatePosition(node, modulators[1], idealEdgeLength, 270);
-            modulators[1].setCenter(_position14.x, _position14.y);
+            var _position15 = calculatePosition(node, modulators[0], idealEdgeLength, 90);
+            modulators[0].setCenter(_position15.x, _position15.y);
+            _position15 = calculatePosition(node, modulators[1], idealEdgeLength, 270);
+            modulators[1].setCenter(_position15.x, _position15.y);
             if (modulators[2]) {
               if (inputs.length == 1) {
-                _position14 = calculatePosition(node, modulators[2], idealEdgeLength, 45);
-                modulators[2].setCenter(_position14.x, _position14.y);
+                _position15 = calculatePosition(node, modulators[2], idealEdgeLength, 45);
+                modulators[2].setCenter(_position15.x, _position15.y);
               }
               if (inputs.length == 2) {
-                _position14 = calculatePosition(node, modulators[2], idealEdgeLength, 0);
-                modulators[2].setCenter(_position14.x, _position14.y);
+                _position15 = calculatePosition(node, modulators[2], idealEdgeLength, 0);
+                modulators[2].setCenter(_position15.x, _position15.y);
               }
             }
           }
           // process outputs
           if (outputs.length == 1) {
 
-            var _position15 = calculatePosition(node, outputs[0], idealEdgeLength, 225);
-            outputs[0].setCenter(_position15.x, _position15.y);
-          } else if (outputs.length == 2) {
-            var _position16 = calculatePosition(node, outputs[0], idealEdgeLength, 135);
+            var _position16 = calculatePosition(node, outputs[0], idealEdgeLength, 225);
             outputs[0].setCenter(_position16.x, _position16.y);
-            _position16 = calculatePosition(node, outputs[1], idealEdgeLength, 225);
-            outputs[1].setCenter(_position16.x, _position16.y);
-          } else if (outputs.length > 2) {
-            var _position17 = calculatePosition(node, outputs[0], idealEdgeLength, 210);
+          } else if (outputs.length == 2) {
+            var _position17 = calculatePosition(node, outputs[0], idealEdgeLength, 135);
             outputs[0].setCenter(_position17.x, _position17.y);
-            _position17 = calculatePosition(node, outputs[1], idealEdgeLength, 150);
+            _position17 = calculatePosition(node, outputs[1], idealEdgeLength, 225);
             outputs[1].setCenter(_position17.x, _position17.y);
+          } else if (outputs.length > 2) {
+            var _position18 = calculatePosition(node, outputs[0], idealEdgeLength, 210);
+            outputs[0].setCenter(_position18.x, _position18.y);
+            _position18 = calculatePosition(node, outputs[1], idealEdgeLength, 150);
+            outputs[1].setCenter(_position18.x, _position18.y);
             if (outputs[2]) {
-              _position17 = calculatePosition(node, outputs[2], idealEdgeLength, 240);
-              outputs[2].setCenter(_position17.x, _position17.y);
+              _position18 = calculatePosition(node, outputs[2], idealEdgeLength, 240);
+              outputs[2].setCenter(_position18.x, _position18.y);
               if (outputs[3]) {
-                _position17 = calculatePosition(node, outputs[3], idealEdgeLength, 120);
-                outputs[3].setCenter(_position17.x, _position17.y);
+                _position18 = calculatePosition(node, outputs[3], idealEdgeLength, 120);
+                outputs[3].setCenter(_position18.x, _position18.y);
               }
             }
           }
@@ -1066,76 +1063,76 @@ SBGNPolishing.addPerComponentPolishment = function (components, directions) {
         if (orientation == "top-to-bottom") {
           // process inputs
           if (inputs.length == 1) {
-            var _position18 = calculatePosition(node, inputs[0], idealEdgeLength, 90);
-            inputs[0].setCenter(_position18.x, _position18.y);
+            var _position19 = calculatePosition(node, inputs[0], idealEdgeLength, 90);
+            inputs[0].setCenter(_position19.x, _position19.y);
             verticalAlignments.push([node, inputs[0]]);
           } else if (inputs.length == 2) {
-            var _position19 = calculatePosition(node, inputs[0], idealEdgeLength, 45);
-            inputs[0].setCenter(_position19.x, _position19.y);
-            _position19 = calculatePosition(node, inputs[1], idealEdgeLength, 135);
-            inputs[1].setCenter(_position19.x, _position19.y);
-          } else if (inputs.length == 3) {
             var _position20 = calculatePosition(node, inputs[0], idealEdgeLength, 45);
             inputs[0].setCenter(_position20.x, _position20.y);
-            _position20 = calculatePosition(node, inputs[1], idealEdgeLength, 90);
+            _position20 = calculatePosition(node, inputs[1], idealEdgeLength, 135);
             inputs[1].setCenter(_position20.x, _position20.y);
-            _position20 = calculatePosition(node, inputs[2], idealEdgeLength, 135);
-            inputs[2].setCenter(_position20.x, _position20.y);
+          } else if (inputs.length == 3) {
+            var _position21 = calculatePosition(node, inputs[0], idealEdgeLength, 45);
+            inputs[0].setCenter(_position21.x, _position21.y);
+            _position21 = calculatePosition(node, inputs[1], idealEdgeLength, 90);
+            inputs[1].setCenter(_position21.x, _position21.y);
+            _position21 = calculatePosition(node, inputs[2], idealEdgeLength, 135);
+            inputs[2].setCenter(_position21.x, _position21.y);
             horizontalAlignments.push([node, inputs[1]]);
           } else if (inputs.length > 3) {
-            var _position21 = calculatePosition(node, inputs[0], idealEdgeLength, 72);
-            inputs[0].setCenter(_position21.x, _position21.y);
-            _position21 = calculatePosition(node, inputs[1], idealEdgeLength, 108);
-            inputs[1].setCenter(_position21.x, _position21.y);
-            _position21 = calculatePosition(node, inputs[2], idealEdgeLength, 36);
-            inputs[2].setCenter(_position21.x, _position21.y);
-            _position21 = calculatePosition(node, inputs[3], idealEdgeLength, 144);
-            inputs[3].setCenter(_position21.x, _position21.y);
+            var _position22 = calculatePosition(node, inputs[0], idealEdgeLength, 72);
+            inputs[0].setCenter(_position22.x, _position22.y);
+            _position22 = calculatePosition(node, inputs[1], idealEdgeLength, 108);
+            inputs[1].setCenter(_position22.x, _position22.y);
+            _position22 = calculatePosition(node, inputs[2], idealEdgeLength, 36);
+            inputs[2].setCenter(_position22.x, _position22.y);
+            _position22 = calculatePosition(node, inputs[3], idealEdgeLength, 144);
+            inputs[3].setCenter(_position22.x, _position22.y);
             inputs.forEach(function (input) {
               relativePlacementConstraints.push({ left: input.id, right: node.id });
             });
           }
           // process modulators
           if (modulators.length == 1) {
-            var _position22 = calculatePosition(node, modulators[0], idealEdgeLength, 0);
-            modulators[0].setCenter(_position22.x, _position22.y);
+            var _position23 = calculatePosition(node, modulators[0], idealEdgeLength, 0);
+            modulators[0].setCenter(_position23.x, _position23.y);
             horizontalAlignments.push([node, modulators[0]]);
           } else if (modulators.length >= 2) {
-            var _position23 = calculatePosition(node, modulators[0], idealEdgeLength, 180);
-            modulators[0].setCenter(_position23.x, _position23.y);
-            _position23 = calculatePosition(node, modulators[1], idealEdgeLength, 0);
-            modulators[1].setCenter(_position23.x, _position23.y);
+            var _position24 = calculatePosition(node, modulators[0], idealEdgeLength, 180);
+            modulators[0].setCenter(_position24.x, _position24.y);
+            _position24 = calculatePosition(node, modulators[1], idealEdgeLength, 0);
+            modulators[1].setCenter(_position24.x, _position24.y);
             if (modulators[2]) {
               if (inputs.length == 1) {
-                _position23 = calculatePosition(node, modulators[2], idealEdgeLength, 135);
-                modulators[2].setCenter(_position23.x, _position23.y);
+                _position24 = calculatePosition(node, modulators[2], idealEdgeLength, 135);
+                modulators[2].setCenter(_position24.x, _position24.y);
               }
               if (inputs.length == 2) {
-                _position23 = calculatePosition(node, modulators[2], idealEdgeLength, 90);
-                modulators[2].setCenter(_position23.x, _position23.y);
+                _position24 = calculatePosition(node, modulators[2], idealEdgeLength, 90);
+                modulators[2].setCenter(_position24.x, _position24.y);
               }
             }
           }
           // process outputs
           if (outputs.length == 1) {
-            var _position24 = calculatePosition(node, outputs[0], idealEdgeLength, 315);
-            outputs[0].setCenter(_position24.x, _position24.y);
-          } else if (outputs.length == 2) {
             var _position25 = calculatePosition(node, outputs[0], idealEdgeLength, 315);
             outputs[0].setCenter(_position25.x, _position25.y);
-            _position25 = calculatePosition(node, outputs[1], idealEdgeLength, 225);
-            outputs[1].setCenter(_position25.x, _position25.y);
-          } else if (outputs.length > 2) {
-            var _position26 = calculatePosition(node, outputs[0], idealEdgeLength, 300);
+          } else if (outputs.length == 2) {
+            var _position26 = calculatePosition(node, outputs[0], idealEdgeLength, 315);
             outputs[0].setCenter(_position26.x, _position26.y);
-            _position26 = calculatePosition(node, outputs[1], idealEdgeLength, 240);
+            _position26 = calculatePosition(node, outputs[1], idealEdgeLength, 225);
             outputs[1].setCenter(_position26.x, _position26.y);
+          } else if (outputs.length > 2) {
+            var _position27 = calculatePosition(node, outputs[0], idealEdgeLength, 300);
+            outputs[0].setCenter(_position27.x, _position27.y);
+            _position27 = calculatePosition(node, outputs[1], idealEdgeLength, 240);
+            outputs[1].setCenter(_position27.x, _position27.y);
             if (outputs[2]) {
-              _position26 = calculatePosition(node, outputs[2], idealEdgeLength, 330);
-              outputs[2].setCenter(_position26.x, _position26.y);
+              _position27 = calculatePosition(node, outputs[2], idealEdgeLength, 330);
+              outputs[2].setCenter(_position27.x, _position27.y);
               if (outputs[3]) {
-                _position26 = calculatePosition(node, outputs[3], idealEdgeLength, 210);
-                outputs[3].setCenter(_position26.x, _position26.y);
+                _position27 = calculatePosition(node, outputs[3], idealEdgeLength, 210);
+                outputs[3].setCenter(_position27.x, _position27.y);
               }
             }
           }
@@ -1143,73 +1140,73 @@ SBGNPolishing.addPerComponentPolishment = function (components, directions) {
         if (orientation == "bottom-to-top") {
           // process inputs
           if (inputs.length == 1) {
-            var _position27 = calculatePosition(node, inputs[0], idealEdgeLength, 270);
-            inputs[0].setCenter(_position27.x, _position27.y);
+            var _position28 = calculatePosition(node, inputs[0], idealEdgeLength, 270);
+            inputs[0].setCenter(_position28.x, _position28.y);
             verticalAlignments.push([node, inputs[0]]);
           } else if (inputs.length == 2) {
-            var _position28 = calculatePosition(node, inputs[0], idealEdgeLength, 315);
-            inputs[0].setCenter(_position28.x, _position28.y);
-            _position28 = calculatePosition(node, inputs[1], idealEdgeLength, 225);
-            inputs[1].setCenter(_position28.x, _position28.y);
-          } else if (inputs.length == 3) {
             var _position29 = calculatePosition(node, inputs[0], idealEdgeLength, 315);
             inputs[0].setCenter(_position29.x, _position29.y);
-            _position29 = calculatePosition(node, inputs[1], idealEdgeLength, 270);
+            _position29 = calculatePosition(node, inputs[1], idealEdgeLength, 225);
             inputs[1].setCenter(_position29.x, _position29.y);
-            _position29 = calculatePosition(node, inputs[2], idealEdgeLength, 225);
-            inputs[2].setCenter(_position29.x, _position29.y);
+          } else if (inputs.length == 3) {
+            var _position30 = calculatePosition(node, inputs[0], idealEdgeLength, 315);
+            inputs[0].setCenter(_position30.x, _position30.y);
+            _position30 = calculatePosition(node, inputs[1], idealEdgeLength, 270);
+            inputs[1].setCenter(_position30.x, _position30.y);
+            _position30 = calculatePosition(node, inputs[2], idealEdgeLength, 225);
+            inputs[2].setCenter(_position30.x, _position30.y);
             verticalAlignments.push([node, inputs[1]]);
           } else if (inputs.length > 3) {
-            var _position30 = calculatePosition(node, inputs[0], idealEdgeLength, 288);
-            inputs[0].setCenter(_position30.x, _position30.y);
-            _position30 = calculatePosition(node, inputs[1], idealEdgeLength, 252);
-            inputs[1].setCenter(_position30.x, _position30.y);
-            _position30 = calculatePosition(node, inputs[2], idealEdgeLength, 324);
-            inputs[2].setCenter(_position30.x, _position30.y);
-            _position30 = calculatePosition(node, inputs[3], idealEdgeLength, 216);
-            inputs[3].setCenter(_position30.x, _position30.y);
+            var _position31 = calculatePosition(node, inputs[0], idealEdgeLength, 288);
+            inputs[0].setCenter(_position31.x, _position31.y);
+            _position31 = calculatePosition(node, inputs[1], idealEdgeLength, 252);
+            inputs[1].setCenter(_position31.x, _position31.y);
+            _position31 = calculatePosition(node, inputs[2], idealEdgeLength, 324);
+            inputs[2].setCenter(_position31.x, _position31.y);
+            _position31 = calculatePosition(node, inputs[3], idealEdgeLength, 216);
+            inputs[3].setCenter(_position31.x, _position31.y);
           }
           // process modulators
           if (modulators.length == 1) {
-            var _position31 = calculatePosition(node, modulators[0], idealEdgeLength, 180);
-            modulators[0].setCenter(_position31.x, _position31.y);
-            horizontalAlignments.push([node, modulators[0]]);
-          } else if (modulators.length >= 2) {
             var _position32 = calculatePosition(node, modulators[0], idealEdgeLength, 180);
             modulators[0].setCenter(_position32.x, _position32.y);
-            _position32 = calculatePosition(node, modulators[1], idealEdgeLength, 0);
-            modulators[1].setCenter(_position32.x, _position32.y);
+            horizontalAlignments.push([node, modulators[0]]);
+          } else if (modulators.length >= 2) {
+            var _position33 = calculatePosition(node, modulators[0], idealEdgeLength, 180);
+            modulators[0].setCenter(_position33.x, _position33.y);
+            _position33 = calculatePosition(node, modulators[1], idealEdgeLength, 0);
+            modulators[1].setCenter(_position33.x, _position33.y);
             if (modulators[2]) {
               if (inputs.length == 1) {
-                _position32 = calculatePosition(node, modulators[2], idealEdgeLength, 225);
-                modulators[2].setCenter(_position32.x, _position32.y);
+                _position33 = calculatePosition(node, modulators[2], idealEdgeLength, 225);
+                modulators[2].setCenter(_position33.x, _position33.y);
               }
               if (inputs.length == 2) {
-                _position32 = calculatePosition(node, modulators[2], idealEdgeLength, 270);
-                modulators[2].setCenter(_position32.x, _position32.y);
+                _position33 = calculatePosition(node, modulators[2], idealEdgeLength, 270);
+                modulators[2].setCenter(_position33.x, _position33.y);
               }
             }
           }
           // process outputs
           if (outputs.length == 1) {
-            var _position33 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
-            outputs[0].setCenter(_position33.x, _position33.y);
-          } else if (outputs.length == 2) {
             var _position34 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
             outputs[0].setCenter(_position34.x, _position34.y);
-            _position34 = calculatePosition(node, outputs[1], idealEdgeLength, 135);
-            outputs[1].setCenter(_position34.x, _position34.y);
-          } else if (outputs.length > 2) {
-            var _position35 = calculatePosition(node, outputs[0], idealEdgeLength, 60);
+          } else if (outputs.length == 2) {
+            var _position35 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
             outputs[0].setCenter(_position35.x, _position35.y);
-            _position35 = calculatePosition(node, outputs[1], idealEdgeLength, 120);
+            _position35 = calculatePosition(node, outputs[1], idealEdgeLength, 135);
             outputs[1].setCenter(_position35.x, _position35.y);
+          } else if (outputs.length > 2) {
+            var _position36 = calculatePosition(node, outputs[0], idealEdgeLength, 60);
+            outputs[0].setCenter(_position36.x, _position36.y);
+            _position36 = calculatePosition(node, outputs[1], idealEdgeLength, 120);
+            outputs[1].setCenter(_position36.x, _position36.y);
             if (outputs[2]) {
-              _position35 = calculatePosition(node, outputs[2], idealEdgeLength, 30);
-              outputs[2].setCenter(_position35.x, _position35.y);
+              _position36 = calculatePosition(node, outputs[2], idealEdgeLength, 30);
+              outputs[2].setCenter(_position36.x, _position36.y);
               if (outputs[3]) {
-                _position35 = calculatePosition(node, outputs[3], idealEdgeLength, 150);
-                outputs[3].setCenter(_position35.x, _position35.y);
+                _position36 = calculatePosition(node, outputs[3], idealEdgeLength, 150);
+                outputs[3].setCenter(_position36.x, _position36.y);
               }
             }
           }
@@ -1219,66 +1216,88 @@ SBGNPolishing.addPerComponentPolishment = function (components, directions) {
         if (orientation == "left-to-right") {
           // process inputs
           if (inputs.length == 1) {
-
-            var _position36 = calculatePosition(node, inputs[0], idealEdgeLength, 225);
-            inputs[0].setCenter(_position36.x, _position36.y);
-          } else if (inputs.length == 2) {
             var _position37 = calculatePosition(node, inputs[0], idealEdgeLength, 225);
             inputs[0].setCenter(_position37.x, _position37.y);
-            _position37 = calculatePosition(node, inputs[1], idealEdgeLength, 135);
-            inputs[1].setCenter(_position37.x, _position37.y);
-          } else if (inputs.length > 2) {
-            var _position38 = calculatePosition(node, inputs[0], idealEdgeLength, 210);
+          } else if (inputs.length == 2) {
+            var _position38 = calculatePosition(node, inputs[0], idealEdgeLength, 225);
             inputs[0].setCenter(_position38.x, _position38.y);
-            _position38 = calculatePosition(node, inputs[1], idealEdgeLength, 150);
+            _position38 = calculatePosition(node, inputs[1], idealEdgeLength, 135);
             inputs[1].setCenter(_position38.x, _position38.y);
+          } else if (inputs.length > 2) {
+            var _position39 = calculatePosition(node, inputs[0], idealEdgeLength, 210);
+            inputs[0].setCenter(_position39.x, _position39.y);
+            _position39 = calculatePosition(node, inputs[1], idealEdgeLength, 150);
+            inputs[1].setCenter(_position39.x, _position39.y);
             if (inputs[2]) {
-              _position38 = calculatePosition(node, inputs[2], idealEdgeLength, 240);
-              inputs[2].setCenter(_position38.x, _position38.y);
+              _position39 = calculatePosition(node, inputs[2], idealEdgeLength, 240);
+              inputs[2].setCenter(_position39.x, _position39.y);
               if (inputs[3]) {
-                _position38 = calculatePosition(node, inputs[3], idealEdgeLength, 120);
-                inputs[3].setCenter(_position38.x, _position38.y);
+                _position39 = calculatePosition(node, inputs[3], idealEdgeLength, 120);
+                inputs[3].setCenter(_position39.x, _position39.y);
               }
             }
           }
           // process modulators
           if (modulators.length == 1) {
-            var _position39 = calculatePosition(node, modulators[0], idealEdgeLength, 90);
-            modulators[0].setCenter(_position39.x, _position39.y);
-            verticalAlignments.push([node, modulators[0]]);
-          } else if (modulators.length == 2) {
             var _position40 = calculatePosition(node, modulators[0], idealEdgeLength, 90);
             modulators[0].setCenter(_position40.x, _position40.y);
-            _position40 = calculatePosition(node, modulators[1], idealEdgeLength, 270);
-            modulators[1].setCenter(_position40.x, _position40.y);
-          } else if (modulators.length > 2) {
-            var _position41 = calculatePosition(node, modulators[0], idealEdgeLength, 60);
+            if (modulators[0].isLogicalOperator()) {
+              // if logical operator
+              placeLogicalOperators(modulators[0], 90, 45, 135);
+            }
+          } else if (modulators.length == 2) {
+            var _position41 = calculatePosition(node, modulators[0], idealEdgeLength, 90);
             modulators[0].setCenter(_position41.x, _position41.y);
-            _position41 = calculatePosition(node, modulators[1], idealEdgeLength, 120);
+            if (modulators[0].isLogicalOperator()) {
+              // if logical operator
+              placeLogicalOperators(modulators[0], 90, 45, 135);
+            }
+            _position41 = calculatePosition(node, modulators[1], idealEdgeLength, 270);
             modulators[1].setCenter(_position41.x, _position41.y);
-            _position41 = calculatePosition(node, modulators[2], idealEdgeLength, 270);
-            modulators[2].setCenter(_position41.x, _position41.y);
+            if (modulators[1].isLogicalOperator()) {
+              // if logical operator
+              placeLogicalOperators(modulators[1], 270, 225, 315);
+            }
+          } else if (modulators.length > 2) {
+            var _position42 = calculatePosition(node, modulators[0], idealEdgeLength, 60);
+            modulators[0].setCenter(_position42.x, _position42.y);
+            if (modulators[0].isLogicalOperator()) {
+              // if logical operator
+              placeLogicalOperators(modulators[0], 90, 45, 135);
+            }
+            _position42 = calculatePosition(node, modulators[1], idealEdgeLength, 120);
+            modulators[1].setCenter(_position42.x, _position42.y);
+            if (modulators[1].isLogicalOperator()) {
+              // if logical operator
+              placeLogicalOperators(modulators[1], 90, 45, 135);
+            }
+            _position42 = calculatePosition(node, modulators[2], idealEdgeLength, 270);
+            modulators[2].setCenter(_position42.x, _position42.y);
+            if (modulators[2].isLogicalOperator()) {
+              // if logical operator
+              placeLogicalOperators(modulators[2], 270, 225, 315);
+            }
           }
           // process outputs
           if (outputs.length == 1) {
-            var _position42 = calculatePosition(node, outputs[0], idealEdgeLength, 315);
-            outputs[0].setCenter(_position42.x, _position42.y);
-          } else if (outputs.length == 2) {
             var _position43 = calculatePosition(node, outputs[0], idealEdgeLength, 315);
             outputs[0].setCenter(_position43.x, _position43.y);
-            _position43 = calculatePosition(node, outputs[1], idealEdgeLength, 45);
-            outputs[1].setCenter(_position43.x, _position43.y);
-          } else if (outputs.length > 2) {
-            var _position44 = calculatePosition(node, outputs[0], idealEdgeLength, 330);
+          } else if (outputs.length == 2) {
+            var _position44 = calculatePosition(node, outputs[0], idealEdgeLength, 315);
             outputs[0].setCenter(_position44.x, _position44.y);
-            _position44 = calculatePosition(node, outputs[1], idealEdgeLength, 30);
+            _position44 = calculatePosition(node, outputs[1], idealEdgeLength, 45);
             outputs[1].setCenter(_position44.x, _position44.y);
+          } else if (outputs.length > 2) {
+            var _position45 = calculatePosition(node, outputs[0], idealEdgeLength, 330);
+            outputs[0].setCenter(_position45.x, _position45.y);
+            _position45 = calculatePosition(node, outputs[1], idealEdgeLength, 30);
+            outputs[1].setCenter(_position45.x, _position45.y);
             if (outputs[2]) {
-              _position44 = calculatePosition(node, outputs[2], idealEdgeLength, 300);
-              outputs[2].setCenter(_position44.x, _position44.y);
+              _position45 = calculatePosition(node, outputs[2], idealEdgeLength, 300);
+              outputs[2].setCenter(_position45.x, _position45.y);
               if (outputs[3]) {
-                _position44 = calculatePosition(node, outputs[3], idealEdgeLength, 60);
-                outputs[3].setCenter(_position44.x, _position44.y);
+                _position45 = calculatePosition(node, outputs[3], idealEdgeLength, 60);
+                outputs[3].setCenter(_position45.x, _position45.y);
               }
             }
           }
@@ -1286,24 +1305,24 @@ SBGNPolishing.addPerComponentPolishment = function (components, directions) {
         if (orientation == "right-to-left") {
           // process inputs
           if (inputs.length == 1) {
-            var _position45 = calculatePosition(node, inputs[0], idealEdgeLength, 45);
-            inputs[0].setCenter(_position45.x, _position45.y);
-          } else if (inputs.length == 2) {
             var _position46 = calculatePosition(node, inputs[0], idealEdgeLength, 45);
             inputs[0].setCenter(_position46.x, _position46.y);
-            _position46 = calculatePosition(node, inputs[1], idealEdgeLength, 315);
-            inputs[1].setCenter(_position46.x, _position46.y);
-          } else if (inputs.length > 2) {
-            var _position47 = calculatePosition(node, inputs[0], idealEdgeLength, 330);
+          } else if (inputs.length == 2) {
+            var _position47 = calculatePosition(node, inputs[0], idealEdgeLength, 45);
             inputs[0].setCenter(_position47.x, _position47.y);
-            _position47 = calculatePosition(node, inputs[1], idealEdgeLength, 30);
+            _position47 = calculatePosition(node, inputs[1], idealEdgeLength, 315);
             inputs[1].setCenter(_position47.x, _position47.y);
+          } else if (inputs.length > 2) {
+            var _position48 = calculatePosition(node, inputs[0], idealEdgeLength, 330);
+            inputs[0].setCenter(_position48.x, _position48.y);
+            _position48 = calculatePosition(node, inputs[1], idealEdgeLength, 30);
+            inputs[1].setCenter(_position48.x, _position48.y);
             if (inputs[2]) {
-              _position47 = calculatePosition(node, inputs[2], idealEdgeLength, 300);
-              inputs[2].setCenter(_position47.x, _position47.y);
+              _position48 = calculatePosition(node, inputs[2], idealEdgeLength, 300);
+              inputs[2].setCenter(_position48.x, _position48.y);
               if (inputs[3]) {
-                _position47 = calculatePosition(node, inputs[3], idealEdgeLength, 60);
-                inputs[3].setCenter(_position47.x, _position47.y);
+                _position48 = calculatePosition(node, inputs[3], idealEdgeLength, 60);
+                inputs[3].setCenter(_position48.x, _position48.y);
               }
             }
             inputs.forEach(function (input) {
@@ -1312,42 +1331,65 @@ SBGNPolishing.addPerComponentPolishment = function (components, directions) {
           }
           // process modulators
           if (modulators.length == 1) {
-            var _position48 = calculatePosition(node, modulators[0], idealEdgeLength, 270);
-            modulators[0].setCenter(_position48.x, _position48.y);
-            verticalAlignments.push([node, modulators[0]]);
-          } else if (modulators.length == 2) {
-            var _position49 = calculatePosition(node, modulators[0], idealEdgeLength, 90);
+            var _position49 = calculatePosition(node, modulators[0], idealEdgeLength, 270);
             modulators[0].setCenter(_position49.x, _position49.y);
-            _position49 = calculatePosition(node, modulators[1], idealEdgeLength, 270);
-            modulators[1].setCenter(_position49.x, _position49.y);
-          } else if (modulators.length > 2) {
-            var _position50 = calculatePosition(node, modulators[0], idealEdgeLength, 60);
+            if (modulators[0].isLogicalOperator()) {
+              // if logical operator
+              placeLogicalOperators(modulators[0], 270, 225, 315);
+            }
+          } else if (modulators.length == 2) {
+            var _position50 = calculatePosition(node, modulators[0], idealEdgeLength, 90);
             modulators[0].setCenter(_position50.x, _position50.y);
-            _position50 = calculatePosition(node, modulators[1], idealEdgeLength, 120);
+            if (modulators[0].isLogicalOperator()) {
+              // if logical operator
+              placeLogicalOperators(modulators[0], 90, 45, 135);
+            }
+            _position50 = calculatePosition(node, modulators[1], idealEdgeLength, 270);
             modulators[1].setCenter(_position50.x, _position50.y);
-            _position50 = calculatePosition(node, modulators[2], idealEdgeLength, 270);
-            modulators[2].setCenter(_position50.x, _position50.y);
+            if (modulators[0].isLogicalOperator()) {
+              // if logical operator
+              placeLogicalOperators(modulators[0], 270, 225, 315);
+            }
+          } else if (modulators.length > 2) {
+            var _position51 = calculatePosition(node, modulators[0], idealEdgeLength, 60);
+            modulators[0].setCenter(_position51.x, _position51.y);
+            if (modulators[0].isLogicalOperator()) {
+              // if logical operator
+              placeLogicalOperators(modulators[0], 90, 45, 135);
+            }
+            _position51 = calculatePosition(node, modulators[1], idealEdgeLength, 120);
+            modulators[1].setCenter(_position51.x, _position51.y);
+            if (modulators[1].isLogicalOperator()) {
+              // if logical operator
+              placeLogicalOperators(modulators[1], 90, 45, 135);
+            }
+            _position51 = calculatePosition(node, modulators[2], idealEdgeLength, 270);
+            modulators[2].setCenter(_position51.x, _position51.y);
+            if (modulators[2].isLogicalOperator()) {
+              // if logical operator
+              placeLogicalOperators(modulators[2], 270, 225, 315);
+            }
           }
           // process outputs
           if (outputs.length == 1) {
-            var _position51 = calculatePosition(node, outputs[0], idealEdgeLength, 135);
-            outputs[0].setCenter(_position51.x, _position51.y);
-          } else if (outputs.length == 2) {
             var _position52 = calculatePosition(node, outputs[0], idealEdgeLength, 135);
             outputs[0].setCenter(_position52.x, _position52.y);
-            _position52 = calculatePosition(node, outputs[1], idealEdgeLength, 225);
-            outputs[1].setCenter(_position52.x, _position52.y);
-          } else if (outputs.length > 2) {
-            var _position53 = calculatePosition(node, outputs[0], idealEdgeLength, 210);
+          } else if (outputs.length == 2) {
+            var _position53 = calculatePosition(node, outputs[0], idealEdgeLength, 135);
             outputs[0].setCenter(_position53.x, _position53.y);
-            _position53 = calculatePosition(node, outputs[1], idealEdgeLength, 150);
+            _position53 = calculatePosition(node, outputs[1], idealEdgeLength, 225);
             outputs[1].setCenter(_position53.x, _position53.y);
+          } else if (outputs.length > 2) {
+            var _position54 = calculatePosition(node, outputs[0], idealEdgeLength, 210);
+            outputs[0].setCenter(_position54.x, _position54.y);
+            _position54 = calculatePosition(node, outputs[1], idealEdgeLength, 150);
+            outputs[1].setCenter(_position54.x, _position54.y);
             if (outputs[2]) {
-              _position53 = calculatePosition(node, outputs[2], idealEdgeLength, 240);
-              outputs[2].setCenter(_position53.x, _position53.y);
+              _position54 = calculatePosition(node, outputs[2], idealEdgeLength, 240);
+              outputs[2].setCenter(_position54.x, _position54.y);
               if (outputs[3]) {
-                _position53 = calculatePosition(node, outputs[3], idealEdgeLength, 120);
-                outputs[3].setCenter(_position53.x, _position53.y);
+                _position54 = calculatePosition(node, outputs[3], idealEdgeLength, 120);
+                outputs[3].setCenter(_position54.x, _position54.y);
               }
             }
           }
@@ -1355,24 +1397,24 @@ SBGNPolishing.addPerComponentPolishment = function (components, directions) {
         if (orientation == "top-to-bottom") {
           // process inputs
           if (inputs.length == 1) {
-            var _position54 = calculatePosition(node, inputs[0], idealEdgeLength, 135);
-            inputs[0].setCenter(_position54.x, _position54.y);
-          } else if (inputs.length == 2) {
             var _position55 = calculatePosition(node, inputs[0], idealEdgeLength, 135);
             inputs[0].setCenter(_position55.x, _position55.y);
-            _position55 = calculatePosition(node, inputs[1], idealEdgeLength, 45);
-            inputs[1].setCenter(_position55.x, _position55.y);
-          } else if (inputs.length > 2) {
-            var _position56 = calculatePosition(node, inputs[0], idealEdgeLength, 60);
+          } else if (inputs.length == 2) {
+            var _position56 = calculatePosition(node, inputs[0], idealEdgeLength, 135);
             inputs[0].setCenter(_position56.x, _position56.y);
-            _position56 = calculatePosition(node, inputs[1], idealEdgeLength, 120);
+            _position56 = calculatePosition(node, inputs[1], idealEdgeLength, 45);
             inputs[1].setCenter(_position56.x, _position56.y);
+          } else if (inputs.length > 2) {
+            var _position57 = calculatePosition(node, inputs[0], idealEdgeLength, 60);
+            inputs[0].setCenter(_position57.x, _position57.y);
+            _position57 = calculatePosition(node, inputs[1], idealEdgeLength, 120);
+            inputs[1].setCenter(_position57.x, _position57.y);
             if (inputs[2]) {
-              _position56 = calculatePosition(node, inputs[2], idealEdgeLength, 30);
-              inputs[2].setCenter(_position56.x, _position56.y);
+              _position57 = calculatePosition(node, inputs[2], idealEdgeLength, 30);
+              inputs[2].setCenter(_position57.x, _position57.y);
               if (inputs[3]) {
-                _position56 = calculatePosition(node, inputs[3], idealEdgeLength, 150);
-                inputs[3].setCenter(_position56.x, _position56.y);
+                _position57 = calculatePosition(node, inputs[3], idealEdgeLength, 150);
+                inputs[3].setCenter(_position57.x, _position57.y);
               }
             }
             inputs.forEach(function (input) {
@@ -1381,42 +1423,65 @@ SBGNPolishing.addPerComponentPolishment = function (components, directions) {
           }
           // process modulators
           if (modulators.length == 1) {
-            var _position57 = calculatePosition(node, modulators[0], idealEdgeLength, 0);
-            modulators[0].setCenter(_position57.x, _position57.y);
-            horizontalAlignments.push([node, modulators[0]]);
-          } else if (modulators.length == 2) {
-            var _position58 = calculatePosition(node, modulators[0], idealEdgeLength, 180);
+            var _position58 = calculatePosition(node, modulators[0], idealEdgeLength, 0);
             modulators[0].setCenter(_position58.x, _position58.y);
-            _position58 = calculatePosition(node, modulators[1], idealEdgeLength, 0);
-            modulators[1].setCenter(_position58.x, _position58.y);
-          } else if (modulators.length > 2) {
-            var _position59 = calculatePosition(node, modulators[0], idealEdgeLength, 150);
+            if (modulators[0].isLogicalOperator()) {
+              // if logical operator
+              placeLogicalOperators(modulators[0], 0, 45, 315);
+            }
+          } else if (modulators.length == 2) {
+            var _position59 = calculatePosition(node, modulators[0], idealEdgeLength, 180);
             modulators[0].setCenter(_position59.x, _position59.y);
-            _position59 = calculatePosition(node, modulators[1], idealEdgeLength, 210);
+            if (modulators[0].isLogicalOperator()) {
+              // if logical operator
+              placeLogicalOperators(modulators[0], 180, 135, 225);
+            }
+            _position59 = calculatePosition(node, modulators[1], idealEdgeLength, 0);
             modulators[1].setCenter(_position59.x, _position59.y);
-            _position59 = calculatePosition(node, modulators[2], idealEdgeLength, 0);
-            modulators[2].setCenter(_position59.x, _position59.y);
+            if (modulators[1].isLogicalOperator()) {
+              // if logical operator
+              placeLogicalOperators(modulators[1], 0, 45, 315);
+            }
+          } else if (modulators.length > 2) {
+            var _position60 = calculatePosition(node, modulators[0], idealEdgeLength, 150);
+            modulators[0].setCenter(_position60.x, _position60.y);
+            if (modulators[0].isLogicalOperator()) {
+              // if logical operator
+              placeLogicalOperators(modulators[0], 180, 135, 225);
+            }
+            _position60 = calculatePosition(node, modulators[1], idealEdgeLength, 210);
+            modulators[1].setCenter(_position60.x, _position60.y);
+            if (modulators[1].isLogicalOperator()) {
+              // if logical operator
+              placeLogicalOperators(modulators[1], 180, 135, 225);
+            }
+            _position60 = calculatePosition(node, modulators[2], idealEdgeLength, 0);
+            modulators[2].setCenter(_position60.x, _position60.y);
+            if (modulators[2].isLogicalOperator()) {
+              // if logical operator
+              placeLogicalOperators(modulators[2], 0, 45, 315);
+            }
           }
           // process outputs
           if (outputs.length == 1) {
-            var _position60 = calculatePosition(node, outputs[0], idealEdgeLength, 225);
-            outputs[0].setCenter(_position60.x, _position60.y);
-          } else if (outputs.length == 2) {
             var _position61 = calculatePosition(node, outputs[0], idealEdgeLength, 225);
             outputs[0].setCenter(_position61.x, _position61.y);
-            _position61 = calculatePosition(node, outputs[1], idealEdgeLength, 315);
-            outputs[1].setCenter(_position61.x, _position61.y);
-          } else if (outputs.length > 2) {
-            var _position62 = calculatePosition(node, outputs[0], idealEdgeLength, 300);
+          } else if (outputs.length == 2) {
+            var _position62 = calculatePosition(node, outputs[0], idealEdgeLength, 225);
             outputs[0].setCenter(_position62.x, _position62.y);
-            _position62 = calculatePosition(node, outputs[1], idealEdgeLength, 240);
+            _position62 = calculatePosition(node, outputs[1], idealEdgeLength, 315);
             outputs[1].setCenter(_position62.x, _position62.y);
+          } else if (outputs.length > 2) {
+            var _position63 = calculatePosition(node, outputs[0], idealEdgeLength, 300);
+            outputs[0].setCenter(_position63.x, _position63.y);
+            _position63 = calculatePosition(node, outputs[1], idealEdgeLength, 240);
+            outputs[1].setCenter(_position63.x, _position63.y);
             if (outputs[2]) {
-              _position62 = calculatePosition(node, outputs[2], idealEdgeLength, 330);
-              outputs[2].setCenter(_position62.x, _position62.y);
+              _position63 = calculatePosition(node, outputs[2], idealEdgeLength, 330);
+              outputs[2].setCenter(_position63.x, _position63.y);
               if (outputs[3]) {
-                _position62 = calculatePosition(node, outputs[3], idealEdgeLength, 210);
-                outputs[3].setCenter(_position62.x, _position62.y);
+                _position63 = calculatePosition(node, outputs[3], idealEdgeLength, 210);
+                outputs[3].setCenter(_position63.x, _position63.y);
               }
             }
           }
@@ -1424,24 +1489,24 @@ SBGNPolishing.addPerComponentPolishment = function (components, directions) {
         if (orientation == "bottom-to-top") {
           // process inputs
           if (inputs.length == 1) {
-            var _position63 = calculatePosition(node, inputs[0], idealEdgeLength, 315);
-            inputs[0].setCenter(_position63.x, _position63.y);
-          } else if (inputs.length == 2) {
             var _position64 = calculatePosition(node, inputs[0], idealEdgeLength, 315);
             inputs[0].setCenter(_position64.x, _position64.y);
-            _position64 = calculatePosition(node, inputs[1], idealEdgeLength, 225);
-            inputs[1].setCenter(_position64.x, _position64.y);
-          } else if (inputs.length > 2) {
-            var _position65 = calculatePosition(node, inputs[0], idealEdgeLength, 300);
+          } else if (inputs.length == 2) {
+            var _position65 = calculatePosition(node, inputs[0], idealEdgeLength, 315);
             inputs[0].setCenter(_position65.x, _position65.y);
-            _position65 = calculatePosition(node, inputs[1], idealEdgeLength, 240);
+            _position65 = calculatePosition(node, inputs[1], idealEdgeLength, 225);
             inputs[1].setCenter(_position65.x, _position65.y);
+          } else if (inputs.length > 2) {
+            var _position66 = calculatePosition(node, inputs[0], idealEdgeLength, 300);
+            inputs[0].setCenter(_position66.x, _position66.y);
+            _position66 = calculatePosition(node, inputs[1], idealEdgeLength, 240);
+            inputs[1].setCenter(_position66.x, _position66.y);
             if (inputs[2]) {
-              _position65 = calculatePosition(node, inputs[2], idealEdgeLength, 330);
-              inputs[2].setCenter(_position65.x, _position65.y);
+              _position66 = calculatePosition(node, inputs[2], idealEdgeLength, 330);
+              inputs[2].setCenter(_position66.x, _position66.y);
               if (inputs[3]) {
-                _position65 = calculatePosition(node, inputs[3], idealEdgeLength, 210);
-                inputs[3].setCenter(_position65.x, _position65.y);
+                _position66 = calculatePosition(node, inputs[3], idealEdgeLength, 210);
+                inputs[3].setCenter(_position66.x, _position66.y);
               }
             }
             inputs.forEach(function (input) {
@@ -1450,42 +1515,65 @@ SBGNPolishing.addPerComponentPolishment = function (components, directions) {
           }
           // process modulators
           if (modulators.length == 1) {
-            var _position66 = calculatePosition(node, modulators[0], idealEdgeLength, 180);
-            modulators[0].setCenter(_position66.x, _position66.y);
-            horizontalAlignments.push([node, modulators[0]]);
-          } else if (modulators.length == 2) {
             var _position67 = calculatePosition(node, modulators[0], idealEdgeLength, 180);
             modulators[0].setCenter(_position67.x, _position67.y);
-            _position67 = calculatePosition(node, modulators[1], idealEdgeLength, 0);
-            modulators[1].setCenter(_position67.x, _position67.y);
-          } else if (modulators.length > 2) {
-            var _position68 = calculatePosition(node, modulators[0], idealEdgeLength, 150);
+            if (modulators[0].isLogicalOperator()) {
+              // if logical operator
+              placeLogicalOperators(modulators[0], 180, 135, 225);
+            }
+          } else if (modulators.length == 2) {
+            var _position68 = calculatePosition(node, modulators[0], idealEdgeLength, 180);
             modulators[0].setCenter(_position68.x, _position68.y);
-            _position68 = calculatePosition(node, modulators[1], idealEdgeLength, 210);
+            if (modulators[0].isLogicalOperator()) {
+              // if logical operator
+              placeLogicalOperators(modulators[0], 180, 135, 225);
+            }
+            _position68 = calculatePosition(node, modulators[1], idealEdgeLength, 0);
             modulators[1].setCenter(_position68.x, _position68.y);
-            _position68 = calculatePosition(node, modulators[2], idealEdgeLength, 0);
-            modulators[2].setCenter(_position68.x, _position68.y);
+            if (modulators[1].isLogicalOperator()) {
+              // if logical operator
+              placeLogicalOperators(modulators[1], 0, 45, 315);
+            }
+          } else if (modulators.length > 2) {
+            var _position69 = calculatePosition(node, modulators[0], idealEdgeLength, 150);
+            modulators[0].setCenter(_position69.x, _position69.y);
+            if (modulators[0].isLogicalOperator()) {
+              // if logical operator
+              placeLogicalOperators(modulators[0], 180, 135, 225);
+            }
+            _position69 = calculatePosition(node, modulators[1], idealEdgeLength, 210);
+            modulators[1].setCenter(_position69.x, _position69.y);
+            if (modulators[1].isLogicalOperator()) {
+              // if logical operator
+              placeLogicalOperators(modulators[1], 180, 135, 225);
+            }
+            _position69 = calculatePosition(node, modulators[2], idealEdgeLength, 0);
+            modulators[2].setCenter(_position69.x, _position69.y);
+            if (modulators[1].isLogicalOperator()) {
+              // if logical operator
+              placeLogicalOperators(modulators[1], 0, 45, 315);
+            }
           }
           // process outputs
           if (outputs.length == 1) {
-            var _position69 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
-            outputs[0].setCenter(_position69.x, _position69.y);
-          } else if (outputs.length == 2) {
             var _position70 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
             outputs[0].setCenter(_position70.x, _position70.y);
-            _position70 = calculatePosition(node, outputs[1], idealEdgeLength, 135);
-            outputs[1].setCenter(_position70.x, _position70.y);
-          } else if (outputs.length > 2) {
-            var _position71 = calculatePosition(node, outputs[0], idealEdgeLength, 60);
+          } else if (outputs.length == 2) {
+            var _position71 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
             outputs[0].setCenter(_position71.x, _position71.y);
-            _position71 = calculatePosition(node, outputs[1], idealEdgeLength, 120);
+            _position71 = calculatePosition(node, outputs[1], idealEdgeLength, 135);
             outputs[1].setCenter(_position71.x, _position71.y);
+          } else if (outputs.length > 2) {
+            var _position72 = calculatePosition(node, outputs[0], idealEdgeLength, 60);
+            outputs[0].setCenter(_position72.x, _position72.y);
+            _position72 = calculatePosition(node, outputs[1], idealEdgeLength, 120);
+            outputs[1].setCenter(_position72.x, _position72.y);
             if (outputs[2]) {
-              _position71 = calculatePosition(node, outputs[2], idealEdgeLength, 30);
-              outputs[2].setCenter(_position71.x, _position71.y);
+              _position72 = calculatePosition(node, outputs[2], idealEdgeLength, 30);
+              outputs[2].setCenter(_position72.x, _position72.y);
               if (outputs[3]) {
-                _position71 = calculatePosition(node, outputs[3], idealEdgeLength, 150);
-                outputs[3].setCenter(_position71.x, _position71.y);
+                _position72 = calculatePosition(node, outputs[3], idealEdgeLength, 150);
+                outputs[3].setCenter(_position72.x, _position72.y);
               }
             }
           }
@@ -1495,113 +1583,113 @@ SBGNPolishing.addPerComponentPolishment = function (components, directions) {
         if (orientation == "left-to-right") {
           // process outputs
           if (outputs.length == 1) {
-            var _position72 = calculatePosition(node, outputs[0], idealEdgeLength, 0);
-            outputs[0].setCenter(_position72.x, _position72.y);
-          } else if (outputs.length == 2) {
-            var _position73 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
+            var _position73 = calculatePosition(node, outputs[0], idealEdgeLength, 0);
             outputs[0].setCenter(_position73.x, _position73.y);
-            _position73 = calculatePosition(node, outputs[1], idealEdgeLength, 315);
-            outputs[1].setCenter(_position73.x, _position73.y);
-          } else if (outputs.length == 3) {
+          } else if (outputs.length == 2) {
             var _position74 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
             outputs[0].setCenter(_position74.x, _position74.y);
-            _position74 = calculatePosition(node, outputs[1], idealEdgeLength, 0);
+            _position74 = calculatePosition(node, outputs[1], idealEdgeLength, 315);
             outputs[1].setCenter(_position74.x, _position74.y);
-            _position74 = calculatePosition(node, outputs[2], idealEdgeLength, 315);
-            outputs[2].setCenter(_position74.x, _position74.y);
-          } else if (outputs.length == 4) {
-            var _position75 = calculatePosition(node, outputs[0], idealEdgeLength, 54);
+          } else if (outputs.length == 3) {
+            var _position75 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
             outputs[0].setCenter(_position75.x, _position75.y);
-            _position75 = calculatePosition(node, outputs[1], idealEdgeLength, 18);
+            _position75 = calculatePosition(node, outputs[1], idealEdgeLength, 0);
             outputs[1].setCenter(_position75.x, _position75.y);
-            _position75 = calculatePosition(node, outputs[2], idealEdgeLength, 342);
+            _position75 = calculatePosition(node, outputs[2], idealEdgeLength, 315);
             outputs[2].setCenter(_position75.x, _position75.y);
-            _position75 = calculatePosition(node, outputs[3], idealEdgeLength, 306);
-            outputs[3].setCenter(_position75.x, _position75.y);
+          } else if (outputs.length == 4) {
+            var _position76 = calculatePosition(node, outputs[0], idealEdgeLength, 54);
+            outputs[0].setCenter(_position76.x, _position76.y);
+            _position76 = calculatePosition(node, outputs[1], idealEdgeLength, 18);
+            outputs[1].setCenter(_position76.x, _position76.y);
+            _position76 = calculatePosition(node, outputs[2], idealEdgeLength, 342);
+            outputs[2].setCenter(_position76.x, _position76.y);
+            _position76 = calculatePosition(node, outputs[3], idealEdgeLength, 306);
+            outputs[3].setCenter(_position76.x, _position76.y);
           }
         }
         if (orientation == "right-to-left") {
           // process outputs
           if (outputs.length == 1) {
-            var _position76 = calculatePosition(node, outputs[0], idealEdgeLength, 180);
-            outputs[0].setCenter(_position76.x, _position76.y);
-          } else if (outputs.length == 2) {
-            var _position77 = calculatePosition(node, outputs[0], idealEdgeLength, 135);
+            var _position77 = calculatePosition(node, outputs[0], idealEdgeLength, 180);
             outputs[0].setCenter(_position77.x, _position77.y);
-            _position77 = calculatePosition(node, outputs[1], idealEdgeLength, 225);
-            outputs[1].setCenter(_position77.x, _position77.y);
-          } else if (outputs.length == 3) {
+          } else if (outputs.length == 2) {
             var _position78 = calculatePosition(node, outputs[0], idealEdgeLength, 135);
             outputs[0].setCenter(_position78.x, _position78.y);
-            _position78 = calculatePosition(node, outputs[1], idealEdgeLength, 180);
+            _position78 = calculatePosition(node, outputs[1], idealEdgeLength, 225);
             outputs[1].setCenter(_position78.x, _position78.y);
-            _position78 = calculatePosition(node, outputs[2], idealEdgeLength, 225);
-            outputs[2].setCenter(_position78.x, _position78.y);
-          } else if (outputs.length == 4) {
-            var _position79 = calculatePosition(node, outputs[0], idealEdgeLength, 126);
+          } else if (outputs.length == 3) {
+            var _position79 = calculatePosition(node, outputs[0], idealEdgeLength, 135);
             outputs[0].setCenter(_position79.x, _position79.y);
-            _position79 = calculatePosition(node, outputs[1], idealEdgeLength, 162);
+            _position79 = calculatePosition(node, outputs[1], idealEdgeLength, 180);
             outputs[1].setCenter(_position79.x, _position79.y);
-            _position79 = calculatePosition(node, outputs[2], idealEdgeLength, 198);
+            _position79 = calculatePosition(node, outputs[2], idealEdgeLength, 225);
             outputs[2].setCenter(_position79.x, _position79.y);
-            _position79 = calculatePosition(node, outputs[3], idealEdgeLength, 234);
-            outputs[3].setCenter(_position79.x, _position79.y);
+          } else if (outputs.length == 4) {
+            var _position80 = calculatePosition(node, outputs[0], idealEdgeLength, 126);
+            outputs[0].setCenter(_position80.x, _position80.y);
+            _position80 = calculatePosition(node, outputs[1], idealEdgeLength, 162);
+            outputs[1].setCenter(_position80.x, _position80.y);
+            _position80 = calculatePosition(node, outputs[2], idealEdgeLength, 198);
+            outputs[2].setCenter(_position80.x, _position80.y);
+            _position80 = calculatePosition(node, outputs[3], idealEdgeLength, 234);
+            outputs[3].setCenter(_position80.x, _position80.y);
           }
         }
         if (orientation == "top-to-bottom") {
           // process outputs
           if (outputs.length == 1) {
-            var _position80 = calculatePosition(node, outputs[0], idealEdgeLength, 270);
-            outputs[0].setCenter(_position80.x, _position80.y);
-          } else if (outputs.length == 2) {
-            var _position81 = calculatePosition(node, outputs[0], idealEdgeLength, 225);
+            var _position81 = calculatePosition(node, outputs[0], idealEdgeLength, 270);
             outputs[0].setCenter(_position81.x, _position81.y);
-            _position81 = calculatePosition(node, outputs[1], idealEdgeLength, 315);
-            outputs[1].setCenter(_position81.x, _position81.y);
-          } else if (outputs.length == 3) {
+          } else if (outputs.length == 2) {
             var _position82 = calculatePosition(node, outputs[0], idealEdgeLength, 225);
             outputs[0].setCenter(_position82.x, _position82.y);
-            _position82 = calculatePosition(node, outputs[1], idealEdgeLength, 270);
+            _position82 = calculatePosition(node, outputs[1], idealEdgeLength, 315);
             outputs[1].setCenter(_position82.x, _position82.y);
-            _position82 = calculatePosition(node, outputs[2], idealEdgeLength, 315);
-            outputs[2].setCenter(_position82.x, _position82.y);
-          } else if (outputs.length == 4) {
-            var _position83 = calculatePosition(node, outputs[0], idealEdgeLength, 216);
+          } else if (outputs.length == 3) {
+            var _position83 = calculatePosition(node, outputs[0], idealEdgeLength, 225);
             outputs[0].setCenter(_position83.x, _position83.y);
-            _position83 = calculatePosition(node, outputs[1], idealEdgeLength, 252);
+            _position83 = calculatePosition(node, outputs[1], idealEdgeLength, 270);
             outputs[1].setCenter(_position83.x, _position83.y);
-            _position83 = calculatePosition(node, outputs[2], idealEdgeLength, 288);
+            _position83 = calculatePosition(node, outputs[2], idealEdgeLength, 315);
             outputs[2].setCenter(_position83.x, _position83.y);
-            _position83 = calculatePosition(node, outputs[3], idealEdgeLength, 324);
-            outputs[3].setCenter(_position83.x, _position83.y);
+          } else if (outputs.length == 4) {
+            var _position84 = calculatePosition(node, outputs[0], idealEdgeLength, 216);
+            outputs[0].setCenter(_position84.x, _position84.y);
+            _position84 = calculatePosition(node, outputs[1], idealEdgeLength, 252);
+            outputs[1].setCenter(_position84.x, _position84.y);
+            _position84 = calculatePosition(node, outputs[2], idealEdgeLength, 288);
+            outputs[2].setCenter(_position84.x, _position84.y);
+            _position84 = calculatePosition(node, outputs[3], idealEdgeLength, 324);
+            outputs[3].setCenter(_position84.x, _position84.y);
           }
         }
         if (orientation == "bottom-to-top") {
           // process outputs
           if (outputs.length == 1) {
-            var _position84 = calculatePosition(node, outputs[0], idealEdgeLength, 90);
-            outputs[0].setCenter(_position84.x, _position84.y);
-          } else if (outputs.length == 2) {
-            var _position85 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
+            var _position85 = calculatePosition(node, outputs[0], idealEdgeLength, 90);
             outputs[0].setCenter(_position85.x, _position85.y);
-            _position85 = calculatePosition(node, outputs[1], idealEdgeLength, 135);
-            outputs[1].setCenter(_position85.x, _position85.y);
-          } else if (outputs.length == 3) {
+          } else if (outputs.length == 2) {
             var _position86 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
             outputs[0].setCenter(_position86.x, _position86.y);
-            _position86 = calculatePosition(node, outputs[1], idealEdgeLength, 90);
+            _position86 = calculatePosition(node, outputs[1], idealEdgeLength, 135);
             outputs[1].setCenter(_position86.x, _position86.y);
-            _position86 = calculatePosition(node, outputs[2], idealEdgeLength, 135);
-            outputs[2].setCenter(_position86.x, _position86.y);
-          } else if (outputs.length == 4) {
-            var _position87 = calculatePosition(node, outputs[0], idealEdgeLength, 36);
+          } else if (outputs.length == 3) {
+            var _position87 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
             outputs[0].setCenter(_position87.x, _position87.y);
-            _position87 = calculatePosition(node, outputs[1], idealEdgeLength, 72);
+            _position87 = calculatePosition(node, outputs[1], idealEdgeLength, 90);
             outputs[1].setCenter(_position87.x, _position87.y);
-            _position87 = calculatePosition(node, outputs[2], idealEdgeLength, 108);
+            _position87 = calculatePosition(node, outputs[2], idealEdgeLength, 135);
             outputs[2].setCenter(_position87.x, _position87.y);
-            _position87 = calculatePosition(node, outputs[3], idealEdgeLength, 144);
-            outputs[3].setCenter(_position87.x, _position87.y);
+          } else if (outputs.length == 4) {
+            var _position88 = calculatePosition(node, outputs[0], idealEdgeLength, 36);
+            outputs[0].setCenter(_position88.x, _position88.y);
+            _position88 = calculatePosition(node, outputs[1], idealEdgeLength, 72);
+            outputs[1].setCenter(_position88.x, _position88.y);
+            _position88 = calculatePosition(node, outputs[2], idealEdgeLength, 108);
+            outputs[2].setCenter(_position88.x, _position88.y);
+            _position88 = calculatePosition(node, outputs[3], idealEdgeLength, 144);
+            outputs[3].setCenter(_position88.x, _position88.y);
           }
         }
       }
@@ -1713,7 +1801,7 @@ var defaults = {
   // Node repulsion (non overlapping) multiplier
   nodeRepulsion: 4500,
   // Ideal edge (non nested) length
-  idealEdgeLength: 70,
+  idealEdgeLength: 100,
   // Divisor to compute edge forces
   edgeElasticity: 0.45,
   // Nesting factor (multiplier) to compute ideal edge length for nested edges
@@ -1801,7 +1889,6 @@ var Layout = function (_ContinuousLayout) {
       if (state.randomize) {
         sbgnLayout.runLayout();
       }
-
       var graphInfo = sbgnLayout.constructSkeleton();
 
       // Apply an incremental layout to give a shape to reaction blocks

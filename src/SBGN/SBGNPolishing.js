@@ -30,6 +30,20 @@ SBGNPolishing.addPerComponentPolishment = function (components, directions) {
     }
   };
 
+  let placeLogicalOperators = function(modulator, a1, a2, a3){
+    let incomers = modulator.getIncomerNodes();
+    if (incomers.length == 1) {
+      let position = calculatePosition(modulator, incomers[0], idealEdgeLength, a1);
+      incomers[0].setCenter(position.x, position.y);
+    }
+    else if(incomers.length == 2) {
+      let position = calculatePosition(modulator, incomers[0], idealEdgeLength, a2);
+      incomers[0].setCenter(position.x, position.y);
+      position = calculatePosition(modulator, incomers[1], idealEdgeLength, a3);
+      incomers[1].setCenter(position.x, position.y);
+    }
+  };
+
   let findOrientation = function (edgeBetween, direction) {
     let source = edgeBetween.getSource();
     let target = edgeBetween.getTarget();
@@ -62,7 +76,7 @@ SBGNPolishing.addPerComponentPolishment = function (components, directions) {
         orientation = findOrientation(edgeBetween, directions[i]);
       }
     }
-    console.log(orientation);
+
     component.forEach((node, j) => {
       let incomers = node.getIncomerNodes();
       let outgoers = node.getOutgoerNodes();
@@ -79,7 +93,7 @@ SBGNPolishing.addPerComponentPolishment = function (components, directions) {
       // find modulator nodes (filter ring nodes, non-modulator nodes and input with degree higher than 1)
       let modulators = incomers.filter((input) => {
         let edgeBetween = node.getEdgesBetween(input)[0];
-        if (input.pseudoClass != "ring" && (edgeBetween.class == "modulation" || edgeBetween.class == "stimulation" || edgeBetween.class == "catalysis" || edgeBetween.class == "inhibition" || edgeBetween.class == "necessary stimulation") && input.getNeighborsList().size == 1) {
+        if (input.pseudoClass != "ring" && (edgeBetween.class == "modulation" || edgeBetween.class == "stimulation" || edgeBetween.class == "catalysis" || edgeBetween.class == "inhibition" || edgeBetween.class == "necessary stimulation") && (input.getNeighborsList().size == 1 || input.isLogicalOperator())) {
           return true;
         }
         else {
@@ -432,7 +446,6 @@ SBGNPolishing.addPerComponentPolishment = function (components, directions) {
         if (orientation == "left-to-right") {
           // process inputs
           if (inputs.length == 1) {
-
             let position = calculatePosition(node, inputs[0], idealEdgeLength, 225);
             inputs[0].setCenter(position.x, position.y);
           }
@@ -460,21 +473,38 @@ SBGNPolishing.addPerComponentPolishment = function (components, directions) {
           if (modulators.length == 1) {
             let position = calculatePosition(node, modulators[0], idealEdgeLength, 90);
             modulators[0].setCenter(position.x, position.y);
-            verticalAlignments.push([node, modulators[0]]);
+            if(modulators[0].isLogicalOperator()) {   // if logical operator
+              placeLogicalOperators(modulators[0], 90, 45, 135);
+            }
           }
           else if (modulators.length == 2) {
             let position = calculatePosition(node, modulators[0], idealEdgeLength, 90);
             modulators[0].setCenter(position.x, position.y);
+            if(modulators[0].isLogicalOperator()) {   // if logical operator
+              placeLogicalOperators(modulators[0], 90, 45, 135);
+            }
             position = calculatePosition(node, modulators[1], idealEdgeLength, 270);
             modulators[1].setCenter(position.x, position.y);
+            if(modulators[1].isLogicalOperator()) {   // if logical operator
+              placeLogicalOperators(modulators[1], 270, 225, 315);
+            }
           }
           else if (modulators.length > 2) {
             let position = calculatePosition(node, modulators[0], idealEdgeLength, 60);
             modulators[0].setCenter(position.x, position.y);
+            if(modulators[0].isLogicalOperator()) {   // if logical operator
+              placeLogicalOperators(modulators[0], 90, 45, 135);
+            }
             position = calculatePosition(node, modulators[1], idealEdgeLength, 120);
             modulators[1].setCenter(position.x, position.y);
+            if(modulators[1].isLogicalOperator()) {   // if logical operator
+              placeLogicalOperators(modulators[1], 90, 45, 135);
+            }
             position = calculatePosition(node, modulators[2], idealEdgeLength, 270);
             modulators[2].setCenter(position.x, position.y);
+            if(modulators[2].isLogicalOperator()) {   // if logical operator
+              placeLogicalOperators(modulators[2], 270, 225, 315);
+            }
           }
           // process outputs
           if (outputs.length == 1) {
@@ -535,21 +565,38 @@ SBGNPolishing.addPerComponentPolishment = function (components, directions) {
           if (modulators.length == 1) {
             let position = calculatePosition(node, modulators[0], idealEdgeLength, 270);
             modulators[0].setCenter(position.x, position.y);
-            verticalAlignments.push([node, modulators[0]]);
+            if(modulators[0].isLogicalOperator()) {   // if logical operator
+              placeLogicalOperators(modulators[0], 270, 225, 315);
+            }
           }
           else if (modulators.length == 2) {
             let position = calculatePosition(node, modulators[0], idealEdgeLength, 90);
             modulators[0].setCenter(position.x, position.y);
+            if(modulators[0].isLogicalOperator()) {   // if logical operator
+              placeLogicalOperators(modulators[0], 90, 45, 135);
+            }
             position = calculatePosition(node, modulators[1], idealEdgeLength, 270);
             modulators[1].setCenter(position.x, position.y);
+            if(modulators[0].isLogicalOperator()) {   // if logical operator
+              placeLogicalOperators(modulators[0], 270, 225, 315);
+            }
           }
           else if (modulators.length > 2) {
             let position = calculatePosition(node, modulators[0], idealEdgeLength, 60);
             modulators[0].setCenter(position.x, position.y);
+            if(modulators[0].isLogicalOperator()) {   // if logical operator
+              placeLogicalOperators(modulators[0], 90, 45, 135);
+            }
             position = calculatePosition(node, modulators[1], idealEdgeLength, 120);
             modulators[1].setCenter(position.x, position.y);
+            if(modulators[1].isLogicalOperator()) {   // if logical operator
+              placeLogicalOperators(modulators[1], 90, 45, 135);
+            }
             position = calculatePosition(node, modulators[2], idealEdgeLength, 270);
             modulators[2].setCenter(position.x, position.y);
+            if(modulators[2].isLogicalOperator()) {   // if logical operator
+              placeLogicalOperators(modulators[2], 270, 225, 315);
+            }
           }
           // process outputs
           if (outputs.length == 1) {
@@ -610,21 +657,38 @@ SBGNPolishing.addPerComponentPolishment = function (components, directions) {
           if (modulators.length == 1) {
             let position = calculatePosition(node, modulators[0], idealEdgeLength, 0);
             modulators[0].setCenter(position.x, position.y);
-            horizontalAlignments.push([node, modulators[0]]);
+            if(modulators[0].isLogicalOperator()) {   // if logical operator
+              placeLogicalOperators(modulators[0], 0, 45, 315);
+            }
           }
           else if (modulators.length == 2) {
             let position = calculatePosition(node, modulators[0], idealEdgeLength, 180);
             modulators[0].setCenter(position.x, position.y);
+            if(modulators[0].isLogicalOperator()) {   // if logical operator
+              placeLogicalOperators(modulators[0], 180, 135, 225);
+            }
             position = calculatePosition(node, modulators[1], idealEdgeLength, 0);
             modulators[1].setCenter(position.x, position.y);
+            if(modulators[1].isLogicalOperator()) {   // if logical operator
+              placeLogicalOperators(modulators[1], 0, 45, 315);
+            }
           }
           else if (modulators.length > 2) {
             let position = calculatePosition(node, modulators[0], idealEdgeLength, 150);
             modulators[0].setCenter(position.x, position.y);
+            if(modulators[0].isLogicalOperator()) {   // if logical operator
+              placeLogicalOperators(modulators[0], 180, 135, 225);
+            }
             position = calculatePosition(node, modulators[1], idealEdgeLength, 210);
             modulators[1].setCenter(position.x, position.y);
+            if(modulators[1].isLogicalOperator()) {   // if logical operator
+              placeLogicalOperators(modulators[1], 180, 135, 225);
+            }
             position = calculatePosition(node, modulators[2], idealEdgeLength, 0);
             modulators[2].setCenter(position.x, position.y);
+            if(modulators[2].isLogicalOperator()) {   // if logical operator
+              placeLogicalOperators(modulators[2], 0, 45, 315);
+            }
           }
           // process outputs
           if (outputs.length == 1) {
@@ -685,21 +749,38 @@ SBGNPolishing.addPerComponentPolishment = function (components, directions) {
           if (modulators.length == 1) {
             let position = calculatePosition(node, modulators[0], idealEdgeLength, 180);
             modulators[0].setCenter(position.x, position.y);
-            horizontalAlignments.push([node, modulators[0]]);
+            if(modulators[0].isLogicalOperator()) {   // if logical operator
+              placeLogicalOperators(modulators[0], 180, 135, 225);
+            }
           }
           else if (modulators.length == 2) {
             let position = calculatePosition(node, modulators[0], idealEdgeLength, 180);
             modulators[0].setCenter(position.x, position.y);
+            if(modulators[0].isLogicalOperator()) {   // if logical operator
+              placeLogicalOperators(modulators[0], 180, 135, 225);
+            }
             position = calculatePosition(node, modulators[1], idealEdgeLength, 0);
             modulators[1].setCenter(position.x, position.y);
+            if(modulators[1].isLogicalOperator()) {   // if logical operator
+              placeLogicalOperators(modulators[1], 0, 45, 315);
+            }
           }
           else if (modulators.length > 2) {
             let position = calculatePosition(node, modulators[0], idealEdgeLength, 150);
             modulators[0].setCenter(position.x, position.y);
+            if(modulators[0].isLogicalOperator()) {   // if logical operator
+              placeLogicalOperators(modulators[0], 180, 135, 225);
+            }
             position = calculatePosition(node, modulators[1], idealEdgeLength, 210);
             modulators[1].setCenter(position.x, position.y);
+            if(modulators[1].isLogicalOperator()) {   // if logical operator
+              placeLogicalOperators(modulators[1], 180, 135, 225);
+            }
             position = calculatePosition(node, modulators[2], idealEdgeLength, 0);
             modulators[2].setCenter(position.x, position.y);
+            if(modulators[1].isLogicalOperator()) {   // if logical operator
+              placeLogicalOperators(modulators[1], 0, 45, 315);
+            }
           }
           // process outputs
           if (outputs.length == 1) {
@@ -712,7 +793,6 @@ SBGNPolishing.addPerComponentPolishment = function (components, directions) {
             position = calculatePosition(node, outputs[1], idealEdgeLength, 135);
             outputs[1].setCenter(position.x, position.y);
           }
-
           else if (outputs.length > 2) {
             let position = calculatePosition(node, outputs[0], idealEdgeLength, 60);
             outputs[0].setCenter(position.x, position.y);
@@ -859,6 +939,6 @@ SBGNPolishing.addPerComponentPolishment = function (components, directions) {
   });
 
   return { horizontalAlignments: horizontalAlignments, verticalAlignments: verticalAlignments, relativePlacementConstraints: relativePlacementConstraints };
-}
+};
 
 module.exports = SBGNPolishing;

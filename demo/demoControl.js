@@ -46,15 +46,6 @@ document.getElementById("samples").addEventListener("change", function (event) {
 	else if(sample == "sample6") {
 		filename = "vitamins_b6_activation_to_pyridoxal_phosphate.sbgn";
 	}
-/* 	else if(sample == "sample7") {
-		filename = "glycolysis_cropped2.sbgn";
-	} */
-/* 	else if(sample == "sample8") {
-		filename = "Repressilator_PD_v7.sbgn";
-	} */
-/* 	else if(sample == "sample9") {
-		filename = "mapk_cascade.sbgn";
-	} */
 	else if(sample == "sample7") {
 		filename = "Artemether_Metabolism_Pathway.xml";
 	}
@@ -64,6 +55,18 @@ document.getElementById("samples").addEventListener("change", function (event) {
 	else if(sample == "sample9") {
 		filename = "Formation_of_the_Editosome.xml";
 	}
+	else if(sample == "sample10") {
+		filename = "Ketone_body_catabolism_toBeSolved.sbgn";
+	}
+	else if(sample == "sample11") {
+		filename = "activated_stat1alpha_induction_of_the_irf1_gene.sbgn";
+	}
+/* 	else if(sample == "sample8") {
+		filename = "Repressilator_PD_v7.sbgn";
+	} */
+/* 	else if(sample == "sample9") {
+		filename = "mapk_cascade.sbgn";
+	} */
 	loadSample('examples/' + filename);
 	document.getElementById("fileName").innerHTML = filename;
 });

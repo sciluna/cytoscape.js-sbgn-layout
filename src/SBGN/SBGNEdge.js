@@ -12,4 +12,12 @@ for (let prop in CoSEEdge) {
   SBGNEdge[prop] = CoSEEdge[prop];
 }
 
+SBGNEdge.prototype.isModulation = function() {
+  let self = this;
+  if(self.class == "modulation" || self.class == "stimulation" || self.class == "catalysis" || self.class == "inhibition" || self.class == "necessary stimulation")
+    return true;
+  else
+    return false;
+};
+
 module.exports = SBGNEdge;

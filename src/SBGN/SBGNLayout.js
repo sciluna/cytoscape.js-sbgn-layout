@@ -51,7 +51,7 @@ SBGNLayout.prototype.constructSkeleton = function () {
     let neighbors = process.getNeighborsList();
     let count = 0;
     neighbors.forEach((neighbor) => {
-      if (neighbor.getEdges().length > 1) {
+      if (neighbor.getEdges().length > 1 && !neighbor.getEdgesBetween(process)[0].isModulation()) {
         count++;
       }
     });
@@ -141,7 +141,6 @@ SBGNLayout.prototype.constructSkeleton = function () {
   console.log(componentsExtended);
   console.log(directions);
 
-
   let constraintInfo = this.addPerComponentConstraints(components, directions);
   verticalAlignments = verticalAlignments.concat(constraintInfo.verticalAlignments);
   horizontalAlignments = horizontalAlignments.concat(constraintInfo.horizontalAlignments);
@@ -160,7 +159,7 @@ SBGNLayout.prototype.constructSkeleton = function () {
 SBGNLayout.prototype.DFSUtil = function (currentNode, component, visited, visitedProcessNodeIds, queue) {
 
   visited.add(currentNode.id);
-  if (currentNode.class == "process") {
+  if (currentNode.isProcess()) {
     visitedProcessNodeIds.add(currentNode.id);
   }
 
@@ -174,10 +173,15 @@ SBGNLayout.prototype.DFSUtil = function (currentNode, component, visited, visite
 
   if (neighborNodes.length == 1) {
     let neighbor = neighborNodes[0];
-    //if (!visited.has(neighbor.id())) {
-    component.push(neighbor);
-    this.DFSUtil(neighbor, component, visited, visitedProcessNodeIds, queue);
-    //} 
+    if(neighbor.isLogicalOperator() || currentNode.getEdgesBetween(neighbor)[0].isModulation()) {
+      neighbor.pseudoClass = "ring";
+    }
+    else {
+      //if (!visited.has(neighbor.id())) {
+      component.push(neighbor);
+      this.DFSUtil(neighbor, component, visited, visitedProcessNodeIds, queue);
+      //}
+    }
   }
   else if (neighborNodes.length > 1) {
     currentNode.pseudoClass = "ring";
@@ -356,8 +360,15 @@ SBGNLayout.prototype.extendComponents = function (components) {
       componentExtended.push(node);
       let neighbors = node.getNeighborsList();
       neighbors.forEach((neighbor) => {
+        let edgeBetween = node.getEdgesBetween(neighbor)[0];
         if (neighbor.getEdges().length == 1) {
           componentExtended.push(neighbor);
+        }
+        else if(edgeBetween.isModulation() && edgeBetween.getSource().isLogicalOperator() && edgeBetween.getSource().pseudoClass != "ring"){
+          componentExtended.push(neighbor);
+          neighbor.getIncomerNodes().forEach(incomer => {
+            componentExtended.push(incomer);
+          });
         }
       });
     });

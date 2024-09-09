@@ -48,7 +48,15 @@ SBGNNode.prototype.getIncomerNodes = function () {
 
 SBGNNode.prototype.isProcess = function() {
   let self = this;
-  if(self.class == "process" || self.class == "omitted process" || self.class == "uncertain process")
+  if(self.class == "process" || self.class == "omitted process" || self.class == "uncertain process" || self.class == "association" || self.class == "dissociation")
+    return true;
+  else
+    return false;
+};
+
+SBGNNode.prototype.isLogicalOperator = function() {
+  let self = this;
+  if(self.class == "and" || self.class == "or" || self.class == "not")
     return true;
   else
     return false;
