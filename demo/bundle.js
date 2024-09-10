@@ -50962,6 +50962,8 @@
 		    return !visitedProcessNodeIds.has(process.id);
 		  });
 
+		  // TO DO: put these to queue, because there may be nodes added to the beginning of queue during DFS
+		  // in other words, make it similar to original traversal.
 		  unvisitedProcessNodes.forEach(function (node) {
 		    var cmpt = _this.DFS(node, visited, visitedProcessNodeIds, queue);
 		    components.push(cmpt);
@@ -51063,8 +51065,14 @@
 
 		  if (neighborNodes.length == 1) {
 		    var neighbor = neighborNodes[0];
-		    if (neighbor.isLogicalOperator() || currentNode.getEdgesBetween(neighbor)[0].isModulation()) {
+		    if (neighbor.isLogicalOperator() || currentNode.getEdgesBetween(neighbor)[0].isModulation() || !neighbor.isProcess() && neighbor.getIncomerNodes().length > 1) {
 		      neighbor.pseudoClass = "ring";
+		      if (!neighbor.isProcess() && neighbor.getIncomerNodes().length > 1) {
+		        component.push(neighbor);
+		        if (!visited.has(neighbor.id)) {
+		          queue.unshift(neighbor);
+		        }
+		      }
 		    } else {
 		      //if (!visited.has(neighbor.id())) {
 		      component.push(neighbor);
@@ -52149,7 +52157,10 @@
 		          }
 		        }
 		      }
-		      if (j == component.length - 1 && !node.isConnectedToRing() || j == 0 && node.isConnectedToRing()) {
+		      if (j == component.length - 1 && !node.isConnectedToRing() || j == 0 && node.isConnectedToRing() && node.getIncomerNodes().filter(function (incomer) {
+		        return incomer.pseudoClass == "ring";
+		      }).length > 0) {
+		        //if last node and not connected to ring, or first node, connected to ring but connected as a target
 		        if (orientation == "left-to-right") {
 		          // process outputs
 		          if (outputs.length == 1) {
@@ -52385,7 +52396,7 @@
 		  // Gravity force (constant) for compounds
 		  gravityCompound: 1.0,
 		  // Gravity range (constant)
-		  gravityRange: 1.8,
+		  gravityRange: 2.8,
 		  // Initial cooling factor for incremental layout
 		  initialEnergyOnIncremental: 0.5
 		};
@@ -52452,6 +52463,8 @@
 		      // If incremental is true, skip over Phase I
 		      if (state.randomize) {
 		        sbgnLayout.runLayout();
+		      } else {
+		        sbgnLayout.clearCompounds();
 		      }
 		      var graphInfo = sbgnLayout.constructSkeleton();
 
@@ -58329,6 +58342,9 @@
 		else if(sample == "sample12") {
 			filename = "Riboflavin_Metabolism_toBeSolved.sbgn";
 		}
+		else if(sample == "sample13") {
+			filename = "Synthesis_of_Ketone_Bodies.sbgn";
+		}
 		loadSample('examples/' + filename);
 		document.getElementById("fileName").innerHTML = filename;
 	});
@@ -58338,7 +58354,10 @@
 	});
 
 	document.getElementById("layoutButton").addEventListener("click", function () {
-		cy.layout({name: "sbgn-layout"}).run();
+		cy.layout({
+			name: "sbgn-layout",
+			randomize: !document.getElementById("randomize").checked
+		}).run();
 	});
 
 	return demoControl;

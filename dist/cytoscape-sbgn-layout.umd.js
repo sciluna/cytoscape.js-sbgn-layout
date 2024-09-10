@@ -400,6 +400,8 @@ SBGNLayout.prototype.constructSkeleton = function () {
     return !visitedProcessNodeIds.has(process.id);
   });
 
+  // TO DO: put these to queue, because there may be nodes added to the beginning of queue during DFS
+  // in other words, make it similar to original traversal.
   unvisitedProcessNodes.forEach(function (node) {
     var cmpt = _this.DFS(node, visited, visitedProcessNodeIds, queue);
     components.push(cmpt);
@@ -501,8 +503,14 @@ SBGNLayout.prototype.DFSUtil = function (currentNode, component, visited, visite
 
   if (neighborNodes.length == 1) {
     var neighbor = neighborNodes[0];
-    if (neighbor.isLogicalOperator() || currentNode.getEdgesBetween(neighbor)[0].isModulation()) {
+    if (neighbor.isLogicalOperator() || currentNode.getEdgesBetween(neighbor)[0].isModulation() || !neighbor.isProcess() && neighbor.getIncomerNodes().length > 1) {
       neighbor.pseudoClass = "ring";
+      if (!neighbor.isProcess() && neighbor.getIncomerNodes().length > 1) {
+        component.push(neighbor);
+        if (!visited.has(neighbor.id)) {
+          queue.unshift(neighbor);
+        }
+      }
     } else {
       //if (!visited.has(neighbor.id())) {
       component.push(neighbor);
@@ -1589,7 +1597,10 @@ SBGNPolishing.addPerComponentPolishment = function (components, directions) {
           }
         }
       }
-      if (j == component.length - 1 && !node.isConnectedToRing() || j == 0 && node.isConnectedToRing()) {
+      if (j == component.length - 1 && !node.isConnectedToRing() || j == 0 && node.isConnectedToRing() && node.getIncomerNodes().filter(function (incomer) {
+        return incomer.pseudoClass == "ring";
+      }).length > 0) {
+        //if last node and not connected to ring, or first node, connected to ring but connected as a target
         if (orientation == "left-to-right") {
           // process outputs
           if (outputs.length == 1) {
@@ -1829,7 +1840,7 @@ var defaults = {
   // Gravity force (constant) for compounds
   gravityCompound: 1.0,
   // Gravity range (constant)
-  gravityRange: 1.8,
+  gravityRange: 2.8,
   // Initial cooling factor for incremental layout
   initialEnergyOnIncremental: 0.5
 };
@@ -1898,6 +1909,8 @@ var Layout = function (_ContinuousLayout) {
       // If incremental is true, skip over Phase I
       if (state.randomize) {
         sbgnLayout.runLayout();
+      } else {
+        sbgnLayout.clearCompounds();
       }
       var graphInfo = sbgnLayout.constructSkeleton();
 

@@ -64,6 +64,9 @@ document.getElementById("samples").addEventListener("change", function (event) {
 	else if(sample == "sample12") {
 		filename = "Riboflavin_Metabolism_toBeSolved.sbgn";
 	}
+	else if(sample == "sample13") {
+		filename = "Synthesis_of_Ketone_Bodies.sbgn";
+	}
 	loadSample('examples/' + filename);
 	document.getElementById("fileName").innerHTML = filename;
 });
@@ -73,5 +76,8 @@ document.getElementById("randomizeButton").addEventListener("click", function ()
 });
 
 document.getElementById("layoutButton").addEventListener("click", function () {
-	cy.layout({name: "sbgn-layout"}).run();
+	cy.layout({
+		name: "sbgn-layout",
+		randomize: !document.getElementById("randomize").checked
+	}).run();
 });

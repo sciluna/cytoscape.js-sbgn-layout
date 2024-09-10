@@ -80,6 +80,8 @@ SBGNLayout.prototype.constructSkeleton = function () {
 
   let unvisitedProcessNodes = processNodes.filter((process) => !visitedProcessNodeIds.has(process.id));
 
+  // TO DO: put these to queue, because there may be nodes added to the beginning of queue during DFS
+  // in other words, make it similar to original traversal.
   unvisitedProcessNodes.forEach((node) => {
     let cmpt = this.DFS(node, visited, visitedProcessNodeIds, queue);
     components.push(cmpt);
@@ -173,8 +175,14 @@ SBGNLayout.prototype.DFSUtil = function (currentNode, component, visited, visite
 
   if (neighborNodes.length == 1) {
     let neighbor = neighborNodes[0];
-    if(neighbor.isLogicalOperator() || currentNode.getEdgesBetween(neighbor)[0].isModulation()) {
+    if(neighbor.isLogicalOperator() || currentNode.getEdgesBetween(neighbor)[0].isModulation() || (!neighbor.isProcess() && neighbor.getIncomerNodes().length > 1)) {
       neighbor.pseudoClass = "ring";
+      if(!neighbor.isProcess() && neighbor.getIncomerNodes().length > 1) {
+        component.push(neighbor);
+        if (!visited.has(neighbor.id)) {
+          queue.unshift(neighbor);
+        }
+      }
     }
     else {
       //if (!visited.has(neighbor.id())) {

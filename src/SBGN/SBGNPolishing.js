@@ -822,7 +822,7 @@ SBGNPolishing.addPerComponentPolishment = function (components, directions) {
           }
         }
       }
-      if ((j == component.length - 1 && !node.isConnectedToRing()) || (j == 0 && node.isConnectedToRing())) {
+      if ((j == component.length - 1 && !node.isConnectedToRing()) || (j == 0 && node.isConnectedToRing() && node.getIncomerNodes().filter(incomer => incomer.pseudoClass == "ring").length > 0)) { //if last node and not connected to ring, or first node, connected to ring but connected as a target
         if (orientation == "left-to-right") {
           // process outputs
           if (outputs.length == 1) {

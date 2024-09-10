@@ -70,7 +70,7 @@ let defaults = {
   // Gravity force (constant) for compounds
   gravityCompound: 1.0,
   // Gravity range (constant)
-  gravityRange: 1.8,
+  gravityRange: 2.8,
   // Initial cooling factor for incremental layout
   initialEnergyOnIncremental: 0.5
 };
@@ -139,6 +139,9 @@ class Layout extends ContinuousLayout {
     // If incremental is true, skip over Phase I
     if (state.randomize) {
       sbgnLayout.runLayout();
+    }
+    else {
+      sbgnLayout.clearCompounds();
     }
     let graphInfo = sbgnLayout.constructSkeleton();
 

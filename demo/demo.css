@@ -23,7 +23,11 @@ h1 {
 }
 
 #layoutButton {
-    margin-right: 30px;
+    margin-right: 10px;
+}
+
+#randomize {
+    vertical-align: top;
 }
 
 #samples {
