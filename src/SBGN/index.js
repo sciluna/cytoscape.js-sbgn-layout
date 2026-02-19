@@ -164,7 +164,7 @@ class Layout {
     }
 
     if (!randomize) {
-      if (sketchConstraints.alignmentConstraint && sketchConstraints.relativePlacementConstraint) {
+      if (sketchConstraints && sketchConstraints.alignmentConstraint && sketchConstraints.relativePlacementConstraint) {
         sbgnLayout.constraints["alignmentConstraint"] = sketchConstraints.alignmentConstraint;
         sbgnLayout.constraints["relativePlacementConstraint"] = sketchConstraints.relativePlacementConstraint;
         graphManager.allNodesToApplyGravitation = undefined;

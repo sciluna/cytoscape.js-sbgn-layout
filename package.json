@@ -6,8 +6,12 @@
   "module": "dist/cytoscape-sbgn-layout.umd.js",
   "browser": "dist/cytoscape-sbgn-layout.umd.js",
   "type": "commonjs",
+  "bin": {
+    "sbgn-layout": "cli/sbgn_layout_cli.js"
+  },
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
+    "cli": "node cli/sbgn_layout_cli.js",
     "start": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -27,12 +31,11 @@
   },
   "homepage": "https://github.com/sciluna/cytoscape.js-sbgn-layout#readme",
   "dependencies": {
-    "cors": "^2.8.5",
+    "cytoscape": "^3.2.0",
     "cose-base": "^2.2.0",
-    "dotenv": "^16.4.5",
-    "express": "^4.19.2",
-    "openai": "^4.52.0",
-    "sketchlay": "https://github.com/sciluna/sketchlay.git"
+    "sketchlay": "https://github.com/sciluna/sketchlay.git",
+    "sbgnml-to-cytoscape": "https://github.com/hasanbalci/sbgnml-to-cytoscape.git",
+    "xml-js": "^1.6.11"
   },
   "peerDependencies": {
     "cytoscape": "^3.2.0"
