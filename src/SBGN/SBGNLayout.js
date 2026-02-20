@@ -65,7 +65,7 @@ SBGNLayout.prototype.constructSkeleton = function () {
       }
     }
   });
-  console.log(queue);
+  // console.log(queue);
 
   let components = [];
   let visited = new Set();
@@ -135,13 +135,13 @@ SBGNLayout.prototype.constructSkeleton = function () {
   ringNodes.forEach(ringNode => {
     ringNode.pseudoClass = "ring";
   });
-  console.log(ringNodes);
-  console.log(components);
+  // console.log(ringNodes);
+  // console.log(components);
 
   let componentsExtended = this.extendComponents(components);
 
-  console.log(componentsExtended);
-  console.log(directions);
+  // console.log(componentsExtended);
+  // console.log(directions);
 
   let constraintInfo = this.addPerComponentConstraints(components, directions);
   verticalAlignments = verticalAlignments.concat(constraintInfo.verticalAlignments);
@@ -153,7 +153,7 @@ SBGNLayout.prototype.constructSkeleton = function () {
   relativePlacementConstraints = relativePlacementConstraints.concat(constraintInfo.relativePlacementConstraints);
 
   let constraints = { alignmentConstraint: { vertical: verticalAlignments, horizontal: horizontalAlignments }, relativePlacementConstraint: relativePlacementConstraints };
-  console.log(constraints);
+  // console.log(constraints);
   return { components: components, componentsExtended: componentsExtended, ringNodes: ringNodes, constraints: constraints, directions: directions };
 }
 

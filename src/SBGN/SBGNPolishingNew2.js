@@ -49,7 +49,7 @@ SBGNPolishingNew.polish = function (sbgnLayout) {
     } else if(after) {
       process.status = "first";
     }
-    console.log(process.status);
+    // console.log(process.status);
   });
 
   this.addPerProcessPolishment(processNodes);
@@ -221,25 +221,25 @@ let mergeArrays = function (arrays) {
   return arrays;
 };
 
-  let calculatePosition = function (nodeA, nodeB, idealEdgeLength, degree) {
-    if (degree == 0) {
-      return { x: nodeA.getCenterX() + (nodeA.getWidth() / 2 + nodeB.getWidth() / 2 + idealEdgeLength), y: nodeA.getCenterY() };
-    }
-    else if (degree == 90) {
-      return { x: nodeA.getCenterX(), y: nodeA.getCenterY() - (nodeA.getHeight() / 2 + nodeB.getHeight() / 2 + idealEdgeLength) };
-    }
-    else if (degree == 180) {
-      return { x: nodeA.getCenterX() - (nodeA.getWidth() / 2 + nodeB.getWidth() / 2 + idealEdgeLength), y: nodeA.getCenterY() };
-    }
-    else if (degree == 270) {
-      return { x: nodeA.getCenterX(), y: nodeA.getCenterY() + (nodeA.getHeight() / 2 + nodeB.getHeight() / 2 + idealEdgeLength) };
-    }
-    else {
-      let radian = degree * Math.PI / 180;
-      let radius = idealEdgeLength / 2 + (nodeA.getDiagonal() / 2 + nodeB.getDiagonal() / 2);
-      return { x: nodeA.getCenterX() + radius * Math.cos(radian), y: nodeA.getCenterY() - radius * Math.sin(radian) };
-    }
-  };
+let calculatePosition = function (nodeA, nodeB, idealEdgeLength, degree) {
+  if (degree == 0) {
+    return { x: nodeA.getCenterX() + (nodeA.getWidth() / 2 + nodeB.getWidth() / 2 + idealEdgeLength), y: nodeA.getCenterY() };
+  }
+  else if (degree == 90) {
+    return { x: nodeA.getCenterX(), y: nodeA.getCenterY() - (nodeA.getHeight() / 2 + nodeB.getHeight() / 2 + idealEdgeLength) };
+  }
+  else if (degree == 180) {
+    return { x: nodeA.getCenterX() - (nodeA.getWidth() / 2 + nodeB.getWidth() / 2 + idealEdgeLength), y: nodeA.getCenterY() };
+  }
+  else if (degree == 270) {
+    return { x: nodeA.getCenterX(), y: nodeA.getCenterY() + (nodeA.getHeight() / 2 + nodeB.getHeight() / 2 + idealEdgeLength) };
+  }
+  else {
+    let radian = degree * Math.PI / 180;
+    let radius = idealEdgeLength / 2 + (nodeA.getDiagonal() / 2 + nodeB.getDiagonal() / 2);
+    return { x: nodeA.getCenterX() + radius * Math.cos(radian), y: nodeA.getCenterY() - radius * Math.sin(radian) };
+  }
+};
 
 let placeInputs = function (node, inputs, direction = 'l-r', idealEdgeLength, isFirstNode, horizontalAlignments, verticalAlignments, relativePlacementConstraints) {
   const n = inputs.length;
@@ -487,6 +487,10 @@ SBGNPolishingNew.addPerProcessPolishment = function (processes, directions) {
 
     let isFirstNode = node.status === 'first';
     let isLastNode = node.status === 'last';
+    if(node.status == undefined){
+      isFirstNode = true;
+      isLastNode = true
+    }
     placeInputs(node, inputs, node.direction, idealEdgeLength, isFirstNode, horizontalAlignments, verticalAlignments, relativePlacementConstraints);
     placeOutputs(node, outputs, node.direction, idealEdgeLength, isLastNode, horizontalAlignments, verticalAlignments, relativePlacementConstraints);
     placeModulators(node, modulators, node.direction, idealEdgeLength, horizontalAlignments, verticalAlignments, relativePlacementConstraints);

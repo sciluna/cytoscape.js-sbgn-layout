@@ -284,7 +284,8 @@ const main = async () => {
   const cy = setupCytoscape(elements);
   await runLayout(cy, options);
   const positions = buildPositions(cy);
-
+  
+  cy.destroy();
   const map = sbgnObject.sbgn && sbgnObject.sbgn.map ? sbgnObject.sbgn.map : null;
   if (!map) {
     throw new Error('SBGNML does not contain sbgn.map');

@@ -1075,7 +1075,7 @@ SBGNLayout.prototype.constructSkeleton = function () {
       }
     }
   });
-  console.log(queue);
+  // console.log(queue);
 
   var components = [];
   var visited = new _set2.default();
@@ -1157,13 +1157,13 @@ SBGNLayout.prototype.constructSkeleton = function () {
   ringNodes.forEach(function (ringNode) {
     ringNode.pseudoClass = "ring";
   });
-  console.log(ringNodes);
-  console.log(components);
+  // console.log(ringNodes);
+  // console.log(components);
 
   var componentsExtended = this.extendComponents(components);
 
-  console.log(componentsExtended);
-  console.log(directions);
+  // console.log(componentsExtended);
+  // console.log(directions);
 
   var constraintInfo = this.addPerComponentConstraints(components, directions);
   verticalAlignments = verticalAlignments.concat(constraintInfo.verticalAlignments);
@@ -1175,7 +1175,7 @@ SBGNLayout.prototype.constructSkeleton = function () {
   relativePlacementConstraints = relativePlacementConstraints.concat(constraintInfo.relativePlacementConstraints);
 
   var constraints = { alignmentConstraint: { vertical: verticalAlignments, horizontal: horizontalAlignments }, relativePlacementConstraint: relativePlacementConstraints };
-  console.log(constraints);
+  // console.log(constraints);
   return { components: components, componentsExtended: componentsExtended, ringNodes: ringNodes, constraints: constraints, directions: directions };
 };
 
@@ -3286,7 +3286,7 @@ SBGNPolishingNew.polish = function (sbgnLayout) {
     } else if (after) {
       process.status = "first";
     }
-    console.log(process.status);
+    // console.log(process.status);
   });
 
   this.addPerProcessPolishment(processNodes);
@@ -3740,6 +3740,10 @@ SBGNPolishingNew.addPerProcessPolishment = function (processes, directions) {
 
     var isFirstNode = node.status === 'first';
     var isLastNode = node.status === 'last';
+    if (node.status == undefined) {
+      isFirstNode = true;
+      isLastNode = true;
+    }
     placeInputs(node, inputs, node.direction, idealEdgeLength, isFirstNode, horizontalAlignments, verticalAlignments, relativePlacementConstraints);
     placeOutputs(node, outputs, node.direction, idealEdgeLength, isLastNode, horizontalAlignments, verticalAlignments, relativePlacementConstraints);
     placeModulators(node, modulators, node.direction, idealEdgeLength, horizontalAlignments, verticalAlignments, relativePlacementConstraints);

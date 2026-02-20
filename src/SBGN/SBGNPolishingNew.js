@@ -47,7 +47,7 @@ SBGNPolishingNew.polish = function (sbgnLayout) {
     } else if(after) {
       process.status = "first";
     }
-    console.log(process.status);
+    // console.log(process.status);
   });
 
   this.addPerProcessPolishment(processNodes);
