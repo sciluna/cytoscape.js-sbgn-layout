@@ -51647,7 +51647,7 @@
 		      }
 		    }
 		  });
-		  console.log(queue);
+		  // console.log(queue);
 
 		  var components = [];
 		  var visited = new _set2.default();
@@ -51729,13 +51729,13 @@
 		  ringNodes.forEach(function (ringNode) {
 		    ringNode.pseudoClass = "ring";
 		  });
-		  console.log(ringNodes);
-		  console.log(components);
+		  // console.log(ringNodes);
+		  // console.log(components);
 
 		  var componentsExtended = this.extendComponents(components);
 
-		  console.log(componentsExtended);
-		  console.log(directions);
+		  // console.log(componentsExtended);
+		  // console.log(directions);
 
 		  var constraintInfo = this.addPerComponentConstraints(components, directions);
 		  verticalAlignments = verticalAlignments.concat(constraintInfo.verticalAlignments);
@@ -51747,7 +51747,7 @@
 		  relativePlacementConstraints = relativePlacementConstraints.concat(constraintInfo.relativePlacementConstraints);
 
 		  var constraints = { alignmentConstraint: { vertical: verticalAlignments, horizontal: horizontalAlignments }, relativePlacementConstraint: relativePlacementConstraints };
-		  console.log(constraints);
+		  // console.log(constraints);
 		  return { components: components, componentsExtended: componentsExtended, ringNodes: ringNodes, constraints: constraints, directions: directions };
 		};
 
@@ -52581,7 +52581,7 @@
 		                }
 
 		                if (!randomize) {
-		                  if (sketchConstraints.alignmentConstraint && sketchConstraints.relativePlacementConstraint) {
+		                  if (sketchConstraints && sketchConstraints.alignmentConstraint && sketchConstraints.relativePlacementConstraint) {
 		                    sbgnLayout.constraints["alignmentConstraint"] = sketchConstraints.alignmentConstraint;
 		                    sbgnLayout.constraints["relativePlacementConstraint"] = sketchConstraints.relativePlacementConstraint;
 		                    graphManager.allNodesToApplyGravitation = undefined;
@@ -53812,7 +53812,7 @@
 		        process.direction = edges[i].direction;
 		        break;
 		      } else if (edges[i].direction == 'tl-br' || edges[i].direction == 'tr-bl' || edges[i].direction == 'br-tl' || edges[i].direction == 'bl-tr') {
-		        process.direction = 't-b';
+		        process.direction = edges[i].direction;
 		      }
 		    }	    var predecessors = [];
 		    var incomers = process.getIncomerNodes();
@@ -53843,7 +53843,7 @@
 		    } else if (after) {
 		      process.status = "first";
 		    }
-		    console.log(process.status);
+		    // console.log(process.status);
 		  });
 
 		  this.addPerProcessPolishment(processNodes);
@@ -54058,7 +54058,11 @@
 		    'l-r': { start: 270, end: 90, center: 180 }, // left side
 		    'r-l': { start: -90, end: 90, center: 0 }, // right side
 		    't-b': { start: 180, end: 0, center: 90 }, // above
-		    'b-t': { start: 180, end: 360, center: 270 } // below
+		    'b-t': { start: 180, end: 360, center: 270 }, // below
+		    'tl-br': { start: 225, end: 45, center: 135 }, // top left
+		    'bl-tr': { start: 315, end: 135, center: 225 }, // bottom left
+		    'tr-bl': { start: 135, end: -45, center: 45 }, // top right
+		    'br-tl': { start: 45, end: 225, center: 315 } // bottom right
 		  };
 
 		  var _directionConfig$dire = directionConfig[direction],
@@ -54069,7 +54073,7 @@
 		  // Spread scaling: narrower when few inputs, full range when many
 
 		  var maxSpread = Math.abs(end - start);
-		  var spread = n === 1 ? 0 : Math.min(maxSpread, 90 + (n - 2) * 22.5); // grows smoothly
+		  var spread = n === 1 ? 0 : Math.min(maxSpread, 90); // grows smoothly
 
 		  var startAngle = center + spread / 2;
 		  var endAngle = center - spread / 2;
@@ -54084,7 +54088,7 @@
 		        angle = center; // perfectly centered
 		      } else {
 		        // place at first-position angle (as if there were 2 inputs)
-		        angle = direction === 'l-r' ? 225 : direction === 'r-l' ? -45 : direction === 't-b' ? 135 : 225; // fallback
+		        angle = direction === 'l-r' ? 225 : direction === 'r-l' ? -45 : direction === 't-b' ? 135 : direction === 'b-t' ? 225 : direction === 'tl-br' ? 180 : direction === 'bl-tr' ? 270 : direction === 'tr-bl' ? 90 : direction === 'br-tl' ? 0 : 0; // fallback
 		      }
 		    } else {
 		      angle = startAngle + step * i;
@@ -54107,7 +54111,27 @@
 		  // Add relative constraints if many inputs
 		  if (n > 3) {
 		    inputs.forEach(function (input) {
-		      if (direction == "l-r") relativePlacementConstraints.push({ left: input.id, right: node.id });else if (direction == "r-l") relativePlacementConstraints.push({ right: input.id, left: node.id });else if (direction == "t-b") relativePlacementConstraints.push({ top: input.id, bottom: node.id });else if (direction == "r-l") relativePlacementConstraints.push({ bottom: input.id, top: node.id });
+		      if (direction == "l-r") {
+		        relativePlacementConstraints.push({ left: input.id, right: node.id });
+		      } else if (direction == "r-l") {
+		        relativePlacementConstraints.push({ right: input.id, left: node.id });
+		      } else if (direction == "t-b") {
+		        relativePlacementConstraints.push({ top: input.id, bottom: node.id });
+		      } else if (direction == "b-t") {
+		        relativePlacementConstraints.push({ bottom: input.id, top: node.id });
+		      } else if (direction == "tl-br") {
+		        relativePlacementConstraints.push({ left: input.id, right: node.id });
+		        relativePlacementConstraints.push({ top: input.id, bottom: node.id });
+		      } else if (direction == "bl-tr") {
+		        relativePlacementConstraints.push({ left: input.id, right: node.id });
+		        relativePlacementConstraints.push({ bottom: input.id, top: node.id });
+		      } else if (direction == "tr-bl") {
+		        relativePlacementConstraints.push({ top: input.id, bottom: node.id });
+		        relativePlacementConstraints.push({ right: input.id, left: node.id });
+		      } else if (direction == "br-tl") {
+		        relativePlacementConstraints.push({ bottom: input.id, top: node.id });
+		        relativePlacementConstraints.push({ right: input.id, left: node.id });
+		      }
 		    });
 		  }
 		};
@@ -54128,7 +54152,11 @@
 		    'l-r': { start: -90, end: 90, center: 0 }, // right side
 		    'r-l': { start: 270, end: 90, center: 180 }, // left side
 		    't-b': { start: 180, end: 360, center: 270 }, // below
-		    'b-t': { start: 180, end: 0, center: 90 } // above
+		    'b-t': { start: 180, end: 0, center: 90 }, // above
+		    'tl-br': { start: 225, end: 45, center: 315 }, // bottom right
+		    'bl-tr': { start: -45, end: 135, center: 45 }, // top right
+		    'tr-bl': { start: 135, end: -45, center: 225 }, // bottom left
+		    'br-tl': { start: 45, end: 225, center: 135 } // top left
 		  };
 
 		  var _directionConfig$dire2 = directionConfig[direction],
@@ -54139,10 +54167,10 @@
 		  // Spread scaling: narrower when few inputs, full range when many
 
 		  var maxSpread = Math.abs(end - start);
-		  var spread = n === 1 ? 0 : Math.min(maxSpread, 90 + (n - 2) * 22.5); // grows smoothly
+		  var spread = n === 1 ? 0 : Math.min(maxSpread, 90); // grows smoothly
 
-		  var startAngle = center + spread / 2;
-		  var endAngle = center - spread / 2;
+		  var startAngle = center - spread / 2;
+		  var endAngle = center + spread / 2;
 		  var step = n === 1 ? 0 : (endAngle - startAngle) / (n - 1);
 
 		  for (var i = 0; i < n; i++) {
@@ -54154,7 +54182,7 @@
 		        angle = center; // perfectly centered
 		      } else {
 		        // place at first-position angle (as if there were 2 inputs)
-		        angle = direction === 'l-r' ? -45 : direction === 'r-l' ? 225 : direction === 't-b' ? 225 : 135; // fallback
+		        angle = direction === 'l-r' ? -45 : direction === 'r-l' ? 225 : direction === 't-b' ? 225 : direction === 'b-t' ? 135 : direction === 'tl-br' ? 270 : direction === 'bl-tr' ? 0 : direction === 'tr-bl' ? 180 : direction === 'br-tl' ? 90 : 0; // fallback
 		      }
 		    } else {
 		      angle = startAngle + step * i;
@@ -54177,7 +54205,27 @@
 		  // Add relative constraints if many inputs
 		  if (n > 3) {
 		    outputs.forEach(function (output) {
-		      if (direction == "l-r") relativePlacementConstraints.push({ right: output.id, left: node.id });else if (direction == "r-l") relativePlacementConstraints.push({ left: output.id, right: node.id });else if (direction == "t-b") relativePlacementConstraints.push({ bottom: output.id, top: node.id });else if (direction == "r-l") relativePlacementConstraints.push({ top: output.id, bottom: node.id });
+		      if (direction == "l-r") {
+		        relativePlacementConstraints.push({ right: output.id, left: node.id });
+		      } else if (direction == "r-l") {
+		        relativePlacementConstraints.push({ left: output.id, right: node.id });
+		      } else if (direction == "t-b") {
+		        relativePlacementConstraints.push({ bottom: output.id, top: node.id });
+		      } else if (direction == "b-t") {
+		        relativePlacementConstraints.push({ top: output.id, bottom: node.id });
+		      } else if (direction == "tl-br") {
+		        relativePlacementConstraints.push({ right: output.id, left: node.id });
+		        relativePlacementConstraints.push({ bottom: output.id, top: node.id });
+		      } else if (direction == "bl-tr") {
+		        relativePlacementConstraints.push({ right: output.id, left: node.id });
+		        relativePlacementConstraints.push({ top: output.id, bottom: node.id });
+		      } else if (direction == "tr-bl") {
+		        relativePlacementConstraints.push({ left: output.id, right: node.id });
+		        relativePlacementConstraints.push({ top: output.id, bottom: node.id });
+		      } else if (direction == "br-tl") {
+		        relativePlacementConstraints.push({ left: output.id, right: node.id });
+		        relativePlacementConstraints.push({ top: output.id, bottom: node.id });
+		      }
 		    });
 		  }
 		};
@@ -54196,7 +54244,11 @@
 		    'l-r': { belowRange: [225, 315], aboveRange: [45, 135] },
 		    'r-l': { belowRange: [225, 315], aboveRange: [45, 135] },
 		    't-b': { belowRange: [135, 225], aboveRange: [-45, 45] },
-		    'b-t': { belowRange: [135, 225], aboveRange: [-45, 45] }
+		    'b-t': { belowRange: [135, 225], aboveRange: [-45, 45] },
+		    'tl-br': { belowRange: [180, 270], aboveRange: [0, 90] },
+		    'bl-tr': { belowRange: [270, 360], aboveRange: [90, 180] },
+		    'tr-bl': { belowRange: [90, 180], aboveRange: [-90, 0] },
+		    'br-tl': { belowRange: [0, 90], aboveRange: [180, 270] }
 		  };
 
 		  var _directionConfig$dire3 = directionConfig[direction],
@@ -54283,6 +54335,10 @@
 
 		    var isFirstNode = node.status === 'first';
 		    var isLastNode = node.status === 'last';
+		    if (node.status == undefined) {
+		      isFirstNode = true;
+		      isLastNode = true;
+		    }
 		    placeInputs(node, inputs, node.direction, idealEdgeLength, isFirstNode, horizontalAlignments, verticalAlignments, relativePlacementConstraints);
 		    placeOutputs(node, outputs, node.direction, idealEdgeLength, isLastNode, horizontalAlignments, verticalAlignments, relativePlacementConstraints);
 		    placeModulators(node, modulators, node.direction, idealEdgeLength, horizontalAlignments, verticalAlignments, relativePlacementConstraints);
