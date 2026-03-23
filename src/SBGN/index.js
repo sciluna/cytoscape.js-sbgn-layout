@@ -191,12 +191,12 @@ class Layout {
     sbgnLayout.initSpringEmbedder();
     CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = true;
     CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
-    CoSEConstants.TILE = false;
+    CoSEConstants.TILE = true;
     sbgnLayout.runLayout();
     if (this.options.mapType == "PD") {
       SBGNPolishingNew.polish(sbgnLayout);
     }
-    //sbgnLayout.repopulateCompounds();
+    sbgnLayout.repopulateCompounds();
   
     let getPositions = function (ele, i) {
       if (typeof ele === "number") {

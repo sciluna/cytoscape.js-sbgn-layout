@@ -248,9 +248,9 @@ let placeInputs = function (node, inputs, direction = 'l-r', idealEdgeLength, is
   // Direction configuration
   const directionConfig = {
     'l-r': { start: 270, end: 90, center: 180 },   // left side
-    'r-l': { start: -90, end: 90, center: 0 },     // right side
+    'r-l': { start: 90, end: 270, center: 0 },     // right side
     't-b': { start: 180, end: 0, center: 90 },     // above
-    'b-t': { start: 180, end: 360, center: 270 },  // below
+    'b-t': { start: 360, end: 180, center: 270 },  // below
     'tl-br': { start: 225, end: 45, center: 135 },  // top left
     'bl-tr': { start: 315, end: 135, center: 225 },  // bottom left
     'tr-bl': { start: 135, end: -45, center: 45 },  // top right
@@ -259,14 +259,22 @@ let placeInputs = function (node, inputs, direction = 'l-r', idealEdgeLength, is
 
   const { start, end, center } = directionConfig[direction];
 
-  // Spread scaling: narrower when few inputs, full range when many
+  let step = 0;
+  if (isFirstNode){
+    step = 180 / (n + 1);
+  } else {
+    step = 90 / Math.ceil(n / 2  + 1);
+  }
+
+/*   // Spread scaling: narrower when few inputs, full range when many
   const maxSpread = Math.abs(end - start);
   const spread = n === 1 ? 0 : Math.min(maxSpread, 90); // grows smoothly
 
   const startAngle = center + spread / 2;
   const endAngle = center - spread / 2;
-  const step = n === 1 ? 0 : (endAngle - startAngle) / (n - 1);
+  const step = n === 1 ? 0 : (endAngle - startAngle) / (n - 1); */
 
+  let lastAngle = start;
   for (let i = 0; i < n; i++) {
     let angle;
 
@@ -287,8 +295,12 @@ let placeInputs = function (node, inputs, direction = 'l-r', idealEdgeLength, is
                  0); // fallback
       }
     } else {
-      angle = startAngle + step * i;
-    }
+      angle = lastAngle - step;
+      if ((!isFirstNode && angle == center) || (angle == center && isFirstNode && n%2 == 0)){
+        angle -= step;
+      }
+      lastAngle = angle;
+    } 
 
     // Normalize to [0, 360)
     angle = (angle + 360) % 360;
@@ -339,9 +351,9 @@ let placeOutputs = function (node, outputs, direction = 'l-r', idealEdgeLength, 
   // Direction configuration
   const directionConfig = {
     'l-r': { start: -90, end: 90, center: 0 },   // right side
-    'r-l': { start: 270, end: 90, center: 180 },     // left side
+    'r-l': { start: 90, end: 180, center: 180 },     // left side
     't-b': { start: 180, end: 360, center: 270 },     // below
-    'b-t': { start: 180, end: 0, center: 90 },  // above
+    'b-t': { start: 0, end: 180, center: 90 },  // above
     'tl-br': { start: 225, end: 45, center: 315 },  // bottom right
     'bl-tr': { start: -45, end: 135, center: 45 },  // top right
     'tr-bl': { start: 135, end: -45, center: 225 },  // bottom left
@@ -350,14 +362,9 @@ let placeOutputs = function (node, outputs, direction = 'l-r', idealEdgeLength, 
 
   const { start, end, center } = directionConfig[direction];
 
-  // Spread scaling: narrower when few inputs, full range when many
-  const maxSpread = Math.abs(end - start);
-  const spread = n === 1 ? 0 : Math.min(maxSpread, 90); // grows smoothly
+  const step = 90 / Math.ceil(n / 2  + 1);
 
-  const startAngle = center - spread / 2;
-  const endAngle = center + spread / 2;
-  const step = n === 1 ? 0 : (endAngle - startAngle) / (n - 1);
-
+  let lastAngle = start;
   for (let i = 0; i < n; i++) {
     let angle;
 
@@ -378,8 +385,12 @@ let placeOutputs = function (node, outputs, direction = 'l-r', idealEdgeLength, 
                  0); // fallback
       }
     } else {
-      angle = startAngle + step * i;
-    }
+      angle = lastAngle + step;
+      if ((!isLastNode && angle == center) || (angle == center && isLastNode && n%2 == 0)){
+        angle += step;
+      }
+      lastAngle = angle;
+    } 
 
     // Normalize to [0, 360)
     angle = (angle + 360) % 360;
@@ -522,6 +533,7 @@ SBGNPolishingNew.addPerProcessPolishment = function (processes, directions) {
         return false;
       }
     });
+    console.log(modulators);
     // find output nodes (filter ring nodes, modulator nodes and output with degree higher than 1)
     let outputs = outgoers.filter((output) => {
       let edgeBetween = node.getEdgesBetween(output)[0];

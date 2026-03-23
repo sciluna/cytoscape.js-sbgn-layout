@@ -89,7 +89,7 @@ document.getElementById("samples").addEventListener("change", function (event) {
 		filename = "Aminobutyrate_degradation.xml";
 	}
 	else if(sample == "sample9") {
-		filename = "Formation_of_the_Editosome.xml";
+		filename = "test.sbgn";
 	}
 	else if(sample == "sample10") {
 		filename = "Ketone_body_catabolism.sbgn";

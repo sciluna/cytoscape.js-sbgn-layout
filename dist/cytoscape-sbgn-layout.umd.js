@@ -2041,12 +2041,12 @@ var Layout = function () {
                 sbgnLayout.initSpringEmbedder();
                 CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = true;
                 CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
-                CoSEConstants.TILE = false;
+                CoSEConstants.TILE = true;
                 sbgnLayout.runLayout();
                 if (this.options.mapType == "PD") {
                   SBGNPolishingNew.polish(sbgnLayout);
                 }
-                //sbgnLayout.repopulateCompounds();
+                sbgnLayout.repopulateCompounds();
 
                 getPositions = function getPositions(ele, i) {
                   if (typeof ele === "number") {
@@ -2063,7 +2063,7 @@ var Layout = function () {
 
                 eles.nodes().not(":parent").layoutPositions(layout, options, getPositions);
 
-              case 39:
+              case 40:
               case 'end':
                 return _context.stop();
             }
@@ -3499,9 +3499,9 @@ var placeInputs = function placeInputs(node, inputs) {
   // Direction configuration
   var directionConfig = {
     'l-r': { start: 270, end: 90, center: 180 }, // left side
-    'r-l': { start: -90, end: 90, center: 0 }, // right side
+    'r-l': { start: 90, end: 270, center: 0 }, // right side
     't-b': { start: 180, end: 0, center: 90 }, // above
-    'b-t': { start: 180, end: 360, center: 270 }, // below
+    'b-t': { start: 360, end: 180, center: 270 }, // below
     'tl-br': { start: 225, end: 45, center: 135 }, // top left
     'bl-tr': { start: 315, end: 135, center: 225 }, // bottom left
     'tr-bl': { start: 135, end: -45, center: 45 }, // top right
@@ -3513,15 +3513,23 @@ var placeInputs = function placeInputs(node, inputs) {
       end = _directionConfig$dire.end,
       center = _directionConfig$dire.center;
 
-  // Spread scaling: narrower when few inputs, full range when many
 
-  var maxSpread = Math.abs(end - start);
-  var spread = n === 1 ? 0 : Math.min(maxSpread, 90); // grows smoothly
+  var step = 0;
+  if (isFirstNode) {
+    step = 180 / (n + 1);
+  } else {
+    step = 90 / Math.ceil(n / 2 + 1);
+  }
 
-  var startAngle = center + spread / 2;
-  var endAngle = center - spread / 2;
-  var step = n === 1 ? 0 : (endAngle - startAngle) / (n - 1);
+  /*   // Spread scaling: narrower when few inputs, full range when many
+    const maxSpread = Math.abs(end - start);
+    const spread = n === 1 ? 0 : Math.min(maxSpread, 90); // grows smoothly
+  
+    const startAngle = center + spread / 2;
+    const endAngle = center - spread / 2;
+    const step = n === 1 ? 0 : (endAngle - startAngle) / (n - 1); */
 
+  var lastAngle = start;
   for (var i = 0; i < n; i++) {
     var angle = void 0;
 
@@ -3534,7 +3542,11 @@ var placeInputs = function placeInputs(node, inputs) {
         angle = direction === 'l-r' ? 225 : direction === 'r-l' ? -45 : direction === 't-b' ? 135 : direction === 'b-t' ? 225 : direction === 'tl-br' ? 180 : direction === 'bl-tr' ? 270 : direction === 'tr-bl' ? 90 : direction === 'br-tl' ? 0 : 0; // fallback
       }
     } else {
-      angle = startAngle + step * i;
+      angle = lastAngle - step;
+      if (!isFirstNode && angle == center || angle == center && isFirstNode && n % 2 == 0) {
+        angle -= step;
+      }
+      lastAngle = angle;
     }
 
     // Normalize to [0, 360)
@@ -3593,9 +3605,9 @@ var placeOutputs = function placeOutputs(node, outputs) {
   // Direction configuration
   var directionConfig = {
     'l-r': { start: -90, end: 90, center: 0 }, // right side
-    'r-l': { start: 270, end: 90, center: 180 }, // left side
+    'r-l': { start: 90, end: 180, center: 180 }, // left side
     't-b': { start: 180, end: 360, center: 270 }, // below
-    'b-t': { start: 180, end: 0, center: 90 }, // above
+    'b-t': { start: 0, end: 180, center: 90 }, // above
     'tl-br': { start: 225, end: 45, center: 315 }, // bottom right
     'bl-tr': { start: -45, end: 135, center: 45 }, // top right
     'tr-bl': { start: 135, end: -45, center: 225 }, // bottom left
@@ -3607,15 +3619,10 @@ var placeOutputs = function placeOutputs(node, outputs) {
       end = _directionConfig$dire2.end,
       center = _directionConfig$dire2.center;
 
-  // Spread scaling: narrower when few inputs, full range when many
 
-  var maxSpread = Math.abs(end - start);
-  var spread = n === 1 ? 0 : Math.min(maxSpread, 90); // grows smoothly
+  var step = 90 / Math.ceil(n / 2 + 1);
 
-  var startAngle = center - spread / 2;
-  var endAngle = center + spread / 2;
-  var step = n === 1 ? 0 : (endAngle - startAngle) / (n - 1);
-
+  var lastAngle = start;
   for (var i = 0; i < n; i++) {
     var angle = void 0;
 
@@ -3628,7 +3635,11 @@ var placeOutputs = function placeOutputs(node, outputs) {
         angle = direction === 'l-r' ? -45 : direction === 'r-l' ? 225 : direction === 't-b' ? 225 : direction === 'b-t' ? 135 : direction === 'tl-br' ? 270 : direction === 'bl-tr' ? 0 : direction === 'tr-bl' ? 180 : direction === 'br-tl' ? 90 : 0; // fallback
       }
     } else {
-      angle = startAngle + step * i;
+      angle = lastAngle + step;
+      if (!isLastNode && angle == center || angle == center && isLastNode && n % 2 == 0) {
+        angle += step;
+      }
+      lastAngle = angle;
     }
 
     // Normalize to [0, 360)
@@ -3780,6 +3791,7 @@ SBGNPolishingNew.addPerProcessPolishment = function (processes, directions) {
         return false;
       }
     });
+    console.log(modulators);
     // find output nodes (filter ring nodes, modulator nodes and output with degree higher than 1)
     var outputs = outgoers.filter(function (output) {
       var edgeBetween = node.getEdgesBetween(output)[0];
