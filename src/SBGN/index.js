@@ -11,7 +11,7 @@ let LayoutConstants = require('cose-base').layoutBase.LayoutConstants;
 let SBGNConstants = require('../SBGN/SBGNConstants');
 let CoSEConstants = require('cose-base').CoSEConstants;
 let FDLayoutConstants = require('cose-base').layoutBase.FDLayoutConstants;
-const SBGNLayout = require('../SBGN/SBGNLayout');
+const SBGNLayout = require('../SBGN/SBGNLayout2');
 const SBGNNode = require('../SBGN/SBGNNode');
 let SBGNPolishing = require('../SBGN/SBGNPolishing');
 let SBGNPolishingNew = require('../SBGN/SBGNPolishingNew2');
@@ -19,6 +19,7 @@ let sketchLay = require('sketchlay');
 
 const assign = require('../assign');
 const glyphMapping = require('./elementMapping.js');
+const SBGNEdge = require('./SBGNEdge.js');
 const isFn = fn => typeof fn === 'function';
 
 const optFn = (opt, ele) => {
@@ -55,7 +56,7 @@ const defaults = Object.freeze({
   // Node repulsion (non overlapping) multiplier
   nodeRepulsion: 4500,
   // Ideal edge (non nested) length
-  idealEdgeLength: 75,
+  idealEdgeLength: 50,
   // Divisor to compute edge forces
   edgeElasticity: 0.45,
   // Nesting factor (multiplier) to compute ideal edge length for nested edges
@@ -171,17 +172,47 @@ class Layout {
         sbgnLayout.initParameters();
         sbgnLayout.initSpringEmbedder();
         CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
-        CoSEConstants.TILE = false;
+        CoSEConstants.TILE = true;
         sbgnLayout.runLayout();
       }
     } else {
         sbgnLayout.initParameters();
         sbgnLayout.initSpringEmbedder();
-        CoSEConstants.TILE = false;
+        CoSEConstants.TILE = true;
         sbgnLayout.runLayout();
+
+/*         let graphInfo = sbgnLayout.constructSkeleton();
+        graphManager.updateBounds();
+        sbgnLayout.constraints["alignmentConstraint"] = graphInfo.constraints.alignmentConstraint;
+        sbgnLayout.constraints["relativePlacementConstraint"] = graphInfo.constraints.relativePlacementConstraint;
+        graphManager.allNodesToApplyGravitation = undefined;
+        sbgnLayout.initParameters();
+        sbgnLayout.initSpringEmbedder();
+        CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = true;
+        CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
+        CoSEConstants.TILE = true;
+        sbgnLayout.runLayout(); */
+
+/*         graphInfo.componentsExtended.forEach(component => {
+          let processes = [];
+          let nodes = [];
+          let edges = [];
+          component.forEach(ele => {
+            if (ele instanceof SBGNNode){
+              if (ele.isProcess()) {
+                processes.push(ele);
+              }
+              nodes.push(ele);
+            } else {
+              edges.push(ele);
+            }
+          })
+          SBGNPolishingNew.polish2(processes, nodes, edges);
+        }); */
+        //SBGNPolishingNew.polish(sbgnLayout.getAllProcessNodes());
     }
 
-    // polishment phase
+     // polishment phase - first iteration
     let constraints = SBGNPolishingNew.generateConstraints(sbgnLayout, this.options.mapType, this.options.slopeThreshold);
     sbgnLayout.constraints["alignmentConstraint"] = constraints.alignmentConstraint;
     sbgnLayout.constraints["relativePlacementConstraint"] = constraints.relativePlacementConstraint;
@@ -189,6 +220,7 @@ class Layout {
     graphManager.allNodesToApplyGravitation = undefined;
     sbgnLayout.initParameters();
     sbgnLayout.initSpringEmbedder();
+    SBGNConstants.DEFAULT_EDGE_LENGTH = CoSEConstants.DEFAULT_EDGE_LENGTH = FDLayoutConstants.DEFAULT_EDGE_LENGTH = 100;
     CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = true;
     CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
     CoSEConstants.TILE = true;
@@ -196,7 +228,23 @@ class Layout {
     if (this.options.mapType == "PD") {
       SBGNPolishingNew.polish(sbgnLayout);
     }
-    sbgnLayout.repopulateCompounds();
+
+    // polishment phase - second iteration
+    constraints = SBGNPolishingNew.generateConstraints(sbgnLayout, this.options.mapType, this.options.slopeThreshold);
+    sbgnLayout.constraints["alignmentConstraint"] = constraints.alignmentConstraint;
+    sbgnLayout.constraints["relativePlacementConstraint"] = constraints.relativePlacementConstraint;
+
+    graphManager.allNodesToApplyGravitation = undefined;
+    sbgnLayout.initParameters();
+    sbgnLayout.initSpringEmbedder();
+    SBGNConstants.DEFAULT_EDGE_LENGTH = CoSEConstants.DEFAULT_EDGE_LENGTH = FDLayoutConstants.DEFAULT_EDGE_LENGTH = options.idealEdgeLength;
+    CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = true;
+    CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
+    CoSEConstants.TILE = true;
+    sbgnLayout.runLayout();
+    if (this.options.mapType == "PD") {
+      SBGNPolishingNew.polish(sbgnLayout);
+    } 
   
     let getPositions = function (ele, i) {
       if (typeof ele === "number") {

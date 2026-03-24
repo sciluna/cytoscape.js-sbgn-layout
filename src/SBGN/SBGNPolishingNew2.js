@@ -15,6 +15,85 @@ SBGNPolishingNew.polish = function (sbgnLayout) {
     for (let i = 0; i < edges.length; i++ ) {
       if(edges[i].direction && (edges[i].direction == 'l-r' || edges[i].direction == 'r-l' || edges[i].direction == 't-b' || edges[i].direction == 'b-t')) {
         process.direction = edges[i].direction;
+      } else if (edges[i].direction == 'tl-br' || edges[i].direction == 'tr-bl' || edges[i].direction == 'br-tl' || edges[i].direction == 'bl-tr') {
+          process.direction = edges[i].direction;
+          break;
+      }
+    };
+    let predecessors = [];
+    let incomers = process.getIncomerNodes();
+    incomers.forEach(incomer => {
+      predecessors = predecessors.concat(incomer.getIncomerNodes());
+    });
+    let successors = [];
+    let outgoers = process.getOutgoerNodes();
+    outgoers.forEach(outgoer => {
+      successors = successors.concat(outgoer.getOutgoerNodes());
+    });
+    let before = false;
+    let after = false;
+    predecessors.forEach(node => {
+      if(node.isProcess()) {
+        before = true;
+      }
+    });
+    incomers.forEach(incomer => {
+      if(incomer.getEdges().length > 1) {
+        before = true;
+      }
+    });
+    successors.forEach(node => {
+      if(node.isProcess()) {
+        after = true;
+      }
+    });
+    outgoers.forEach(outgoer => {
+      if(outgoer.getEdges().length > 1) {
+        after = true;
+      }
+    });
+    if(before && after) {
+      process.status = "middle";
+    } else if(before) {
+      process.status = "last";
+    } else if(after) {
+      process.status = "first";
+    }
+    // console.log(process.status);
+  });
+
+  this.addPerProcessPolishment(processNodes);
+}
+
+SBGNPolishingNew.polish2 = function (processNodes, nodes, edges, mapType = "PD", slopeThreshold = 0.5) {
+/*   let allNodes = sbgnLayout.getAllNodes();
+  let processNodes = sbgnLayout.getAllProcessNodes(); */
+  let allNodes = nodes;
+  let oneDegreeNodes = new Set();
+  let multiDegreeNodes = new Set();
+  allNodes.forEach(node => {
+    if(node.getNeighborsList().size == 1) {
+      oneDegreeNodes.add(node);
+    } else {
+      multiDegreeNodes.add(node);
+    }
+  });
+  edges.forEach(edge => {
+    let source = edge.getSource();
+    let target = edge.getTarget();
+    if ((!oneDegreeNodes.has(source) && !oneDegreeNodes.has(target) && mapType == "PD") || (mapType == "AF")){
+      let direction = this.getDirection(source, target, slopeThreshold);
+      edge.direction = direction;
+    }
+  });
+
+  processNodes.forEach(process => {
+    let edges = process.edges.filter(edge => {
+      return edge.direction;
+    });
+    for (let i = 0; i < edges.length; i++ ) {
+      if(edges[i].direction && (edges[i].direction == 'l-r' || edges[i].direction == 'r-l' || edges[i].direction == 't-b' || edges[i].direction == 'b-t')) {
+        process.direction = edges[i].direction;
         break;
       } else if (edges[i].direction == 'tl-br' || edges[i].direction == 'tr-bl' || edges[i].direction == 'br-tl' || edges[i].direction == 'bl-tr') {
           process.direction = edges[i].direction;
@@ -242,6 +321,13 @@ let calculatePosition = function (nodeA, nodeB, idealEdgeLength, degree) {
 };
 
 let placeInputs = function (node, inputs, direction = 'l-r', idealEdgeLength, isFirstNode, horizontalAlignments, verticalAlignments, relativePlacementConstraints) {
+  let inputsTemp = [];
+  inputs.forEach(input => {
+    if (input.getParent() == node.getParent()){
+      inputsTemp.push(input);
+    }
+  });
+  inputs = inputsTemp;
   const n = inputs.length;
   if (n === 0) return;
 
@@ -306,7 +392,16 @@ let placeInputs = function (node, inputs, direction = 'l-r', idealEdgeLength, is
     angle = (angle + 360) % 360;
 
     const position = calculatePosition(node, inputs[i], idealEdgeLength, angle);
+    const oldPos = {x: inputs[i].getCenterX(), y: inputs[i].getCenterY()};
+    const newPos = {x: position.x, y: position.y};
+    const shiftAmount = {x: newPos.x - oldPos.x, y: newPos.y - oldPos.y};
     inputs[i].setCenter(position.x, position.y);
+    // if node is compound we need to move its children as well
+    if(inputs[i].child && inputs[i].child.getNodes().length > 0) {
+      inputs[i].child.getNodes().forEach(node => {
+        node.moveBy(shiftAmount.x, shiftAmount.y)
+      });
+    }
 
     const alignedAngle = Math.round(angle); // avoid float precision
     if (alignedAngle === 0 || alignedAngle === 180) {
@@ -345,6 +440,13 @@ let placeInputs = function (node, inputs, direction = 'l-r', idealEdgeLength, is
 };
 
 let placeOutputs = function (node, outputs, direction = 'l-r', idealEdgeLength, isLastNode, horizontalAlignments, verticalAlignments, relativePlacementConstraints) {
+  let outputsTemp = [];
+  outputs.forEach(output => {
+    if (output.getParent() == node.getParent()){
+      outputsTemp.push(output);
+    }
+  });
+  outputs = outputsTemp;
   const n = outputs.length;
   if (n === 0) return;
 
@@ -362,7 +464,12 @@ let placeOutputs = function (node, outputs, direction = 'l-r', idealEdgeLength, 
 
   const { start, end, center } = directionConfig[direction];
 
-  const step = 90 / Math.ceil(n / 2  + 1);
+  let step = 0;
+  if (isLastNode){
+    step = 180 / (n + 1);
+  } else {
+    step = 90 / Math.ceil(n / 2  + 1);
+  }
 
   let lastAngle = start;
   for (let i = 0; i < n; i++) {
@@ -396,7 +503,16 @@ let placeOutputs = function (node, outputs, direction = 'l-r', idealEdgeLength, 
     angle = (angle + 360) % 360;
 
     const position = calculatePosition(node, outputs[i], idealEdgeLength, angle);
+    const oldPos = {x: outputs[i].getCenterX(), y: outputs[i].getCenterY()};
+    const newPos = {x: position.x, y: position.y};
+    const shiftAmount = {x: newPos.x - oldPos.x, y: newPos.y - oldPos.y};
     outputs[i].setCenter(position.x, position.y);
+    // if node is compound we need to move its children as well
+    if(outputs[i].child && outputs[i].child.getNodes().length > 0) {
+      outputs[i].child.getNodes().forEach(node => {
+        node.moveBy(shiftAmount.x, shiftAmount.y)
+      });
+    }
 
     const alignedAngle = Math.round(angle); // avoid float precision
     if (alignedAngle === 0 || alignedAngle === 180) {
@@ -435,6 +551,14 @@ let placeOutputs = function (node, outputs, direction = 'l-r', idealEdgeLength, 
 };
 
 let placeModulators = function (node, modulators, direction = 'l-r', idealEdgeLength, horizontalAlignments, verticalAlignments) {
+  let modulatorsTemp = [];
+  modulators.forEach(modulator => {
+    if (modulator.getParent() == node.getParent()){
+      modulatorsTemp.push(modulator);
+    }
+  });
+  modulators = modulatorsTemp;
+
   const n = modulators.length;
   if (n === 0) return;
 
@@ -477,7 +601,16 @@ let placeModulators = function (node, modulators, direction = 'l-r', idealEdgeLe
   // Apply placement
   allAngles.forEach((angle, i) => {
     const position = calculatePosition(node, modulators[i], idealEdgeLength, angle);
+    const oldPos = {x: modulators[i].getCenterX(), y: modulators[i].getCenterY()};
+    const newPos = {x: position.x, y: position.y};
+    const shiftAmount = {x: newPos.x - oldPos.x, y: newPos.y - oldPos.y};
     modulators[i].setCenter(position.x, position.y);
+    // if node is compound we need to move its children as well
+    if(modulators[i].child && modulators[i].child.getNodes().length > 0) {
+      modulators[i].child.getNodes().forEach(node => {
+        node.moveBy(shiftAmount.x, shiftAmount.y)
+      });
+    }
 
     // Alignment tagging
     const alignedAngle = Math.round(angle % 360);
@@ -533,7 +666,7 @@ SBGNPolishingNew.addPerProcessPolishment = function (processes, directions) {
         return false;
       }
     });
-    console.log(modulators);
+    //console.log(modulators);
     // find output nodes (filter ring nodes, modulator nodes and output with degree higher than 1)
     let outputs = outgoers.filter((output) => {
       let edgeBetween = node.getEdgesBetween(output)[0];

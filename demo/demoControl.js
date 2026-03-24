@@ -35,7 +35,7 @@ let loadSample = function (fname) {
 			cy.add(cyGraph);
 			cy.layout({ name: 'preset' }).run();
 
-			cy.nodes().forEach(node => {			
+			cy.nodes().not(":parent").forEach(node => {			
 				let bbox = node.data('bbox');
 				node.css('width', bbox.w);
 				node.css('height', bbox.h);
@@ -89,7 +89,7 @@ document.getElementById("samples").addEventListener("change", function (event) {
 		filename = "Aminobutyrate_degradation.xml";
 	}
 	else if(sample == "sample9") {
-		filename = "test.sbgn";
+		filename = "Beta_oxidation_of_hexanoyl-CoA_to_butanoyl-CoA.xml";
 	}
 	else if(sample == "sample10") {
 		filename = "Ketone_body_catabolism.sbgn";
@@ -110,8 +110,17 @@ document.getElementById("samples").addEventListener("change", function (event) {
 		filename = "WP121.sbgn";
 	}
 	else if(sample == "sample16") {
-		filename = "Beta_oxidation_of_hexanoyl-CoA_to_butanoyl-CoA.xml";
-  } 
+		filename = "neuronal_muscle_signaling.sbgn";
+  }
+	else if(sample == "sample17") {
+		filename = "cam-camk_dependent_signaling_to_the_nucleus.sbgn";
+  }
+	else if(sample == "sample18") {
+		filename = "atm_mediated_phosphorylation_of_repair_proteins.sbgn";
+  }
+	else if(sample == "sample19") {
+		filename = "polyq_proteins_interference.sbgn";
+  }
 	else if(sample == "reactome") {
 		filename = "9613829.json";
 	}
