@@ -53748,9 +53748,11 @@
 		    for (var i = 0; i < edges.length; i++) {
 		      if (edges[i].direction && (edges[i].direction == 'l-r' || edges[i].direction == 'r-l' || edges[i].direction == 't-b' || edges[i].direction == 'b-t')) {
 		        process.direction = edges[i].direction;
+		        if (edges[i].getTarget().id == process.id) {
+		          break;
+		        }
 		      } else if (edges[i].direction == 'tl-br' || edges[i].direction == 'tr-bl' || edges[i].direction == 'br-tl' || edges[i].direction == 'bl-tr') {
 		        process.direction = edges[i].direction;
-		        break;
 		      }
 		    }	    var predecessors = [];
 		    var incomers = process.getIncomerNodes();
@@ -54442,10 +54444,28 @@
 
 		  // Apply placement
 		  allAngles.forEach(function (angle, i) {
-		    if (modulators[i].class == "complex") {
-		      idealEdgeLength *= 1.3;
-		    }
+		    //if(modulators[i].class == "complex"){
+		    idealEdgeLength *= 1.25;
+		    //}
 		    var position = calculatePosition(node, modulators[i], idealEdgeLength, angle);
+		    var isOverlapping = checkOverlap(modulators[i], position, sbgnLayout);
+		    if (isOverlapping) {
+		      var quadrant = findQuadrant(angle);
+		      var newQuadrant = quadrant;
+		      for (var j = 1; j < node.quadrants.length; j++) {
+		        if (!node.quadrants[(quadrant + j) % node.quadrants.length]) {
+		          newQuadrant = (quadrant + j) % node.quadrants.length;
+		          break;
+		        }
+		      }
+		      angle = newQuadrant * 45;
+		      position = calculatePosition(node, modulators[i], idealEdgeLength, angle);
+		      node.quadrants[newQuadrant] = true;
+		    } else {
+		      var _quadrant3 = findQuadrant(angle);
+		      node.quadrants[_quadrant3] = true;
+		    }
+
 		    var oldPos = { x: modulators[i].getCenterX(), y: modulators[i].getCenterY() };
 		    var newPos = { x: position.x, y: position.y };
 		    var shiftAmount = { x: newPos.x - oldPos.x, y: newPos.y - oldPos.y };

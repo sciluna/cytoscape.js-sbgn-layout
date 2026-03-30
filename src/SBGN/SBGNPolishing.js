@@ -14,9 +14,11 @@ SBGNPolishingNew.polish = function (sbgnLayout) {
     for (let i = 0; i < edges.length; i++ ) {
       if(edges[i].direction && (edges[i].direction == 'l-r' || edges[i].direction == 'r-l' || edges[i].direction == 't-b' || edges[i].direction == 'b-t')) {
         process.direction = edges[i].direction;
+        if(edges[i].getTarget().id == process.id) {
+          break;
+        }
       } else if (edges[i].direction == 'tl-br' || edges[i].direction == 'tr-bl' || edges[i].direction == 'br-tl' || edges[i].direction == 'bl-tr') {
           process.direction = edges[i].direction;
-          break;
       }
     };
     let predecessors = [];
@@ -663,10 +665,28 @@ let placeModulators = function (node, modulators, direction = 'l-r', idealEdgeLe
 
   // Apply placement
   allAngles.forEach((angle, i) => {
-    if(modulators[i].class == "complex"){
-      idealEdgeLength *= 1.3;
-    }
+    //if(modulators[i].class == "complex"){
+      idealEdgeLength *= 1.25;
+    //}
     let position = calculatePosition(node, modulators[i], idealEdgeLength, angle);
+    let isOverlapping = checkOverlap(modulators[i], position, sbgnLayout);
+    if (isOverlapping) {
+      let quadrant = findQuadrant(angle);
+      let newQuadrant = quadrant;
+      for(let j = 1; j < node.quadrants.length; j++) {
+        if (!node.quadrants[(quadrant + j) % node.quadrants.length]) {
+          newQuadrant = (quadrant + j) % node.quadrants.length;
+          break;
+        }
+      }
+      angle = newQuadrant * 45;
+      position = calculatePosition(node, modulators[i], idealEdgeLength, angle);
+      node.quadrants[newQuadrant] = true;
+    } else {
+      let quadrant = findQuadrant(angle);
+      node.quadrants[quadrant] = true;
+    }
+
     const oldPos = {x: modulators[i].getCenterX(), y: modulators[i].getCenterY()};
     const newPos = {x: position.x, y: position.y};
     const shiftAmount = {x: newPos.x - oldPos.x, y: newPos.y - oldPos.y};
