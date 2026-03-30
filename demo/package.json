@@ -14,8 +14,8 @@
   "dependencies": {
     "cytoscape": "^3.2.0",
     "cytoscape-fcose": "^2.2.0",
-    "sbgnml-to-cytoscape": "^4.0.4",
-    "cytoscape-sbgn-stylesheet": "https://github.com/hasanbalci/cytoscape-sbgn-stylesheet.git"
+    "cytoscape-sbgn-stylesheet": "https://github.com/hasanbalci/cytoscape-sbgn-stylesheet.git",
+    "sbgnml-to-cytoscape": "^4.0.4"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^26.0.1",

@@ -7,7 +7,7 @@
 		exports["cytoscapeSbgnLayout"] = factory(require("cose-base"));
 	else
 		root["cytoscapeSbgnLayout"] = factory(root["coseBase"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_1__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_4__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 71);
+/******/ 	return __webpack_require__(__webpack_require__.s = 69);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -86,15 +86,9 @@ if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_1__;
-
-/***/ }),
-/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var global = __webpack_require__(3);
+var global = __webpack_require__(2);
 var core = __webpack_require__(0);
 var ctx = __webpack_require__(9);
 var hide = __webpack_require__(10);
@@ -159,7 +153,7 @@ module.exports = $export;
 
 
 /***/ }),
-/* 3 */
+/* 2 */
 /***/ (function(module, exports) {
 
 // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
@@ -171,12 +165,12 @@ if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
 
 
 /***/ }),
-/* 4 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var store = __webpack_require__(59)('wks');
-var uid = __webpack_require__(45);
-var Symbol = __webpack_require__(3).Symbol;
+var store = __webpack_require__(56)('wks');
+var uid = __webpack_require__(40);
+var Symbol = __webpack_require__(2).Symbol;
 var USE_SYMBOL = typeof Symbol == 'function';
 
 var $exports = module.exports = function (name) {
@@ -186,6 +180,12 @@ var $exports = module.exports = function (name) {
 
 $exports.store = store;
 
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_4__;
 
 /***/ }),
 /* 5 */
@@ -201,7 +201,7 @@ module.exports = function (it) {
 /***/ (function(module, exports, __webpack_require__) {
 
 // Thank's IE8 for his funny defineProperty
-module.exports = !__webpack_require__(12)(function () {
+module.exports = !__webpack_require__(11)(function () {
   return Object.defineProperty({}, 'a', { get: function () { return 7; } }).a != 7;
 });
 
@@ -211,8 +211,8 @@ module.exports = !__webpack_require__(12)(function () {
 /***/ (function(module, exports, __webpack_require__) {
 
 var anObject = __webpack_require__(8);
-var IE8_DOM_DEFINE = __webpack_require__(104);
-var toPrimitive = __webpack_require__(120);
+var IE8_DOM_DEFINE = __webpack_require__(102);
+var toPrimitive = __webpack_require__(118);
 var dP = Object.defineProperty;
 
 exports.f = __webpack_require__(6) ? Object.defineProperty : function defineProperty(O, P, Attributes) {
@@ -270,7 +270,7 @@ module.exports = function (fn, that, length) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var dP = __webpack_require__(7);
-var createDesc = __webpack_require__(40);
+var createDesc = __webpack_require__(35);
 module.exports = __webpack_require__(6) ? function (object, key, value) {
   return dP.f(object, key, createDesc(1, value));
 } : function (object, key, value) {
@@ -281,12 +281,6 @@ module.exports = __webpack_require__(6) ? function (object, key, value) {
 
 /***/ }),
 /* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = { "default": __webpack_require__(88), __esModule: true };
-
-/***/ }),
-/* 12 */
 /***/ (function(module, exports) {
 
 module.exports = function (exec) {
@@ -299,11 +293,17 @@ module.exports = function (exec) {
 
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (function(module, exports) {
 
 module.exports = {};
 
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = { "default": __webpack_require__(86), __esModule: true };
 
 /***/ }),
 /* 14 */
@@ -331,11 +331,11 @@ module.exports = function (it) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var ctx = __webpack_require__(9);
-var call = __webpack_require__(52);
-var isArrayIter = __webpack_require__(51);
+var call = __webpack_require__(49);
+var isArrayIter = __webpack_require__(48);
 var anObject = __webpack_require__(8);
-var toLength = __webpack_require__(25);
-var getIterFn = __webpack_require__(46);
+var toLength = __webpack_require__(22);
+var getIterFn = __webpack_require__(41);
 var BREAK = {};
 var RETURN = {};
 var exports = module.exports = function (iterable, entries, fn, that, ITERATOR) {
@@ -372,7 +372,7 @@ module.exports = function (it, key) {
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.1.13 ToObject(argument)
-var defined = __webpack_require__(31);
+var defined = __webpack_require__(26);
 module.exports = function (it) {
   return Object(defined(it));
 };
@@ -384,10 +384,10 @@ module.exports = function (it) {
 
 "use strict";
 
-var $at = __webpack_require__(118)(true);
+var $at = __webpack_require__(116)(true);
 
 // 21.1.3.27 String.prototype[@@iterator]()
-__webpack_require__(34)(String, 'String', function (iterated) {
+__webpack_require__(29)(String, 'String', function (iterated) {
   this._t = String(iterated); // target
   this._i = 0;                // next index
 // 21.1.5.2.1 %StringIteratorPrototype%.next()
@@ -406,17 +406,483 @@ __webpack_require__(34)(String, 'String', function (iterated) {
 /* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
+// getting tag from 19.1.3.6 Object.prototype.toString()
+var cof = __webpack_require__(15);
+var TAG = __webpack_require__(3)('toStringTag');
+// ES3 wrong here
+var ARG = cof(function () { return arguments; }()) == 'Arguments';
+
+// fallback for IE11 Script Access Denied error
+var tryGet = function (it, key) {
+  try {
+    return it[key];
+  } catch (e) { /* empty */ }
+};
+
+module.exports = function (it) {
+  var O, T, B;
+  return it === undefined ? 'Undefined' : it === null ? 'Null'
+    // @@toStringTag case
+    : typeof (T = tryGet(O = Object(it), TAG)) == 'string' ? T
+    // builtinTag case
+    : ARG ? cof(O)
+    // ES3 arguments fallback
+    : (B = cof(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : B;
+};
+
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var def = __webpack_require__(7).f;
+var has = __webpack_require__(17);
+var TAG = __webpack_require__(3)('toStringTag');
+
+module.exports = function (it, tag, stat) {
+  if (it && !has(it = stat ? it : it.prototype, TAG)) def(it, TAG, { configurable: true, value: tag });
+};
+
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// 7.1.15 ToLength
+var toInteger = __webpack_require__(38);
+var min = Math.min;
+module.exports = function (it) {
+  return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
+};
+
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(123);
+var global = __webpack_require__(2);
+var hide = __webpack_require__(10);
+var Iterators = __webpack_require__(12);
+var TO_STRING_TAG = __webpack_require__(3)('toStringTag');
+
+var DOMIterables = ('CSSRuleList,CSSStyleDeclaration,CSSValueList,ClientRectList,DOMRectList,DOMStringList,' +
+  'DOMTokenList,DataTransferItemList,FileList,HTMLAllCollection,HTMLCollection,HTMLFormElement,HTMLSelectElement,' +
+  'MediaList,MimeTypeArray,NamedNodeMap,NodeList,PaintRequestList,Plugin,PluginArray,SVGLengthList,SVGNumberList,' +
+  'SVGPathSegList,SVGPointList,SVGStringList,SVGTransformList,SourceBufferList,StyleSheetList,TextTrackCueList,' +
+  'TextTrackList,TouchList').split(',');
+
+for (var i = 0; i < DOMIterables.length; i++) {
+  var NAME = DOMIterables[i];
+  var Collection = global[NAME];
+  var proto = Collection && Collection.prototype;
+  if (proto && !proto[TO_STRING_TAG]) hide(proto, TO_STRING_TAG, NAME);
+  Iterators[NAME] = Iterators.Array;
+}
+
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = { "default": __webpack_require__(82), __esModule: true };
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports) {
+
+module.exports = function (it, Constructor, name, forbiddenField) {
+  if (!(it instanceof Constructor) || (forbiddenField !== undefined && forbiddenField in it)) {
+    throw TypeError(name + ': incorrect invocation!');
+  } return it;
+};
+
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports) {
+
+// 7.2.1 RequireObjectCoercible(argument)
+module.exports = function (it) {
+  if (it == undefined) throw TypeError("Can't call method on  " + it);
+  return it;
+};
+
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isObject = __webpack_require__(5);
+var document = __webpack_require__(2).document;
+// typeof document.createElement is 'object' in old IE
+var is = isObject(document) && isObject(document.createElement);
+module.exports = function (it) {
+  return is ? document.createElement(it) : {};
+};
+
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// fallback for non-array-like ES3 and non-enumerable old V8 strings
+var cof = __webpack_require__(15);
+// eslint-disable-next-line no-prototype-builtins
+module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
+  return cof(it) == 'String' ? it.split('') : Object(it);
+};
+
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var LIBRARY = __webpack_require__(30);
+var $export = __webpack_require__(1);
+var redefine = __webpack_require__(113);
+var hide = __webpack_require__(10);
+var Iterators = __webpack_require__(12);
+var $iterCreate = __webpack_require__(105);
+var setToStringTag = __webpack_require__(21);
+var getPrototypeOf = __webpack_require__(110);
+var ITERATOR = __webpack_require__(3)('iterator');
+var BUGGY = !([].keys && 'next' in [].keys()); // Safari has buggy iterators w/o `next`
+var FF_ITERATOR = '@@iterator';
+var KEYS = 'keys';
+var VALUES = 'values';
+
+var returnThis = function () { return this; };
+
+module.exports = function (Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCED) {
+  $iterCreate(Constructor, NAME, next);
+  var getMethod = function (kind) {
+    if (!BUGGY && kind in proto) return proto[kind];
+    switch (kind) {
+      case KEYS: return function keys() { return new Constructor(this, kind); };
+      case VALUES: return function values() { return new Constructor(this, kind); };
+    } return function entries() { return new Constructor(this, kind); };
+  };
+  var TAG = NAME + ' Iterator';
+  var DEF_VALUES = DEFAULT == VALUES;
+  var VALUES_BUG = false;
+  var proto = Base.prototype;
+  var $native = proto[ITERATOR] || proto[FF_ITERATOR] || DEFAULT && proto[DEFAULT];
+  var $default = $native || getMethod(DEFAULT);
+  var $entries = DEFAULT ? !DEF_VALUES ? $default : getMethod('entries') : undefined;
+  var $anyNative = NAME == 'Array' ? proto.entries || $native : $native;
+  var methods, key, IteratorPrototype;
+  // Fix native
+  if ($anyNative) {
+    IteratorPrototype = getPrototypeOf($anyNative.call(new Base()));
+    if (IteratorPrototype !== Object.prototype && IteratorPrototype.next) {
+      // Set @@toStringTag to native iterators
+      setToStringTag(IteratorPrototype, TAG, true);
+      // fix for some old engines
+      if (!LIBRARY && typeof IteratorPrototype[ITERATOR] != 'function') hide(IteratorPrototype, ITERATOR, returnThis);
+    }
+  }
+  // fix Array#{values, @@iterator}.name in V8 / FF
+  if (DEF_VALUES && $native && $native.name !== VALUES) {
+    VALUES_BUG = true;
+    $default = function values() { return $native.call(this); };
+  }
+  // Define iterator
+  if ((!LIBRARY || FORCED) && (BUGGY || VALUES_BUG || !proto[ITERATOR])) {
+    hide(proto, ITERATOR, $default);
+  }
+  // Plug for library
+  Iterators[NAME] = $default;
+  Iterators[TAG] = returnThis;
+  if (DEFAULT) {
+    methods = {
+      values: DEF_VALUES ? $default : getMethod(VALUES),
+      keys: IS_SET ? $default : getMethod(KEYS),
+      entries: $entries
+    };
+    if (FORCED) for (key in methods) {
+      if (!(key in proto)) redefine(proto, key, methods[key]);
+    } else $export($export.P + $export.F * (BUGGY || VALUES_BUG), NAME, methods);
+  }
+  return methods;
+};
+
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports) {
+
+module.exports = true;
+
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var META = __webpack_require__(40)('meta');
+var isObject = __webpack_require__(5);
+var has = __webpack_require__(17);
+var setDesc = __webpack_require__(7).f;
+var id = 0;
+var isExtensible = Object.isExtensible || function () {
+  return true;
+};
+var FREEZE = !__webpack_require__(11)(function () {
+  return isExtensible(Object.preventExtensions({}));
+});
+var setMeta = function (it) {
+  setDesc(it, META, { value: {
+    i: 'O' + ++id, // object ID
+    w: {}          // weak collections IDs
+  } });
+};
+var fastKey = function (it, create) {
+  // return primitive with prefix
+  if (!isObject(it)) return typeof it == 'symbol' ? it : (typeof it == 'string' ? 'S' : 'P') + it;
+  if (!has(it, META)) {
+    // can't set metadata to uncaught frozen object
+    if (!isExtensible(it)) return 'F';
+    // not necessary to add metadata
+    if (!create) return 'E';
+    // add missing metadata
+    setMeta(it);
+  // return object ID
+  } return it[META].i;
+};
+var getWeak = function (it, create) {
+  if (!has(it, META)) {
+    // can't set metadata to uncaught frozen object
+    if (!isExtensible(it)) return true;
+    // not necessary to add metadata
+    if (!create) return false;
+    // add missing metadata
+    setMeta(it);
+  // return hash weak collections IDs
+  } return it[META].w;
+};
+// add metadata on freeze-family methods calling
+var onFreeze = function (it) {
+  if (FREEZE && meta.NEED && isExtensible(it) && !has(it, META)) setMeta(it);
+  return it;
+};
+var meta = module.exports = {
+  KEY: META,
+  NEED: false,
+  fastKey: fastKey,
+  getWeak: getWeak,
+  onFreeze: onFreeze
+};
+
+
+/***/ }),
+/* 32 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+// 25.4.1.5 NewPromiseCapability(C)
+var aFunction = __webpack_require__(14);
+
+function PromiseCapability(C) {
+  var resolve, reject;
+  this.promise = new C(function ($$resolve, $$reject) {
+    if (resolve !== undefined || reject !== undefined) throw TypeError('Bad Promise constructor');
+    resolve = $$resolve;
+    reject = $$reject;
+  });
+  this.resolve = aFunction(resolve);
+  this.reject = aFunction(reject);
+}
+
+module.exports.f = function (C) {
+  return new PromiseCapability(C);
+};
+
+
+/***/ }),
+/* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
+var anObject = __webpack_require__(8);
+var dPs = __webpack_require__(108);
+var enumBugKeys = __webpack_require__(46);
+var IE_PROTO = __webpack_require__(37)('IE_PROTO');
+var Empty = function () { /* empty */ };
+var PROTOTYPE = 'prototype';
+
+// Create object with fake `null` prototype: use iframe Object with cleared prototype
+var createDict = function () {
+  // Thrash, waste and sodomy: IE GC bug
+  var iframe = __webpack_require__(27)('iframe');
+  var i = enumBugKeys.length;
+  var lt = '<';
+  var gt = '>';
+  var iframeDocument;
+  iframe.style.display = 'none';
+  __webpack_require__(47).appendChild(iframe);
+  iframe.src = 'javascript:'; // eslint-disable-line no-script-url
+  // createDict = iframe.contentWindow.Object;
+  // html.removeChild(iframe);
+  iframeDocument = iframe.contentWindow.document;
+  iframeDocument.open();
+  iframeDocument.write(lt + 'script' + gt + 'document.F=Object' + lt + '/script' + gt);
+  iframeDocument.close();
+  createDict = iframeDocument.F;
+  while (i--) delete createDict[PROTOTYPE][enumBugKeys[i]];
+  return createDict();
+};
+
+module.exports = Object.create || function create(O, Properties) {
+  var result;
+  if (O !== null) {
+    Empty[PROTOTYPE] = anObject(O);
+    result = new Empty();
+    Empty[PROTOTYPE] = null;
+    // add "__proto__" for Object.getPrototypeOf polyfill
+    result[IE_PROTO] = O;
+  } else result = createDict();
+  return Properties === undefined ? result : dPs(result, Properties);
+};
+
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// 19.1.2.14 / 15.2.3.14 Object.keys(O)
+var $keys = __webpack_require__(111);
+var enumBugKeys = __webpack_require__(46);
+
+module.exports = Object.keys || function keys(O) {
+  return $keys(O, enumBugKeys);
+};
+
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports) {
+
+module.exports = function (bitmap, value) {
+  return {
+    enumerable: !(bitmap & 1),
+    configurable: !(bitmap & 2),
+    writable: !(bitmap & 4),
+    value: value
+  };
+};
+
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var hide = __webpack_require__(10);
+module.exports = function (target, src, safe) {
+  for (var key in src) {
+    if (safe && target[key]) target[key] = src[key];
+    else hide(target, key, src[key]);
+  } return target;
+};
+
+
+/***/ }),
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var shared = __webpack_require__(56)('keys');
+var uid = __webpack_require__(40);
+module.exports = function (key) {
+  return shared[key] || (shared[key] = uid(key));
+};
+
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports) {
+
+// 7.1.4 ToInteger
+var ceil = Math.ceil;
+var floor = Math.floor;
+module.exports = function (it) {
+  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
+};
+
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// to indexed object, toObject with fallback for non-array-like ES3 strings
+var IObject = __webpack_require__(28);
+var defined = __webpack_require__(26);
+module.exports = function (it) {
+  return IObject(defined(it));
+};
+
+
+/***/ }),
+/* 40 */
+/***/ (function(module, exports) {
+
+var id = 0;
+var px = Math.random();
+module.exports = function (key) {
+  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
+};
+
+
+/***/ }),
+/* 41 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var classof = __webpack_require__(20);
+var ITERATOR = __webpack_require__(3)('iterator');
+var Iterators = __webpack_require__(12);
+module.exports = __webpack_require__(0).getIteratorMethod = function (it) {
+  if (it != undefined) return it[ITERATOR]
+    || it['@@iterator']
+    || Iterators[classof(it)];
+};
+
+
+/***/ }),
+/* 42 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
 
-var _create = __webpack_require__(11);
+var CoSEConstants = __webpack_require__(4).CoSEConstants;
+
+function SBGNConstants() {}
+
+//CoSEPConstants inherits static props in FDLayoutConstants
+for (var prop in CoSEConstants) {
+  SBGNConstants[prop] = CoSEConstants[prop];
+}
+
+SBGNConstants.SLOPE_THRESHOLD = 0.5;
+
+module.exports = SBGNConstants;
+
+/***/ }),
+/* 43 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _create = __webpack_require__(13);
 
 var _create2 = _interopRequireDefault(_create);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var CoSENode = __webpack_require__(1).CoSENode;
-var IMath = __webpack_require__(138).IMath;
+var CoSENode = __webpack_require__(4).CoSENode;
+var IMath = __webpack_require__(136).IMath;
 
 function SBGNNode(gm, loc, size, vNode) {
   // the constructor of LNode handles alternative constructors
@@ -491,13 +957,13 @@ SBGNNode.prototype.isConnectedToRing = function () {
 module.exports = SBGNNode;
 
 /***/ }),
-/* 21 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = { "default": __webpack_require__(84), __esModule: true };
+module.exports = { "default": __webpack_require__(91), __esModule: true };
 
 /***/ }),
-/* 22 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -505,7 +971,7 @@ module.exports = { "default": __webpack_require__(84), __esModule: true };
 
 exports.__esModule = true;
 
-var _from = __webpack_require__(21);
+var _from = __webpack_require__(24);
 
 var _from2 = _interopRequireDefault(_from);
 
@@ -524,574 +990,7 @@ exports.default = function (arr) {
 };
 
 /***/ }),
-/* 23 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// getting tag from 19.1.3.6 Object.prototype.toString()
-var cof = __webpack_require__(15);
-var TAG = __webpack_require__(4)('toStringTag');
-// ES3 wrong here
-var ARG = cof(function () { return arguments; }()) == 'Arguments';
-
-// fallback for IE11 Script Access Denied error
-var tryGet = function (it, key) {
-  try {
-    return it[key];
-  } catch (e) { /* empty */ }
-};
-
-module.exports = function (it) {
-  var O, T, B;
-  return it === undefined ? 'Undefined' : it === null ? 'Null'
-    // @@toStringTag case
-    : typeof (T = tryGet(O = Object(it), TAG)) == 'string' ? T
-    // builtinTag case
-    : ARG ? cof(O)
-    // ES3 arguments fallback
-    : (B = cof(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : B;
-};
-
-
-/***/ }),
-/* 24 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var def = __webpack_require__(7).f;
-var has = __webpack_require__(17);
-var TAG = __webpack_require__(4)('toStringTag');
-
-module.exports = function (it, tag, stat) {
-  if (it && !has(it = stat ? it : it.prototype, TAG)) def(it, TAG, { configurable: true, value: tag });
-};
-
-
-/***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// 7.1.15 ToLength
-var toInteger = __webpack_require__(43);
-var min = Math.min;
-module.exports = function (it) {
-  return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
-};
-
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(125);
-var global = __webpack_require__(3);
-var hide = __webpack_require__(10);
-var Iterators = __webpack_require__(13);
-var TO_STRING_TAG = __webpack_require__(4)('toStringTag');
-
-var DOMIterables = ('CSSRuleList,CSSStyleDeclaration,CSSValueList,ClientRectList,DOMRectList,DOMStringList,' +
-  'DOMTokenList,DataTransferItemList,FileList,HTMLAllCollection,HTMLCollection,HTMLFormElement,HTMLSelectElement,' +
-  'MediaList,MimeTypeArray,NamedNodeMap,NodeList,PaintRequestList,Plugin,PluginArray,SVGLengthList,SVGNumberList,' +
-  'SVGPathSegList,SVGPointList,SVGStringList,SVGTransformList,SourceBufferList,StyleSheetList,TextTrackCueList,' +
-  'TextTrackList,TouchList').split(',');
-
-for (var i = 0; i < DOMIterables.length; i++) {
-  var NAME = DOMIterables[i];
-  var Collection = global[NAME];
-  var proto = Collection && Collection.prototype;
-  if (proto && !proto[TO_STRING_TAG]) hide(proto, TO_STRING_TAG, NAME);
-  Iterators[NAME] = Iterators.Array;
-}
-
-
-/***/ }),
-/* 27 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var CoSEConstants = __webpack_require__(1).CoSEConstants;
-
-function SBGNConstants() {}
-
-//CoSEPConstants inherits static props in FDLayoutConstants
-for (var prop in CoSEConstants) {
-  SBGNConstants[prop] = CoSEConstants[prop];
-}
-
-module.exports = SBGNConstants;
-
-/***/ }),
-/* 28 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _create = __webpack_require__(11);
-
-var _create2 = _interopRequireDefault(_create);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var CoSEEdge = __webpack_require__(1).CoSEEdge;
-
-function SBGNEdge(source, target, vEdge) {
-  CoSEEdge.call(this, source, target, vEdge);
-
-  // SBGN class of edge (such as consumption, production etc.)
-  this.class = null;
-}
-
-SBGNEdge.prototype = (0, _create2.default)(CoSEEdge.prototype);
-for (var prop in CoSEEdge) {
-  SBGNEdge[prop] = CoSEEdge[prop];
-}
-
-SBGNEdge.prototype.isModulation = function () {
-  var self = this;
-  if (self.class == "modulation" || self.class == "stimulation" || self.class == "catalysis" || self.class == "inhibition" || self.class == "necessary stimulation") return true;else return false;
-};
-
-module.exports = SBGNEdge;
-
-/***/ }),
-/* 29 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = { "default": __webpack_require__(93), __esModule: true };
-
-/***/ }),
-/* 30 */
-/***/ (function(module, exports) {
-
-module.exports = function (it, Constructor, name, forbiddenField) {
-  if (!(it instanceof Constructor) || (forbiddenField !== undefined && forbiddenField in it)) {
-    throw TypeError(name + ': incorrect invocation!');
-  } return it;
-};
-
-
-/***/ }),
-/* 31 */
-/***/ (function(module, exports) {
-
-// 7.2.1 RequireObjectCoercible(argument)
-module.exports = function (it) {
-  if (it == undefined) throw TypeError("Can't call method on  " + it);
-  return it;
-};
-
-
-/***/ }),
-/* 32 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var isObject = __webpack_require__(5);
-var document = __webpack_require__(3).document;
-// typeof document.createElement is 'object' in old IE
-var is = isObject(document) && isObject(document.createElement);
-module.exports = function (it) {
-  return is ? document.createElement(it) : {};
-};
-
-
-/***/ }),
-/* 33 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// fallback for non-array-like ES3 and non-enumerable old V8 strings
-var cof = __webpack_require__(15);
-// eslint-disable-next-line no-prototype-builtins
-module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
-  return cof(it) == 'String' ? it.split('') : Object(it);
-};
-
-
-/***/ }),
-/* 34 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var LIBRARY = __webpack_require__(35);
-var $export = __webpack_require__(2);
-var redefine = __webpack_require__(115);
-var hide = __webpack_require__(10);
-var Iterators = __webpack_require__(13);
-var $iterCreate = __webpack_require__(107);
-var setToStringTag = __webpack_require__(24);
-var getPrototypeOf = __webpack_require__(112);
-var ITERATOR = __webpack_require__(4)('iterator');
-var BUGGY = !([].keys && 'next' in [].keys()); // Safari has buggy iterators w/o `next`
-var FF_ITERATOR = '@@iterator';
-var KEYS = 'keys';
-var VALUES = 'values';
-
-var returnThis = function () { return this; };
-
-module.exports = function (Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCED) {
-  $iterCreate(Constructor, NAME, next);
-  var getMethod = function (kind) {
-    if (!BUGGY && kind in proto) return proto[kind];
-    switch (kind) {
-      case KEYS: return function keys() { return new Constructor(this, kind); };
-      case VALUES: return function values() { return new Constructor(this, kind); };
-    } return function entries() { return new Constructor(this, kind); };
-  };
-  var TAG = NAME + ' Iterator';
-  var DEF_VALUES = DEFAULT == VALUES;
-  var VALUES_BUG = false;
-  var proto = Base.prototype;
-  var $native = proto[ITERATOR] || proto[FF_ITERATOR] || DEFAULT && proto[DEFAULT];
-  var $default = $native || getMethod(DEFAULT);
-  var $entries = DEFAULT ? !DEF_VALUES ? $default : getMethod('entries') : undefined;
-  var $anyNative = NAME == 'Array' ? proto.entries || $native : $native;
-  var methods, key, IteratorPrototype;
-  // Fix native
-  if ($anyNative) {
-    IteratorPrototype = getPrototypeOf($anyNative.call(new Base()));
-    if (IteratorPrototype !== Object.prototype && IteratorPrototype.next) {
-      // Set @@toStringTag to native iterators
-      setToStringTag(IteratorPrototype, TAG, true);
-      // fix for some old engines
-      if (!LIBRARY && typeof IteratorPrototype[ITERATOR] != 'function') hide(IteratorPrototype, ITERATOR, returnThis);
-    }
-  }
-  // fix Array#{values, @@iterator}.name in V8 / FF
-  if (DEF_VALUES && $native && $native.name !== VALUES) {
-    VALUES_BUG = true;
-    $default = function values() { return $native.call(this); };
-  }
-  // Define iterator
-  if ((!LIBRARY || FORCED) && (BUGGY || VALUES_BUG || !proto[ITERATOR])) {
-    hide(proto, ITERATOR, $default);
-  }
-  // Plug for library
-  Iterators[NAME] = $default;
-  Iterators[TAG] = returnThis;
-  if (DEFAULT) {
-    methods = {
-      values: DEF_VALUES ? $default : getMethod(VALUES),
-      keys: IS_SET ? $default : getMethod(KEYS),
-      entries: $entries
-    };
-    if (FORCED) for (key in methods) {
-      if (!(key in proto)) redefine(proto, key, methods[key]);
-    } else $export($export.P + $export.F * (BUGGY || VALUES_BUG), NAME, methods);
-  }
-  return methods;
-};
-
-
-/***/ }),
-/* 35 */
-/***/ (function(module, exports) {
-
-module.exports = true;
-
-
-/***/ }),
-/* 36 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var META = __webpack_require__(45)('meta');
-var isObject = __webpack_require__(5);
-var has = __webpack_require__(17);
-var setDesc = __webpack_require__(7).f;
-var id = 0;
-var isExtensible = Object.isExtensible || function () {
-  return true;
-};
-var FREEZE = !__webpack_require__(12)(function () {
-  return isExtensible(Object.preventExtensions({}));
-});
-var setMeta = function (it) {
-  setDesc(it, META, { value: {
-    i: 'O' + ++id, // object ID
-    w: {}          // weak collections IDs
-  } });
-};
-var fastKey = function (it, create) {
-  // return primitive with prefix
-  if (!isObject(it)) return typeof it == 'symbol' ? it : (typeof it == 'string' ? 'S' : 'P') + it;
-  if (!has(it, META)) {
-    // can't set metadata to uncaught frozen object
-    if (!isExtensible(it)) return 'F';
-    // not necessary to add metadata
-    if (!create) return 'E';
-    // add missing metadata
-    setMeta(it);
-  // return object ID
-  } return it[META].i;
-};
-var getWeak = function (it, create) {
-  if (!has(it, META)) {
-    // can't set metadata to uncaught frozen object
-    if (!isExtensible(it)) return true;
-    // not necessary to add metadata
-    if (!create) return false;
-    // add missing metadata
-    setMeta(it);
-  // return hash weak collections IDs
-  } return it[META].w;
-};
-// add metadata on freeze-family methods calling
-var onFreeze = function (it) {
-  if (FREEZE && meta.NEED && isExtensible(it) && !has(it, META)) setMeta(it);
-  return it;
-};
-var meta = module.exports = {
-  KEY: META,
-  NEED: false,
-  fastKey: fastKey,
-  getWeak: getWeak,
-  onFreeze: onFreeze
-};
-
-
-/***/ }),
-/* 37 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-// 25.4.1.5 NewPromiseCapability(C)
-var aFunction = __webpack_require__(14);
-
-function PromiseCapability(C) {
-  var resolve, reject;
-  this.promise = new C(function ($$resolve, $$reject) {
-    if (resolve !== undefined || reject !== undefined) throw TypeError('Bad Promise constructor');
-    resolve = $$resolve;
-    reject = $$reject;
-  });
-  this.resolve = aFunction(resolve);
-  this.reject = aFunction(reject);
-}
-
-module.exports.f = function (C) {
-  return new PromiseCapability(C);
-};
-
-
-/***/ }),
-/* 38 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-var anObject = __webpack_require__(8);
-var dPs = __webpack_require__(110);
-var enumBugKeys = __webpack_require__(49);
-var IE_PROTO = __webpack_require__(42)('IE_PROTO');
-var Empty = function () { /* empty */ };
-var PROTOTYPE = 'prototype';
-
-// Create object with fake `null` prototype: use iframe Object with cleared prototype
-var createDict = function () {
-  // Thrash, waste and sodomy: IE GC bug
-  var iframe = __webpack_require__(32)('iframe');
-  var i = enumBugKeys.length;
-  var lt = '<';
-  var gt = '>';
-  var iframeDocument;
-  iframe.style.display = 'none';
-  __webpack_require__(50).appendChild(iframe);
-  iframe.src = 'javascript:'; // eslint-disable-line no-script-url
-  // createDict = iframe.contentWindow.Object;
-  // html.removeChild(iframe);
-  iframeDocument = iframe.contentWindow.document;
-  iframeDocument.open();
-  iframeDocument.write(lt + 'script' + gt + 'document.F=Object' + lt + '/script' + gt);
-  iframeDocument.close();
-  createDict = iframeDocument.F;
-  while (i--) delete createDict[PROTOTYPE][enumBugKeys[i]];
-  return createDict();
-};
-
-module.exports = Object.create || function create(O, Properties) {
-  var result;
-  if (O !== null) {
-    Empty[PROTOTYPE] = anObject(O);
-    result = new Empty();
-    Empty[PROTOTYPE] = null;
-    // add "__proto__" for Object.getPrototypeOf polyfill
-    result[IE_PROTO] = O;
-  } else result = createDict();
-  return Properties === undefined ? result : dPs(result, Properties);
-};
-
-
-/***/ }),
-/* 39 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// 19.1.2.14 / 15.2.3.14 Object.keys(O)
-var $keys = __webpack_require__(113);
-var enumBugKeys = __webpack_require__(49);
-
-module.exports = Object.keys || function keys(O) {
-  return $keys(O, enumBugKeys);
-};
-
-
-/***/ }),
-/* 40 */
-/***/ (function(module, exports) {
-
-module.exports = function (bitmap, value) {
-  return {
-    enumerable: !(bitmap & 1),
-    configurable: !(bitmap & 2),
-    writable: !(bitmap & 4),
-    value: value
-  };
-};
-
-
-/***/ }),
-/* 41 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var hide = __webpack_require__(10);
-module.exports = function (target, src, safe) {
-  for (var key in src) {
-    if (safe && target[key]) target[key] = src[key];
-    else hide(target, key, src[key]);
-  } return target;
-};
-
-
-/***/ }),
-/* 42 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var shared = __webpack_require__(59)('keys');
-var uid = __webpack_require__(45);
-module.exports = function (key) {
-  return shared[key] || (shared[key] = uid(key));
-};
-
-
-/***/ }),
-/* 43 */
-/***/ (function(module, exports) {
-
-// 7.1.4 ToInteger
-var ceil = Math.ceil;
-var floor = Math.floor;
-module.exports = function (it) {
-  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
-};
-
-
-/***/ }),
-/* 44 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// to indexed object, toObject with fallback for non-array-like ES3 strings
-var IObject = __webpack_require__(33);
-var defined = __webpack_require__(31);
-module.exports = function (it) {
-  return IObject(defined(it));
-};
-
-
-/***/ }),
-/* 45 */
-/***/ (function(module, exports) {
-
-var id = 0;
-var px = Math.random();
-module.exports = function (key) {
-  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
-};
-
-
-/***/ }),
 /* 46 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var classof = __webpack_require__(23);
-var ITERATOR = __webpack_require__(4)('iterator');
-var Iterators = __webpack_require__(13);
-module.exports = __webpack_require__(0).getIteratorMethod = function (it) {
-  if (it != undefined) return it[ITERATOR]
-    || it['@@iterator']
-    || Iterators[classof(it)];
-};
-
-
-/***/ }),
-/* 47 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _create = __webpack_require__(11);
-
-var _create2 = _interopRequireDefault(_create);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var CoSEGraph = __webpack_require__(1).CoSEGraph;
-
-function SBGNGraph(parent, graphMgr, vGraph) {
-  CoSEGraph.call(this, parent, graphMgr, vGraph);
-}
-
-SBGNGraph.prototype = (0, _create2.default)(CoSEGraph.prototype);
-
-for (var prop in CoSEGraph) {
-  SBGNGraph[prop] = CoSEGraph[prop];
-}
-
-module.exports = SBGNGraph;
-
-/***/ }),
-/* 48 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _create = __webpack_require__(11);
-
-var _create2 = _interopRequireDefault(_create);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var CoSEGraphManager = __webpack_require__(1).CoSEGraphManager;
-
-function SBGNGraphManager(layout) {
-  CoSEGraphManager.call(this, layout);
-}
-
-SBGNGraphManager.prototype = (0, _create2.default)(CoSEGraphManager.prototype);
-
-for (var prop in CoSEGraphManager) {
-  SBGNGraphManager[prop] = CoSEGraphManager[prop];
-}
-
-SBGNGraphManager.prototype.getAllProcessNodes = function () {
-  var nodeList = [];
-  var graphs = this.getGraphs();
-  var s = graphs.length;
-  for (var i = 0; i < s; i++) {
-    nodeList = nodeList.concat(graphs[i].getNodes());
-  }
-  var processNodeList = nodeList.filter(function (node) {
-    if (node.isProcess()) return true;else return false;
-  });
-  this.processNodes = processNodeList;
-
-  return this.processNodes;
-};
-
-module.exports = SBGNGraphManager;
-
-/***/ }),
-/* 49 */
 /***/ (function(module, exports) {
 
 // IE 8- don't enum bug keys
@@ -1101,20 +1000,20 @@ module.exports = (
 
 
 /***/ }),
-/* 50 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var document = __webpack_require__(3).document;
+var document = __webpack_require__(2).document;
 module.exports = document && document.documentElement;
 
 
 /***/ }),
-/* 51 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // check on default Array iterator
-var Iterators = __webpack_require__(13);
-var ITERATOR = __webpack_require__(4)('iterator');
+var Iterators = __webpack_require__(12);
+var ITERATOR = __webpack_require__(3)('iterator');
 var ArrayProto = Array.prototype;
 
 module.exports = function (it) {
@@ -1123,7 +1022,7 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 52 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // call something on iterator step with safe closing on error
@@ -1141,10 +1040,10 @@ module.exports = function (iterator, fn, value, entries) {
 
 
 /***/ }),
-/* 53 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var ITERATOR = __webpack_require__(4)('iterator');
+var ITERATOR = __webpack_require__(3)('iterator');
 var SAFE_CLOSING = false;
 
 try {
@@ -1169,7 +1068,7 @@ module.exports = function (exec, skipClosing) {
 
 
 /***/ }),
-/* 54 */
+/* 51 */
 /***/ (function(module, exports) {
 
 module.exports = function (done, value) {
@@ -1178,13 +1077,13 @@ module.exports = function (done, value) {
 
 
 /***/ }),
-/* 55 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // most Object methods by ES6 should accept primitives
-var $export = __webpack_require__(2);
+var $export = __webpack_require__(1);
 var core = __webpack_require__(0);
-var fails = __webpack_require__(12);
+var fails = __webpack_require__(11);
 module.exports = function (KEY, exec) {
   var fn = (core.Object || {})[KEY] || Object[KEY];
   var exp = {};
@@ -1194,7 +1093,7 @@ module.exports = function (KEY, exec) {
 
 
 /***/ }),
-/* 56 */
+/* 53 */
 /***/ (function(module, exports) {
 
 module.exports = function (exec) {
@@ -1207,12 +1106,12 @@ module.exports = function (exec) {
 
 
 /***/ }),
-/* 57 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var anObject = __webpack_require__(8);
 var isObject = __webpack_require__(5);
-var newPromiseCapability = __webpack_require__(37);
+var newPromiseCapability = __webpack_require__(32);
 
 module.exports = function (C, x) {
   anObject(C);
@@ -1225,16 +1124,16 @@ module.exports = function (C, x) {
 
 
 /***/ }),
-/* 58 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var global = __webpack_require__(3);
+var global = __webpack_require__(2);
 var core = __webpack_require__(0);
 var dP = __webpack_require__(7);
 var DESCRIPTORS = __webpack_require__(6);
-var SPECIES = __webpack_require__(4)('species');
+var SPECIES = __webpack_require__(3)('species');
 
 module.exports = function (KEY) {
   var C = typeof core[KEY] == 'function' ? core[KEY] : global[KEY];
@@ -1246,11 +1145,11 @@ module.exports = function (KEY) {
 
 
 /***/ }),
-/* 59 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var core = __webpack_require__(0);
-var global = __webpack_require__(3);
+var global = __webpack_require__(2);
 var SHARED = '__core-js_shared__';
 var store = global[SHARED] || (global[SHARED] = {});
 
@@ -1258,19 +1157,19 @@ var store = global[SHARED] || (global[SHARED] = {});
   return store[key] || (store[key] = value !== undefined ? value : {});
 })('versions', []).push({
   version: core.version,
-  mode: __webpack_require__(35) ? 'pure' : 'global',
+  mode: __webpack_require__(30) ? 'pure' : 'global',
   copyright: '© 2020 Denis Pushkarev (zloirock.ru)'
 });
 
 
 /***/ }),
-/* 60 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.3.20 SpeciesConstructor(O, defaultConstructor)
 var anObject = __webpack_require__(8);
 var aFunction = __webpack_require__(14);
-var SPECIES = __webpack_require__(4)('species');
+var SPECIES = __webpack_require__(3)('species');
 module.exports = function (O, D) {
   var C = anObject(O).constructor;
   var S;
@@ -1279,14 +1178,14 @@ module.exports = function (O, D) {
 
 
 /***/ }),
-/* 61 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var ctx = __webpack_require__(9);
-var invoke = __webpack_require__(105);
-var html = __webpack_require__(50);
-var cel = __webpack_require__(32);
-var global = __webpack_require__(3);
+var invoke = __webpack_require__(103);
+var html = __webpack_require__(47);
+var cel = __webpack_require__(27);
+var global = __webpack_require__(2);
 var process = global.process;
 var setTask = global.setImmediate;
 var clearTask = global.clearImmediate;
@@ -1369,7 +1268,7 @@ module.exports = {
 
 
 /***/ }),
-/* 62 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isObject = __webpack_require__(5);
@@ -1380,35 +1279,35 @@ module.exports = function (it, TYPE) {
 
 
 /***/ }),
-/* 63 */
+/* 60 */
 /***/ (function(module, exports) {
 
 
 
 /***/ }),
-/* 64 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _regenerator = __webpack_require__(83);
+var _regenerator = __webpack_require__(81);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = __webpack_require__(79);
+var _asyncToGenerator2 = __webpack_require__(77);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
-var _classCallCheck2 = __webpack_require__(80);
+var _classCallCheck2 = __webpack_require__(78);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(81);
+var _createClass2 = __webpack_require__(79);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _freeze = __webpack_require__(76);
+var _freeze = __webpack_require__(74);
 
 var _freeze2 = _interopRequireDefault(_freeze);
 
@@ -1418,24 +1317,21 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
   The implementation of the sbgn layout algorithm
 */
 
-var HashMap = __webpack_require__(1).layoutBase.HashMap;
-var PointD = __webpack_require__(1).layoutBase.PointD;
-var DimensionD = __webpack_require__(1).layoutBase.DimensionD;
-var RectangleD = __webpack_require__(1).layoutBase.RectangleD;
-var Integer = __webpack_require__(1).layoutBase.Integer;
-var LayoutConstants = __webpack_require__(1).layoutBase.LayoutConstants;
-var SBGNConstants = __webpack_require__(27);
-var CoSEConstants = __webpack_require__(1).CoSEConstants;
-var FDLayoutConstants = __webpack_require__(1).layoutBase.FDLayoutConstants;
-var SBGNLayout = __webpack_require__(66);
-var SBGNNode = __webpack_require__(20);
-var SBGNPolishing = __webpack_require__(67);
-var SBGNPolishingNew = __webpack_require__(68);
-var sketchLay = __webpack_require__(141);
+var PointD = __webpack_require__(4).layoutBase.PointD;
+var DimensionD = __webpack_require__(4).layoutBase.DimensionD;
+var Integer = __webpack_require__(4).layoutBase.Integer;
+var LayoutConstants = __webpack_require__(4).layoutBase.LayoutConstants;
+var SBGNConstants = __webpack_require__(42);
+var CoSEConstants = __webpack_require__(4).CoSEConstants;
+var FDLayoutConstants = __webpack_require__(4).layoutBase.FDLayoutConstants;
+var SBGNLayout = __webpack_require__(65);
+var SBGNNode = __webpack_require__(43);
+var SBGNPolishing = __webpack_require__(66);
+var sketchLay = __webpack_require__(139);
 
-var assign = __webpack_require__(70);
-var glyphMapping = __webpack_require__(69);
-var SBGNEdge = __webpack_require__(28);
+var assign = __webpack_require__(68);
+var glyphMapping = __webpack_require__(67);
+
 var isFn = function isFn(fn) {
   return typeof fn === 'function';
 };
@@ -1457,10 +1353,8 @@ var defaults = (0, _freeze2.default)({
   ungrabifyWhileSimulating: false, // so you can't drag nodes during layout
   fit: true, // on every layout reposition of nodes, fit the viewport
   padding: 30, // padding around the simulation
-  boundingBox: undefined, // constrain layout bounds; { x1, y1, x2, y2 } or { x1, y1, w, h }
-  // infinite layout options
-  infinite: false, // overrides all other options for a forces-all-the-time mode
-
+  // Whether to pack disconnected components
+  packComponents: true,
   // map type - PD or AF
   mapType: "PD",
   // slope threshold to decide orientation during polishing
@@ -1500,7 +1394,7 @@ var defaults = (0, _freeze2.default)({
   ready: function ready() {}, // on layoutready
   stop: function stop() {}, // on layoutstop
 
-  // sketchlay option
+  // sketchlay options
   imageData: undefined,
   subset: undefined
 });
@@ -1513,6 +1407,7 @@ var getUserOptions = function getUserOptions(options) {
   if (options.gravityCompound != null) SBGNConstants.DEFAULT_COMPOUND_GRAVITY_STRENGTH = CoSEConstants.DEFAULT_COMPOUND_GRAVITY_STRENGTH = FDLayoutConstants.DEFAULT_COMPOUND_GRAVITY_STRENGTH = options.gravityCompound;
   if (options.gravityRangeCompound != null) SBGNConstants.DEFAULT_COMPOUND_GRAVITY_RANGE_FACTOR = CoSEConstants.DEFAULT_COMPOUND_GRAVITY_RANGE_FACTOR = FDLayoutConstants.DEFAULT_COMPOUND_GRAVITY_RANGE_FACTOR = options.gravityRangeCompound;
   if (options.initialEnergyOnIncremental != null) SBGNConstants.DEFAULT_COOLING_FACTOR_INCREMENTAL = CoSEConstants.DEFAULT_COOLING_FACTOR_INCREMENTAL = FDLayoutConstants.DEFAULT_COOLING_FACTOR_INCREMENTAL = options.initialEnergyOnIncremental;
+  if (options.slopeThreshold != null) SBGNConstants.SLOPE_THRESHOLD = options.slopeThreshold;
 
   SBGNConstants.TILE = CoSEConstants.TILE = options.tile;
   if (options.tilingCompareBy != null) SBGNConstants.TILING_COMPARE_BY = CoSEConstants.TILING_COMPARE_BY = options.tilingCompareBy;
@@ -1539,11 +1434,46 @@ var Layout = function () {
     key: 'run',
     value: function () {
       var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
-        var layout, options, cy, eles, nodes, edges, self, sbgnLayout, graphManager, randomize, sketchConstraints, sketchLayResult, constraints, getPositions;
+        var layout, options, cy, eles, nodes, edges, self, layUtil, packingEnabled, sbgnLayout, graphManager, randomize, sketchConstraints, sketchLayResult, initialCenter, constraints, finalCenter, centerDiff, calcCenter, moveNodes, getPositions;
         return _regenerator2.default.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                moveNodes = function moveNodes(nodes, centerDiff) {
+                  nodes.forEach(function (node) {
+                    node.moveBy(centerDiff.x, centerDiff.y);
+                    if (node.getChild()) {
+                      moveNodes(node.getChild().getNodes(), centerDiff);
+                    }
+                  });
+                  //gm.updateBounds();
+                };
+
+                calcCenter = function calcCenter(gm) {
+                  var left = Integer.MAX_VALUE;
+                  var right = -Integer.MAX_VALUE;
+                  var top = Integer.MAX_VALUE;
+                  var bottom = -Integer.MAX_VALUE;
+                  var allNodes = gm.getAllNodes();
+                  allNodes.forEach(function (node) {
+                    if (node.getNoOfChildren() == 1) {
+                      if (node.getRect().x < left) {
+                        left = node.getRect().x;
+                      }
+                      if (node.getRect().x + node.getWidth() > right) {
+                        right = node.getRect().x + node.getWidth();
+                      }
+                      if (node.getRect().y < top) {
+                        top = node.getRect().y;
+                      }
+                      if (node.getRect().y + node.getHeight() > bottom) {
+                        bottom = node.getRect().y + node.getHeight();
+                      }
+                    }
+                  });
+                  return { x: (left + right) / 2, y: (top + bottom) / 2 };
+                };
+
                 layout = this;
                 options = this.options;
                 cy = options.cy;
@@ -1552,6 +1482,15 @@ var Layout = function () {
                 edges = eles.edges();
                 self = this;
 
+                // decide component packing is enabled or not
+
+                layUtil = void 0;
+                packingEnabled = false;
+
+                if (cy.layoutUtilities && options.packComponents) {
+                  layUtil = cy.layoutUtilities("get");
+                  if (!layUtil) layUtil = cy.layoutUtilities();
+                }
 
                 this.idToLNode = {};
                 //Initialize SBGN elements
@@ -1568,14 +1507,14 @@ var Layout = function () {
                 sketchConstraints = undefined;
 
                 if (!this.options.imageData) {
-                  _context.next = 23;
+                  _context.next = 28;
                   break;
                 }
 
-                _context.next = 18;
-                return sketchLay.generateConstraints({ cy: this.options.cy, imageData: this.options.imageData, subset: this.options.subset, idealEdgeLength: this.options.idealEdgeLength });
+                _context.next = 23;
+                return sketchLay.generateConstraints({ cy: this.options.cy, imageData: this.options.imageData, subset: this.options.subset, idealEdgeLength: this.options.idealEdgeLength, connectionTolerance: 40, slopeThreshold: 0.25 });
 
-              case 18:
+              case 23:
                 sketchLayResult = _context.sent;
 
                 sketchConstraints = sketchLayResult.constraints;
@@ -1584,19 +1523,23 @@ var Layout = function () {
                 } else {
                   randomize = options.randomize;
                 }
-                _context.next = 24;
+                _context.next = 29;
                 break;
 
-              case 23:
+              case 28:
                 randomize = options.randomize;
 
-              case 24:
+              case 29:
 
                 if (!randomize) {
                   CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = true;
                 } else {
                   CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = false;
                 }
+
+                // start to layout
+                initialCenter = calcCenter(graphManager);
+
 
                 if (!randomize) {
                   if (sketchConstraints && sketchConstraints.alignmentConstraint && sketchConstraints.relativePlacementConstraint) {
@@ -1641,13 +1584,13 @@ var Layout = function () {
                                 edges.push(ele);
                               }
                             })
-                            SBGNPolishingNew.polish2(processes, nodes, edges);
+                            SBGNPolishing.polish2(processes, nodes, edges);
                           }); */
-                  //SBGNPolishingNew.polish(sbgnLayout.getAllProcessNodes());
+                  //SBGNPolishing.polish(sbgnLayout.getAllProcessNodes());
                 }
 
                 // polishment phase - first iteration
-                constraints = SBGNPolishingNew.generateConstraints(sbgnLayout, this.options.mapType, this.options.slopeThreshold);
+                constraints = SBGNPolishing.generateConstraints(sbgnLayout, this.options.mapType, this.options.slopeThreshold);
 
                 sbgnLayout.constraints["alignmentConstraint"] = constraints.alignmentConstraint;
                 sbgnLayout.constraints["relativePlacementConstraint"] = constraints.relativePlacementConstraint;
@@ -1661,11 +1604,11 @@ var Layout = function () {
                 CoSEConstants.TILE = true;
                 sbgnLayout.runLayout();
                 if (this.options.mapType == "PD") {
-                  SBGNPolishingNew.polish(sbgnLayout);
+                  SBGNPolishing.polish(sbgnLayout);
                 }
 
                 // polishment phase - second iteration
-                constraints = SBGNPolishingNew.generateConstraints(sbgnLayout, this.options.mapType, this.options.slopeThreshold);
+                constraints = SBGNPolishing.generateConstraints(sbgnLayout, this.options.mapType, this.options.slopeThreshold);
                 sbgnLayout.constraints["alignmentConstraint"] = constraints.alignmentConstraint;
                 sbgnLayout.constraints["relativePlacementConstraint"] = constraints.relativePlacementConstraint;
 
@@ -1678,8 +1621,17 @@ var Layout = function () {
                 CoSEConstants.TILE = true;
                 sbgnLayout.runLayout();
                 if (this.options.mapType == "PD") {
-                  SBGNPolishingNew.polish(sbgnLayout);
+                  SBGNPolishing.polish(sbgnLayout);
                 }
+
+                finalCenter = calcCenter(graphManager);
+                centerDiff = { x: initialCenter.x - finalCenter.x, y: initialCenter.y - finalCenter.y };
+
+                if (this.options.subset) {
+                  moveNodes(graphManager.getAllNodes(), centerDiff);
+                }
+
+                ;
 
                 getPositions = function getPositions(ele, i) {
                   if (typeof ele === "number") {
@@ -1696,7 +1648,7 @@ var Layout = function () {
 
                 eles.nodes().not(":parent").layoutPositions(layout, options, getPositions);
 
-              case 52:
+              case 62:
               case 'end':
                 return _context.stop();
             }
@@ -1821,553 +1773,138 @@ var Layout = function () {
 module.exports = Layout;
 
 /***/ }),
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _create = __webpack_require__(13);
+
+var _create2 = _interopRequireDefault(_create);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var CoSEEdge = __webpack_require__(4).CoSEEdge;
+
+function SBGNEdge(source, target, vEdge) {
+  CoSEEdge.call(this, source, target, vEdge);
+
+  // SBGN class of edge (such as consumption, production etc.)
+  this.class = null;
+}
+
+SBGNEdge.prototype = (0, _create2.default)(CoSEEdge.prototype);
+for (var prop in CoSEEdge) {
+  SBGNEdge[prop] = CoSEEdge[prop];
+}
+
+SBGNEdge.prototype.isModulation = function () {
+  var self = this;
+  if (self.class == "modulation" || self.class == "stimulation" || self.class == "catalysis" || self.class == "inhibition" || self.class == "necessary stimulation") return true;else return false;
+};
+
+module.exports = SBGNEdge;
+
+/***/ }),
+/* 63 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _create = __webpack_require__(13);
+
+var _create2 = _interopRequireDefault(_create);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var CoSEGraph = __webpack_require__(4).CoSEGraph;
+
+function SBGNGraph(parent, graphMgr, vGraph) {
+  CoSEGraph.call(this, parent, graphMgr, vGraph);
+}
+
+SBGNGraph.prototype = (0, _create2.default)(CoSEGraph.prototype);
+
+for (var prop in CoSEGraph) {
+  SBGNGraph[prop] = CoSEGraph[prop];
+}
+
+module.exports = SBGNGraph;
+
+/***/ }),
+/* 64 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _create = __webpack_require__(13);
+
+var _create2 = _interopRequireDefault(_create);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var CoSEGraphManager = __webpack_require__(4).CoSEGraphManager;
+
+function SBGNGraphManager(layout) {
+  CoSEGraphManager.call(this, layout);
+}
+
+SBGNGraphManager.prototype = (0, _create2.default)(CoSEGraphManager.prototype);
+
+for (var prop in CoSEGraphManager) {
+  SBGNGraphManager[prop] = CoSEGraphManager[prop];
+}
+
+SBGNGraphManager.prototype.getAllProcessNodes = function () {
+  var nodeList = [];
+  var graphs = this.getGraphs();
+  var s = graphs.length;
+  for (var i = 0; i < s; i++) {
+    nodeList = nodeList.concat(graphs[i].getNodes());
+  }
+  var processNodeList = nodeList.filter(function (node) {
+    if (node.isProcess()) return true;else return false;
+  });
+  this.processNodes = processNodeList;
+
+  return this.processNodes;
+};
+
+module.exports = SBGNGraphManager;
+
+/***/ }),
 /* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _from = __webpack_require__(21);
+var _from = __webpack_require__(24);
 
 var _from2 = _interopRequireDefault(_from);
 
-var _toConsumableArray2 = __webpack_require__(22);
+var _toConsumableArray2 = __webpack_require__(45);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
-var _set = __webpack_require__(29);
+var _set = __webpack_require__(44);
 
 var _set2 = _interopRequireDefault(_set);
 
-var _create = __webpack_require__(11);
+var _create = __webpack_require__(13);
 
 var _create2 = _interopRequireDefault(_create);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var CoSELayout = __webpack_require__(1).CoSELayout;
-var SBGNGraphManager = __webpack_require__(48);
-var SBGNGraph = __webpack_require__(47);
-var SBGNNode = __webpack_require__(20);
-var SBGNEdge = __webpack_require__(28);
-
-// Constructor
-function SBGNLayout() {
-  CoSELayout.call(this);
-}
-
-SBGNLayout.prototype = (0, _create2.default)(CoSELayout.prototype);
-
-for (var property in CoSELayout) {
-  SBGNLayout[property] = CoSELayout[property];
-}
-
-// -----------------------------------------------------------------------------
-// Section: Class methods related to Graph Manager
-// -----------------------------------------------------------------------------
-SBGNLayout.prototype.newGraphManager = function () {
-  this.graphManager = new SBGNGraphManager(this);
-  return this.graphManager;
-};
-
-SBGNLayout.prototype.newGraph = function (vGraph) {
-  return new SBGNGraph(null, this.graphManager, vGraph);
-};
-
-SBGNLayout.prototype.newNode = function (vNode) {
-  return new SBGNNode(this.graphManager, vNode);
-};
-
-SBGNLayout.prototype.newEdge = function (vEdge) {
-  return new SBGNEdge(null, null, vEdge);
-};
-
-SBGNLayout.prototype.getAllProcessNodes = function () {
-  return this.graphManager.getAllProcessNodes();
-};
-
-///////////////////////////////////////////////////////
-
-SBGNLayout.prototype.constructSkeleton = function () {
-  var _this = this;
-
-  var queue = [];
-  var allNodes = this.getAllNodes();
-  var processNodes = this.getAllProcessNodes();
-
-  // find process nodes that are suitable to be source of DFS
-  processNodes.forEach(function (process) {
-    var neighbors = process.getNeighborsList();
-    var count = 0;
-    neighbors.forEach(function (neighbor) {
-      if (neighbor.getEdges().length > 1 && !neighbor.getEdgesBetween(process)[0].isModulation()) {
-        count++;
-      }
-    });
-    if (count < 2) {
-      var outgoers = process.getOutgoerNodes();
-      for (var i = 0; i < outgoers.length; i++) {
-        if (outgoers[i].getOutgoerNodes().length > 0) {
-          queue.push(process);
-          break;
-        }
-      }
-    }
-  });
-  // console.log(queue);
-
-  var components = [];
-  var visited = new _set2.default();
-  var visitedProcessNodeIds = new _set2.default();
-
-  // run DFS on graph and find components (in skeleton format)
-  while (queue.length > 0) {
-    var cmpt = this.DFS(queue[0], visited, visitedProcessNodeIds, queue);
-    components.push(cmpt);
-    queue = queue.filter(function (element) {
-      return !visitedProcessNodeIds.has(element.id);
-    });
-  }
-
-  var unvisitedProcessNodes = processNodes.filter(function (process) {
-    return !visitedProcessNodeIds.has(process.id);
-  });
-
-  // TO DO: put these to queue, because there may be nodes added to the beginning of queue during DFS
-  // in other words, make it similar to original traversal.
-  unvisitedProcessNodes.forEach(function (node) {
-    var cmpt = _this.DFS(node, visited, visitedProcessNodeIds, queue);
-    components.push(cmpt);
-  });
-
-  // remove components with only one node that has ring class
-  for (var i = components.length - 1; i >= 0; i--) {
-    if (components[i].length == 1 && components[i][0].pseudoClass == "ring") {
-      components.splice(i, 1);
-    }
-  }
-
-  // some postprocessing to shape components better
-  var componentIndexesToBeExpanded = new _set2.default();
-  components.forEach(function (component, i) {
-    if (component.length == 1 && component[0].isProcess()) {
-      componentIndexesToBeExpanded.add(i);
-    }
-  });
-
-  componentIndexesToBeExpanded.forEach(function (index) {
-    var component = components[index];
-    var process = component[0];
-    var candidateNode = null;
-    var otherProcess = null;
-    process.getIncomerNodes().forEach(function (node) {
-      if (node.getOutgoerNodes().filter(function (node) {
-        return node.isProcess();
-      }).length > 1) {
-        candidateNode = node;
-      }
-    });
-    if (candidateNode) {
-      components[index].unshift(candidateNode);
-      otherProcess = candidateNode.getOutgoerNodes().filter(function (node) {
-        return node.isProcess();
-      }).filter(function (node) {
-        return node.id != process.id;
-      })[0];
-      components.forEach(function (component, i) {
-        if (component.includes(otherProcess)) {
-          components[i].unshift(candidateNode);
-        }
-      });
-    }
-  });
-
-  var nodesWithRingClass = new _set2.default(allNodes.filter(function (node) {
-    return node.pseudoClass == "ring";
-  }));
-  // process components to separate ring nodes
-  var componentsInfo = this.processComponents(components, nodesWithRingClass);
-  components = componentsInfo.components;
-  var ringNodes = componentsInfo.ringNodes;
-  var directions = componentsInfo.directions;
-  var verticalAlignments = componentsInfo.verticalAlignments;
-  var horizontalAlignments = componentsInfo.horizontalAlignments;
-  var relativePlacementConstraints = componentsInfo.relativePlacementConstraints;
-  ringNodes.forEach(function (ringNode) {
-    ringNode.pseudoClass = "ring";
-  });
-  // console.log(ringNodes);
-  // console.log(components);
-
-  var componentsExtended = this.extendComponents(components);
-
-  // console.log(componentsExtended);
-  // console.log(directions);
-
-  var constraintInfo = this.addPerComponentConstraints(components, directions);
-  verticalAlignments = verticalAlignments.concat(constraintInfo.verticalAlignments);
-  horizontalAlignments = horizontalAlignments.concat(constraintInfo.horizontalAlignments);
-  verticalAlignments = this.mergeArrays(verticalAlignments);
-  horizontalAlignments = this.mergeArrays(horizontalAlignments);
-  /*   let verticalAlignments = constraintInfo.verticalAlignments.length > 0 ? constraintInfo.verticalAlignments: undefined;
-    let horizontalAlignments = constraintInfo.horizontalAlignments.length > 0 ? constraintInfo.horizontalAlignments : undefined; */
-  relativePlacementConstraints = relativePlacementConstraints.concat(constraintInfo.relativePlacementConstraints);
-
-  var constraints = { alignmentConstraint: { vertical: verticalAlignments, horizontal: horizontalAlignments }, relativePlacementConstraint: relativePlacementConstraints };
-  // console.log(constraints);
-  return { components: components, componentsExtended: componentsExtended, ringNodes: ringNodes, constraints: constraints, directions: directions };
-};
-
-// A function used by DFS
-SBGNLayout.prototype.DFSUtil = function (currentNode, component, visited, visitedProcessNodeIds, queue) {
-
-  visited.add(currentNode.id);
-  if (currentNode.isProcess()) {
-    visitedProcessNodeIds.add(currentNode.id);
-  }
-
-  // Traverse all outgoer neigbors of this node
-  var neighborNodes = [];
-  currentNode.getOutgoerNodes().forEach(function (node) {
-    if (node.getEdges().length != 1) {
-      neighborNodes.push(node);
-    }
-  });
-
-  if (neighborNodes.length == 1) {
-    var neighbor = neighborNodes[0];
-    if (neighbor.isLogicalOperator() || currentNode.getEdgesBetween(neighbor)[0].isModulation() || !neighbor.isProcess() && neighbor.getIncomerNodes().length > 1) {
-      neighbor.pseudoClass = "ring";
-      if (!neighbor.isProcess() && neighbor.getIncomerNodes().length > 1) {
-        component.push(neighbor);
-        if (!visited.has(neighbor.id)) {
-          queue.unshift(neighbor);
-        }
-      }
-    } else {
-      //if (!visited.has(neighbor.id())) {
-      component.push(neighbor);
-      this.DFSUtil(neighbor, component, visited, visitedProcessNodeIds, queue);
-      //}
-    }
-  } else if (neighborNodes.length > 1) {
-    currentNode.pseudoClass = "ring";
-    neighborNodes.forEach(function (neighbor) {
-      if (neighbor.pseudoClass == "ringCandidate") {
-        neighbor.pseudoClass = "ring";
-      } else {
-        neighbor.pseudoClass = "ringCandidate";
-      }
-      if (!visited.has(neighbor.id)) {
-        queue.unshift(neighbor);
-      }
-    });
-  }
-};
-
-SBGNLayout.prototype.DFS = function (node, visited, visitedProcessNodeIds, queue) {
-  var cmpt = [];
-  cmpt.push(node);
-  queue.shift(node);
-  this.DFSUtil(node, cmpt, visited, visitedProcessNodeIds, queue);
-  return cmpt;
-};
-
-SBGNLayout.prototype.processComponents = function (components, nodesWithRingClass) {
-  // ring nodes with 'ring' class
-  var ringNodes1 = new _set2.default();
-  var verticalAlignments = [];
-  var horizontalAlignments = [];
-  var relativePlacementConstraints = [];
-  var directions = [];
-  // first, process components with nodes that have ring class
-  components.forEach(function (component, i) {
-    if (component.length > 1) {
-      var direction = [null, null];
-      if (component[0].pseudoClass == "ring") {
-        ringNodes1.add(component[0]);
-        if (Math.abs(component[1].getCenterX() - component[0].getCenterX()) > Math.abs(component[1].getCenterY() - component[0].getCenterY())) {
-          direction[0] = "horizontal";
-          horizontalAlignments.push([component[0].id, component[1].id]);
-          /*           if(component[1].getCenterX() > component[0].getCenterX())
-                      relativePlacementConstraints.push({left: component[0].id, right: component[1].id});
-                    else
-                      relativePlacementConstraints.push({left: component[1].id, right: component[0].id}); */
-        } else {
-          direction[0] = "vertical";
-          verticalAlignments.push([component[0].id, component[1].id]);
-          /*           if(component[1].getCenterY() > component[0].getCenterY())
-                      relativePlacementConstraints.push({top: component[0].id, bottom: component[1].id});
-                    else
-                      relativePlacementConstraints.push({top: component[1].id, bottom: component[0].id}); */
-        }
-        component = component.filter(function (node) {
-          return node.id != component[0].id;
-        });
-        components[i] = component;
-      }
-      if (component[component.length - 1].pseudoClass == "ring") {
-        ringNodes1.add(component[component.length - 1]);
-        if (Math.abs(component[component.length - 2].getCenterX() - component[component.length - 1].getCenterX()) > Math.abs(component[component.length - 2].getCenterY() - component[component.length - 1].getCenterY())) {
-          direction[1] = "horizontal";
-          horizontalAlignments.push([component[component.length - 1].id, component[component.length - 2].id]);
-          /*           if(component[component.length - 2].getCenterX() > component[component.length - 1].getCenterX())
-                      relativePlacementConstraints.push({left: component[component.length - 1].id, right: component[component.length - 2].id});
-                    else
-                      relativePlacementConstraints.push({left: component[component.length - 2].id, right: component[component.length - 1].id}); */
-        } else {
-          direction[1] = "vertical";
-          verticalAlignments.push([component[component.length - 1].id, component[component.length - 2].id]);
-          /*           if(component[component.length - 2].getCenterY() > component[component.length - 1].getCenterY())
-                      relativePlacementConstraints.push({top: component[component.length - 1].id, bottom: component[component.length - 2].id});
-                    else
-                      relativePlacementConstraints.push({top: component[component.length - 2].id, bottom: component[component.length - 1].id}); */
-        }
-        components[i] = component.filter(function (node) {
-          return node.id != component[component.length - 1].id;
-        });
-      }
-      if (direction[0] != null) {
-        directions[i] = direction[0];
-      } else if (direction[1] != null) {
-        directions[i] = direction[1];
-      }
-    } else {
-      //ringNodes1.add(component[0]);
-      directions[i] = "horizontal";
-    }
-  });
-
-  // ring nodes without 'ring' class
-  var ringNodes2 = new _set2.default();
-  // second, process components with ring nodes that doesn't have ring class
-  for (var i = 0; i < components.length; i++) {
-    var component = components[i];
-    for (var j = i + 1; j < components.length; j++) {
-      var componentToCompare = components[j];
-      if (component[0].id == componentToCompare[0].id || component[0].id == componentToCompare[componentToCompare.length - 1].id) {
-        var commonNode = component[0];
-        ringNodes2.add(commonNode);
-      }
-      if (component[component.length - 1].id == componentToCompare[0].id || component[component.length - 1].id == componentToCompare[componentToCompare.length - 1].id) {
-        var _commonNode = component[component.length - 1];
-        ringNodes2.add(_commonNode);
-      }
-    }
-  }
-
-  components.forEach(function (component, i) {
-    var direction = [null, null];
-    if (ringNodes2.has(component[0])) {
-      if (Math.abs(component[1].getCenterX() - component[0].getCenterX()) > Math.abs(component[1].getCenterY() - component[0].getCenterY())) {
-        direction[0] = "horizontal";
-        horizontalAlignments.push([component[0].id, component[1].id]);
-        /*         if(component[1].getCenterX() > component[0].getCenterX())
-                  relativePlacementConstraints.push({left: component[0].id, right: component[1].id});
-                else
-                  relativePlacementConstraints.push({left: component[1].id, right: component[0].id}); */
-      } else {
-        direction[0] = "vertical";
-        verticalAlignments.push([component[0].id, component[1].id]);
-        /*         if(component[1].getCenterY() > component[0].getCenterY())
-                  relativePlacementConstraints.push({top: component[0].id, bottom: component[1].id});
-                else
-                  relativePlacementConstraints.push({top: component[1].id, bottom: component[0].id}); */
-      }
-      component = component.filter(function (node) {
-        return node.id != component[0].id;
-      });
-      components[i] = component;
-    }
-    if (ringNodes2.has(component[component.length - 1])) {
-      if (Math.abs(component[component.length - 2].getCenterX() - component[component.length - 1].getCenterX()) > Math.abs(component[component.length - 2].getCenterY() - component[component.length - 1].getCenterY())) {
-        direction[1] = "horizontal";
-        horizontalAlignments.push([component[component.length - 1].id, component[component.length - 2].id]);
-        /*         if(component[component.length - 2].getCenterX() > component[component.length - 1].getCenterX())
-                  relativePlacementConstraints.push({left: component[component.length - 1].id, right: component[component.length - 2].id});
-                else
-                  relativePlacementConstraints.push({left: component[component.length - 2].id, right: component[component.length - 1].id}); */
-      } else {
-        direction[1] = "vertical";
-        verticalAlignments.push([component[component.length - 1].id, component[component.length - 2].id]);
-        /*         if(component[component.length - 2].getCenterY() > component[component.length - 1].getCenterY())
-                  relativePlacementConstraints.push({top: component[component.length - 1].id, bottom: component[component.length - 2].id});
-                else
-                  relativePlacementConstraints.push({top: component[component.length - 2].id, bottom: component[component.length - 1].id}); */
-      }
-      components[i] = component.filter(function (node) {
-        return node.id != component[component.length - 1].id;
-      });
-    }
-    if (!directions[i]) {
-      if (direction[0] != null) {
-        directions[i] = direction[0];
-      } else if (direction[1] != null) {
-        directions[i] = direction[1];
-      } else {
-        if (Math.abs(component[component.length - 1].getCenterX() - component[0].getCenterX()) > Math.abs(component[component.length - 1].getCenterY() - component[0].getCenterY())) {
-          directions[i] = "horizontal";
-        } else {
-          directions[i] = "vertical";
-        }
-      }
-    }
-  });
-  return { components: components, ringNodes: new _set2.default([].concat((0, _toConsumableArray3.default)(nodesWithRingClass), (0, _toConsumableArray3.default)(ringNodes1), (0, _toConsumableArray3.default)(ringNodes2))), directions: directions, horizontalAlignments: horizontalAlignments, verticalAlignments: verticalAlignments, relativePlacementConstraints: relativePlacementConstraints };
-};
-
-// Extend components (reaction chains) with one degree neighbors
-SBGNLayout.prototype.extendComponents = function (components) {
-  var componentsExtended = [];
-  components.forEach(function (component, i) {
-    var componentExtended = [];
-    component.forEach(function (node) {
-      componentExtended.push(node);
-      var neighbors = node.getNeighborsList();
-      neighbors.forEach(function (neighbor) {
-        var edgeBetween = node.getEdgesBetween(neighbor)[0];
-        if (neighbor.getEdges().length == 1) {
-          componentExtended.push(neighbor);
-        } else if (edgeBetween.isModulation() && edgeBetween.getSource().isLogicalOperator() && edgeBetween.getSource().pseudoClass != "ring") {
-          componentExtended.push(neighbor);
-          neighbor.getIncomerNodes().forEach(function (incomer) {
-            componentExtended.push(incomer);
-          });
-        }
-      });
-    });
-    //componentExtended.move({parent: componentParent.id()});
-    //componentExtended.css('background-color', getRandomColor());
-    componentsExtended.push(componentExtended);
-  });
-  return componentsExtended;
-};
-
-SBGNLayout.prototype.addPerComponentConstraints = function (components, directions) {
-  var horizontalAlignments = [];
-  var verticalAlignments = [];
-  var relativePlacementConstraints = [];
-
-  directions.forEach(function (direction, i) {
-    if (direction == "horizontal" && components[i].length > 1) {
-      horizontalAlignments.push(components[i].map(function (node) {
-        return node.id;
-      }));
-
-      var isLeftToRight = true;
-      if (components[i][0].getCenterX() > components[i][1].getCenterX()) isLeftToRight = false;
-
-      if (isLeftToRight) {
-        components[i].forEach(function (node, j) {
-          if (j != components[i].length - 1) {
-            relativePlacementConstraints.push({ left: node.id, right: components[i][j + 1].id });
-          }
-        });
-      } else {
-        components[i].forEach(function (node, j) {
-          if (j != components[i].length - 1) {
-            relativePlacementConstraints.push({ left: components[i][j + 1].id, right: node.id });
-          }
-        });
-      }
-    } else if (direction == "vertical" && components[i].length > 1) {
-      verticalAlignments.push(components[i].map(function (node) {
-        return node.id;
-      }));
-
-      var isTopToBottom = true;
-      if (components[i][0].getCenterY() > components[i][1].getCenterY()) isTopToBottom = false;
-
-      if (isTopToBottom) {
-        components[i].forEach(function (node, j) {
-          if (j != components[i].length - 1) {
-            relativePlacementConstraints.push({ top: node.id, bottom: components[i][j + 1].id });
-          }
-        });
-      } else {
-        components[i].forEach(function (node, j) {
-          if (j != components[i].length - 1) {
-            relativePlacementConstraints.push({ top: components[i][j + 1].id, bottom: node.id });
-          }
-        });
-      }
-    }
-  });
-
-  return { horizontalAlignments: horizontalAlignments, verticalAlignments: verticalAlignments, relativePlacementConstraints: relativePlacementConstraints };
-};
-
-// auxuliary function to merge arrays with duplicates
-SBGNLayout.prototype.mergeArrays = function (arrays) {
-  // Function to check if two arrays have common items
-  function haveCommonItems(arr1, arr2) {
-    return arr1.some(function (item) {
-      return arr2.includes(item);
-    });
-  }
-
-  // Function to merge two arrays and remove duplicates
-  function mergeAndRemoveDuplicates(arr1, arr2) {
-    return (0, _from2.default)(new _set2.default([].concat((0, _toConsumableArray3.default)(arr1), (0, _toConsumableArray3.default)(arr2))));
-  }
-
-  // Loop until no more merges are possible
-  var merged = false;
-  do {
-    merged = false;
-    for (var i = 0; i < arrays.length; i++) {
-      for (var j = i + 1; j < arrays.length; j++) {
-        if (haveCommonItems(arrays[i], arrays[j])) {
-          // Merge the arrays
-          arrays[i] = mergeAndRemoveDuplicates(arrays[i], arrays[j]);
-          // Remove the merged array
-          arrays.splice(j, 1);
-          // Set merged to true to indicate a merge has occurred
-          merged = true;
-          break;
-        }
-      }
-      if (merged) {
-        break;
-      }
-    }
-  } while (merged);
-
-  return arrays;
-};
-
-module.exports = SBGNLayout;
-
-/***/ }),
-/* 66 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _from = __webpack_require__(21);
-
-var _from2 = _interopRequireDefault(_from);
-
-var _toConsumableArray2 = __webpack_require__(22);
-
-var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
-
-var _set = __webpack_require__(29);
-
-var _set2 = _interopRequireDefault(_set);
-
-var _create = __webpack_require__(11);
-
-var _create2 = _interopRequireDefault(_create);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var CoSELayout = __webpack_require__(1).CoSELayout;
-var SBGNGraphManager = __webpack_require__(48);
-var SBGNGraph = __webpack_require__(47);
-var SBGNNode = __webpack_require__(20);
-var SBGNEdge = __webpack_require__(28);
+var CoSELayout = __webpack_require__(4).CoSELayout;
+var SBGNGraphManager = __webpack_require__(64);
+var SBGNGraph = __webpack_require__(63);
+var SBGNNode = __webpack_require__(43);
+var SBGNEdge = __webpack_require__(62);
 
 // Constructor
 function SBGNLayout() {
@@ -2950,954 +2487,32 @@ SBGNLayout.prototype.mergeArrays = function (arrays) {
 module.exports = SBGNLayout;
 
 /***/ }),
-/* 67 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _toConsumableArray2 = __webpack_require__(22);
-
-var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var SBGNConstants = __webpack_require__(27);
-
-function SBGNPolishing() {}
-
-SBGNPolishing.addPerComponentPolishment = function (components, directions) {
-  var horizontalAlignments = [];
-  var verticalAlignments = [];
-  var relativePlacementConstraints = [];
-
-  var idealEdgeLength = SBGNConstants.DEFAULT_EDGE_LENGTH;
-
-  var calculatePosition = function calculatePosition(nodeA, nodeB, idealEdgeLength, degree) {
-    if (degree == 0) {
-      return { x: nodeA.getCenterX() + (nodeA.getWidth() / 2 + nodeB.getWidth() / 2 + idealEdgeLength), y: nodeA.getCenterY() };
-    } else if (degree == 90) {
-      return { x: nodeA.getCenterX(), y: nodeA.getCenterY() - (nodeA.getHeight() / 2 + nodeB.getHeight() / 2 + idealEdgeLength) };
-    } else if (degree == 180) {
-      return { x: nodeA.getCenterX() - (nodeA.getWidth() / 2 + nodeB.getWidth() / 2 + idealEdgeLength), y: nodeA.getCenterY() };
-    } else if (degree == 270) {
-      return { x: nodeA.getCenterX(), y: nodeA.getCenterY() + (nodeA.getHeight() / 2 + nodeB.getHeight() / 2 + idealEdgeLength) };
-    } else {
-      var radian = degree * Math.PI / 180;
-      var radius = idealEdgeLength / 2 + (nodeA.getDiagonal() / 2 + nodeB.getDiagonal() / 2);
-      return { x: nodeA.getCenterX() + radius * Math.cos(radian), y: nodeA.getCenterY() - radius * Math.sin(radian) };
-    }
-  };
-
-  var placeLogicalOperators = function placeLogicalOperators(modulator, a1, a2, a3) {
-    var incomers = modulator.getIncomerNodes();
-    if (incomers.length == 1) {
-      var position = calculatePosition(modulator, incomers[0], idealEdgeLength, a1);
-      incomers[0].setCenter(position.x, position.y);
-    } else if (incomers.length == 2) {
-      var _position = calculatePosition(modulator, incomers[0], idealEdgeLength, a2);
-      incomers[0].setCenter(_position.x, _position.y);
-      _position = calculatePosition(modulator, incomers[1], idealEdgeLength, a3);
-      incomers[1].setCenter(_position.x, _position.y);
-    }
-  };
-
-  var findOrientation = function findOrientation(direction, edgeBetween) {
-    if (edgeBetween) {
-      var source = edgeBetween.getSource();
-      var target = edgeBetween.getTarget();
-      if (direction == "horizontal") {
-        if (source.getCenterX() > target.getCenterX()) return "right-to-left";else return "left-to-right";
-      } else {
-        if (source.getCenterY() > target.getCenterY()) return "bottom-to-top";else return "top-to-bottom";
-      }
-    } else {
-      if (direction == "horizontal") {
-        return "left-to-right";
-      } else {
-        return "top-to-bottom";
-      }
-    }
-  };
-
-  // first process input nodes (except modulators)
-  components.forEach(function (component, i) {
-    var orientation = "";
-    if (component.length > 1) {
-      var edgeBetween = component[0].getEdgesBetween(component[1])[0];
-      orientation = findOrientation(directions[i], edgeBetween);
-    } else if (component.length == 1) {
-      var ringNeighbors = [].concat((0, _toConsumableArray3.default)(component[0].getNeighborsList())).filter(function (neighbor) {
-        return neighbor.pseudoClass == "ring";
-      });
-      if (ringNeighbors.length == 0) {
-        orientation = findOrientation(directions[i]);
-      } else if (ringNeighbors.length == 1) {
-        var ringNeighbor = ringNeighbors[0];
-        var _edgeBetween = component[0].getEdgesBetween(ringNeighbor)[0];
-        orientation = findOrientation(directions[i], _edgeBetween);
-      }
-    }
-
-    component.forEach(function (node, j) {
-      var incomers = node.getIncomerNodes();
-      var outgoers = node.getOutgoerNodes();
-      // find input nodes (filter ring nodes, modulator nodes and input with degree higher than 1)
-      var inputs = incomers.filter(function (input) {
-        var edgeBetween = node.getEdgesBetween(input)[0];
-        if (input.pseudoClass == "ring" || edgeBetween.class == "modulation" || edgeBetween.class == "stimulation" || edgeBetween.class == "catalysis" || edgeBetween.class == "inhibition" || edgeBetween.class == "necessary stimulation" || input.getNeighborsList().size > 1) {
-          return false;
-        } else {
-          return true;
-        }
-      });
-      // find modulator nodes (filter ring nodes, non-modulator nodes and input with degree higher than 1)
-      var modulators = incomers.filter(function (input) {
-        var edgeBetween = node.getEdgesBetween(input)[0];
-        if (input.pseudoClass != "ring" && (edgeBetween.class == "modulation" || edgeBetween.class == "stimulation" || edgeBetween.class == "catalysis" || edgeBetween.class == "inhibition" || edgeBetween.class == "necessary stimulation") && (input.getNeighborsList().size == 1 || input.isLogicalOperator())) {
-          return true;
-        } else {
-          return false;
-        }
-      });
-      // find output nodes (filter ring nodes, modulator nodes and output with degree higher than 1)
-      var outputs = outgoers.filter(function (output) {
-        var edgeBetween = node.getEdgesBetween(output)[0];
-        if (output.pseudoClass == "ring" || edgeBetween.class == "modulation" || edgeBetween.class == "stimulation" || edgeBetween.class == "catalysis" || edgeBetween.class == "inhibition" || edgeBetween.class == "necessary stimulation" || output.getNeighborsList().size > 1) {
-          return false;
-        } else {
-          return true;
-        }
-      });
-      if (j == 0 && !node.isConnectedToRing()) {
-        // first node and not connected to ring
-        if (orientation == "left-to-right") {
-          // process inputs
-          if (inputs.length == 1) {
-            var position = calculatePosition(node, inputs[0], idealEdgeLength, 180);
-            inputs[0].setCenter(position.x, position.y);
-            horizontalAlignments.push([node, inputs[0]]);
-          } else if (inputs.length == 2) {
-            var _position2 = calculatePosition(node, inputs[0], idealEdgeLength, 135);
-            inputs[0].setCenter(_position2.x, _position2.y);
-            _position2 = calculatePosition(node, inputs[1], idealEdgeLength, 225);
-            inputs[1].setCenter(_position2.x, _position2.y);
-          } else if (inputs.length == 3) {
-            var _position3 = calculatePosition(node, inputs[0], idealEdgeLength, 135);
-            inputs[0].setCenter(_position3.x, _position3.y);
-            _position3 = calculatePosition(node, inputs[1], idealEdgeLength, 180);
-            inputs[1].setCenter(_position3.x, _position3.y);
-            _position3 = calculatePosition(node, inputs[2], idealEdgeLength, 225);
-            inputs[2].setCenter(_position3.x, _position3.y);
-            horizontalAlignments.push([node, inputs[1]]);
-          } else if (inputs.length > 3) {
-            var _position4 = calculatePosition(node, inputs[0], idealEdgeLength, 126);
-            inputs[0].setCenter(_position4.x, _position4.y);
-            _position4 = calculatePosition(node, inputs[1], idealEdgeLength, 162);
-            inputs[1].setCenter(_position4.x, _position4.y);
-            _position4 = calculatePosition(node, inputs[2], idealEdgeLength, 198);
-            inputs[2].setCenter(_position4.x, _position4.y);
-            _position4 = calculatePosition(node, inputs[3], idealEdgeLength, 234);
-            inputs[3].setCenter(_position4.x, _position4.y);
-            inputs.forEach(function (input) {
-              relativePlacementConstraints.push({ left: input.id, right: node.id });
-            });
-          }
-          // process modulators
-          if (modulators.length == 1) {
-            var _position5 = calculatePosition(node, modulators[0], idealEdgeLength, 90);
-            modulators[0].setCenter(_position5.x, _position5.y);
-            verticalAlignments.push([node, modulators[0]]);
-          } else if (modulators.length >= 2) {
-            var _position6 = calculatePosition(node, modulators[0], idealEdgeLength, 90);
-            modulators[0].setCenter(_position6.x, _position6.y);
-            _position6 = calculatePosition(node, modulators[1], idealEdgeLength, 270);
-            modulators[1].setCenter(_position6.x, _position6.y);
-            if (modulators[2]) {
-              if (inputs.length == 1) {
-                _position6 = calculatePosition(node, modulators[2], idealEdgeLength, 135);
-                modulators[2].setCenter(_position6.x, _position6.y);
-              }
-              if (inputs.length == 2) {
-                _position6 = calculatePosition(node, modulators[2], idealEdgeLength, 180);
-                modulators[2].setCenter(_position6.x, _position6.y);
-              }
-            }
-          }
-          // process outputs
-          if (outputs.length == 1) {
-            var _position7 = calculatePosition(node, outputs[0], idealEdgeLength, 315);
-            outputs[0].setCenter(_position7.x, _position7.y);
-          } else if (outputs.length == 2) {
-            var _position8 = calculatePosition(node, outputs[0], idealEdgeLength, 315);
-            outputs[0].setCenter(_position8.x, _position8.y);
-            _position8 = calculatePosition(node, outputs[1], idealEdgeLength, 45);
-            outputs[1].setCenter(_position8.x, _position8.y);
-          } else if (outputs.length > 2) {
-            var _position9 = calculatePosition(node, outputs[0], idealEdgeLength, 330);
-            outputs[0].setCenter(_position9.x, _position9.y);
-            _position9 = calculatePosition(node, outputs[1], idealEdgeLength, 30);
-            outputs[1].setCenter(_position9.x, _position9.y);
-            if (outputs[2]) {
-              _position9 = calculatePosition(node, outputs[2], idealEdgeLength, 310);
-              outputs[2].setCenter(_position9.x, _position9.y);
-              if (outputs[3]) {
-                _position9 = calculatePosition(node, outputs[3], idealEdgeLength, 60);
-                outputs[3].setCenter(_position9.x, _position9.y);
-              }
-            }
-          }
-        }
-        if (orientation == "right-to-left") {
-          // process inputs
-          if (inputs.length == 1) {
-            var _position10 = calculatePosition(node, inputs[0], idealEdgeLength, 0);
-            inputs[0].setCenter(_position10.x, _position10.y);
-            horizontalAlignments.push([node, inputs[0]]);
-          } else if (inputs.length == 2) {
-            var _position11 = calculatePosition(node, inputs[0], idealEdgeLength, 45);
-            inputs[0].setCenter(_position11.x, _position11.y);
-            _position11 = calculatePosition(node, inputs[1], idealEdgeLength, 315);
-            inputs[1].setCenter(_position11.x, _position11.y);
-          } else if (inputs.length == 3) {
-            var _position12 = calculatePosition(node, inputs[0], idealEdgeLength, 45);
-            inputs[0].setCenter(_position12.x, _position12.y);
-            _position12 = calculatePosition(node, inputs[1], idealEdgeLength, 0);
-            inputs[1].setCenter(_position12.x, _position12.y);
-            _position12 = calculatePosition(node, inputs[2], idealEdgeLength, 315);
-            inputs[2].setCenter(_position12.x, _position12.y);
-            horizontalAlignments.push([node, inputs[1]]);
-          } else if (inputs.length > 3) {
-            var _position13 = calculatePosition(node, inputs[0], idealEdgeLength, 36);
-            inputs[0].setCenter(_position13.x, _position13.y);
-            _position13 = calculatePosition(node, inputs[1], idealEdgeLength, 324);
-            inputs[1].setCenter(_position13.x, _position13.y);
-            _position13 = calculatePosition(node, inputs[2], idealEdgeLength, 72);
-            inputs[2].setCenter(_position13.x, _position13.y);
-            _position13 = calculatePosition(node, inputs[3], idealEdgeLength, 288);
-            inputs[3].setCenter(_position13.x, _position13.y);
-            inputs.forEach(function (input) {
-              relativePlacementConstraints.push({ left: input.id, right: node.id });
-            });
-          }
-          // process modulators
-          if (modulators.length == 1) {
-            var _position14 = calculatePosition(node, modulators[0], idealEdgeLength, 270);
-            modulators[0].setCenter(_position14.x, _position14.y);
-            verticalAlignments.push([node, modulators[0]]);
-          } else if (modulators.length >= 2) {
-            var _position15 = calculatePosition(node, modulators[0], idealEdgeLength, 90);
-            modulators[0].setCenter(_position15.x, _position15.y);
-            _position15 = calculatePosition(node, modulators[1], idealEdgeLength, 270);
-            modulators[1].setCenter(_position15.x, _position15.y);
-            if (modulators[2]) {
-              if (inputs.length == 1) {
-                _position15 = calculatePosition(node, modulators[2], idealEdgeLength, 45);
-                modulators[2].setCenter(_position15.x, _position15.y);
-              }
-              if (inputs.length == 2) {
-                _position15 = calculatePosition(node, modulators[2], idealEdgeLength, 0);
-                modulators[2].setCenter(_position15.x, _position15.y);
-              }
-            }
-          }
-          // process outputs
-          if (outputs.length == 1) {
-
-            var _position16 = calculatePosition(node, outputs[0], idealEdgeLength, 225);
-            outputs[0].setCenter(_position16.x, _position16.y);
-          } else if (outputs.length == 2) {
-            var _position17 = calculatePosition(node, outputs[0], idealEdgeLength, 135);
-            outputs[0].setCenter(_position17.x, _position17.y);
-            _position17 = calculatePosition(node, outputs[1], idealEdgeLength, 225);
-            outputs[1].setCenter(_position17.x, _position17.y);
-          } else if (outputs.length > 2) {
-            var _position18 = calculatePosition(node, outputs[0], idealEdgeLength, 210);
-            outputs[0].setCenter(_position18.x, _position18.y);
-            _position18 = calculatePosition(node, outputs[1], idealEdgeLength, 150);
-            outputs[1].setCenter(_position18.x, _position18.y);
-            if (outputs[2]) {
-              _position18 = calculatePosition(node, outputs[2], idealEdgeLength, 240);
-              outputs[2].setCenter(_position18.x, _position18.y);
-              if (outputs[3]) {
-                _position18 = calculatePosition(node, outputs[3], idealEdgeLength, 120);
-                outputs[3].setCenter(_position18.x, _position18.y);
-              }
-            }
-          }
-        }
-        if (orientation == "top-to-bottom") {
-          // process inputs
-          if (inputs.length == 1) {
-            var _position19 = calculatePosition(node, inputs[0], idealEdgeLength, 90);
-            inputs[0].setCenter(_position19.x, _position19.y);
-            verticalAlignments.push([node, inputs[0]]);
-          } else if (inputs.length == 2) {
-            var _position20 = calculatePosition(node, inputs[0], idealEdgeLength, 45);
-            inputs[0].setCenter(_position20.x, _position20.y);
-            _position20 = calculatePosition(node, inputs[1], idealEdgeLength, 135);
-            inputs[1].setCenter(_position20.x, _position20.y);
-          } else if (inputs.length == 3) {
-            var _position21 = calculatePosition(node, inputs[0], idealEdgeLength, 45);
-            inputs[0].setCenter(_position21.x, _position21.y);
-            _position21 = calculatePosition(node, inputs[1], idealEdgeLength, 90);
-            inputs[1].setCenter(_position21.x, _position21.y);
-            _position21 = calculatePosition(node, inputs[2], idealEdgeLength, 135);
-            inputs[2].setCenter(_position21.x, _position21.y);
-            horizontalAlignments.push([node, inputs[1]]);
-          } else if (inputs.length > 3) {
-            var _position22 = calculatePosition(node, inputs[0], idealEdgeLength, 72);
-            inputs[0].setCenter(_position22.x, _position22.y);
-            _position22 = calculatePosition(node, inputs[1], idealEdgeLength, 108);
-            inputs[1].setCenter(_position22.x, _position22.y);
-            _position22 = calculatePosition(node, inputs[2], idealEdgeLength, 36);
-            inputs[2].setCenter(_position22.x, _position22.y);
-            _position22 = calculatePosition(node, inputs[3], idealEdgeLength, 144);
-            inputs[3].setCenter(_position22.x, _position22.y);
-            inputs.forEach(function (input) {
-              relativePlacementConstraints.push({ left: input.id, right: node.id });
-            });
-          }
-          // process modulators
-          if (modulators.length == 1) {
-            var _position23 = calculatePosition(node, modulators[0], idealEdgeLength, 0);
-            modulators[0].setCenter(_position23.x, _position23.y);
-            horizontalAlignments.push([node, modulators[0]]);
-          } else if (modulators.length >= 2) {
-            var _position24 = calculatePosition(node, modulators[0], idealEdgeLength, 180);
-            modulators[0].setCenter(_position24.x, _position24.y);
-            _position24 = calculatePosition(node, modulators[1], idealEdgeLength, 0);
-            modulators[1].setCenter(_position24.x, _position24.y);
-            if (modulators[2]) {
-              if (inputs.length == 1) {
-                _position24 = calculatePosition(node, modulators[2], idealEdgeLength, 135);
-                modulators[2].setCenter(_position24.x, _position24.y);
-              }
-              if (inputs.length == 2) {
-                _position24 = calculatePosition(node, modulators[2], idealEdgeLength, 90);
-                modulators[2].setCenter(_position24.x, _position24.y);
-              }
-            }
-          }
-          // process outputs
-          if (outputs.length == 1) {
-            var _position25 = calculatePosition(node, outputs[0], idealEdgeLength, 315);
-            outputs[0].setCenter(_position25.x, _position25.y);
-          } else if (outputs.length == 2) {
-            var _position26 = calculatePosition(node, outputs[0], idealEdgeLength, 315);
-            outputs[0].setCenter(_position26.x, _position26.y);
-            _position26 = calculatePosition(node, outputs[1], idealEdgeLength, 225);
-            outputs[1].setCenter(_position26.x, _position26.y);
-          } else if (outputs.length > 2) {
-            var _position27 = calculatePosition(node, outputs[0], idealEdgeLength, 300);
-            outputs[0].setCenter(_position27.x, _position27.y);
-            _position27 = calculatePosition(node, outputs[1], idealEdgeLength, 240);
-            outputs[1].setCenter(_position27.x, _position27.y);
-            if (outputs[2]) {
-              _position27 = calculatePosition(node, outputs[2], idealEdgeLength, 330);
-              outputs[2].setCenter(_position27.x, _position27.y);
-              if (outputs[3]) {
-                _position27 = calculatePosition(node, outputs[3], idealEdgeLength, 210);
-                outputs[3].setCenter(_position27.x, _position27.y);
-              }
-            }
-          }
-        }
-        if (orientation == "bottom-to-top") {
-          // process inputs
-          if (inputs.length == 1) {
-            var _position28 = calculatePosition(node, inputs[0], idealEdgeLength, 270);
-            inputs[0].setCenter(_position28.x, _position28.y);
-            verticalAlignments.push([node, inputs[0]]);
-          } else if (inputs.length == 2) {
-            var _position29 = calculatePosition(node, inputs[0], idealEdgeLength, 315);
-            inputs[0].setCenter(_position29.x, _position29.y);
-            _position29 = calculatePosition(node, inputs[1], idealEdgeLength, 225);
-            inputs[1].setCenter(_position29.x, _position29.y);
-          } else if (inputs.length == 3) {
-            var _position30 = calculatePosition(node, inputs[0], idealEdgeLength, 315);
-            inputs[0].setCenter(_position30.x, _position30.y);
-            _position30 = calculatePosition(node, inputs[1], idealEdgeLength, 270);
-            inputs[1].setCenter(_position30.x, _position30.y);
-            _position30 = calculatePosition(node, inputs[2], idealEdgeLength, 225);
-            inputs[2].setCenter(_position30.x, _position30.y);
-            verticalAlignments.push([node, inputs[1]]);
-          } else if (inputs.length > 3) {
-            var _position31 = calculatePosition(node, inputs[0], idealEdgeLength, 288);
-            inputs[0].setCenter(_position31.x, _position31.y);
-            _position31 = calculatePosition(node, inputs[1], idealEdgeLength, 252);
-            inputs[1].setCenter(_position31.x, _position31.y);
-            _position31 = calculatePosition(node, inputs[2], idealEdgeLength, 324);
-            inputs[2].setCenter(_position31.x, _position31.y);
-            _position31 = calculatePosition(node, inputs[3], idealEdgeLength, 216);
-            inputs[3].setCenter(_position31.x, _position31.y);
-          }
-          // process modulators
-          if (modulators.length == 1) {
-            var _position32 = calculatePosition(node, modulators[0], idealEdgeLength, 180);
-            modulators[0].setCenter(_position32.x, _position32.y);
-            horizontalAlignments.push([node, modulators[0]]);
-          } else if (modulators.length >= 2) {
-            var _position33 = calculatePosition(node, modulators[0], idealEdgeLength, 180);
-            modulators[0].setCenter(_position33.x, _position33.y);
-            _position33 = calculatePosition(node, modulators[1], idealEdgeLength, 0);
-            modulators[1].setCenter(_position33.x, _position33.y);
-            if (modulators[2]) {
-              if (inputs.length == 1) {
-                _position33 = calculatePosition(node, modulators[2], idealEdgeLength, 225);
-                modulators[2].setCenter(_position33.x, _position33.y);
-              }
-              if (inputs.length == 2) {
-                _position33 = calculatePosition(node, modulators[2], idealEdgeLength, 270);
-                modulators[2].setCenter(_position33.x, _position33.y);
-              }
-            }
-          }
-          // process outputs
-          if (outputs.length == 1) {
-            var _position34 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
-            outputs[0].setCenter(_position34.x, _position34.y);
-          } else if (outputs.length == 2) {
-            var _position35 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
-            outputs[0].setCenter(_position35.x, _position35.y);
-            _position35 = calculatePosition(node, outputs[1], idealEdgeLength, 135);
-            outputs[1].setCenter(_position35.x, _position35.y);
-          } else if (outputs.length > 2) {
-            var _position36 = calculatePosition(node, outputs[0], idealEdgeLength, 60);
-            outputs[0].setCenter(_position36.x, _position36.y);
-            _position36 = calculatePosition(node, outputs[1], idealEdgeLength, 120);
-            outputs[1].setCenter(_position36.x, _position36.y);
-            if (outputs[2]) {
-              _position36 = calculatePosition(node, outputs[2], idealEdgeLength, 30);
-              outputs[2].setCenter(_position36.x, _position36.y);
-              if (outputs[3]) {
-                _position36 = calculatePosition(node, outputs[3], idealEdgeLength, 150);
-                outputs[3].setCenter(_position36.x, _position36.y);
-              }
-            }
-          }
-        }
-      } else {
-        // an intermediate node - think about if connected to ring
-        if (orientation == "left-to-right") {
-          // process inputs
-          if (inputs.length == 1) {
-            var _position37 = calculatePosition(node, inputs[0], idealEdgeLength, 225);
-            inputs[0].setCenter(_position37.x, _position37.y);
-          } else if (inputs.length == 2) {
-            var _position38 = calculatePosition(node, inputs[0], idealEdgeLength, 225);
-            inputs[0].setCenter(_position38.x, _position38.y);
-            _position38 = calculatePosition(node, inputs[1], idealEdgeLength, 135);
-            inputs[1].setCenter(_position38.x, _position38.y);
-          } else if (inputs.length > 2) {
-            var _position39 = calculatePosition(node, inputs[0], idealEdgeLength, 210);
-            inputs[0].setCenter(_position39.x, _position39.y);
-            _position39 = calculatePosition(node, inputs[1], idealEdgeLength, 150);
-            inputs[1].setCenter(_position39.x, _position39.y);
-            if (inputs[2]) {
-              _position39 = calculatePosition(node, inputs[2], idealEdgeLength, 240);
-              inputs[2].setCenter(_position39.x, _position39.y);
-              if (inputs[3]) {
-                _position39 = calculatePosition(node, inputs[3], idealEdgeLength, 120);
-                inputs[3].setCenter(_position39.x, _position39.y);
-              }
-            }
-          }
-          // process modulators
-          if (modulators.length == 1) {
-            var _position40 = calculatePosition(node, modulators[0], idealEdgeLength, 90);
-            modulators[0].setCenter(_position40.x, _position40.y);
-            if (modulators[0].isLogicalOperator()) {
-              // if logical operator
-              placeLogicalOperators(modulators[0], 90, 45, 135);
-            }
-          } else if (modulators.length == 2) {
-            var _position41 = calculatePosition(node, modulators[0], idealEdgeLength, 90);
-            modulators[0].setCenter(_position41.x, _position41.y);
-            if (modulators[0].isLogicalOperator()) {
-              // if logical operator
-              placeLogicalOperators(modulators[0], 90, 45, 135);
-            }
-            _position41 = calculatePosition(node, modulators[1], idealEdgeLength, 270);
-            modulators[1].setCenter(_position41.x, _position41.y);
-            if (modulators[1].isLogicalOperator()) {
-              // if logical operator
-              placeLogicalOperators(modulators[1], 270, 225, 315);
-            }
-          } else if (modulators.length > 2) {
-            var _position42 = calculatePosition(node, modulators[0], idealEdgeLength, 60);
-            modulators[0].setCenter(_position42.x, _position42.y);
-            if (modulators[0].isLogicalOperator()) {
-              // if logical operator
-              placeLogicalOperators(modulators[0], 90, 45, 135);
-            }
-            _position42 = calculatePosition(node, modulators[1], idealEdgeLength, 120);
-            modulators[1].setCenter(_position42.x, _position42.y);
-            if (modulators[1].isLogicalOperator()) {
-              // if logical operator
-              placeLogicalOperators(modulators[1], 90, 45, 135);
-            }
-            _position42 = calculatePosition(node, modulators[2], idealEdgeLength, 270);
-            modulators[2].setCenter(_position42.x, _position42.y);
-            if (modulators[2].isLogicalOperator()) {
-              // if logical operator
-              placeLogicalOperators(modulators[2], 270, 225, 315);
-            }
-          }
-          // process outputs
-          if (outputs.length == 1) {
-            var _position43 = calculatePosition(node, outputs[0], idealEdgeLength, 315);
-            outputs[0].setCenter(_position43.x, _position43.y);
-          } else if (outputs.length == 2) {
-            var _position44 = calculatePosition(node, outputs[0], idealEdgeLength, 315);
-            outputs[0].setCenter(_position44.x, _position44.y);
-            _position44 = calculatePosition(node, outputs[1], idealEdgeLength, 45);
-            outputs[1].setCenter(_position44.x, _position44.y);
-          } else if (outputs.length > 2) {
-            var _position45 = calculatePosition(node, outputs[0], idealEdgeLength, 330);
-            outputs[0].setCenter(_position45.x, _position45.y);
-            _position45 = calculatePosition(node, outputs[1], idealEdgeLength, 30);
-            outputs[1].setCenter(_position45.x, _position45.y);
-            if (outputs[2]) {
-              _position45 = calculatePosition(node, outputs[2], idealEdgeLength, 300);
-              outputs[2].setCenter(_position45.x, _position45.y);
-              if (outputs[3]) {
-                _position45 = calculatePosition(node, outputs[3], idealEdgeLength, 60);
-                outputs[3].setCenter(_position45.x, _position45.y);
-              }
-            }
-          }
-        }
-        if (orientation == "right-to-left") {
-          // process inputs
-          if (inputs.length == 1) {
-            var _position46 = calculatePosition(node, inputs[0], idealEdgeLength, 45);
-            inputs[0].setCenter(_position46.x, _position46.y);
-          } else if (inputs.length == 2) {
-            var _position47 = calculatePosition(node, inputs[0], idealEdgeLength, 45);
-            inputs[0].setCenter(_position47.x, _position47.y);
-            _position47 = calculatePosition(node, inputs[1], idealEdgeLength, 315);
-            inputs[1].setCenter(_position47.x, _position47.y);
-          } else if (inputs.length > 2) {
-            var _position48 = calculatePosition(node, inputs[0], idealEdgeLength, 330);
-            inputs[0].setCenter(_position48.x, _position48.y);
-            _position48 = calculatePosition(node, inputs[1], idealEdgeLength, 30);
-            inputs[1].setCenter(_position48.x, _position48.y);
-            if (inputs[2]) {
-              _position48 = calculatePosition(node, inputs[2], idealEdgeLength, 300);
-              inputs[2].setCenter(_position48.x, _position48.y);
-              if (inputs[3]) {
-                _position48 = calculatePosition(node, inputs[3], idealEdgeLength, 60);
-                inputs[3].setCenter(_position48.x, _position48.y);
-              }
-            }
-            inputs.forEach(function (input) {
-              relativePlacementConstraints.push({ left: node.id, right: input.id });
-            });
-          }
-          // process modulators
-          if (modulators.length == 1) {
-            var _position49 = calculatePosition(node, modulators[0], idealEdgeLength, 270);
-            modulators[0].setCenter(_position49.x, _position49.y);
-            if (modulators[0].isLogicalOperator()) {
-              // if logical operator
-              placeLogicalOperators(modulators[0], 270, 225, 315);
-            }
-          } else if (modulators.length == 2) {
-            var _position50 = calculatePosition(node, modulators[0], idealEdgeLength, 90);
-            modulators[0].setCenter(_position50.x, _position50.y);
-            if (modulators[0].isLogicalOperator()) {
-              // if logical operator
-              placeLogicalOperators(modulators[0], 90, 45, 135);
-            }
-            _position50 = calculatePosition(node, modulators[1], idealEdgeLength, 270);
-            modulators[1].setCenter(_position50.x, _position50.y);
-            if (modulators[0].isLogicalOperator()) {
-              // if logical operator
-              placeLogicalOperators(modulators[0], 270, 225, 315);
-            }
-          } else if (modulators.length > 2) {
-            var _position51 = calculatePosition(node, modulators[0], idealEdgeLength, 60);
-            modulators[0].setCenter(_position51.x, _position51.y);
-            if (modulators[0].isLogicalOperator()) {
-              // if logical operator
-              placeLogicalOperators(modulators[0], 90, 45, 135);
-            }
-            _position51 = calculatePosition(node, modulators[1], idealEdgeLength, 120);
-            modulators[1].setCenter(_position51.x, _position51.y);
-            if (modulators[1].isLogicalOperator()) {
-              // if logical operator
-              placeLogicalOperators(modulators[1], 90, 45, 135);
-            }
-            _position51 = calculatePosition(node, modulators[2], idealEdgeLength, 270);
-            modulators[2].setCenter(_position51.x, _position51.y);
-            if (modulators[2].isLogicalOperator()) {
-              // if logical operator
-              placeLogicalOperators(modulators[2], 270, 225, 315);
-            }
-          }
-          // process outputs
-          if (outputs.length == 1) {
-            var _position52 = calculatePosition(node, outputs[0], idealEdgeLength, 135);
-            outputs[0].setCenter(_position52.x, _position52.y);
-          } else if (outputs.length == 2) {
-            var _position53 = calculatePosition(node, outputs[0], idealEdgeLength, 135);
-            outputs[0].setCenter(_position53.x, _position53.y);
-            _position53 = calculatePosition(node, outputs[1], idealEdgeLength, 225);
-            outputs[1].setCenter(_position53.x, _position53.y);
-          } else if (outputs.length > 2) {
-            var _position54 = calculatePosition(node, outputs[0], idealEdgeLength, 210);
-            outputs[0].setCenter(_position54.x, _position54.y);
-            _position54 = calculatePosition(node, outputs[1], idealEdgeLength, 150);
-            outputs[1].setCenter(_position54.x, _position54.y);
-            if (outputs[2]) {
-              _position54 = calculatePosition(node, outputs[2], idealEdgeLength, 240);
-              outputs[2].setCenter(_position54.x, _position54.y);
-              if (outputs[3]) {
-                _position54 = calculatePosition(node, outputs[3], idealEdgeLength, 120);
-                outputs[3].setCenter(_position54.x, _position54.y);
-              }
-            }
-          }
-        }
-        if (orientation == "top-to-bottom") {
-          // process inputs
-          if (inputs.length == 1) {
-            var _position55 = calculatePosition(node, inputs[0], idealEdgeLength, 135);
-            inputs[0].setCenter(_position55.x, _position55.y);
-          } else if (inputs.length == 2) {
-            var _position56 = calculatePosition(node, inputs[0], idealEdgeLength, 135);
-            inputs[0].setCenter(_position56.x, _position56.y);
-            _position56 = calculatePosition(node, inputs[1], idealEdgeLength, 45);
-            inputs[1].setCenter(_position56.x, _position56.y);
-          } else if (inputs.length > 2) {
-            var _position57 = calculatePosition(node, inputs[0], idealEdgeLength, 60);
-            inputs[0].setCenter(_position57.x, _position57.y);
-            _position57 = calculatePosition(node, inputs[1], idealEdgeLength, 120);
-            inputs[1].setCenter(_position57.x, _position57.y);
-            if (inputs[2]) {
-              _position57 = calculatePosition(node, inputs[2], idealEdgeLength, 30);
-              inputs[2].setCenter(_position57.x, _position57.y);
-              if (inputs[3]) {
-                _position57 = calculatePosition(node, inputs[3], idealEdgeLength, 150);
-                inputs[3].setCenter(_position57.x, _position57.y);
-              }
-            }
-            inputs.forEach(function (input) {
-              relativePlacementConstraints.push({ top: input.id, bottom: node.id });
-            });
-          }
-          // process modulators
-          if (modulators.length == 1) {
-            var _position58 = calculatePosition(node, modulators[0], idealEdgeLength, 0);
-            modulators[0].setCenter(_position58.x, _position58.y);
-            if (modulators[0].isLogicalOperator()) {
-              // if logical operator
-              placeLogicalOperators(modulators[0], 0, 45, 315);
-            }
-          } else if (modulators.length == 2) {
-            var _position59 = calculatePosition(node, modulators[0], idealEdgeLength, 180);
-            modulators[0].setCenter(_position59.x, _position59.y);
-            if (modulators[0].isLogicalOperator()) {
-              // if logical operator
-              placeLogicalOperators(modulators[0], 180, 135, 225);
-            }
-            _position59 = calculatePosition(node, modulators[1], idealEdgeLength, 0);
-            modulators[1].setCenter(_position59.x, _position59.y);
-            if (modulators[1].isLogicalOperator()) {
-              // if logical operator
-              placeLogicalOperators(modulators[1], 0, 45, 315);
-            }
-          } else if (modulators.length > 2) {
-            var _position60 = calculatePosition(node, modulators[0], idealEdgeLength, 150);
-            modulators[0].setCenter(_position60.x, _position60.y);
-            if (modulators[0].isLogicalOperator()) {
-              // if logical operator
-              placeLogicalOperators(modulators[0], 180, 135, 225);
-            }
-            _position60 = calculatePosition(node, modulators[1], idealEdgeLength, 210);
-            modulators[1].setCenter(_position60.x, _position60.y);
-            if (modulators[1].isLogicalOperator()) {
-              // if logical operator
-              placeLogicalOperators(modulators[1], 180, 135, 225);
-            }
-            _position60 = calculatePosition(node, modulators[2], idealEdgeLength, 0);
-            modulators[2].setCenter(_position60.x, _position60.y);
-            if (modulators[2].isLogicalOperator()) {
-              // if logical operator
-              placeLogicalOperators(modulators[2], 0, 45, 315);
-            }
-          }
-          // process outputs
-          if (outputs.length == 1) {
-            var _position61 = calculatePosition(node, outputs[0], idealEdgeLength, 225);
-            outputs[0].setCenter(_position61.x, _position61.y);
-          } else if (outputs.length == 2) {
-            var _position62 = calculatePosition(node, outputs[0], idealEdgeLength, 225);
-            outputs[0].setCenter(_position62.x, _position62.y);
-            _position62 = calculatePosition(node, outputs[1], idealEdgeLength, 315);
-            outputs[1].setCenter(_position62.x, _position62.y);
-          } else if (outputs.length > 2) {
-            var _position63 = calculatePosition(node, outputs[0], idealEdgeLength, 300);
-            outputs[0].setCenter(_position63.x, _position63.y);
-            _position63 = calculatePosition(node, outputs[1], idealEdgeLength, 240);
-            outputs[1].setCenter(_position63.x, _position63.y);
-            if (outputs[2]) {
-              _position63 = calculatePosition(node, outputs[2], idealEdgeLength, 330);
-              outputs[2].setCenter(_position63.x, _position63.y);
-              if (outputs[3]) {
-                _position63 = calculatePosition(node, outputs[3], idealEdgeLength, 210);
-                outputs[3].setCenter(_position63.x, _position63.y);
-              }
-            }
-          }
-        }
-        if (orientation == "bottom-to-top") {
-          // process inputs
-          if (inputs.length == 1) {
-            var _position64 = calculatePosition(node, inputs[0], idealEdgeLength, 315);
-            inputs[0].setCenter(_position64.x, _position64.y);
-          } else if (inputs.length == 2) {
-            var _position65 = calculatePosition(node, inputs[0], idealEdgeLength, 315);
-            inputs[0].setCenter(_position65.x, _position65.y);
-            _position65 = calculatePosition(node, inputs[1], idealEdgeLength, 225);
-            inputs[1].setCenter(_position65.x, _position65.y);
-          } else if (inputs.length > 2) {
-            var _position66 = calculatePosition(node, inputs[0], idealEdgeLength, 300);
-            inputs[0].setCenter(_position66.x, _position66.y);
-            _position66 = calculatePosition(node, inputs[1], idealEdgeLength, 240);
-            inputs[1].setCenter(_position66.x, _position66.y);
-            if (inputs[2]) {
-              _position66 = calculatePosition(node, inputs[2], idealEdgeLength, 330);
-              inputs[2].setCenter(_position66.x, _position66.y);
-              if (inputs[3]) {
-                _position66 = calculatePosition(node, inputs[3], idealEdgeLength, 210);
-                inputs[3].setCenter(_position66.x, _position66.y);
-              }
-            }
-            inputs.forEach(function (input) {
-              relativePlacementConstraints.push({ top: node.id, bottom: input.id });
-            });
-          }
-          // process modulators
-          if (modulators.length == 1) {
-            var _position67 = calculatePosition(node, modulators[0], idealEdgeLength, 180);
-            modulators[0].setCenter(_position67.x, _position67.y);
-            if (modulators[0].isLogicalOperator()) {
-              // if logical operator
-              placeLogicalOperators(modulators[0], 180, 135, 225);
-            }
-          } else if (modulators.length == 2) {
-            var _position68 = calculatePosition(node, modulators[0], idealEdgeLength, 180);
-            modulators[0].setCenter(_position68.x, _position68.y);
-            if (modulators[0].isLogicalOperator()) {
-              // if logical operator
-              placeLogicalOperators(modulators[0], 180, 135, 225);
-            }
-            _position68 = calculatePosition(node, modulators[1], idealEdgeLength, 0);
-            modulators[1].setCenter(_position68.x, _position68.y);
-            if (modulators[1].isLogicalOperator()) {
-              // if logical operator
-              placeLogicalOperators(modulators[1], 0, 45, 315);
-            }
-          } else if (modulators.length > 2) {
-            var _position69 = calculatePosition(node, modulators[0], idealEdgeLength, 150);
-            modulators[0].setCenter(_position69.x, _position69.y);
-            if (modulators[0].isLogicalOperator()) {
-              // if logical operator
-              placeLogicalOperators(modulators[0], 180, 135, 225);
-            }
-            _position69 = calculatePosition(node, modulators[1], idealEdgeLength, 210);
-            modulators[1].setCenter(_position69.x, _position69.y);
-            if (modulators[1].isLogicalOperator()) {
-              // if logical operator
-              placeLogicalOperators(modulators[1], 180, 135, 225);
-            }
-            _position69 = calculatePosition(node, modulators[2], idealEdgeLength, 0);
-            modulators[2].setCenter(_position69.x, _position69.y);
-            if (modulators[1].isLogicalOperator()) {
-              // if logical operator
-              placeLogicalOperators(modulators[1], 0, 45, 315);
-            }
-          }
-          // process outputs
-          if (outputs.length == 1) {
-            var _position70 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
-            outputs[0].setCenter(_position70.x, _position70.y);
-          } else if (outputs.length == 2) {
-            var _position71 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
-            outputs[0].setCenter(_position71.x, _position71.y);
-            _position71 = calculatePosition(node, outputs[1], idealEdgeLength, 135);
-            outputs[1].setCenter(_position71.x, _position71.y);
-          } else if (outputs.length > 2) {
-            var _position72 = calculatePosition(node, outputs[0], idealEdgeLength, 60);
-            outputs[0].setCenter(_position72.x, _position72.y);
-            _position72 = calculatePosition(node, outputs[1], idealEdgeLength, 120);
-            outputs[1].setCenter(_position72.x, _position72.y);
-            if (outputs[2]) {
-              _position72 = calculatePosition(node, outputs[2], idealEdgeLength, 30);
-              outputs[2].setCenter(_position72.x, _position72.y);
-              if (outputs[3]) {
-                _position72 = calculatePosition(node, outputs[3], idealEdgeLength, 150);
-                outputs[3].setCenter(_position72.x, _position72.y);
-              }
-            }
-          }
-        }
-      }
-      if (j == component.length - 1 && !node.isConnectedToRing() || j == 0 && node.isConnectedToRing() && node.getIncomerNodes().filter(function (incomer) {
-        return incomer.pseudoClass == "ring";
-      }).length > 0) {
-        //if last node and not connected to ring, or first node, connected to ring but connected as a target
-        if (orientation == "left-to-right") {
-          // process outputs
-          if (outputs.length == 1) {
-            var _position73 = calculatePosition(node, outputs[0], idealEdgeLength, 0);
-            outputs[0].setCenter(_position73.x, _position73.y);
-          } else if (outputs.length == 2) {
-            var _position74 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
-            outputs[0].setCenter(_position74.x, _position74.y);
-            _position74 = calculatePosition(node, outputs[1], idealEdgeLength, 315);
-            outputs[1].setCenter(_position74.x, _position74.y);
-          } else if (outputs.length == 3) {
-            var _position75 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
-            outputs[0].setCenter(_position75.x, _position75.y);
-            _position75 = calculatePosition(node, outputs[1], idealEdgeLength, 0);
-            outputs[1].setCenter(_position75.x, _position75.y);
-            _position75 = calculatePosition(node, outputs[2], idealEdgeLength, 315);
-            outputs[2].setCenter(_position75.x, _position75.y);
-          } else if (outputs.length == 4) {
-            var _position76 = calculatePosition(node, outputs[0], idealEdgeLength, 54);
-            outputs[0].setCenter(_position76.x, _position76.y);
-            _position76 = calculatePosition(node, outputs[1], idealEdgeLength, 18);
-            outputs[1].setCenter(_position76.x, _position76.y);
-            _position76 = calculatePosition(node, outputs[2], idealEdgeLength, 342);
-            outputs[2].setCenter(_position76.x, _position76.y);
-            _position76 = calculatePosition(node, outputs[3], idealEdgeLength, 306);
-            outputs[3].setCenter(_position76.x, _position76.y);
-          }
-        }
-        if (orientation == "right-to-left") {
-          // process outputs
-          if (outputs.length == 1) {
-            var _position77 = calculatePosition(node, outputs[0], idealEdgeLength, 180);
-            outputs[0].setCenter(_position77.x, _position77.y);
-          } else if (outputs.length == 2) {
-            var _position78 = calculatePosition(node, outputs[0], idealEdgeLength, 135);
-            outputs[0].setCenter(_position78.x, _position78.y);
-            _position78 = calculatePosition(node, outputs[1], idealEdgeLength, 225);
-            outputs[1].setCenter(_position78.x, _position78.y);
-          } else if (outputs.length == 3) {
-            var _position79 = calculatePosition(node, outputs[0], idealEdgeLength, 135);
-            outputs[0].setCenter(_position79.x, _position79.y);
-            _position79 = calculatePosition(node, outputs[1], idealEdgeLength, 180);
-            outputs[1].setCenter(_position79.x, _position79.y);
-            _position79 = calculatePosition(node, outputs[2], idealEdgeLength, 225);
-            outputs[2].setCenter(_position79.x, _position79.y);
-          } else if (outputs.length == 4) {
-            var _position80 = calculatePosition(node, outputs[0], idealEdgeLength, 126);
-            outputs[0].setCenter(_position80.x, _position80.y);
-            _position80 = calculatePosition(node, outputs[1], idealEdgeLength, 162);
-            outputs[1].setCenter(_position80.x, _position80.y);
-            _position80 = calculatePosition(node, outputs[2], idealEdgeLength, 198);
-            outputs[2].setCenter(_position80.x, _position80.y);
-            _position80 = calculatePosition(node, outputs[3], idealEdgeLength, 234);
-            outputs[3].setCenter(_position80.x, _position80.y);
-          }
-        }
-        if (orientation == "top-to-bottom") {
-          // process outputs
-          if (outputs.length == 1) {
-            var _position81 = calculatePosition(node, outputs[0], idealEdgeLength, 270);
-            outputs[0].setCenter(_position81.x, _position81.y);
-          } else if (outputs.length == 2) {
-            var _position82 = calculatePosition(node, outputs[0], idealEdgeLength, 225);
-            outputs[0].setCenter(_position82.x, _position82.y);
-            _position82 = calculatePosition(node, outputs[1], idealEdgeLength, 315);
-            outputs[1].setCenter(_position82.x, _position82.y);
-          } else if (outputs.length == 3) {
-            var _position83 = calculatePosition(node, outputs[0], idealEdgeLength, 225);
-            outputs[0].setCenter(_position83.x, _position83.y);
-            _position83 = calculatePosition(node, outputs[1], idealEdgeLength, 270);
-            outputs[1].setCenter(_position83.x, _position83.y);
-            _position83 = calculatePosition(node, outputs[2], idealEdgeLength, 315);
-            outputs[2].setCenter(_position83.x, _position83.y);
-          } else if (outputs.length == 4) {
-            var _position84 = calculatePosition(node, outputs[0], idealEdgeLength, 216);
-            outputs[0].setCenter(_position84.x, _position84.y);
-            _position84 = calculatePosition(node, outputs[1], idealEdgeLength, 252);
-            outputs[1].setCenter(_position84.x, _position84.y);
-            _position84 = calculatePosition(node, outputs[2], idealEdgeLength, 288);
-            outputs[2].setCenter(_position84.x, _position84.y);
-            _position84 = calculatePosition(node, outputs[3], idealEdgeLength, 324);
-            outputs[3].setCenter(_position84.x, _position84.y);
-          }
-        }
-        if (orientation == "bottom-to-top") {
-          // process outputs
-          if (outputs.length == 1) {
-            var _position85 = calculatePosition(node, outputs[0], idealEdgeLength, 90);
-            outputs[0].setCenter(_position85.x, _position85.y);
-          } else if (outputs.length == 2) {
-            var _position86 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
-            outputs[0].setCenter(_position86.x, _position86.y);
-            _position86 = calculatePosition(node, outputs[1], idealEdgeLength, 135);
-            outputs[1].setCenter(_position86.x, _position86.y);
-          } else if (outputs.length == 3) {
-            var _position87 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
-            outputs[0].setCenter(_position87.x, _position87.y);
-            _position87 = calculatePosition(node, outputs[1], idealEdgeLength, 90);
-            outputs[1].setCenter(_position87.x, _position87.y);
-            _position87 = calculatePosition(node, outputs[2], idealEdgeLength, 135);
-            outputs[2].setCenter(_position87.x, _position87.y);
-          } else if (outputs.length == 4) {
-            var _position88 = calculatePosition(node, outputs[0], idealEdgeLength, 36);
-            outputs[0].setCenter(_position88.x, _position88.y);
-            _position88 = calculatePosition(node, outputs[1], idealEdgeLength, 72);
-            outputs[1].setCenter(_position88.x, _position88.y);
-            _position88 = calculatePosition(node, outputs[2], idealEdgeLength, 108);
-            outputs[2].setCenter(_position88.x, _position88.y);
-            _position88 = calculatePosition(node, outputs[3], idealEdgeLength, 144);
-            outputs[3].setCenter(_position88.x, _position88.y);
-          }
-        }
-      }
-    });
-  });
-
-  return { horizontalAlignments: horizontalAlignments, verticalAlignments: verticalAlignments, relativePlacementConstraints: relativePlacementConstraints };
-};
-
-module.exports = SBGNPolishing;
-
-/***/ }),
-/* 68 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _slicedToArray2 = __webpack_require__(82);
+var _slicedToArray2 = __webpack_require__(80);
 
 var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
 
-var _toConsumableArray2 = __webpack_require__(22);
+var _toConsumableArray2 = __webpack_require__(45);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
-var _from = __webpack_require__(21);
+var _from = __webpack_require__(24);
 
 var _from2 = _interopRequireDefault(_from);
 
-var _set = __webpack_require__(29);
+var _set = __webpack_require__(44);
 
 var _set2 = _interopRequireDefault(_set);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var SBGNConstants = __webpack_require__(27);
-var SBGNNode = __webpack_require__(20);
-var SBGNLayout = __webpack_require__(65);
+var LayoutConstants = __webpack_require__(4).layoutBase.LayoutConstants;
+var SBGNConstants = __webpack_require__(42);
 
 function SBGNPolishingNew() {}
 
@@ -3955,15 +2570,28 @@ SBGNPolishingNew.polish = function (sbgnLayout) {
     } else if (after) {
       process.status = "first";
     }
-    // console.log(process.status);
   });
 
-  this.addPerProcessPolishment(processNodes);
+  // polish process nodes
+
+  var _addPerProcessPolishm = this.addPerProcessPolishment(processNodes, sbgnLayout),
+      horizontalAlignments = _addPerProcessPolishm.horizontalAlignments,
+      verticalAlignments = _addPerProcessPolishm.verticalAlignments,
+      elativePlacementConstraints = _addPerProcessPolishm.elativePlacementConstraints;
+
+  // polish phenotype nodes
+
+
+  var phenotypeNodes = allNodes.filter(function (node) {
+    if (node.class == "phenotype") {
+      return node;
+    }
+  });
+  var slopeThreshold = SBGNConstants.SLOPE_THRESHOLD;
+  this.addPerPhenotypePolishment(phenotypeNodes, slopeThreshold, horizontalAlignments, verticalAlignments, elativePlacementConstraints, sbgnLayout);
 };
-
+// not used
 SBGNPolishingNew.polish2 = function (processNodes, nodes, edges) {
-  var _this = this;
-
   var mapType = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "PD";
   var slopeThreshold = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0.5;
 
@@ -3983,7 +2611,7 @@ SBGNPolishingNew.polish2 = function (processNodes, nodes, edges) {
     var source = edge.getSource();
     var target = edge.getTarget();
     if (!oneDegreeNodes.has(source) && !oneDegreeNodes.has(target) && mapType == "PD" || mapType == "AF") {
-      var direction = _this.getDirection(source, target, slopeThreshold);
+      var direction = getDirection(source, target, slopeThreshold);
       edge.direction = direction;
     }
   });
@@ -4036,8 +2664,6 @@ SBGNPolishingNew.polish2 = function (processNodes, nodes, edges) {
 };
 
 SBGNPolishingNew.generateConstraints = function (sbgnLayout, mapType, slopeThreshold) {
-  var _this2 = this;
-
   var allNodes = sbgnLayout.getAllNodes();
   var oneDegreeNodes = new _set2.default();
   var multiDegreeNodes = new _set2.default();
@@ -4057,7 +2683,7 @@ SBGNPolishingNew.generateConstraints = function (sbgnLayout, mapType, slopeThres
     var source = edge.getSource();
     var target = edge.getTarget();
     if (!oneDegreeNodes.has(source) && !oneDegreeNodes.has(target) && mapType == "PD" || mapType == "AF") {
-      var direction = _this2.getDirection(source, target, slopeThreshold);
+      var direction = getDirection(source, target, slopeThreshold);
       edge.direction = direction;
       if (direction == "l-r") {
         var relativePlacement = [];
@@ -4145,7 +2771,7 @@ SBGNPolishingNew.generateConstraints = function (sbgnLayout, mapType, slopeThres
 };
 
 // calculates line direction
-SBGNPolishingNew.getDirection = function (source, target) {
+var getDirection = function getDirection(source, target) {
   var slopeThreshold = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0.5;
 
   var direction = "l-r";
@@ -4235,10 +2861,11 @@ var placeInputs = function placeInputs(node, inputs) {
   var horizontalAlignments = arguments[5];
   var verticalAlignments = arguments[6];
   var relativePlacementConstraints = arguments[7];
+  var sbgnLayout = arguments[8];
 
   var inputsTemp = [];
   inputs.forEach(function (input) {
-    if (input.getParent() == node.getParent()) {
+    if (input.getParent() == node.getParent() || input.inclusionTreeDepth != node.inclusionTreeDepth) {
       inputsTemp.push(input);
     }
   });
@@ -4246,6 +2873,7 @@ var placeInputs = function placeInputs(node, inputs) {
   var n = inputs.length;
   if (n === 0) return;
 
+  fillQuadrants(node, direction); // fill related quadrants
   // Direction configuration
   var directionConfig = {
     'l-r': { start: 270, end: 90, center: 180 }, // left side
@@ -4271,14 +2899,6 @@ var placeInputs = function placeInputs(node, inputs) {
     step = 90 / Math.ceil(n / 2 + 1);
   }
 
-  /*   // Spread scaling: narrower when few inputs, full range when many
-    const maxSpread = Math.abs(end - start);
-    const spread = n === 1 ? 0 : Math.min(maxSpread, 90); // grows smoothly
-  
-    const startAngle = center + spread / 2;
-    const endAngle = center - spread / 2;
-    const step = n === 1 ? 0 : (endAngle - startAngle) / (n - 1); */
-
   var lastAngle = start;
 
   var _loop2 = function _loop2(i) {
@@ -4303,11 +2923,40 @@ var placeInputs = function placeInputs(node, inputs) {
     // Normalize to [0, 360)
     angle = (angle + 360) % 360;
 
-    var position = calculatePosition(node, inputs[i], idealEdgeLength, angle);
+    var idealLength = idealEdgeLength;
+    if (node.inclusionTreeDepth != inputs[i].inclusionTreeDepth) {
+      idealLength = idealEdgeLength + node.getDiagonal() + inputs[i].getDiagonal() + 4 * LayoutConstants.SIMPLE_NODE_SIZE;
+    }
+
+    var position = calculatePosition(node, inputs[i], idealLength, angle);
+    var isOverlapping = checkOverlap(inputs[i], position, sbgnLayout);
+    if (isOverlapping) {
+      var quadrant = findQuadrant(angle);
+      var newQuadrant = quadrant;
+      for (var j = 1; j < node.quadrants.length; j++) {
+        if (!node.quadrants[(quadrant + j) % node.quadrants.length]) {
+          newQuadrant = (quadrant + j) % node.quadrants.length;
+          break;
+        }
+      }
+      angle = newQuadrant * 45;
+      position = calculatePosition(node, inputs[i], idealLength, angle);
+      node.quadrants[newQuadrant] = true;
+    } else {
+      var _quadrant = findQuadrant(angle);
+      node.quadrants[_quadrant] = true;
+    }
+
     var oldPos = { x: inputs[i].getCenterX(), y: inputs[i].getCenterY() };
     var newPos = { x: position.x, y: position.y };
     var shiftAmount = { x: newPos.x - oldPos.x, y: newPos.y - oldPos.y };
     inputs[i].setCenter(position.x, position.y);
+    try {
+      addNodeToGrid(inputs[i], sbgnLayout);
+    } catch (error) {
+      console.log("Exceeds polishingGrid boundaries!");
+    }
+
     // if node is compound we need to move its children as well
     if (inputs[i].child && inputs[i].child.getNodes().length > 0) {
       inputs[i].child.getNodes().forEach(function (node) {
@@ -4362,16 +3011,19 @@ var placeOutputs = function placeOutputs(node, outputs) {
   var horizontalAlignments = arguments[5];
   var verticalAlignments = arguments[6];
   var relativePlacementConstraints = arguments[7];
+  var sbgnLayout = arguments[8];
 
   var outputsTemp = [];
   outputs.forEach(function (output) {
-    if (output.getParent() == node.getParent()) {
+    if (output.getParent() == node.getParent() || output.inclusionTreeDepth != node.inclusionTreeDepth) {
       outputsTemp.push(output);
     }
   });
   outputs = outputsTemp;
   var n = outputs.length;
   if (n === 0) return;
+
+  fillQuadrants(node, direction); // fill related quadrants
 
   // Direction configuration
   var directionConfig = {
@@ -4422,15 +3074,44 @@ var placeOutputs = function placeOutputs(node, outputs) {
     // Normalize to [0, 360)
     angle = (angle + 360) % 360;
 
-    var position = calculatePosition(node, outputs[i], idealEdgeLength, angle);
+    var idealLength = idealEdgeLength;
+    if (node.inclusionTreeDepth != outputs[i].inclusionTreeDepth) {
+      idealLength = idealEdgeLength + node.getDiagonal() + outputs[i].getDiagonal() + 4 * LayoutConstants.SIMPLE_NODE_SIZE;
+    }
+    var position = calculatePosition(node, outputs[i], idealLength, angle);
+    var isOverlapping = checkOverlap(outputs[i], position, sbgnLayout);
+    if (isOverlapping) {
+      var quadrant = findQuadrant(angle);
+      var newQuadrant = quadrant;
+      for (var j = 1; j < node.quadrants.length; j++) {
+        if (!node.quadrants[(quadrant + j) % node.quadrants.length]) {
+          newQuadrant = (quadrant + j) % node.quadrants.length;
+          break;
+        }
+      }
+      angle = newQuadrant * 45;
+      position = calculatePosition(node, outputs[i], idealLength, angle);
+      node.quadrants[newQuadrant] = true;
+    } else {
+      var _quadrant2 = findQuadrant(angle);
+      node.quadrants[_quadrant2] = true;
+    }
+
     var oldPos = { x: outputs[i].getCenterX(), y: outputs[i].getCenterY() };
     var newPos = { x: position.x, y: position.y };
     var shiftAmount = { x: newPos.x - oldPos.x, y: newPos.y - oldPos.y };
     outputs[i].setCenter(position.x, position.y);
+    try {
+      addNodeToGrid(outputs[i], sbgnLayout);
+    } catch (error) {
+      console.log("Exceeds polishingGrid boundaries!");
+    }
     // if node is compound we need to move its children as well
     if (outputs[i].child && outputs[i].child.getNodes().length > 0) {
-      outputs[i].child.getNodes().forEach(function (node) {
-        node.moveBy(shiftAmount.x, shiftAmount.y);
+      outputs[i].withChildren().forEach(function (node) {
+        if (outputs[i].id != node.id) {
+          node.moveBy(shiftAmount.x, shiftAmount.y);
+        }
       });
     }
 
@@ -4479,10 +3160,12 @@ var placeModulators = function placeModulators(node, modulators) {
   var idealEdgeLength = arguments[3];
   var horizontalAlignments = arguments[4];
   var verticalAlignments = arguments[5];
+  var relativePlacementConstraints = arguments[6];
+  var sbgnLayout = arguments[7];
 
   var modulatorsTemp = [];
   modulators.forEach(function (modulator) {
-    if (modulator.getParent() == node.getParent()) {
+    if (modulator.getParent() == node.getParent() || modulator.inclusionTreeDepth != node.inclusionTreeDepth) {
       modulatorsTemp.push(modulator);
     }
   });
@@ -4490,6 +3173,8 @@ var placeModulators = function placeModulators(node, modulators) {
 
   var n = modulators.length;
   if (n === 0) return;
+
+  fillQuadrants(node, direction); // fill related quadrants
 
   // Define angle bands depending on direction (supports all 4)
   var directionConfig = {
@@ -4538,11 +3223,19 @@ var placeModulators = function placeModulators(node, modulators) {
 
   // Apply placement
   allAngles.forEach(function (angle, i) {
+    if (modulators[i].class == "complex") {
+      idealEdgeLength *= 1.3;
+    }
     var position = calculatePosition(node, modulators[i], idealEdgeLength, angle);
     var oldPos = { x: modulators[i].getCenterX(), y: modulators[i].getCenterY() };
     var newPos = { x: position.x, y: position.y };
     var shiftAmount = { x: newPos.x - oldPos.x, y: newPos.y - oldPos.y };
     modulators[i].setCenter(position.x, position.y);
+    try {
+      addNodeToGrid(modulators[i], sbgnLayout);
+    } catch (error) {
+      console.log("Exceeds polishingGrid boundaries!");
+    }
     // if node is compound we need to move its children as well
     if (modulators[i].child && modulators[i].child.getNodes().length > 0) {
       modulators[i].child.getNodes().forEach(function (node) {
@@ -4553,31 +3246,43 @@ var placeModulators = function placeModulators(node, modulators) {
     // Alignment tagging
     var alignedAngle = Math.round(angle % 360);
     if (alignedAngle === 0 || alignedAngle === 180) horizontalAlignments.push([node, modulators[i]]);else if (alignedAngle === 90 || alignedAngle === 270) verticalAlignments.push([node, modulators[i]]);
+
+    // extra process if modulator is a logical operator
+    if (modulators[i].isLogicalOperator()) {
+      modulators[i].quadrants = Array(8).fill(false);
+      var incomers = modulators[i].getIncomerNodes().filter(function (incomer) {
+        if (incomer.getEdges().length == 1) return true;
+      });
+      var incomerDirection = getDirection(modulators[i], node);
+      placeInputs(modulators[i], incomers, incomerDirection, idealEdgeLength, true, horizontalAlignments, verticalAlignments, relativePlacementConstraints, sbgnLayout);
+    }
   });
 };
 
-SBGNPolishingNew.addPerProcessPolishment = function (processes, directions) {
+SBGNPolishingNew.addPerProcessPolishment = function (processNodes, sbgnLayout) {
   var horizontalAlignments = [];
   var verticalAlignments = [];
   var relativePlacementConstraints = [];
 
   var idealEdgeLength = SBGNConstants.DEFAULT_EDGE_LENGTH;
 
-  var placeLogicalOperators = function placeLogicalOperators(modulator, a1, a2, a3) {
-    var incomers = modulator.getIncomerNodes();
-    if (incomers.length == 1) {
-      var position = calculatePosition(modulator, incomers[0], idealEdgeLength, a1);
-      incomers[0].setCenter(position.x, position.y);
-    } else if (incomers.length == 2) {
-      var _position = calculatePosition(modulator, incomers[0], idealEdgeLength, a2);
-      incomers[0].setCenter(_position.x, _position.y);
-      _position = calculatePosition(modulator, incomers[1], idealEdgeLength, a3);
-      incomers[1].setCenter(_position.x, _position.y);
+  // construct grid
+  var repulsionRange = sbgnLayout.repulsionRange;
+  var grid = calcGrid(sbgnLayout.graphManager.getRoot(), repulsionRange);
+  sbgnLayout.polishingGrid = grid;
+  var allNodes = sbgnLayout.getAllNodes();
+  // put all nodes to proper grid cells
+  var node = void 0;
+  for (var i = 0; i < allNodes.length; i++) {
+    node = allNodes[i];
+    if (node.getEdges().length > 1) {
+      addNodeToGrid(node, sbgnLayout);
     }
-  };
+  }
 
   // first process input nodes (except modulators)
-  processes.forEach(function (node, j) {
+  processNodes.forEach(function (node, j) {
+    node.quadrants = Array(8).fill(false); // quadrants start from right and finish at top-right
     var incomers = node.getIncomerNodes();
     var outgoers = node.getOutgoerNodes();
     // find input nodes (filter ring nodes, modulator nodes and input with degree higher than 1)
@@ -4598,7 +3303,7 @@ SBGNPolishingNew.addPerProcessPolishment = function (processes, directions) {
         return false;
       }
     });
-    //console.log(modulators);
+
     // find output nodes (filter ring nodes, modulator nodes and output with degree higher than 1)
     var outputs = outgoers.filter(function (output) {
       var edgeBetween = node.getEdgesBetween(output)[0];
@@ -4615,18 +3320,148 @@ SBGNPolishingNew.addPerProcessPolishment = function (processes, directions) {
       isFirstNode = true;
       isLastNode = true;
     }
-    placeInputs(node, inputs, node.direction, idealEdgeLength, isFirstNode, horizontalAlignments, verticalAlignments, relativePlacementConstraints);
-    placeOutputs(node, outputs, node.direction, idealEdgeLength, isLastNode, horizontalAlignments, verticalAlignments, relativePlacementConstraints);
-    placeModulators(node, modulators, node.direction, idealEdgeLength, horizontalAlignments, verticalAlignments, relativePlacementConstraints);
+    placeInputs(node, inputs, node.direction, idealEdgeLength, isFirstNode, horizontalAlignments, verticalAlignments, relativePlacementConstraints, sbgnLayout);
+    placeOutputs(node, outputs, node.direction, idealEdgeLength, isLastNode, horizontalAlignments, verticalAlignments, relativePlacementConstraints, sbgnLayout);
+    placeModulators(node, modulators, node.direction, idealEdgeLength, horizontalAlignments, verticalAlignments, relativePlacementConstraints, sbgnLayout);
   });
 
   return { horizontalAlignments: horizontalAlignments, verticalAlignments: verticalAlignments, relativePlacementConstraints: relativePlacementConstraints };
 };
 
+SBGNPolishingNew.addPerPhenotypePolishment = function (phenotypes, slopeThreshold, horizontalAlignments, verticalAlignments, relativePlacementConstraints, sbgnLayout) {
+
+  var idealEdgeLength = SBGNConstants.DEFAULT_EDGE_LENGTH;
+
+  phenotypes.forEach(function (phenotype, j) {
+    var edges = phenotype.getEdges();
+    var sourceNode = edges[0].getSource();
+    sourceNode.quadrants = Array(8).fill(false);
+    var direction = getDirection(sourceNode, phenotype, slopeThreshold);
+    placeOutputs(sourceNode, [phenotype], direction, idealEdgeLength, true, horizontalAlignments, verticalAlignments, relativePlacementConstraints, sbgnLayout);
+  });
+};
+
+function calcGrid(graph, repulsionRange) {
+
+  var sizeX = 0;
+  var sizeY = 0;
+
+  sizeX = parseInt(Math.ceil((graph.getRight() + 500 - (graph.getLeft() - 500)) / repulsionRange));
+  sizeY = parseInt(Math.ceil((graph.getBottom() + 500 - (graph.getTop() - 500)) / repulsionRange));
+
+  var grid = new Array(sizeX);
+
+  for (var i = 0; i < sizeX; i++) {
+    grid[i] = new Array(sizeY);
+  }
+
+  for (var i = 0; i < sizeX; i++) {
+    for (var j = 0; j < sizeY; j++) {
+      grid[i][j] = new Array();
+    }
+  }
+
+  return grid;
+};
+
+function addNodeToGrid(v, sbgnLayout) {
+  var repulsionRange = sbgnLayout.repulsionRange;
+  var left = sbgnLayout.graphManager.getRoot().getLeft() - 500;
+  var top = sbgnLayout.graphManager.getRoot().getTop() - 500;
+  var startX = 0;
+  var finishX = 0;
+  var startY = 0;
+  var finishY = 0;
+
+  startX = parseInt(Math.floor((v.getRect().x - left) / repulsionRange));
+  finishX = parseInt(Math.floor((v.getRect().width + v.getRect().x - left) / repulsionRange));
+  startY = parseInt(Math.floor((v.getRect().y - top) / repulsionRange));
+  finishY = parseInt(Math.floor((v.getRect().height + v.getRect().y - top) / repulsionRange));
+
+  for (var i = startX; i <= finishX; i++) {
+    for (var j = startY; j <= finishY; j++) {
+      sbgnLayout.polishingGrid[i][j].push(v);
+      v.setGridCoordinates(startX, finishX, startY, finishY);
+    }
+  }
+};
+
+function checkOverlap(v, position, sbgnLayout) {
+  var repulsionRange = sbgnLayout.repulsionRange;
+  var left = sbgnLayout.graphManager.getRoot().getLeft() - 500;
+  var top = sbgnLayout.graphManager.getRoot().getTop() - 500;
+  var startX = 0;
+  var finishX = 0;
+  var startY = 0;
+  var finishY = 0;
+
+  startX = Math.max(parseInt(Math.floor((position.x - v.getWidth() / 2 - left) / repulsionRange)), 0);
+  finishX = Math.max(parseInt(Math.floor((position.x + v.getWidth() - left) / repulsionRange)), 0);
+  startY = Math.max(parseInt(Math.floor((position.y - v.getHeight() / 2 - top) / repulsionRange)), 0);
+  finishY = Math.max(parseInt(Math.floor((position.y + v.getHeight() - top) / repulsionRange)), 0);
+
+  var candidateNodes = [];
+  for (var i = startX; i <= finishX; i++) {
+    for (var j = startY; j <= finishY; j++) {
+      candidateNodes = candidateNodes.concat(sbgnLayout.polishingGrid[i][j]);
+    }
+  }
+  var isOverlapping = false;
+  candidateNodes.forEach(function (node) {
+    var bb1 = { x: position.x - v.getWidth() / 2, y: position.y - v.getHeight() / 2, width: v.getWidth(), height: v.getHeight() };
+    var bb2 = { x: node.getRect().x, y: node.getRect().y, width: node.getRect().width, height: node.getRect().height };
+    if (doesOverlap(bb1, bb2)) {
+      isOverlapping = true;
+    }
+  });
+
+  return isOverlapping;
+};
+
+function doesOverlap(bb1, bb2) {
+  return !(bb2.x > bb1.x + bb1.width || bb2.x + bb2.width < bb1.x || bb2.y > bb1.y + bb1.height || bb2.y + bb2.height < bb1.y);
+};
+
+function fillQuadrants(node, direction) {
+  if (direction == 'l-r' || direction == 'r-l') {
+    node.quadrants[0] = true;
+    node.quadrants[4] = true;
+  } else if (direction == 't-b' || direction == 'b-t') {
+    node.quadrants[2] = true;
+    node.quadrants[6] = true;
+  } else if (direction == 'tl-br' || direction == 'br-tl') {
+    node.quadrants[3] = true;
+    node.quadrants[7] = true;
+  } else if (direction == 'tr-bl' || direction == 'bl-tr') {
+    node.quadrants[1] = true;
+    node.quadrants[5] = true;
+  }
+};
+
+function findQuadrant(angle) {
+  if (angle == 0) {
+    return 0;
+  } else if (angle > 0 && angle < 90) {
+    return 1;
+  } else if (angle == 90) {
+    return 2;
+  } else if (angle > 90 && angle < 180) {
+    return 3;
+  } else if (angle == 180) {
+    return 4;
+  } else if (angle > 180 && angle < 270) {
+    return 5;
+  } else if (angle == 270) {
+    return 6;
+  } else if (angle > 270 && angle < 360) {
+    return 7;
+  }
+};
+
 module.exports = SBGNPolishingNew;
 
 /***/ }),
-/* 69 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4657,17 +3492,17 @@ mapping.getGlyph = function (classes) {
 module.exports = mapping;
 
 /***/ }),
-/* 70 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _keys = __webpack_require__(77);
+var _keys = __webpack_require__(75);
 
 var _keys2 = _interopRequireDefault(_keys);
 
-var _assign = __webpack_require__(74);
+var _assign = __webpack_require__(72);
 
 var _assign2 = _interopRequireDefault(_assign);
 
@@ -4690,13 +3525,13 @@ module.exports = _assign2.default != null ? _assign2.default.bind(Object) : func
 };
 
 /***/ }),
-/* 71 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var impl = __webpack_require__(64);
+var impl = __webpack_require__(61);
 
 // registers the extension on a cytoscape lib ref
 var register = function register(cytoscape) {
@@ -4715,6 +3550,18 @@ if (typeof cytoscape !== 'undefined') {
 module.exports = register;
 
 /***/ }),
+/* 70 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = { "default": __webpack_require__(83), __esModule: true };
+
+/***/ }),
+/* 71 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = { "default": __webpack_require__(84), __esModule: true };
+
+/***/ }),
 /* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4724,13 +3571,13 @@ module.exports = { "default": __webpack_require__(85), __esModule: true };
 /* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = { "default": __webpack_require__(86), __esModule: true };
+module.exports = { "default": __webpack_require__(87), __esModule: true };
 
 /***/ }),
 /* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = { "default": __webpack_require__(87), __esModule: true };
+module.exports = { "default": __webpack_require__(88), __esModule: true };
 
 /***/ }),
 /* 75 */
@@ -4748,24 +3595,12 @@ module.exports = { "default": __webpack_require__(90), __esModule: true };
 /* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = { "default": __webpack_require__(91), __esModule: true };
-
-/***/ }),
-/* 78 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = { "default": __webpack_require__(92), __esModule: true };
-
-/***/ }),
-/* 79 */
-/***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
 
 
 exports.__esModule = true;
 
-var _promise = __webpack_require__(78);
+var _promise = __webpack_require__(76);
 
 var _promise2 = _interopRequireDefault(_promise);
 
@@ -4801,7 +3636,7 @@ exports.default = function (fn) {
 };
 
 /***/ }),
-/* 80 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4816,7 +3651,7 @@ exports.default = function (instance, Constructor) {
 };
 
 /***/ }),
-/* 81 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4824,7 +3659,7 @@ exports.default = function (instance, Constructor) {
 
 exports.__esModule = true;
 
-var _defineProperty = __webpack_require__(75);
+var _defineProperty = __webpack_require__(73);
 
 var _defineProperty2 = _interopRequireDefault(_defineProperty);
 
@@ -4849,7 +3684,7 @@ exports.default = function () {
 }();
 
 /***/ }),
-/* 82 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4857,11 +3692,11 @@ exports.default = function () {
 
 exports.__esModule = true;
 
-var _isIterable2 = __webpack_require__(73);
+var _isIterable2 = __webpack_require__(71);
 
 var _isIterable3 = _interopRequireDefault(_isIterable2);
 
-var _getIterator2 = __webpack_require__(72);
+var _getIterator2 = __webpack_require__(70);
 
 var _getIterator3 = _interopRequireDefault(_getIterator2);
 
@@ -4906,52 +3741,52 @@ exports.default = function () {
 }();
 
 /***/ }),
+/* 81 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(137);
+
+
+/***/ }),
+/* 82 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(19);
+__webpack_require__(122);
+module.exports = __webpack_require__(0).Array.from;
+
+
+/***/ }),
 /* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(139);
+__webpack_require__(23);
+__webpack_require__(19);
+module.exports = __webpack_require__(120);
 
 
 /***/ }),
 /* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
+__webpack_require__(23);
 __webpack_require__(19);
-__webpack_require__(124);
-module.exports = __webpack_require__(0).Array.from;
+module.exports = __webpack_require__(121);
 
 
 /***/ }),
 /* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(26);
-__webpack_require__(19);
-module.exports = __webpack_require__(122);
+__webpack_require__(124);
+module.exports = __webpack_require__(0).Object.assign;
 
 
 /***/ }),
 /* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(26);
-__webpack_require__(19);
-module.exports = __webpack_require__(123);
-
-
-/***/ }),
-/* 87 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(126);
-module.exports = __webpack_require__(0).Object.assign;
-
-
-/***/ }),
-/* 88 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(127);
+__webpack_require__(125);
 var $Object = __webpack_require__(0).Object;
 module.exports = function create(P, D) {
   return $Object.create(P, D);
@@ -4959,10 +3794,10 @@ module.exports = function create(P, D) {
 
 
 /***/ }),
-/* 89 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(128);
+__webpack_require__(126);
 var $Object = __webpack_require__(0).Object;
 module.exports = function defineProperty(it, key, desc) {
   return $Object.defineProperty(it, key, desc);
@@ -4970,57 +3805,57 @@ module.exports = function defineProperty(it, key, desc) {
 
 
 /***/ }),
+/* 88 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(127);
+module.exports = __webpack_require__(0).Object.freeze;
+
+
+/***/ }),
+/* 89 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(128);
+module.exports = __webpack_require__(0).Object.keys;
+
+
+/***/ }),
 /* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
+__webpack_require__(60);
+__webpack_require__(19);
+__webpack_require__(23);
 __webpack_require__(129);
-module.exports = __webpack_require__(0).Object.freeze;
+__webpack_require__(131);
+__webpack_require__(132);
+module.exports = __webpack_require__(0).Promise;
 
 
 /***/ }),
 /* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
+__webpack_require__(60);
+__webpack_require__(19);
+__webpack_require__(23);
 __webpack_require__(130);
-module.exports = __webpack_require__(0).Object.keys;
-
-
-/***/ }),
-/* 92 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(63);
-__webpack_require__(19);
-__webpack_require__(26);
-__webpack_require__(131);
-__webpack_require__(133);
-__webpack_require__(134);
-module.exports = __webpack_require__(0).Promise;
-
-
-/***/ }),
-/* 93 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(63);
-__webpack_require__(19);
-__webpack_require__(26);
-__webpack_require__(132);
-__webpack_require__(137);
-__webpack_require__(136);
 __webpack_require__(135);
+__webpack_require__(134);
+__webpack_require__(133);
 module.exports = __webpack_require__(0).Set;
 
 
 /***/ }),
-/* 94 */
+/* 92 */
 /***/ (function(module, exports) {
 
 module.exports = function () { /* empty */ };
 
 
 /***/ }),
-/* 95 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var forOf = __webpack_require__(16);
@@ -5033,14 +3868,14 @@ module.exports = function (iter, ITERATOR) {
 
 
 /***/ }),
-/* 96 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // false -> Array#indexOf
 // true  -> Array#includes
-var toIObject = __webpack_require__(44);
-var toLength = __webpack_require__(25);
-var toAbsoluteIndex = __webpack_require__(119);
+var toIObject = __webpack_require__(39);
+var toLength = __webpack_require__(22);
+var toAbsoluteIndex = __webpack_require__(117);
 module.exports = function (IS_INCLUDES) {
   return function ($this, el, fromIndex) {
     var O = toIObject($this);
@@ -5062,7 +3897,7 @@ module.exports = function (IS_INCLUDES) {
 
 
 /***/ }),
-/* 97 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 0 -> Array#forEach
@@ -5073,10 +3908,10 @@ module.exports = function (IS_INCLUDES) {
 // 5 -> Array#find
 // 6 -> Array#findIndex
 var ctx = __webpack_require__(9);
-var IObject = __webpack_require__(33);
+var IObject = __webpack_require__(28);
 var toObject = __webpack_require__(18);
-var toLength = __webpack_require__(25);
-var asc = __webpack_require__(99);
+var toLength = __webpack_require__(22);
+var asc = __webpack_require__(97);
 module.exports = function (TYPE, $create) {
   var IS_MAP = TYPE == 1;
   var IS_FILTER = TYPE == 2;
@@ -5112,12 +3947,12 @@ module.exports = function (TYPE, $create) {
 
 
 /***/ }),
-/* 98 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isObject = __webpack_require__(5);
-var isArray = __webpack_require__(106);
-var SPECIES = __webpack_require__(4)('species');
+var isArray = __webpack_require__(104);
+var SPECIES = __webpack_require__(3)('species');
 
 module.exports = function (original) {
   var C;
@@ -5134,11 +3969,11 @@ module.exports = function (original) {
 
 
 /***/ }),
-/* 99 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 9.4.2.3 ArraySpeciesCreate(originalArray, length)
-var speciesConstructor = __webpack_require__(98);
+var speciesConstructor = __webpack_require__(96);
 
 module.exports = function (original, length) {
   return new (speciesConstructor(original))(length);
@@ -5146,23 +3981,23 @@ module.exports = function (original, length) {
 
 
 /***/ }),
-/* 100 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var dP = __webpack_require__(7).f;
-var create = __webpack_require__(38);
-var redefineAll = __webpack_require__(41);
+var create = __webpack_require__(33);
+var redefineAll = __webpack_require__(36);
 var ctx = __webpack_require__(9);
-var anInstance = __webpack_require__(30);
+var anInstance = __webpack_require__(25);
 var forOf = __webpack_require__(16);
-var $iterDefine = __webpack_require__(34);
-var step = __webpack_require__(54);
-var setSpecies = __webpack_require__(58);
+var $iterDefine = __webpack_require__(29);
+var step = __webpack_require__(51);
+var setSpecies = __webpack_require__(55);
 var DESCRIPTORS = __webpack_require__(6);
-var fastKey = __webpack_require__(36).fastKey;
-var validate = __webpack_require__(62);
+var fastKey = __webpack_require__(31).fastKey;
+var validate = __webpack_require__(59);
 var SIZE = DESCRIPTORS ? '_s' : 'size';
 
 var getEntry = function (that, key) {
@@ -5297,12 +4132,12 @@ module.exports = {
 
 
 /***/ }),
-/* 101 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/DavidBruant/Map-Set.prototype.toJSON
-var classof = __webpack_require__(23);
-var from = __webpack_require__(95);
+var classof = __webpack_require__(20);
+var from = __webpack_require__(93);
 module.exports = function (NAME) {
   return function toJSON() {
     if (classof(this) != NAME) throw TypeError(NAME + "#toJSON isn't generic");
@@ -5312,23 +4147,23 @@ module.exports = function (NAME) {
 
 
 /***/ }),
-/* 102 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var global = __webpack_require__(3);
-var $export = __webpack_require__(2);
-var meta = __webpack_require__(36);
-var fails = __webpack_require__(12);
+var global = __webpack_require__(2);
+var $export = __webpack_require__(1);
+var meta = __webpack_require__(31);
+var fails = __webpack_require__(11);
 var hide = __webpack_require__(10);
-var redefineAll = __webpack_require__(41);
+var redefineAll = __webpack_require__(36);
 var forOf = __webpack_require__(16);
-var anInstance = __webpack_require__(30);
+var anInstance = __webpack_require__(25);
 var isObject = __webpack_require__(5);
-var setToStringTag = __webpack_require__(24);
+var setToStringTag = __webpack_require__(21);
 var dP = __webpack_require__(7).f;
-var each = __webpack_require__(97)(0);
+var each = __webpack_require__(95)(0);
 var DESCRIPTORS = __webpack_require__(6);
 
 module.exports = function (NAME, wrapper, methods, common, IS_MAP, IS_WEAK) {
@@ -5378,13 +4213,13 @@ module.exports = function (NAME, wrapper, methods, common, IS_MAP, IS_WEAK) {
 
 
 /***/ }),
-/* 103 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var $defineProperty = __webpack_require__(7);
-var createDesc = __webpack_require__(40);
+var createDesc = __webpack_require__(35);
 
 module.exports = function (object, index, value) {
   if (index in object) $defineProperty.f(object, index, createDesc(0, value));
@@ -5393,16 +4228,16 @@ module.exports = function (object, index, value) {
 
 
 /***/ }),
-/* 104 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = !__webpack_require__(6) && !__webpack_require__(12)(function () {
-  return Object.defineProperty(__webpack_require__(32)('div'), 'a', { get: function () { return 7; } }).a != 7;
+module.exports = !__webpack_require__(6) && !__webpack_require__(11)(function () {
+  return Object.defineProperty(__webpack_require__(27)('div'), 'a', { get: function () { return 7; } }).a != 7;
 });
 
 
 /***/ }),
-/* 105 */
+/* 103 */
 /***/ (function(module, exports) {
 
 // fast apply, http://jsperf.lnkit.com/fast-apply/5
@@ -5424,7 +4259,7 @@ module.exports = function (fn, args, that) {
 
 
 /***/ }),
-/* 106 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.2.2 IsArray(argument)
@@ -5435,18 +4270,18 @@ module.exports = Array.isArray || function isArray(arg) {
 
 
 /***/ }),
-/* 107 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var create = __webpack_require__(38);
-var descriptor = __webpack_require__(40);
-var setToStringTag = __webpack_require__(24);
+var create = __webpack_require__(33);
+var descriptor = __webpack_require__(35);
+var setToStringTag = __webpack_require__(21);
 var IteratorPrototype = {};
 
 // 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
-__webpack_require__(10)(IteratorPrototype, __webpack_require__(4)('iterator'), function () { return this; });
+__webpack_require__(10)(IteratorPrototype, __webpack_require__(3)('iterator'), function () { return this; });
 
 module.exports = function (Constructor, NAME, next) {
   Constructor.prototype = create(IteratorPrototype, { next: descriptor(1, next) });
@@ -5455,11 +4290,11 @@ module.exports = function (Constructor, NAME, next) {
 
 
 /***/ }),
-/* 108 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var global = __webpack_require__(3);
-var macrotask = __webpack_require__(61).set;
+var global = __webpack_require__(2);
+var macrotask = __webpack_require__(58).set;
 var Observer = global.MutationObserver || global.WebKitMutationObserver;
 var process = global.process;
 var Promise = global.Promise;
@@ -5530,22 +4365,22 @@ module.exports = function () {
 
 
 /***/ }),
-/* 109 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // 19.1.2.1 Object.assign(target, source, ...)
 var DESCRIPTORS = __webpack_require__(6);
-var getKeys = __webpack_require__(39);
-var gOPS = __webpack_require__(111);
-var pIE = __webpack_require__(114);
+var getKeys = __webpack_require__(34);
+var gOPS = __webpack_require__(109);
+var pIE = __webpack_require__(112);
 var toObject = __webpack_require__(18);
-var IObject = __webpack_require__(33);
+var IObject = __webpack_require__(28);
 var $assign = Object.assign;
 
 // should work with symbols and should have deterministic property order (V8 bug)
-module.exports = !$assign || __webpack_require__(12)(function () {
+module.exports = !$assign || __webpack_require__(11)(function () {
   var A = {};
   var B = {};
   // eslint-disable-next-line no-undef
@@ -5575,12 +4410,12 @@ module.exports = !$assign || __webpack_require__(12)(function () {
 
 
 /***/ }),
-/* 110 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var dP = __webpack_require__(7);
 var anObject = __webpack_require__(8);
-var getKeys = __webpack_require__(39);
+var getKeys = __webpack_require__(34);
 
 module.exports = __webpack_require__(6) ? Object.defineProperties : function defineProperties(O, Properties) {
   anObject(O);
@@ -5594,20 +4429,20 @@ module.exports = __webpack_require__(6) ? Object.defineProperties : function def
 
 
 /***/ }),
-/* 111 */
+/* 109 */
 /***/ (function(module, exports) {
 
 exports.f = Object.getOwnPropertySymbols;
 
 
 /***/ }),
-/* 112 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
 var has = __webpack_require__(17);
 var toObject = __webpack_require__(18);
-var IE_PROTO = __webpack_require__(42)('IE_PROTO');
+var IE_PROTO = __webpack_require__(37)('IE_PROTO');
 var ObjectProto = Object.prototype;
 
 module.exports = Object.getPrototypeOf || function (O) {
@@ -5620,13 +4455,13 @@ module.exports = Object.getPrototypeOf || function (O) {
 
 
 /***/ }),
-/* 113 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var has = __webpack_require__(17);
-var toIObject = __webpack_require__(44);
-var arrayIndexOf = __webpack_require__(96)(false);
-var IE_PROTO = __webpack_require__(42)('IE_PROTO');
+var toIObject = __webpack_require__(39);
+var arrayIndexOf = __webpack_require__(94)(false);
+var IE_PROTO = __webpack_require__(37)('IE_PROTO');
 
 module.exports = function (object, names) {
   var O = toIObject(object);
@@ -5643,27 +4478,27 @@ module.exports = function (object, names) {
 
 
 /***/ }),
-/* 114 */
+/* 112 */
 /***/ (function(module, exports) {
 
 exports.f = {}.propertyIsEnumerable;
 
 
 /***/ }),
-/* 115 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(10);
 
 
 /***/ }),
-/* 116 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // https://tc39.github.io/proposal-setmap-offrom/
-var $export = __webpack_require__(2);
+var $export = __webpack_require__(1);
 var aFunction = __webpack_require__(14);
 var ctx = __webpack_require__(9);
 var forOf = __webpack_require__(16);
@@ -5692,13 +4527,13 @@ module.exports = function (COLLECTION) {
 
 
 /***/ }),
-/* 117 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // https://tc39.github.io/proposal-setmap-offrom/
-var $export = __webpack_require__(2);
+var $export = __webpack_require__(1);
 
 module.exports = function (COLLECTION) {
   $export($export.S, COLLECTION, { of: function of() {
@@ -5711,11 +4546,11 @@ module.exports = function (COLLECTION) {
 
 
 /***/ }),
-/* 118 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var toInteger = __webpack_require__(43);
-var defined = __webpack_require__(31);
+var toInteger = __webpack_require__(38);
+var defined = __webpack_require__(26);
 // true  -> String#at
 // false -> String#codePointAt
 module.exports = function (TO_STRING) {
@@ -5734,10 +4569,10 @@ module.exports = function (TO_STRING) {
 
 
 /***/ }),
-/* 119 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var toInteger = __webpack_require__(43);
+var toInteger = __webpack_require__(38);
 var max = Math.max;
 var min = Math.min;
 module.exports = function (index, length) {
@@ -5747,7 +4582,7 @@ module.exports = function (index, length) {
 
 
 /***/ }),
-/* 120 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.1.1 ToPrimitive(input [, PreferredType])
@@ -5765,21 +4600,21 @@ module.exports = function (it, S) {
 
 
 /***/ }),
-/* 121 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var global = __webpack_require__(3);
+var global = __webpack_require__(2);
 var navigator = global.navigator;
 
 module.exports = navigator && navigator.userAgent || '';
 
 
 /***/ }),
-/* 122 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var anObject = __webpack_require__(8);
-var get = __webpack_require__(46);
+var get = __webpack_require__(41);
 module.exports = __webpack_require__(0).getIterator = function (it) {
   var iterFn = get(it);
   if (typeof iterFn != 'function') throw TypeError(it + ' is not iterable!');
@@ -5788,12 +4623,12 @@ module.exports = __webpack_require__(0).getIterator = function (it) {
 
 
 /***/ }),
-/* 123 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var classof = __webpack_require__(23);
-var ITERATOR = __webpack_require__(4)('iterator');
-var Iterators = __webpack_require__(13);
+var classof = __webpack_require__(20);
+var ITERATOR = __webpack_require__(3)('iterator');
+var Iterators = __webpack_require__(12);
 module.exports = __webpack_require__(0).isIterable = function (it) {
   var O = Object(it);
   return O[ITERATOR] !== undefined
@@ -5804,21 +4639,21 @@ module.exports = __webpack_require__(0).isIterable = function (it) {
 
 
 /***/ }),
-/* 124 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var ctx = __webpack_require__(9);
-var $export = __webpack_require__(2);
+var $export = __webpack_require__(1);
 var toObject = __webpack_require__(18);
-var call = __webpack_require__(52);
-var isArrayIter = __webpack_require__(51);
-var toLength = __webpack_require__(25);
-var createProperty = __webpack_require__(103);
-var getIterFn = __webpack_require__(46);
+var call = __webpack_require__(49);
+var isArrayIter = __webpack_require__(48);
+var toLength = __webpack_require__(22);
+var createProperty = __webpack_require__(101);
+var getIterFn = __webpack_require__(41);
 
-$export($export.S + $export.F * !__webpack_require__(53)(function (iter) { Array.from(iter); }), 'Array', {
+$export($export.S + $export.F * !__webpack_require__(50)(function (iter) { Array.from(iter); }), 'Array', {
   // 22.1.2.1 Array.from(arrayLike, mapfn = undefined, thisArg = undefined)
   from: function from(arrayLike /* , mapfn = undefined, thisArg = undefined */) {
     var O = toObject(arrayLike);
@@ -5848,21 +4683,21 @@ $export($export.S + $export.F * !__webpack_require__(53)(function (iter) { Array
 
 
 /***/ }),
-/* 125 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var addToUnscopables = __webpack_require__(94);
-var step = __webpack_require__(54);
-var Iterators = __webpack_require__(13);
-var toIObject = __webpack_require__(44);
+var addToUnscopables = __webpack_require__(92);
+var step = __webpack_require__(51);
+var Iterators = __webpack_require__(12);
+var toIObject = __webpack_require__(39);
 
 // 22.1.3.4 Array.prototype.entries()
 // 22.1.3.13 Array.prototype.keys()
 // 22.1.3.29 Array.prototype.values()
 // 22.1.3.30 Array.prototype[@@iterator]()
-module.exports = __webpack_require__(34)(Array, 'Array', function (iterated, kind) {
+module.exports = __webpack_require__(29)(Array, 'Array', function (iterated, kind) {
   this._t = toIObject(iterated); // target
   this._i = 0;                   // next index
   this._k = kind;                // kind
@@ -5889,42 +4724,42 @@ addToUnscopables('entries');
 
 
 /***/ }),
-/* 126 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.3.1 Object.assign(target, source)
-var $export = __webpack_require__(2);
+var $export = __webpack_require__(1);
 
-$export($export.S + $export.F, 'Object', { assign: __webpack_require__(109) });
+$export($export.S + $export.F, 'Object', { assign: __webpack_require__(107) });
+
+
+/***/ }),
+/* 125 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var $export = __webpack_require__(1);
+// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
+$export($export.S, 'Object', { create: __webpack_require__(33) });
+
+
+/***/ }),
+/* 126 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var $export = __webpack_require__(1);
+// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
+$export($export.S + $export.F * !__webpack_require__(6), 'Object', { defineProperty: __webpack_require__(7).f });
 
 
 /***/ }),
 /* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var $export = __webpack_require__(2);
-// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-$export($export.S, 'Object', { create: __webpack_require__(38) });
-
-
-/***/ }),
-/* 128 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var $export = __webpack_require__(2);
-// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
-$export($export.S + $export.F * !__webpack_require__(6), 'Object', { defineProperty: __webpack_require__(7).f });
-
-
-/***/ }),
-/* 129 */
-/***/ (function(module, exports, __webpack_require__) {
-
 // 19.1.2.5 Object.freeze(O)
 var isObject = __webpack_require__(5);
-var meta = __webpack_require__(36).onFreeze;
+var meta = __webpack_require__(31).onFreeze;
 
-__webpack_require__(55)('freeze', function ($freeze) {
+__webpack_require__(52)('freeze', function ($freeze) {
   return function freeze(it) {
     return $freeze && isObject(it) ? $freeze(meta(it)) : it;
   };
@@ -5932,14 +4767,14 @@ __webpack_require__(55)('freeze', function ($freeze) {
 
 
 /***/ }),
-/* 130 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.14 Object.keys(O)
 var toObject = __webpack_require__(18);
-var $keys = __webpack_require__(39);
+var $keys = __webpack_require__(34);
 
-__webpack_require__(55)('keys', function () {
+__webpack_require__(52)('keys', function () {
   return function keys(it) {
     return $keys(toObject(it));
   };
@@ -5947,27 +4782,27 @@ __webpack_require__(55)('keys', function () {
 
 
 /***/ }),
-/* 131 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var LIBRARY = __webpack_require__(35);
-var global = __webpack_require__(3);
+var LIBRARY = __webpack_require__(30);
+var global = __webpack_require__(2);
 var ctx = __webpack_require__(9);
-var classof = __webpack_require__(23);
-var $export = __webpack_require__(2);
+var classof = __webpack_require__(20);
+var $export = __webpack_require__(1);
 var isObject = __webpack_require__(5);
 var aFunction = __webpack_require__(14);
-var anInstance = __webpack_require__(30);
+var anInstance = __webpack_require__(25);
 var forOf = __webpack_require__(16);
-var speciesConstructor = __webpack_require__(60);
-var task = __webpack_require__(61).set;
-var microtask = __webpack_require__(108)();
-var newPromiseCapabilityModule = __webpack_require__(37);
-var perform = __webpack_require__(56);
-var userAgent = __webpack_require__(121);
-var promiseResolve = __webpack_require__(57);
+var speciesConstructor = __webpack_require__(57);
+var task = __webpack_require__(58).set;
+var microtask = __webpack_require__(106)();
+var newPromiseCapabilityModule = __webpack_require__(32);
+var perform = __webpack_require__(53);
+var userAgent = __webpack_require__(119);
+var promiseResolve = __webpack_require__(54);
 var PROMISE = 'Promise';
 var TypeError = global.TypeError;
 var process = global.process;
@@ -5983,7 +4818,7 @@ var USE_NATIVE = !!function () {
   try {
     // correct subclassing with @@species support
     var promise = $Promise.resolve(1);
-    var FakePromise = (promise.constructor = {})[__webpack_require__(4)('species')] = function (exec) {
+    var FakePromise = (promise.constructor = {})[__webpack_require__(3)('species')] = function (exec) {
       exec(empty, empty);
     };
     // unhandled rejections tracking support, NodeJS Promise without it fails @@species test
@@ -6142,7 +4977,7 @@ if (!USE_NATIVE) {
     this._h = 0;              // <- rejection state, 0 - default, 1 - handled, 2 - unhandled
     this._n = false;          // <- notify
   };
-  Internal.prototype = __webpack_require__(41)($Promise.prototype, {
+  Internal.prototype = __webpack_require__(36)($Promise.prototype, {
     // 25.4.5.3 Promise.prototype.then(onFulfilled, onRejected)
     then: function then(onFulfilled, onRejected) {
       var reaction = newPromiseCapability(speciesConstructor(this, $Promise));
@@ -6173,8 +5008,8 @@ if (!USE_NATIVE) {
 }
 
 $export($export.G + $export.W + $export.F * !USE_NATIVE, { Promise: $Promise });
-__webpack_require__(24)($Promise, PROMISE);
-__webpack_require__(58)(PROMISE);
+__webpack_require__(21)($Promise, PROMISE);
+__webpack_require__(55)(PROMISE);
 Wrapper = __webpack_require__(0)[PROMISE];
 
 // statics
@@ -6193,7 +5028,7 @@ $export($export.S + $export.F * (LIBRARY || !USE_NATIVE), PROMISE, {
     return promiseResolve(LIBRARY && this === Wrapper ? $Promise : this, x);
   }
 });
-$export($export.S + $export.F * !(USE_NATIVE && __webpack_require__(53)(function (iter) {
+$export($export.S + $export.F * !(USE_NATIVE && __webpack_require__(50)(function (iter) {
   $Promise.all(iter)['catch'](empty);
 })), PROMISE, {
   // 25.4.4.1 Promise.all(iterable)
@@ -6240,17 +5075,17 @@ $export($export.S + $export.F * !(USE_NATIVE && __webpack_require__(53)(function
 
 
 /***/ }),
-/* 132 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var strong = __webpack_require__(100);
-var validate = __webpack_require__(62);
+var strong = __webpack_require__(98);
+var validate = __webpack_require__(59);
 var SET = 'Set';
 
 // 23.2 Set Objects
-module.exports = __webpack_require__(102)(SET, function (get) {
+module.exports = __webpack_require__(100)(SET, function (get) {
   return function Set() { return get(this, arguments.length > 0 ? arguments[0] : undefined); };
 }, {
   // 23.2.3.1 Set.prototype.add(value)
@@ -6261,17 +5096,17 @@ module.exports = __webpack_require__(102)(SET, function (get) {
 
 
 /***/ }),
-/* 133 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 // https://github.com/tc39/proposal-promise-finally
 
-var $export = __webpack_require__(2);
+var $export = __webpack_require__(1);
 var core = __webpack_require__(0);
-var global = __webpack_require__(3);
-var speciesConstructor = __webpack_require__(60);
-var promiseResolve = __webpack_require__(57);
+var global = __webpack_require__(2);
+var speciesConstructor = __webpack_require__(57);
+var promiseResolve = __webpack_require__(54);
 
 $export($export.P + $export.R, 'Promise', { 'finally': function (onFinally) {
   var C = speciesConstructor(this, core.Promise || global.Promise);
@@ -6288,15 +5123,15 @@ $export($export.P + $export.R, 'Promise', { 'finally': function (onFinally) {
 
 
 /***/ }),
-/* 134 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // https://github.com/tc39/proposal-promise-try
-var $export = __webpack_require__(2);
-var newPromiseCapability = __webpack_require__(37);
-var perform = __webpack_require__(56);
+var $export = __webpack_require__(1);
+var newPromiseCapability = __webpack_require__(32);
+var perform = __webpack_require__(53);
 
 $export($export.S, 'Promise', { 'try': function (callbackfn) {
   var promiseCapability = newPromiseCapability.f(this);
@@ -6307,33 +5142,33 @@ $export($export.S, 'Promise', { 'try': function (callbackfn) {
 
 
 /***/ }),
-/* 135 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://tc39.github.io/proposal-setmap-offrom/#sec-set.from
-__webpack_require__(116)('Set');
+__webpack_require__(114)('Set');
+
+
+/***/ }),
+/* 134 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// https://tc39.github.io/proposal-setmap-offrom/#sec-set.of
+__webpack_require__(115)('Set');
+
+
+/***/ }),
+/* 135 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// https://github.com/DavidBruant/Map-Set.prototype.toJSON
+var $export = __webpack_require__(1);
+
+$export($export.P + $export.R, 'Set', { toJSON: __webpack_require__(99)('Set') });
 
 
 /***/ }),
 /* 136 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// https://tc39.github.io/proposal-setmap-offrom/#sec-set.of
-__webpack_require__(117)('Set');
-
-
-/***/ }),
-/* 137 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// https://github.com/DavidBruant/Map-Set.prototype.toJSON
-var $export = __webpack_require__(2);
-
-$export($export.P + $export.R, 'Set', { toJSON: __webpack_require__(101)('Set') });
-
-
-/***/ }),
-/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -11568,7 +10403,7 @@ module.exports = Emitter;
 });
 
 /***/ }),
-/* 139 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -11593,7 +10428,7 @@ var oldRuntime = hadRuntime && g.regeneratorRuntime;
 // Force reevalutation of runtime.js.
 g.regeneratorRuntime = undefined;
 
-module.exports = __webpack_require__(140);
+module.exports = __webpack_require__(138);
 
 if (hadRuntime) {
   // Restore the original runtime.
@@ -11609,7 +10444,7 @@ if (hadRuntime) {
 
 
 /***/ }),
-/* 140 */
+/* 138 */
 /***/ (function(module, exports) {
 
 /**
@@ -12342,13 +11177,13 @@ if (hadRuntime) {
 
 
 /***/ }),
-/* 141 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {(function (global, factory) {
    true ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.uggly = factory());
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.sketchLay = factory());
 })(this, (function () { 'use strict';
 
   let computeConstraints = function (cy, placement, isLoop, idealEdgeLength, slopeThreshold) {
@@ -13330,11 +12165,11 @@ if (hadRuntime) {
   };
 
   //import { runTest } from "./test_runtime";
-  let uggly = function () {
+  let sketchLay = function () {
 
   };
 
-  uggly.generateConstraints = function(options){
+  sketchLay.generateConstraints = function(options){
     let cy = options.cy;
     let imageData = options.imageData;
     let subset = options.subset || undefined;
@@ -13345,11 +12180,11 @@ if (hadRuntime) {
     return generateConstraints(cy, imageData, subset, idealEdgeLength, slopeThreshold, cycleThreshold, connectionTolerance);
   };
 
-  //uggly.runTest = runTest; // for test purposes
+  //sketchLay.runTest = runTest; // for test purposes
 
-  // Make uggly available globally if running in browser
+  // Make sketchLay available globally if running in browser
   if (typeof window !== 'undefined') {
-    window.uggly = uggly;
+    window.sketchLay = sketchLay;
   }
 
   const isFn = fn => typeof fn === 'function';
@@ -13363,7 +12198,7 @@ if (hadRuntime) {
   };
 
   /*!
-   * uggly.js
+   * sketchLay.js
    * License: CC0 1.0 Universal
    *
    * This project uses simplify.js, licensed under the BSD-2-Clause License:
@@ -13392,14 +12227,14 @@ if (hadRuntime) {
    * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
    */
 
-  return uggly;
+  return sketchLay;
 
 }));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(142)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(140)))
 
 /***/ }),
-/* 142 */
+/* 140 */
 /***/ (function(module, exports) {
 
 var g;

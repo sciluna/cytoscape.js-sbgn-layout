@@ -8,4 +8,6 @@ for (let prop in CoSEConstants) {
   SBGNConstants[prop] = CoSEConstants[prop];
 }
 
+SBGNConstants.SLOPE_THRESHOLD = 0.5;
+
 module.exports = SBGNConstants;

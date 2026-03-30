@@ -43,6 +43,7 @@
 				<option value="sample17">Sample 17</option>
 				<option value="sample18">Sample 18</option>
 				<option value="sample19">Sample 19</option>
+				<option value="sample20">Sample 20</option>
 				<option value="reactome">Reactome</option>
 			</select><br>
 			<span id="fileName" class="text-secondary"></span>
@@ -101,7 +102,6 @@
       const container = document.getElementById('cy');
       const rect = container.getBoundingClientRect();
       const style = window.getComputedStyle(container);
-      const borderWidth = parseFloat(style.borderLeftWidth);
 
       // Set the canvas's internal rendering size to match the container
       canvas.width = rect.width;
@@ -154,7 +154,7 @@
       ctx.moveTo(lastX, lastY);
       ctx.lineTo(pos.x, pos.y);
       ctx.strokeStyle = 'black';
-      ctx.lineWidth = 20;
+      ctx.lineWidth = 30;
       ctx.stroke();
       ctx.closePath();
 

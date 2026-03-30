@@ -2,24 +2,21 @@
   The implementation of the sbgn layout algorithm
 */
 
-const HashMap = require('cose-base').layoutBase.HashMap;
 const PointD = require('cose-base').layoutBase.PointD;
 const DimensionD = require('cose-base').layoutBase.DimensionD;
-const RectangleD = require('cose-base').layoutBase.RectangleD;
 const Integer = require('cose-base').layoutBase.Integer;
-let LayoutConstants = require('cose-base').layoutBase.LayoutConstants;
-let SBGNConstants = require('../SBGN/SBGNConstants');
-let CoSEConstants = require('cose-base').CoSEConstants;
-let FDLayoutConstants = require('cose-base').layoutBase.FDLayoutConstants;
+const LayoutConstants = require('cose-base').layoutBase.LayoutConstants;
+const SBGNConstants = require('../SBGN/SBGNConstants');
+const CoSEConstants = require('cose-base').CoSEConstants;
+const FDLayoutConstants = require('cose-base').layoutBase.FDLayoutConstants;
 const SBGNLayout = require('../SBGN/SBGNLayout2');
 const SBGNNode = require('../SBGN/SBGNNode');
-let SBGNPolishing = require('../SBGN/SBGNPolishing');
-let SBGNPolishingNew = require('../SBGN/SBGNPolishingNew2');
-let sketchLay = require('sketchlay');
+const SBGNPolishing = require('./SBGNPolishing.js');
+const sketchLay = require('sketchlay');
 
 const assign = require('../assign');
 const glyphMapping = require('./elementMapping.js');
-const SBGNEdge = require('./SBGNEdge.js');
+
 const isFn = fn => typeof fn === 'function';
 
 const optFn = (opt, ele) => {
@@ -39,10 +36,8 @@ const defaults = Object.freeze({
   ungrabifyWhileSimulating: false, // so you can't drag nodes during layout
   fit: true, // on every layout reposition of nodes, fit the viewport
   padding: 30, // padding around the simulation
-  boundingBox: undefined, // constrain layout bounds; { x1, y1, x2, y2 } or { x1, y1, w, h }
-  // infinite layout options
-  infinite: false, // overrides all other options for a forces-all-the-time mode
-
+  // Whether to pack disconnected components
+  packComponents: true,
   // map type - PD or AF
   mapType: "PD",
   // slope threshold to decide orientation during polishing
@@ -82,7 +77,7 @@ const defaults = Object.freeze({
   ready: function () { }, // on layoutready
   stop: function () { }, // on layoutstop
 
-  // sketchlay option
+  // sketchlay options
   imageData: undefined,
   subset: undefined
 });
@@ -102,6 +97,8 @@ let getUserOptions = function (options) {
     SBGNConstants.DEFAULT_COMPOUND_GRAVITY_RANGE_FACTOR = CoSEConstants.DEFAULT_COMPOUND_GRAVITY_RANGE_FACTOR = FDLayoutConstants.DEFAULT_COMPOUND_GRAVITY_RANGE_FACTOR = options.gravityRangeCompound;
   if (options.initialEnergyOnIncremental != null)
     SBGNConstants.DEFAULT_COOLING_FACTOR_INCREMENTAL = CoSEConstants.DEFAULT_COOLING_FACTOR_INCREMENTAL = FDLayoutConstants.DEFAULT_COOLING_FACTOR_INCREMENTAL = options.initialEnergyOnIncremental;
+  if (options.slopeThreshold != null)
+    SBGNConstants.SLOPE_THRESHOLD = options.slopeThreshold;
 
   SBGNConstants.TILE = CoSEConstants.TILE = options.tile;
   if (options.tilingCompareBy != null)
@@ -132,7 +129,16 @@ class Layout {
     let eles = options.eles;
     let nodes = eles.nodes();
     let edges = eles.edges();
-    var self = this;
+    let self = this;
+
+     // decide component packing is enabled or not
+    let layUtil;
+    let packingEnabled = false;
+    if(cy.layoutUtilities && options.packComponents){
+      layUtil = cy.layoutUtilities("get");
+      if(!layUtil)
+        layUtil = cy.layoutUtilities();             
+    }   
 
     this.idToLNode = {};
     //Initialize SBGN elements
@@ -147,7 +153,7 @@ class Layout {
     let randomize = false;
     let sketchConstraints = undefined;
     if (this.options.imageData) {
-      let sketchLayResult = await sketchLay.generateConstraints({cy: this.options.cy, imageData: this.options.imageData, subset: this.options.subset, idealEdgeLength: this.options.idealEdgeLength});
+      let sketchLayResult = await sketchLay.generateConstraints({cy: this.options.cy, imageData: this.options.imageData, subset: this.options.subset, idealEdgeLength: this.options.idealEdgeLength, connectionTolerance: 40, slopeThreshold: 0.25});
       sketchConstraints = sketchLayResult.constraints;
       if (sketchConstraints.alignmentConstraint && sketchConstraints.relativePlacementConstraint) {
         randomize = false; // so no tree reduction is applied
@@ -163,6 +169,9 @@ class Layout {
     } else {
       CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = false;
     }
+
+    // start to layout
+    const initialCenter = calcCenter(graphManager);
 
     if (!randomize) {
       if (sketchConstraints && sketchConstraints.alignmentConstraint && sketchConstraints.relativePlacementConstraint) {
@@ -207,13 +216,13 @@ class Layout {
               edges.push(ele);
             }
           })
-          SBGNPolishingNew.polish2(processes, nodes, edges);
+          SBGNPolishing.polish2(processes, nodes, edges);
         }); */
-        //SBGNPolishingNew.polish(sbgnLayout.getAllProcessNodes());
+        //SBGNPolishing.polish(sbgnLayout.getAllProcessNodes());
     }
 
-     // polishment phase - first iteration
-    let constraints = SBGNPolishingNew.generateConstraints(sbgnLayout, this.options.mapType, this.options.slopeThreshold);
+    // polishment phase - first iteration
+    let constraints = SBGNPolishing.generateConstraints(sbgnLayout, this.options.mapType, this.options.slopeThreshold);
     sbgnLayout.constraints["alignmentConstraint"] = constraints.alignmentConstraint;
     sbgnLayout.constraints["relativePlacementConstraint"] = constraints.relativePlacementConstraint;
 
@@ -226,11 +235,11 @@ class Layout {
     CoSEConstants.TILE = true;
     sbgnLayout.runLayout();
     if (this.options.mapType == "PD") {
-      SBGNPolishingNew.polish(sbgnLayout);
+      SBGNPolishing.polish(sbgnLayout);
     }
 
     // polishment phase - second iteration
-    constraints = SBGNPolishingNew.generateConstraints(sbgnLayout, this.options.mapType, this.options.slopeThreshold);
+    constraints = SBGNPolishing.generateConstraints(sbgnLayout, this.options.mapType, this.options.slopeThreshold);
     sbgnLayout.constraints["alignmentConstraint"] = constraints.alignmentConstraint;
     sbgnLayout.constraints["relativePlacementConstraint"] = constraints.relativePlacementConstraint;
 
@@ -243,15 +252,56 @@ class Layout {
     CoSEConstants.TILE = true;
     sbgnLayout.runLayout();
     if (this.options.mapType == "PD") {
-      SBGNPolishingNew.polish(sbgnLayout);
-    } 
+      SBGNPolishing.polish(sbgnLayout);
+    }
+
+    const finalCenter = calcCenter(graphManager);
+    const centerDiff = {x: initialCenter.x - finalCenter.x, y: initialCenter.y-finalCenter.y};
+    if(this.options.subset) {
+      moveNodes(graphManager.getAllNodes(), centerDiff);
+    }
+
+    function calcCenter(gm) {
+      let left = Integer.MAX_VALUE;
+      let right = -Integer.MAX_VALUE;
+      let top = Integer.MAX_VALUE;
+      let bottom = -Integer.MAX_VALUE;
+      let allNodes = gm.getAllNodes();
+      allNodes.forEach(node => {
+        if(node.getNoOfChildren() == 1) {
+          if(node.getRect().x < left) {
+            left = node.getRect().x;
+          }
+          if(node.getRect().x + node.getWidth() > right) {
+            right = node.getRect().x + node.getWidth();
+          }
+          if(node.getRect().y < top) {
+            top = node.getRect().y;
+          }
+          if(node.getRect().y + node.getHeight() > bottom) {
+            bottom = node.getRect().y + node.getHeight();
+          }
+        }
+      });
+      return { x: (left + right) / 2, y: (top + bottom) / 2 };
+    };
+
+    function moveNodes(nodes, centerDiff) {
+      nodes.forEach(node => {
+        node.moveBy(centerDiff.x, centerDiff.y);
+        if (node.getChild()) {
+          moveNodes(node.getChild().getNodes(), centerDiff);
+        }
+      });
+      //gm.updateBounds();
+    }
   
     let getPositions = function (ele, i) {
       if (typeof ele === "number") {
         ele = i;
       }
-      var theId = ele.data('id');
-      var lNode = self.idToLNode[theId];
+      let theId = ele.data('id');
+      let lNode = self.idToLNode[theId];
 
       return {
         x: lNode.getRect().getCenterX(),

@@ -121,6 +121,9 @@ document.getElementById("samples").addEventListener("change", function (event) {
 	else if(sample == "sample19") {
 		filename = "polyq_proteins_interference.sbgn";
   }
+	else if(sample == "sample20") {
+		filename = "TCA_cycle.xml";
+  }
 	else if(sample == "reactome") {
 		filename = "9613829.json";
 	}
