@@ -163,7 +163,7 @@ SBGNPolishingNew.generateConstraints = function (sbgnLayout, mapType, slopeThres
   allEdges.forEach(edge => {
     let source = edge.getSource();
     let target = edge.getTarget();
-    if ((!oneDegreeNodes.has(source) && !oneDegreeNodes.has(target) && mapType == "PD") || (mapType == "AF")){
+    if ((!oneDegreeNodes.has(source) && !oneDegreeNodes.has(target) && (!source.isLogicalOperator()) && !target.isLogicalOperator() && mapType == "PD") || (mapType == "AF")){
       let direction = getDirection(source, target, slopeThreshold);
       edge.direction = direction;
       if (direction == "l-r") {
@@ -670,6 +670,9 @@ let placeModulators = function (node, modulators, direction = 'l-r', idealEdgeLe
     //}
     let position = calculatePosition(node, modulators[i], idealEdgeLength, angle);
     let isOverlapping = checkOverlap(modulators[i], position, sbgnLayout);
+    if(modulators[i].isLogicalOperator()) { // otherwise it may detect overlap with its inputs because of first polising iteration
+      isOverlapping = false;
+    }
     if (isOverlapping) {
       let quadrant = findQuadrant(angle);
       let newQuadrant = quadrant;

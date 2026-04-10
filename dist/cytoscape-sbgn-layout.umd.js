@@ -1512,7 +1512,7 @@ var Layout = function () {
                 }
 
                 _context.next = 23;
-                return sketchLay.generateConstraints({ cy: this.options.cy, imageData: this.options.imageData, subset: this.options.subset, idealEdgeLength: this.options.idealEdgeLength, connectionTolerance: 40, slopeThreshold: 0.25 });
+                return sketchLay.generateConstraints({ cy: this.options.cy, imageData: this.options.imageData, subset: this.options.subset, idealEdgeLength: this.options.idealEdgeLength });
 
               case 23:
                 sketchLayResult = _context.sent;
@@ -2684,7 +2684,7 @@ SBGNPolishingNew.generateConstraints = function (sbgnLayout, mapType, slopeThres
   allEdges.forEach(function (edge) {
     var source = edge.getSource();
     var target = edge.getTarget();
-    if (!oneDegreeNodes.has(source) && !oneDegreeNodes.has(target) && mapType == "PD" || mapType == "AF") {
+    if (!oneDegreeNodes.has(source) && !oneDegreeNodes.has(target) && !source.isLogicalOperator() && !target.isLogicalOperator() && mapType == "PD" || mapType == "AF") {
       var direction = getDirection(source, target, slopeThreshold);
       edge.direction = direction;
       if (direction == "l-r") {
@@ -3230,6 +3230,10 @@ var placeModulators = function placeModulators(node, modulators) {
     //}
     var position = calculatePosition(node, modulators[i], idealEdgeLength, angle);
     var isOverlapping = checkOverlap(modulators[i], position, sbgnLayout);
+    if (modulators[i].isLogicalOperator()) {
+      // otherwise it may detect overlap with its inputs because of first polising iteration
+      isOverlapping = false;
+    }
     if (isOverlapping) {
       var quadrant = findQuadrant(angle);
       var newQuadrant = quadrant;

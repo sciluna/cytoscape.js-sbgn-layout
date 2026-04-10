@@ -153,7 +153,7 @@ class Layout {
     let randomize = false;
     let sketchConstraints = undefined;
     if (this.options.imageData) {
-      let sketchLayResult = await sketchLay.generateConstraints({cy: this.options.cy, imageData: this.options.imageData, subset: this.options.subset, idealEdgeLength: this.options.idealEdgeLength, connectionTolerance: 40, slopeThreshold: 0.25});
+      let sketchLayResult = await sketchLay.generateConstraints({cy: this.options.cy, imageData: this.options.imageData, subset: this.options.subset, idealEdgeLength: this.options.idealEdgeLength});
       sketchConstraints = sketchLayResult.constraints;
       if (sketchConstraints.alignmentConstraint && sketchConstraints.relativePlacementConstraint) {
         randomize = false; // so no tree reduction is applied
