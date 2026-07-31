@@ -153,6 +153,16 @@ class Layout {
     let randomize = false;
     let sketchConstraints = undefined;
     if (this.options.imageData) {
+      if (this.options.subset) {
+        let subsetNodes = this.options.subset.nodes();
+        let zeroDegreeNodes = cy.collection();
+        subsetNodes.forEach(node => {
+          if (node.data("class") == "complex") {
+            zeroDegreeNodes.merge(node.children());
+          }
+        });
+        this.options.subset = this.options.subset.difference(zeroDegreeNodes);
+      }
       let sketchLayResult = await sketchLay.generateConstraints({cy: this.options.cy, imageData: this.options.imageData, subset: this.options.subset, idealEdgeLength: this.options.idealEdgeLength});
       sketchConstraints = sketchLayResult.constraints;
       if (sketchConstraints.alignmentConstraint && sketchConstraints.relativePlacementConstraint) {

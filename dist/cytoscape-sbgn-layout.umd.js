@@ -1434,7 +1434,7 @@ var Layout = function () {
     key: 'run',
     value: function () {
       var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
-        var layout, options, cy, eles, nodes, edges, self, layUtil, packingEnabled, sbgnLayout, graphManager, randomize, sketchConstraints, sketchLayResult, initialCenter, constraints, finalCenter, centerDiff, calcCenter, moveNodes, getPositions;
+        var layout, options, cy, eles, nodes, edges, self, layUtil, packingEnabled, sbgnLayout, graphManager, randomize, sketchConstraints, subsetNodes, zeroDegreeNodes, sketchLayResult, initialCenter, constraints, finalCenter, centerDiff, calcCenter, moveNodes, getPositions;
         return _regenerator2.default.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -1507,14 +1507,25 @@ var Layout = function () {
                 sketchConstraints = undefined;
 
                 if (!this.options.imageData) {
-                  _context.next = 28;
+                  _context.next = 29;
                   break;
                 }
 
-                _context.next = 23;
+                if (this.options.subset) {
+                  subsetNodes = this.options.subset.nodes();
+                  zeroDegreeNodes = cy.collection();
+
+                  subsetNodes.forEach(function (node) {
+                    if (node.data("class") == "complex") {
+                      zeroDegreeNodes.merge(node.children());
+                    }
+                  });
+                  this.options.subset = this.options.subset.difference(zeroDegreeNodes);
+                }
+                _context.next = 24;
                 return sketchLay.generateConstraints({ cy: this.options.cy, imageData: this.options.imageData, subset: this.options.subset, idealEdgeLength: this.options.idealEdgeLength });
 
-              case 23:
+              case 24:
                 sketchLayResult = _context.sent;
 
                 sketchConstraints = sketchLayResult.constraints;
@@ -1523,13 +1534,13 @@ var Layout = function () {
                 } else {
                   randomize = options.randomize;
                 }
-                _context.next = 29;
+                _context.next = 30;
                 break;
 
-              case 28:
+              case 29:
                 randomize = options.randomize;
 
-              case 29:
+              case 30:
 
                 if (!randomize) {
                   CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = true;
@@ -1648,7 +1659,7 @@ var Layout = function () {
 
                 eles.nodes().not(":parent").layoutPositions(layout, options, getPositions);
 
-              case 62:
+              case 63:
               case 'end':
                 return _context.stop();
             }
